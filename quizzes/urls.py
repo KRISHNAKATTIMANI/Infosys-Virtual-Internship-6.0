@@ -31,7 +31,12 @@ urlpatterns = [
      # PDF for perfo
      path("performance/download/", views.download_performance_pdf,name="download_performance_pdf"),
 
-    path('recent/', views.recent_quizzes_view, name='recent_quizzes'),
-    path('attempts/', views.attempts_summary_view, name='attempts_summary'),
- 
+     path('recent/', views.recent_quizzes_view, name='recent_quizzes'),
+     path('attempts/', views.attempts_summary_view, name='attempts_summary'),
+     path('leaderboard/', views.leaderboard, name='leaderboard'),
+
+     # resume quiz
+     path('quiz/resume/<uuid:attempt_id>/',views.resume_quiz_prompt,name='resume_quiz_prompt'),
+     path('quiz/resume/<uuid:attempt_id>/continue/', views.resume_quiz, name='resume_quiz'),
+     path('quiz/resume/<uuid:attempt_id>/quit/', views.quit_quiz, name='quit_quiz'),
 ]

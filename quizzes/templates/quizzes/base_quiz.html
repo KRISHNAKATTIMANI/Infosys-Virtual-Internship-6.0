@@ -5,8 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>
-      {% block title %}Quiz — {% if quiz_attempt %}{{
-      quiz_attempt.subcategory.name }}{% else %}Quiz{% endif %}{% endblock %}
+      {% block title %}Quiz — {% if quiz_attempt %}{{quiz_attempt.subcategory.name }}{% else %}Quiz{% endif %}{% endblock %}
     </title>
 
     <!-- Colors & design tokens -->
@@ -334,8 +333,7 @@
             <div class="badge">Quiz</div>
             <div>
               <h1 id="quiz-title" class="title">
-                {% if quiz_attempt %} {{ quiz_attempt.subcategory.name }} {%else
-                %} — {% endif %}
+                {% if quiz_attempt %} {{ quiz_attempt.subcategory.name }} {%else%} — {% endif %}
               </h1>
 
               <p class="sub">

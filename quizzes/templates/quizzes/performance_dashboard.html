@@ -112,7 +112,6 @@
 
   <body>
     <div class="dashboard">
-      
       <a
         href="{% url 'quizzes:download_performance_pdf' %}"
         style="
@@ -131,6 +130,10 @@
 
       <!-- ================= SUMMARY ================= -->
       <div class="cards">
+        <div class="card">
+          <div class="card-title">🔥 Daily Streak</div>
+          <div class="card-desc">{{ streak }} day(s)</div>
+        </div>
         <div class="card">
           <h3>Total Quizzes</h3>
           <p>{{ total_quizzes }}</p>
@@ -205,7 +208,9 @@
       <h2>🤖 AI Learning Feedback</h2>
 
       <div class="chart-card" style="background: #f8fafc">
-        <pre style="white-space: pre-wrap; font-family: inherit;">{{ ai_feedback }}</pre>
+        <pre style="white-space: pre-wrap; font-family: inherit">
+{{ ai_feedback }}</pre
+        >
       </div>
 
       <!-- ================= INSIGHTS ================= -->

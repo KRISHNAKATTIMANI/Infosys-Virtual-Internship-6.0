@@ -12,7 +12,6 @@ import random
 from django.views.decorators.http import require_POST
 import json
 from django.db.models.functions import TruncDate
-
 # for performance pdf functionality
 from reportlab.platypus import (
     SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
@@ -30,7 +29,13 @@ from datetime import timedelta
 
 # AI Feedback recommendation
 from .ai_feedback_service import generate_ai_feedback
-# ============================================================
+#
+
+# streak
+from django.utils import timezone
+from datetime import timedelta, datetime
+ 
+#============================================================
 # USER DASHBOARD
 # ============================================================
 @login_required
@@ -194,7 +199,6 @@ def instructions(request, subcategory_id, difficulty):
         "difficulty": difficulty
     })
 
-
 # ============================================================
 # START QUIZ — only allowed for leaf nodes and logged-in users
 # ============================================================
@@ -203,6 +207,10 @@ def start_quiz(request, subcategory_id, difficulty):
     """
     Create quiz attempt and show loading page
     """
+    active_quiz=get_active_quiz(request.user)
+
+    if active_quiz:
+        return redirect('quizzes:resume_quiz_prompt',attempt_id=active_quiz.id)
     subcategory = get_object_or_404(SubCategory, id=subcategory_id)
     
     # Safety: only leaf nodes should start a quiz
@@ -226,9 +234,60 @@ def start_quiz(request, subcategory_id, difficulty):
         "difficulty": difficulty,
     })
 
+# get active quiz function
+def get_active_quiz(user):
+    return QuizAttempt.objects.filter(
+        user=user,
+        status=QuizAttempt.STATUS_IN_PROGRESS
+    ).order_by('-started_at').first()
 
+# If user is reumes quiz
+# RESUME / QUIT PROMPT VIEW
 @login_required
-@require_POST
+def resume_quiz_prompt(request,attempt_id):
+    quiz_attempt=get_object_or_404(
+        QuizAttempt,
+        id=attempt_id,
+        user=request.user,
+        status=QuizAttempt.STATUS_IN_PROGRESS
+    )
+
+    return render(request,'quizzes/resume_prompt.html',{
+        'quiz':quiz_attempt
+    })
+
+# RESUME ACITON
+@login_required
+def resume_quiz(request, attempt_id):
+    quiz_attempt = get_object_or_404(
+        QuizAttempt,
+        id=attempt_id,
+        user=request.user,
+        status=QuizAttempt.STATUS_IN_PROGRESS
+    )
+
+    return redirect(
+        'quizzes:show_question',
+        attempt_id=quiz_attempt.id
+    )
+
+# QUIT & END ACTION 
+@login_required
+def quit_quiz(request, attempt_id):
+    quiz_attempt = get_object_or_404(
+        QuizAttempt,
+        id=attempt_id,
+        user=request.user,
+        status=QuizAttempt.STATUS_IN_PROGRESS
+    )
+
+    quiz_attempt.status = QuizAttempt.STATUS_ABANDONED
+    quiz_attempt.completed_at = timezone.now()
+    quiz_attempt.save()
+
+    return redirect('quizzes:dashboard')
+
+
 @login_required
 @require_POST
 def generate_questions(request, attempt_id):
@@ -508,6 +567,39 @@ def finalize_quiz_attempt(quiz_attempt):
 
     quiz_attempt.save()
 
+# streak
+def calculate_streak(user):
+    """
+    Calculate consecutive-day quiz streak for a user.
+    """
+    streak = 0
+    today = timezone.now().date()
+
+    while True:
+        # Calculate the date we are checking
+        check_date = today - timedelta(days=streak)
+
+        # Start & end time of that day
+        day_start = timezone.make_aware(
+            datetime.combine(check_date, datetime.min.time())
+        )
+        day_end = timezone.make_aware(
+            datetime.combine(check_date, datetime.max.time())
+        )
+
+        # Check if user attempted any quiz on that day
+        attempted = QuizAttempt.objects.filter(
+            user=user,
+            started_at__range=(day_start, day_end)
+        ).exists()
+
+        if attempted:
+            streak += 1
+        else:
+            break
+
+    return streak
+
 # Performance Analysis and AI-Feedback 
 @login_required
 def performance_dashboard(request):
@@ -632,43 +724,54 @@ def performance_dashboard(request):
     # ---------------------------
     # 7. AI-GENERATED FEEDBACK 
     # ---------------------------
-    difficulty_map = {
-        d['difficulty']: round(d['avg_score'] or 0, 2)
-        for d in difficulty_performance
-    }
-    weak_concepts = []
+    total_quizzes = overall['total_quizzes'] or 0
 
-    for wt in weak_topics:
-        concepts = Concept.objects.filter(
-            subcategory__name=wt['subcategory']
-        ).values_list('name', flat=True)
+    if total_quizzes == 0:
+        ai_feedback = (
+            "You haven’t attempted any quizzes yet. 🚀 "
+            "Start your first quiz to receive personalized AI-powered feedback!"
+        )
+    else:
+        difficulty_map = {
+            d['difficulty']: round(d['avg_score'] or 0, 2)
+            for d in difficulty_performance
+        }
+        weak_concepts = []
 
-        weak_concepts.extend(list(concepts[:5]))  # limit per topic
-    ai_summary = {
-        "overall_accuracy": round(overall_accuracy, 2),
-        "avg_time_per_question": round(avg_time_per_question, 2),
-        "difficulty_performance": difficulty_map,
-        "strong_topics": [t['subcategory'] for t in strong_topics],
-        "weak_topics": [t['subcategory'] for t in weak_topics],
-        "weak_concepts": weak_concepts,
-    }
+        for wt in weak_topics:
+            concepts = Concept.objects.filter(
+                subcategory__name=wt['subcategory']
+            ).values_list('name', flat=True)
 
-    if not request.session.get("ai_feedback"):
-        try:
-            request.session["ai_feedback"] = generate_ai_feedback(ai_summary)
-        except Exception:
-            request.session["ai_feedback"] = (
-                "Your performance data is being analyzed. "
-                "Keep practicing regularly to strengthen your understanding."
-            )
+            weak_concepts.extend(list(concepts[:5]))  # limit per topic
+        ai_summary = {
+            "overall_accuracy": round(overall_accuracy, 2),
+            "avg_time_per_question": round(avg_time_per_question, 2),
+            "difficulty_performance": difficulty_map,
+            "strong_topics": [t['subcategory'] for t in strong_topics],
+            "weak_topics": [t['subcategory'] for t in weak_topics],
+            "weak_concepts": weak_concepts,
+        }
 
-    ai_feedback = request.session["ai_feedback"]
+        if not request.session.get("ai_feedback"):
+            try:
+                request.session["ai_feedback"] = generate_ai_feedback(ai_summary)
+            except Exception:
+                request.session["ai_feedback"] = (
+                    "Your performance data is being analyzed. "
+                    "Keep practicing regularly to strengthen your understanding."
+                )
+
+        ai_feedback = request.session["ai_feedback"]
+
+    # streak
+    streak = calculate_streak(request.user)
 
     # ---------------------------
     # FINAL CONTEXT
     # ---------------------------
     context = {
-        'total_quizzes': overall['total_quizzes'] or 0,
+        'total_quizzes': total_quizzes or 0,
         'avg_score': round(overall['avg_score'] or 0, 2),
         'overall_accuracy': round(overall_accuracy, 2),
         'avg_time_per_question': round(avg_time_per_question, 2),
@@ -682,6 +785,7 @@ def performance_dashboard(request):
         'strong_topics': strong_topics,
         'weak_topics': weak_topics,
         'ai_feedback': ai_feedback,
+        'streak':streak,
     }
 
     return render(request, 'quizzes/performance_dashboard.html', context)
@@ -845,7 +949,10 @@ def recent_quizzes_view(request):
 def attempts_summary_view(request):
     user = request.user
 
-    total_attempts = QuizAttempt.objects.filter(user=user).count()
+    total_attempts = QuizAttempt.objects.filter(user=user, status__in=[
+        QuizAttempt.STATUS_COMPLETED,
+        QuizAttempt.STATUS_ABANDONED
+    ]).count()
 
     status_counts = QuizAttempt.objects.filter(user=user).aggregate(
         completed=Count('id', filter=Q(status=QuizAttempt.STATUS_COMPLETED)),
@@ -865,3 +972,23 @@ def attempts_summary_view(request):
     }
 
     return render(request, 'quizzes/attempts_summary.html', context)
+
+# Leaderboard
+
+@login_required
+def leaderboard(request):
+    leaderboard_data = (
+        QuizAttempt.objects
+        .filter(status=QuizAttempt.STATUS_COMPLETED)
+        .values('user__username')
+        .annotate(
+            avg_score=Avg('score'),
+            quizzes_attempted=Count('id')
+        )
+        .filter(quizzes_attempted__gte=3)  # minimum attempts
+        .order_by('-avg_score', '-quizzes_attempted')[:20]
+    )
+
+    return render(request, 'quizzes/leaderboard.html', {
+        'leaderboard': leaderboard_data
+    })

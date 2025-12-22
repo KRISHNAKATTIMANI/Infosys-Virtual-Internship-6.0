@@ -1,0 +1,16 @@
+
+<h2>You have an unfinished quiz</h2>
+
+<p>
+Category: {{ quiz.category.name }} <br>
+Topic: {{ quiz.subcategory.name }} <br>
+Progress: {{ quiz.current_question_index }} / {{ quiz.total_questions }}
+</p>
+
+<a href="{% url 'quizzes:resume_quiz' quiz.id %}">
+  Resume Quiz
+</a>
+
+<a href="{% url 'quizzes:quit_quiz' quiz.id %}">
+  Quit & End Quiz
+</a>
