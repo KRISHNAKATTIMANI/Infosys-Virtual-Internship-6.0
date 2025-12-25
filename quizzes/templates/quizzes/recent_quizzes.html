@@ -1,28 +1,348 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <title>Recent Quizzes</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recent Quizzes — AI Quiz Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #f5f7fb 0%, #e8ecf3 100%);
+      min-height: 100vh;
+      color: #1a1a1a;
+    }
+
+    .navbar {
+      background: white;
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand {
+      font-size: 24px;
+      font-weight: 700;
+      color: #4f46e5;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 500;
+      color: #333;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #4f46e5;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px;
+    }
+
+    .page-header {
+      background: linear-gradient(135deg, #4f46e5, #6d28d9);
+      border-radius: 20px;
+      padding: 35px;
+      color: white;
+      box-shadow: 0 10px 30px rgba(79, 70, 229, 0.25);
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .page-header h1 {
+      font-size: 28px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .page-header .subtitle {
+      opacity: 0.9;
+      margin-top: 5px;
+    }
+
+    .back-btn {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .back-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .quiz-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .quiz-card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .quiz-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .quiz-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      flex-shrink: 0;
+    }
+
+    .quiz-icon.easy {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+    }
+
+    .quiz-icon.medium {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: white;
+    }
+
+    .quiz-icon.hard {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: white;
+    }
+
+    .quiz-info {
+      flex: 1;
+    }
+
+    .quiz-title {
+      font-weight: 600;
+      font-size: 18px;
+      color: #1a1a1a;
+    }
+
+    .quiz-meta {
+      color: #666;
+      font-size: 14px;
+      margin-top: 4px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .quiz-meta span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .quiz-score {
+      text-align: right;
+      min-width: 100px;
+    }
+
+    .score-value {
+      font-size: 32px;
+      font-weight: 700;
+    }
+
+    .score-value.excellent {
+      color: #10b981;
+    }
+
+    .score-value.good {
+      color: #4f46e5;
+    }
+
+    .score-value.average {
+      color: #f59e0b;
+    }
+
+    .score-value.poor {
+      color: #ef4444;
+    }
+
+    .score-label {
+      color: #666;
+      font-size: 12px;
+    }
+
+    .difficulty-badge {
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .difficulty-badge.easy {
+      background: #d1fae5;
+      color: #059669;
+    }
+
+    .difficulty-badge.medium {
+      background: #fef3c7;
+      color: #d97706;
+    }
+
+    .difficulty-badge.hard {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 40px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    }
+
+    .empty-icon {
+      font-size: 64px;
+      color: #d1d5db;
+      margin-bottom: 20px;
+    }
+
+    .empty-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .empty-desc {
+      color: #6b7280;
+      margin-top: 8px;
+    }
+
+    .empty-btn {
+      display: inline-block;
+      margin-top: 20px;
+      background: linear-gradient(135deg, #4f46e5, #6d28d9);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    @media (max-width: 600px) {
+      .quiz-card {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .quiz-score {
+        text-align: center;
+        margin-top: 10px;
+      }
+
+      .page-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<h2>🕘 Recent Quizzes</h2>
+  <div class="navbar">
+    <div class="brand">AI Quiz Hub</div>
+    <div class="nav-links">
+      <a href="{% url 'quizzes:dashboard' %}">Dashboard</a>
+      <a href="{% url 'accounts:profile' %}">Profile</a>
+      <a href="{% url 'accounts:logout' %}">Logout</a>
+    </div>
+  </div>
 
-{% if recent_quizzes %}
-  <ul>
-    {% for quiz in recent_quizzes %}
-      <li>
-        <strong>{{ quiz.subcategory.name }}</strong>
-        ({{ quiz.difficulty|title }}) —
-        {{ quiz.score }}%
-        <br>
-        <small>Completed on {{ quiz.completed_at|date:"d M Y, H:i" }}</small>
-      </li>
-      <hr>
-    {% endfor %}
-  </ul>
-{% else %}
-  <p>No quizzes completed yet.</p>
-{% endif %}
+  <div class="container">
+    <div class="page-header">
+      <div>
+        <h1><i class="ri-history-line"></i> Recent Quizzes</h1>
+        <div class="subtitle">Your last {{ recent_quizzes|length }} completed quizzes</div>
+      </div>
+      <a href="{% url 'quizzes:dashboard' %}" class="back-btn">
+        <i class="ri-arrow-left-line"></i> Back to Dashboard
+      </a>
+    </div>
+
+    {% if recent_quizzes %}
+    <div class="quiz-list">
+      {% for quiz in recent_quizzes %}
+      <div class="quiz-card">
+        <div class="quiz-icon {{ quiz.difficulty }}">
+          <i class="ri-file-list-3-line"></i>
+        </div>
+        <div class="quiz-info">
+          <div class="quiz-title">{{ quiz.subcategory.name }}</div>
+          <div class="quiz-meta">
+            <span><i class="ri-folder-line"></i> {{ quiz.category.name }}</span>
+            <span><i class="ri-calendar-line"></i> {{ quiz.completed_at|date:"d M Y, H:i" }}</span>
+            <span class="difficulty-badge {{ quiz.difficulty }}">{{ quiz.difficulty|title }}</span>
+          </div>
+        </div>
+        <div class="quiz-score">
+          <div
+            class="score-value {% if quiz.score >= 80 %}excellent{% elif quiz.score >= 60 %}good{% elif quiz.score >= 40 %}average{% else %}poor{% endif %}">
+            {{ quiz.score|floatformat:0 }}%
+          </div>
+          <div class="score-label">Score</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+      <div class="empty-icon"><i class="ri-history-line"></i></div>
+      <div class="empty-title">No Recent Quizzes</div>
+      <div class="empty-desc">You haven't completed any quizzes yet. Start your first quiz now!</div>
+      <a href="{% url 'quizzes:quiz_selector' %}" class="empty-btn">
+        <i class="ri-play-circle-line"></i> Start a Quiz
+      </a>
+    </div>
+    {% endif %}
+  </div>
 
 </body>
+
 </html>

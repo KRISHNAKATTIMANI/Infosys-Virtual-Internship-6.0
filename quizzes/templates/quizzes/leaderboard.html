@@ -1,59 +1,430 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <title>Leaderboard</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leaderboard — AI Quiz Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet" />
   <style>
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #f5f7fb 0%, #e8ecf3 100%);
+      min-height: 100vh;
+      color: #1a1a1a;
+    }
+
+    .navbar {
       background: white;
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
-    th, td {
-      padding: 12px;
-      border-bottom: 1px solid #ddd;
+
+    .brand {
+      font-size: 24px;
+      font-weight: 700;
+      color: #4f46e5;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 500;
+      color: #333;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #4f46e5;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px;
+    }
+
+    .page-header {
+      background: linear-gradient(135deg, #4f46e5, #6d28d9);
+      border-radius: 20px;
+      padding: 35px;
+      color: white;
+      box-shadow: 0 10px 30px rgba(79, 70, 229, 0.25);
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .page-header h1 {
+      font-size: 28px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .page-header .subtitle {
+      opacity: 0.9;
+      margin-top: 5px;
+    }
+
+    .back-btn {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .back-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Top 3 Podium */
+    .podium {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .podium-item {
       text-align: center;
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+      transition: transform 0.2s;
     }
-    th {
-      background: #4f46e5;
+
+    .podium-item:hover {
+      transform: translateY(-4px);
+    }
+
+    .podium-item.first {
+      order: 2;
+      min-height: 200px;
+    }
+
+    .podium-item.second {
+      order: 1;
+      min-height: 170px;
+    }
+
+    .podium-item.third {
+      order: 3;
+      min-height: 150px;
+    }
+
+    .podium-rank {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 10px;
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    .first .podium-rank {
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      color: white;
+      width: 60px;
+      height: 60px;
+      font-size: 24px;
+    }
+
+    .second .podium-rank {
+      background: linear-gradient(135deg, #9ca3af, #6b7280);
       color: white;
     }
-    tr:nth-child(even) {
+
+    .third .podium-rank {
+      background: linear-gradient(135deg, #cd7f32, #a0522d);
+      color: white;
+    }
+
+    .podium-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #4f46e5, #6d28d9);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 600;
+      margin: 0 auto 10px;
+    }
+
+    .first .podium-avatar {
+      width: 80px;
+      height: 80px;
+      font-size: 32px;
+    }
+
+    .podium-name {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    .first .podium-name {
+      font-size: 18px;
+    }
+
+    .podium-score {
+      color: #4f46e5;
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .first .podium-score {
+      font-size: 24px;
+    }
+
+    .podium-quizzes {
+      color: #666;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+
+    /* Table for remaining */
+    .leaderboard-table {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+      overflow: hidden;
+    }
+
+    .table-header {
+      background: linear-gradient(135deg, #4f46e5, #6d28d9);
+      color: white;
+      display: grid;
+      grid-template-columns: 80px 1fr 150px 120px;
+      padding: 16px 24px;
+      font-weight: 600;
+    }
+
+    .table-row {
+      display: grid;
+      grid-template-columns: 80px 1fr 150px 120px;
+      padding: 16px 24px;
+      border-bottom: 1px solid #f3f4f6;
+      align-items: center;
+      transition: background 0.2s;
+    }
+
+    .table-row:hover {
       background: #f9fafb;
     }
-    .rank {
-      font-weight: bold;
+
+    .table-row:last-child {
+      border-bottom: none;
+    }
+
+    .rank-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #f3f4f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: #666;
+    }
+
+    .rank-badge.top10 {
+      background: linear-gradient(135deg, #4f46e5, #6d28d9);
+      color: white;
+    }
+
+    .user-cell {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .user-avatar-small {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #4f46e5, #6d28d9);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+    }
+
+    .user-name {
+      font-weight: 500;
+    }
+
+    .score-cell {
+      font-weight: 700;
+      color: #4f46e5;
+    }
+
+    .quizzes-cell {
+      color: #666;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 40px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    }
+
+    .empty-icon {
+      font-size: 64px;
+      color: #d1d5db;
+      margin-bottom: 20px;
+    }
+
+    .empty-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .empty-desc {
+      color: #6b7280;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .podium {
+        flex-wrap: wrap;
+      }
+
+      .podium-item.first {
+        order: 0;
+        width: 100%;
+      }
+
+      .table-header,
+      .table-row {
+        grid-template-columns: 60px 1fr 100px;
+      }
+
+      .quizzes-cell {
+        display: none;
+      }
+
+      .page-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
     }
   </style>
 </head>
+
 <body>
 
-<h1>🏆 Leaderboard</h1>
+  <div class="navbar">
+    <div class="brand">AI Quiz Hub</div>
+    <div class="nav-links">
+      <a href="{% url 'quizzes:dashboard' %}">Dashboard</a>
+      <a href="{% url 'accounts:profile' %}">Profile</a>
+      <a href="{% url 'accounts:logout' %}">Logout</a>
+    </div>
+  </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Rank</th>
-      <th>User</th>
-      <th>Average Score (%)</th>
-      <th>Quizzes Attempted</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for user in leaderboard %}
-    <tr>
-      <td class="rank">{{ forloop.counter }}</td>
-      <td>{{ user.user__username }}</td>
-      <td>{{ user.avg_score|floatformat:2 }}</td>
-      <td>{{ user.quizzes_attempted }}</td>
-    </tr>
-    {% empty %}
-    <tr>
-      <td colspan="4">No leaderboard data available</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+  <div class="container">
+    <div class="page-header">
+      <div>
+        <h1><i class="ri-trophy-line"></i> Leaderboard</h1>
+        <div class="subtitle">Top performers ranked by average score</div>
+      </div>
+      <a href="{% url 'quizzes:dashboard' %}" class="back-btn">
+        <i class="ri-arrow-left-line"></i> Back to Dashboard
+      </a>
+    </div>
+
+    {% if leaderboard %}
+
+    <!-- Top 3 Podium -->
+    <div class="podium">
+      {% for user in leaderboard|slice:":3" %}
+      <div
+        class="podium-item {% if forloop.counter == 1 %}first{% elif forloop.counter == 2 %}second{% else %}third{% endif %}">
+        <div class="podium-rank">
+          {% if forloop.counter == 1 %}<i class="ri-trophy-fill"></i>{% else %}{{ forloop.counter }}{% endif %}
+        </div>
+        <div class="podium-avatar">{{ user.user__username|slice:":1"|upper }}</div>
+        <div class="podium-name">{{ user.user__username }}</div>
+        <div class="podium-score">{{ user.avg_score|floatformat:1 }}%</div>
+        <div class="podium-quizzes">{{ user.quizzes_attempted }} quizzes</div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Remaining Rankings -->
+    {% if leaderboard|length > 3 %}
+    <div class="leaderboard-table">
+      <div class="table-header">
+        <div>Rank</div>
+        <div>User</div>
+        <div>Avg. Score</div>
+        <div>Quizzes</div>
+      </div>
+      {% for user in leaderboard %}
+      {% if forloop.counter > 3 %}
+      <div class="table-row">
+        <div>
+          <div class="rank-badge {% if forloop.counter <= 10 %}top10{% endif %}">{{ forloop.counter }}</div>
+        </div>
+        <div class="user-cell">
+          <div class="user-avatar-small">{{ user.user__username|slice:":1"|upper }}</div>
+          <div class="user-name">{{ user.user__username }}</div>
+        </div>
+        <div class="score-cell">{{ user.avg_score|floatformat:1 }}%</div>
+        <div class="quizzes-cell">{{ user.quizzes_attempted }}</div>
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% else %}
+    <div class="empty-state">
+      <div class="empty-icon"><i class="ri-trophy-line"></i></div>
+      <div class="empty-title">No Leaderboard Data</div>
+      <div class="empty-desc">Be the first to complete quizzes and claim the top spot!</div>
+    </div>
+    {% endif %}
+  </div>
 
 </body>
+
 </html>
