@@ -633,9 +633,10 @@ def finalize_quiz_attempt(quiz_attempt):
     Finalize quiz attempt:
     - calculate correct / attempted
     - calculate score
-    - calculate time taken
+    - calculate time spent & time taken correctly
     - mark completed
     """
+
     questions = quiz_attempt.questions or []
 
     attempted = 0
@@ -655,17 +656,23 @@ def finalize_quiz_attempt(quiz_attempt):
         if quiz_attempt.total_questions > 0 else 0
     )
 
-    quiz_attempt.completed_at = timezone.now()
+    now_time = timezone.now()
+
+    # 🔥 FIX: Flush current session time into time_spent_seconds
+    if quiz_attempt.started_at and not quiz_attempt.paused_at:
+        quiz_attempt.time_spent_seconds += int(
+            (now_time - quiz_attempt.started_at).total_seconds()
+        )
+
+    # Finalize timing
+    quiz_attempt.time_taken_seconds = quiz_attempt.time_spent_seconds
+
+    quiz_attempt.completed_at = now_time
     quiz_attempt.status = QuizAttempt.STATUS_COMPLETED
 
-    # Calculate final time spent
-    if quiz_attempt.started_at:
-        time_spent_current_session = int(
-            (quiz_attempt.completed_at - quiz_attempt.started_at).total_seconds()
-        )
-        quiz_attempt.time_taken_seconds = quiz_attempt.time_spent_seconds + time_spent_current_session
-    else:
-        quiz_attempt.time_taken_seconds = quiz_attempt.time_spent_seconds
+    # Prevent double-counting if finalize is called again
+    quiz_attempt.started_at = None
+    quiz_attempt.paused_at = None
 
     quiz_attempt.save()
 
