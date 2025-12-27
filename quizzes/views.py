@@ -1141,7 +1141,7 @@ def leaderboard(request):
             avg_score=Avg('score'),
             quizzes_attempted=Count('id')
         )
-        .filter(quizzes_attempted__gte=3)  # minimum attempts
+        .filter(quizzes_attempted__gte=1)  # minimum 1 attempt to appear
         .order_by('-avg_score', '-quizzes_attempted')[:20]
     )
 

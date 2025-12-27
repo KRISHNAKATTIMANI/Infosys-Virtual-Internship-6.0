@@ -1,47 +1,234 @@
 {% load static %}
-
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Choose Category</title>
-
-    <link rel="stylesheet" href="{% static 'quizzes/css/categories.css' %}" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
-    />
-  </head>
-
-  <body>
-    <section class="section">
-      <div class="container">
-        <h1 class="title" data-aos="fade-up">Choose Your Category</h1>
-        <!-- <p><strong>DEBUG: categories count = {{ debug_count }}</strong></p> -->
-        {% if not categories %}
-        <p><em>No categories found — add one via admin or the shell.</em></p>
-        {% endif %}
-
-        <div class="grid">
-          {% for c in categories %}
-          <a
-            href="{% url 'quizzes:subcategories' c.id %}"
-            class="card"
-            data-aos="zoom-in"
-            data-aos-delay="{{ forloop.counter0 }}00"
-          >
-            <div class="icon">{{ c.name|first }}</div>
-            <h3>{{ c.name }}</h3>
-            <p>{{ c.description|default:"Explore quizzes inside" }}</p>
-          </a>
-          {% endfor %}
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Choose Category - AI Quiz Hub</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    
+    <!-- Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet" />
+    
+    <!-- AOS Animation -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet" />
+    
+    <!-- Global Styles -->
+    <link rel="stylesheet" href="{% static 'css/global.css' %}" />
+    
+    <style>
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0f1a 0%, #1a1f3a 50%, #0f1729 100%);
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        .grid-bg {
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .category-section {
+            position: relative;
+            z-index: 1;
+            padding: 4rem 2rem;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .category-container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        .category-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .category-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .category-subtitle {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .category-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .category-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(99, 102, 241, 0.5);
+            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.3);
+        }
+        
+        .category-card:hover::before {
+            opacity: 1;
+        }
+        
+        .category-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 1.25rem;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .category-name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .category-desc {
+            color: #94a3b8;
+            font-size: 1rem;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .back-link {
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .back-link a {
+            color: #60a5fa;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+        
+        .back-link a:hover {
+            color: #93c5fd;
+            transform: translateX(-4px);
+        }
+        
+        @media (max-width: 768px) {
+            .category-title {
+                font-size: 2rem;
+            }
+            
+            .category-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .category-card {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    
+    <section class="category-section">
+        <div class="category-container">
+            <div class="category-header" data-aos="fade-up">
+                <h1 class="category-title">Choose Your Category</h1>
+                <p class="category-subtitle">Select a category to begin your learning journey with AI-powered quizzes</p>
+            </div>
+            
+            {% if not categories %}
+            <p style="text-align: center; color: #94a3b8;"><em>No categories found — add one via admin or the shell.</em></p>
+            {% endif %}
+            
+            <div class="category-grid">
+                {% for c in categories %}
+                <a href="{% url 'quizzes:subcategories' c.id %}" class="category-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter0 }}00">
+                    <div class="category-icon">{{ c.name|first }}</div>
+                    <h3 class="category-name">{{ c.name }}</h3>
+                    <p class="category-desc">{{ c.description|default:"Explore quizzes inside" }}</p>
+                </a>
+                {% endfor %}
+            </div>
+            
+            <div class="back-link" data-aos="fade-up">
+                <a href="{% url 'home' %}">
+                    <i class="ri-arrow-left-line"></i> Back to Home
+                </a>
+            </div>
         </div>
-      </div>
     </section>
-
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
-      AOS.init();
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true
+        });
     </script>
-  </body>
+</body>
 </html>
 

@@ -1,66 +1,279 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Select Subcategory</title>
-    <link rel="stylesheet" href="{% static 'quizzes/css/wizard.css' %}" />
-  </head>
-
-  <body>
-    <div class="wizard-container">
-      <!-- Step Indicator -->
-      <div class="steps">
-        <div class="step completed">1. Category</div>
-        <div class="step active">2. Subcategory</div>
-        <div class="step">3. Difficulty</div>
-        <div class="step">4. Start</div>
-      </div>
-
-      <h2 class="wizard-title">Choose a Subcategory</h2>
-      <p class="wizard-subtitle">
-        Category: <strong>{{ parent.category.name }}</strong> →
-        <strong>{{ parent.name }}</strong>
-      </p>
-
-      <div class="wizard-grid">
-        {% for child in children %} {% if child.is_leaf %}
-        <!-- LEAF → choose difficulty -->
-        <a
-          href="{% url 'quizzes:choose_difficulty' child.id %}"
-          class="wizard-card"
-        >
-          🔹 <strong>{{ child.name }}</strong>
-          <p>
-            {% if child.description %} {{ child.description }} {% else %} Select
-            difficulty for this topic {% endif %}
-          </p>
-        </a>
-        {% else %}
-        <!-- HAS CHILDREN → go to next level -->
-        <a
-          href="{% url 'quizzes:subcategory_children' child.id %}"
-          class="wizard-card"
-        >
-          📁 <strong>{{ child.name }}</strong>
-          <p>
-            {% if child.description %} {{ child.description }} {% else %}
-            Explore more topics inside this category {% endif %}
-          </p>
-        </a>
-        {% endif %} {% empty %}
-        <p>No subcategories available.</p>
-        {% endfor %}
-      </div>
-
-      <!-- Back Button -->
-      <div style="margin-top: 20px; text-align: center">
-        <a
-          href="{% url 'quizzes:subcategories' parent.category.id %}"
-        >
-          ← Back to {{ parent.category.name }}
-        </a>
-      </div>
-    </div>
-  </body>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Select Subcategory - AI Quiz Hub</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    
+    <!-- Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet" />
+    
+    <!-- Global Styles -->
+    <link rel="stylesheet" href="{% static 'css/global.css' %}" />
+    
+    <style>
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0f1a 0%, #1a1f3a 50%, #0f1729 100%);
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        .grid-bg {
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .wizard-section {
+            position: relative;
+            z-index: 1;
+            padding: 3rem 2rem;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .wizard-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        .wizard-steps {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .wizard-step {
+            padding: 0.75rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.03);
+            color: #64748b;
+        }
+        
+        .wizard-step.completed {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            border-color: #fbbf24;
+            color: #0a0f1a;
+        }
+        
+        .wizard-step.active {
+            background: linear-gradient(135deg, #60a5fa, #3b82f6);
+            border-color: #60a5fa;
+            color: white;
+            box-shadow: 0 8px 24px rgba(96, 165, 250, 0.4);
+        }
+        
+        .wizard-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        
+        .wizard-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .wizard-subtitle {
+            color: #94a3b8;
+            font-size: 1.1rem;
+        }
+        
+        .wizard-subtitle strong {
+            color: #60a5fa;
+        }
+        
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+        
+        .breadcrumb strong {
+            color: #94a3b8;
+        }
+        
+        .subcategory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .subcategory-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.25rem;
+            padding: 2rem;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            display: block;
+            overflow: hidden;
+        }
+        
+        .subcategory-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .subcategory-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(99, 102, 241, 0.5);
+            box-shadow: 0 12px 40px rgba(99, 102, 241, 0.25);
+        }
+        
+        .subcategory-card:hover::before {
+            opacity: 1;
+        }
+        
+        .subcategory-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .subcategory-name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .subcategory-desc {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .back-link {
+            text-align: center;
+            margin-top: 2.5rem;
+        }
+        
+        .back-link a {
+            color: #60a5fa;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+        
+        .back-link a:hover {
+            color: #93c5fd;
+            transform: translateX(-4px);
+        }
+        
+        @media (max-width: 768px) {
+            .wizard-title {
+                font-size: 2rem;
+            }
+            
+            .subcategory-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    
+    <section class="wizard-section">
+        <div class="wizard-container">
+            <div class="wizard-steps">
+                <div class="wizard-step completed">1. Category</div>
+                <div class="wizard-step active">2. Subcategory</div>
+                <div class="wizard-step">3. Difficulty</div>
+                <div class="wizard-step">4. Start</div>
+            </div>
+            
+            <div class="wizard-header">
+                <h2 class="wizard-title">Choose a Subcategory</h2>
+                <div class="breadcrumb">
+                    <strong>{{ parent.category.name }}</strong> 
+                    <i class="ri-arrow-right-s-line"></i> 
+                    <strong>{{ parent.name }}</strong>
+                </div>
+            </div>
+            
+            <div class="subcategory-grid">
+                {% for child in children %}
+                    {% if child.is_leaf %}
+                    <a href="{% url 'quizzes:choose_difficulty' child.id %}" class="subcategory-card">
+                        <div class="subcategory-icon">📘</div>
+                        <h3 class="subcategory-name">{{ child.name }}</h3>
+                        <p class="subcategory-desc">
+                            {% if child.description %}
+                                {{ child.description }}
+                            {% else %}
+                                Select difficulty for this topic
+                            {% endif %}
+                        </p>
+                    </a>
+                    {% else %}
+                    <a href="{% url 'quizzes:subcategory_children' child.id %}" class="subcategory-card">
+                        <div class="subcategory-icon">📁</div>
+                        <h3 class="subcategory-name">{{ child.name }}</h3>
+                        <p class="subcategory-desc">
+                            {% if child.description %}
+                                {{ child.description }}
+                            {% else %}
+                                Explore more topics inside this category
+                            {% endif %}
+                        </p>
+                    </a>
+                    {% endif %}
+                {% empty %}
+                <p style="color: #94a3b8; text-align: center; grid-column: 1 / -1;">No subcategories available.</p>
+                {% endfor %}
+            </div>
+            
+            <div class="back-link">
+                <a href="{% url 'quizzes:subcategories' parent.category.id %}">
+                    <i class="ri-arrow-left-line"></i> Back to {{ parent.category.name }}
+                </a>
+            </div>
+        </div>
+    </section>
+</body>
 </html>
 

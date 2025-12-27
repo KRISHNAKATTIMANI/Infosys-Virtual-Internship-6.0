@@ -1,0 +1,163 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Profile | AI Quiz Hub</title>
+
+    <style>
+      body {
+        background: #f5f7fb;
+        font-family: Inter, system-ui;
+      }
+      .card {
+        max-width: 760px;
+        margin: 60px auto;
+        background: white;
+        border-radius: 14px;
+        padding: 32px;
+        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+      }
+      .avatar {
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+        background: #6c5ce7;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        overflow: hidden;
+        margin-bottom: 14px;
+      }
+      .avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      input,
+      button {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+      }
+      button {
+        background: #6c5ce7;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      #toast-container {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+      }
+
+      .toast {
+        background: #6c5ce7;
+        color: white;
+        padding: 12px 18px;
+        border-radius: 10px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        animation: fadeOut 4s forwards;
+        font-weight: 500;
+      }
+
+      @keyframes fadeOut {
+        0% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        80% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+      }
+      #popup-wrapper {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+      }
+
+      .popup {
+        background: #22c55e;
+        color: #062e1a;
+        padding: 12px 18px;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        font-weight: 600;
+        animation: slideFade 3s forwards;
+      }
+
+      @keyframes slideFade {
+        0% {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        10% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        80% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="card">
+      <h2>Your Profile</h2>
+
+      <div class="avatar">
+        {% if request.user.avatar_path %}
+        <img src="{{ request.user.avatar_path.url }}" />
+        {% else %} {{ request.user.username|first|upper }} {% endif %}
+      </div>
+
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <label>Change avatar</label>
+        <input type="file" name="avatar_path" accept="image/*" />
+
+        <label>Email</label>
+        <input type="email" name="email" value="{{ request.user.email }}" />
+
+        <label>Full Name</label>
+        <input
+          type="text"
+          name="full_name"
+          value="{{ request.user.full_name }}"
+        />
+
+        <button type="submit">Update Profile</button>
+      </form>
+      {% if messages %}
+      <div id="popup-wrapper">
+        {% for message in messages %}
+        <div class="popup">{{ message }}</div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </body>
+  {% if messages %}
+  <script>
+    setTimeout(function () {
+      window.location.href = "{% url 'quizzes:dashboard' %}";
+    }, 3000); // 3 seconds
+  </script>
+  {% endif %}
+</html>
