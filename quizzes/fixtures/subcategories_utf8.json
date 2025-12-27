@@ -1,3 +1,408 @@
-﻿[{"model": "quizzes.subcategory", "pk": 32, "fields": {"category": 7, "name": "Engineering", "level": 1, "parent_subcat": null, "is_leaf": false, "description": "Engineering streams and subjects", "created_at": "2025-12-26T06:28:20.760Z", "updated_at": "2025-12-26T06:28:20.760Z"}}, {"model": "quizzes.subcategory", "pk": 33, "fields": {"category": 7, "name": "CSE", "level": 2, "parent_subcat": 32, "is_leaf": false, "description": "Computer Science & Engineering", "created_at": "2025-12-26T06:28:20.762Z", "updated_at": "2025-12-26T06:28:20.762Z"}}, {"model": "quizzes.subcategory", "pk": 34, "fields": {"category": 7, "name": "Java", "level": 3, "parent_subcat": 33, "is_leaf": true, "description": "Java programming and concepts", "created_at": "2025-12-26T06:28:20.764Z", "updated_at": "2025-12-26T06:28:20.764Z"}}, {"model": "quizzes.subcategory", "pk": 35, "fields": {"category": 7, "name": "Python", "level": 3, "parent_subcat": 33, "is_leaf": true, "description": "Python programming and concepts", "created_at": "2025-12-26T06:28:20.767Z", "updated_at": "2025-12-26T06:28:20.767Z"}}, {"model": "quizzes.subcategory", "pk": 36, "fields": {"category": 7, "name": "Operating Systems", "level": 3, "parent_subcat": 33, "is_leaf": true, "description": "Operating Systems programming and concepts", "created_at": "2025-12-26T06:28:20.778Z", "updated_at": "2025-12-26T06:28:20.778Z"}}, {"model": "quizzes.subcategory", "pk": 37, "fields": {"category": 7, "name": "Data Structures", "level": 3, "parent_subcat": 33, "is_leaf": true, "description": "Data Structures programming and concepts", "created_at": "2025-12-26T06:28:20.782Z", "updated_at": "2025-12-26T06:28:20.782Z"}}, {"model": "quizzes.subcategory", "pk": 38, "fields": {"category": 7, "name": "DBMS", "level": 3, "parent_subcat": 33, "is_leaf": true, "description": "DBMS programming and concepts", "created_at": "2025-12-26T06:28:20.784Z", "updated_at": "2025-12-26T06:28:20.784Z"}}, {"model": "quizzes.subcategory", "pk": 39, "fields": {"category": 7, "name": "AIML", "level": 2, "parent_subcat": 32, "is_leaf": false, "description": "Artificial Intelligence & Machine Learning", "created_at": "2025-12-26T06:28:20.788Z", "updated_at": "2025-12-26T06:28:20.788Z"}}, {"model": "quizzes.subcategory", "pk": 40, "fields": {"category": 7, "name": "Machine Learning", "level": 3, "parent_subcat": 39, "is_leaf": true, "description": "Machine Learning concepts and applications", "created_at": "2025-12-26T06:28:20.791Z", "updated_at": "2025-12-26T06:28:20.791Z"}}, {"model": "quizzes.subcategory", "pk": 41, "fields": {"category": 7, "name": "Deep Learning", "level": 3, "parent_subcat": 39, "is_leaf": true, "description": "Deep Learning concepts and applications", "created_at": "2025-12-26T06:28:20.793Z", "updated_at": "2025-12-26T06:28:20.793Z"}}, {"model": "quizzes.subcategory", "pk": 42, "fields": {"category": 7, "name": "Neural Networks", "level": 3, "parent_subcat": 39, "is_leaf": true, "description": "Neural Networks concepts and applications", "created_at": "2025-12-26T06:28:20.796Z", "updated_at": "2025-12-26T06:28:20.796Z"}}, {"model": "quizzes.subcategory", "pk": 43, "fields": {"category": 7, "name": "NLP", "level": 3, "parent_subcat": 39, "is_leaf": true, "description": "NLP concepts and applications", "created_at": "2025-12-26T06:28:20.798Z", "updated_at": "2025-12-26T06:28:20.798Z"}}, {"model": "quizzes.subcategory", "pk": 44, "fields": {"category": 7, "name": "Medical", "level": 1, "parent_subcat": null, "is_leaf": false, "description": "Medical science subjects", "created_at": "2025-12-26T06:28:20.800Z", "updated_at": "2025-12-26T06:28:20.800Z"}}, {"model": "quizzes.subcategory", "pk": 45, "fields": {"category": 7, "name": "Anatomy", "level": 2, "parent_subcat": 44, "is_leaf": true, "description": "Anatomy studies", "created_at": "2025-12-26T06:28:20.802Z", "updated_at": "2025-12-26T06:28:20.802Z"}}, {"model": "quizzes.subcategory", "pk": 46, "fields": {"category": 7, "name": "Physiology", "level": 2, "parent_subcat": 44, "is_leaf": true, "description": "Physiology studies", "created_at": "2025-12-26T06:28:20.803Z", "updated_at": "2025-12-26T06:28:20.803Z"}}, {"model": "quizzes.subcategory", "pk": 47, "fields": {"category": 7, "name": "Biochemistry", "level": 2, "parent_subcat": 44, "is_leaf": true, "description": "Biochemistry studies", "created_at": "2025-12-26T06:28:20.806Z", "updated_at": "2025-12-26T06:28:20.806Z"}}, {"model": "quizzes.subcategory", "pk": 48, "fields": {"category": 7, "name": "Pharmacology", "level": 2, "parent_subcat": 44, "is_leaf": true, "description": "Pharmacology studies", "created_at": "2025-12-26T06:28:20.807Z", "updated_at": "2025-12-26T06:28:20.807Z"}}, {"model": "quizzes.subcategory", "pk": 49, "fields": {"category": 8, "name": "Movies", "level": 1, "parent_subcat": null, "is_leaf": true, "description": "Film trivia and cinema", "created_at": "2025-12-26T06:28:20.811Z", "updated_at": "2025-12-26T06:28:20.811Z"}}, {"model": "quizzes.subcategory", "pk": 50, "fields": {"category": 8, "name": "Music", "level": 1, "parent_subcat": null, "is_leaf": true, "description": "Songs, artists, and genres", "created_at": "2025-12-26T06:28:20.813Z", "updated_at": "2025-12-26T06:28:20.813Z"}}, {"model": "quizzes.subcategory", "pk": 51, "fields": {"category": 8, "name": "TV Shows", "level": 1, "parent_subcat": null, "is_leaf": true, "description": "Television series and shows", "created_at": "2025-12-26T06:28:20.815Z", "updated_at": "2025-12-26T06:28:20.815Z"}}, {"model": "quizzes.subcategory", "pk": 52, "fields": {"category": 8, "name": "Gaming", "level": 1, "parent_subcat": null, "is_leaf": true, "description": "Video games and esports", "created_at": "2025-12-26T06:28:20.816Z", "updated_at": "2025-12-26T06:28:20.816Z"}}, {"model": "quizzes.subcategory", "pk": 53, "fields": {"category": 9, "name": "History", "level": 1, "parent_subcat": null, "is_leaf": true, "description": "World and regional history", "created_at": "2025-12-26T06:28:20.819Z", "updated_at": "2025-12-26T06:28:20.819Z"}}, {"model": "quizzes.subcategory", "pk": 54, "fields": {"category": 9, "name": "Geography", "level": 1, "parent_subcat": null, "is_leaf": true, "description": "Countries, capitals, and landmarks", "created_at": "2025-12-26T06:28:20.820Z", "updated_at": "2025-12-26T06:28:20.820Z"}}, {"model": "quizzes.subcategory", "pk": 55, "fields": {"category": 9, "name": "Science", "level": 1, "parent_subcat": null, "is_leaf": true, "description": "Scientific discoveries and facts", "created_at": "2025-12-26T06:28:20.822Z", "updated_at": "2025-12-26T06:28:20.822Z"}}, {"model": "quizzes.subcategory", "pk": 56, "fields": {"category": 9, "name": "Current Affairs", "level": 1, "parent_subcat": null, "is_leaf": true, "description": "Recent news and events", "created_at": "2025-12-26T06:28:20.824Z", "updated_at": "2025-12-26T06:28:20.824Z"}}, {"model": "quizzes.subcategory", "pk": 57, "fields": {"category": 9, "name": "Sports", "level": 1, "parent_subcat": null, "is_leaf": true, "description": "Sports events and athletes", "created_at": "2025-12-26T06:28:20.825Z", "updated_at": "2025-12-26T06:28:20.825Z"}}]
-
-
+﻿[
+  {
+    "model": "quizzes.subcategory",
+    "pk": 32,
+    "fields": {
+      "category": 7,
+      "name": "Engineering",
+      "level": 1,
+      "parent_subcat": null,
+      "is_leaf": false,
+      "description": "Engineering streams and subjects",
+      "created_at": "2025-12-26T06:28:20.760Z",
+      "updated_at": "2025-12-26T06:28:20.760Z"
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 33,
+    "fields": {
+      "category": 7,
+      "name": "CSE",
+      "level": 2,
+      "parent_subcat": 32,
+      "is_leaf": false,
+      "description": "Computer Science & Engineering",
+      "created_at": "2025-12-26T06:28:20.762Z",
+      "updated_at": "2025-12-26T06:28:20.762Z"
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 34,
+    "fields": {
+      "category": 7,
+      "name": "Java",
+      "level": 3,
+      "parent_subcat": 33,
+      "is_leaf": true,
+      "description": "Java programming and concepts",
+      "created_at": "2025-12-26T06:28:20.764Z",
+      "updated_at": "2025-12-26T06:28:20.764Z"
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 35,
+    "fields": {
+      "category": 7,
+      "name": "Python",
+      "level": 3,
+      "parent_subcat": 33,
+      "is_leaf": true,
+      "description": "Python programming and concepts",
+      "created_at": "2025-12-26T06:28:20.767Z",
+      "updated_at": "2025-12-26T06:28:20.767Z"
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 36,
+    "fields": {
+      "category": 7,
+      "name": "Operating Systems",
+      "level": 3,
+      "parent_subcat": 33,
+      "is_leaf": true,
+      "description": "Operating Systems programming and concepts",
+      "created_at": "2025-12-26T06:28:20.778Z",
+      "updated_at": "2025-12-26T06:28:20.778Z"
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 37,
+    "fields": {
+      "category": 7,
+      "name": "Data Structures",
+      "level": 3,
+      "parent_subcat": 33,
+      "is_leaf": true,
+      "description": "Data Structures programming and concepts",
+      "created_at": "2025-12-26T06:28:20.782Z",
+      "updated_at": "2025-12-26T06:28:20.782Z"
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 38,
+    "fields": {
+      "category": 7,
+      "name": "DBMS",
+      "level": 3,
+      "parent_subcat": 33,
+      "is_leaf": true,
+      "description": "DBMS programming and concepts",
+      "created_at": "2025-12-26T06:28:20.784Z",
+      "updated_at": "2025-12-26T06:28:20.784Z"
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 39,
+    "fields": {
+      "category": 7,
+      "name": "AIML",
+      "level": 2,
+      "parent_subcat": 32,
+      "is_leaf": false,
+      "description": "Artificial Intelligence & Machine Learning",
+      "created_at": "2025-12-26T06:28:20.788Z",
+      "updated_at": "2025-12-26T06:28:20.788Z"
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 40,
+    "fields": {
+      "category": 7,
+      "name": "Machine Learning",
+      "level": 3,
+      "parent_subcat": 39,
+      "is_leaf": true,
+      "description": "Machine Learning concepts and applications",
+      "created_at": "2025-12-26T06:28:20.791Z",
+      "updated_at": "2025-12-26T06:28:20.791Z"
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 41,
+    "fields": {
+      "category": 7,
+      "name": "Deep Learning",
+      "level": 3,
+      "parent_subcat": 39,
+      "is_leaf": true,
+      "description": "Deep Learning concepts and applications",
+      "created_at": "2025-12-26T06:28:20.793Z",
+      "updated_at": "2025-12-26T06:28:20.793Z"
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 42,
+    "fields": {
+      "category": 7,
+      "name": "Neural Networks",
+      "level": 3,
+      "parent_subcat": 39,
+      "is_leaf": true,
+      "description": "Neural Networks concepts and applications",
+      "created_at": "2025-12-26T06:28:20.796Z",
+      "updated_at": "2025-12-26T06:28:20.796Z"
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 43,
+    "fields": {
+      "category": 7,
+      "name": "NLP",
+      "level": 3,
+      "parent_subcat": 39,
+      "is_leaf": true,
+      "description": "NLP concepts and applications",
+      "created_at": "2025-12-26T06:28:20.798Z",
+      "updated_at": "2025-12-26T06:28:20.798Z"
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 44,
+    "fields": {
+      "category": 7,
+      "name": "Medical",
+      "level": 1,
+      "parent_subcat": null,
+      "is_leaf": false,
+      "description": "Medical science subjects",
+      "created_at": "2025-12-26T06:28:20.800Z",
+      "updated_at": "2025-12-26T06:28:20.800Z"
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 45,
+    "fields": {
+      "category": 7,
+      "name": "Anatomy",
+      "level": 2,
+      "parent_subcat": 44,
+      "is_leaf": true,
+      "description": "Anatomy studies",
+      "created_at": "2025-12-26T06:28:20.802Z",
+      "updated_at": "2025-12-26T06:28:20.802Z"
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 46,
+    "fields": {
+      "category": 7,
+      "name": "Physiology",
+      "level": 2,
+      "parent_subcat": 44,
+      "is_leaf": true,
+      "description": "Physiology studies",
+      "created_at": "2025-12-26T06:28:20.803Z",
+      "updated_at": "2025-12-26T06:28:20.803Z"
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 47,
+    "fields": {
+      "category": 7,
+      "name": "Biochemistry",
+      "level": 2,
+      "parent_subcat": 44,
+      "is_leaf": true,
+      "description": "Biochemistry studies",
+      "created_at": "2025-12-26T06:28:20.806Z",
+      "updated_at": "2025-12-26T06:28:20.806Z"
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 48,
+    "fields": {
+      "category": 7,
+      "name": "Pharmacology",
+      "level": 2,
+      "parent_subcat": 44,
+      "is_leaf": true,
+      "description": "Pharmacology studies",
+      "created_at": "2025-12-26T06:28:20.807Z",
+      "updated_at": "2025-12-26T06:28:20.807Z"
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 49,
+    "fields": {
+      "category": 8,
+      "name": "Movies",
+      "level": 1,
+      "parent_subcat": null,
+      "is_leaf": false,
+      "description": "Film trivia and cinema",
+      "created_at": "2025-12-26T06:28:20.811Z",
+      "updated_at": "2025-12-26T06:28:20.811Z"
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 50,
+    "fields": {
+      "category": 8,
+      "name": "Music",
+      "level": 1,
+      "parent_subcat": null,
+      "is_leaf": false,
+      "description": "Songs, artists, and genres",
+      "created_at": "2025-12-26T06:28:20.813Z",
+      "updated_at": "2025-12-26T06:28:20.813Z"
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 106,
+    "fields": {
+      "category": 8,
+      "name": "Action",
+      "level": 2,
+      "parent_subcat": 49,
+      "is_leaf": true,
+      "description": "Action movies and high-energy films",
+      "created_at": "2025-12-26T06:28:21.000Z",
+      "updated_at": "2025-12-26T06:28:21.000Z"
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 107,
+    "fields": {
+      "category": 8,
+      "name": "Drama",
+      "level": 2,
+      "parent_subcat": 49,
+      "is_leaf": true,
+      "description": "Drama movies and emotional storytelling",
+      "created_at": "2025-12-26T06:28:21.002Z",
+      "updated_at": "2025-12-26T06:28:21.002Z"
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 108,
+    "fields": {
+      "category": 8,
+      "name": "Rap",
+      "level": 2,
+      "parent_subcat": 50,
+      "is_leaf": true,
+      "description": "Rap music, hip-hop culture, and artists",
+      "created_at": "2025-12-26T06:28:21.010Z",
+      "updated_at": "2025-12-26T06:28:21.010Z"
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 109,
+    "fields": {
+      "category": 8,
+      "name": "Classical",
+      "level": 2,
+      "parent_subcat": 50,
+      "is_leaf": true,
+      "description": "Classical music, composers, and traditions",
+      "created_at": "2025-12-26T06:28:21.012Z",
+      "updated_at": "2025-12-26T06:28:21.012Z"
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 100,
+    "fields": {
+      "category": 9,
+      "name": "Current Affairs",
+      "level": 1,
+      "parent_subcat": null,
+      "is_leaf": false,
+      "description": "Current national and international events",
+      "created_at": "2025-12-26T06:28:20.900Z",
+      "updated_at": "2025-12-26T06:28:20.900Z"
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 101,
+    "fields": {
+      "category": 9,
+      "name": "National",
+      "level": 2,
+      "parent_subcat": 100,
+      "is_leaf": true,
+      "description": "National current affairs",
+      "created_at": "2025-12-26T06:28:20.902Z",
+      "updated_at": "2025-12-26T06:28:20.902Z"
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 102,
+    "fields": {
+      "category": 9,
+      "name": "International",
+      "level": 2,
+      "parent_subcat": 100,
+      "is_leaf": true,
+      "description": "International current affairs",
+      "created_at": "2025-12-26T06:28:20.904Z",
+      "updated_at": "2025-12-26T06:28:20.904Z"
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 103,
+    "fields": {
+      "category": 9,
+      "name": "Static GK",
+      "level": 1,
+      "parent_subcat": null,
+      "is_leaf": false,
+      "description": "Static general knowledge topics",
+      "created_at": "2025-12-26T06:28:20.906Z",
+      "updated_at": "2025-12-26T06:28:20.906Z"
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 104,
+    "fields": {
+      "category": 9,
+      "name": "History",
+      "level": 2,
+      "parent_subcat": 103,
+      "is_leaf": true,
+      "description": "Historical events and timelines",
+      "created_at": "2025-12-26T06:28:20.908Z",
+      "updated_at": "2025-12-26T06:28:20.908Z"
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 105,
+    "fields": {
+      "category": 9,
+      "name": "Science",
+      "level": 2,
+      "parent_subcat": 103,
+      "is_leaf": true,
+      "description": "Basic science facts and concepts",
+      "created_at": "2025-12-26T06:28:20.910Z",
+      "updated_at": "2025-12-26T06:28:20.910Z"
+    }
+  }
+]

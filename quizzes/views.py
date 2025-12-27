@@ -251,7 +251,7 @@ def resume_quiz(request, attempt_id):
     quiz_attempt.paused_at = None
     # Reset started_at to current time for timer calculation
     quiz_attempt.started_at = timezone.now()
-    quiz_attempt.save()
+    quiz_attempt.save(update_fields=['paused_at', 'started_at'])
 
     return redirect(
         'quizzes:show_question',
@@ -270,7 +270,7 @@ def previous_question(request, attempt_id):
     # Move back only if possible
     if quiz_attempt.current_question_index > 0:
         quiz_attempt.current_question_index -= 1
-        quiz_attempt.save()
+        quiz_attempt.save(update_fields=['current_question_index'])
 
     return redirect(
         'quizzes:show_question',
@@ -300,7 +300,7 @@ def quit_quiz(request, attempt_id):
     
     quiz_attempt.status = QuizAttempt.STATUS_ABANDONED
     quiz_attempt.completed_at = timezone.now()
-    quiz_attempt.save()
+    quiz_attempt.save(update_fields=['time_spent_seconds', 'paused_at', 'status', 'completed_at'])
 
     return redirect('quizzes:dashboard')
 
@@ -485,7 +485,7 @@ def generate_questions(request, attempt_id):
             'existing_used': sum(1 for q in formatted_questions if q.get('id')),
             'newly_generated': REQUIRED_QUESTIONS - sum(1 for q in formatted_questions if q.get('id'))
         }
-        quiz_attempt.save()
+        quiz_attempt.save(update_fields=['questions', 'status', 'ai_meta'])
 
         return JsonResponse({
             'success': True,
@@ -596,7 +596,9 @@ def submit_answer(request, attempt_id):
     
     # Move to next question
     quiz_attempt.current_question_index += 1
-    quiz_attempt.save()
+
+    # Persist only the changed fields to ensure JSONField is saved
+    quiz_attempt.save(update_fields=['questions', 'current_question_index'])
     
     # Check if quiz is complete
     if quiz_attempt.is_quiz_complete():
@@ -713,10 +715,13 @@ def finalize_quiz_attempt(quiz_attempt):
     quiz_attempt.status = QuizAttempt.STATUS_COMPLETED
 
     # Prevent double-counting if finalize is called again
-    quiz_attempt.started_at = None
     quiz_attempt.paused_at = None
 
-    quiz_attempt.save()
+    quiz_attempt.save(update_fields=[
+        'attempted_questions', 'correct_answers', 'score',
+        'time_spent_seconds', 'time_taken_seconds',
+        'completed_at', 'status', 'paused_at'
+    ])
 
 # streak
 def calculate_streak(user):

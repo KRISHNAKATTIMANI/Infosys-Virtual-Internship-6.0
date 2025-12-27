@@ -1,0 +1,8402 @@
+[
+  {
+    "model": "quizzes.concept",
+    "pk": 2000,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "easy",
+      "name": "Variables",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2001,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "easy",
+      "name": "Data Types",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2002,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "easy",
+      "name": "Lists",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2003,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "easy",
+      "name": "Tuples",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2004,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "easy",
+      "name": "Dictionaries",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2005,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "easy",
+      "name": "Sets",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2006,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "easy",
+      "name": "If-Elif-Else",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2007,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "easy",
+      "name": "For Loops",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2008,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "easy",
+      "name": "While Loops",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2009,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "easy",
+      "name": "Functions",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2010,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "easy",
+      "name": "Comments",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2011,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "easy",
+      "name": "Input/Output",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2012,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "easy",
+      "name": "String Methods",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2013,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "easy",
+      "name": "Slicing",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2014,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "easy",
+      "name": "Boolean Logic",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2015,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "easy",
+      "name": "Range Function",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2016,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "easy",
+      "name": "Break/Continue",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2017,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "easy",
+      "name": "Type Conversion",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2018,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "easy",
+      "name": "Arithmetic Operators",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2019,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "easy",
+      "name": "Indentation",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2020,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "medium",
+      "name": "List Comprehensions",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2021,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "medium",
+      "name": "Lambda Functions",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2022,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "medium",
+      "name": "Map & Filter",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2023,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "medium",
+      "name": "Modules",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2024,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "medium",
+      "name": "File I/O",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2025,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "medium",
+      "name": "Exception Handling",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2026,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "medium",
+      "name": "Classes & Objects",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2027,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "medium",
+      "name": "Inheritance",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2028,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "medium",
+      "name": "Decorators",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2029,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "medium",
+      "name": "Generators",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2030,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "medium",
+      "name": "Iterators",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2031,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "medium",
+      "name": "Virtual Environments",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2032,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "medium",
+      "name": "PIP",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2033,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "medium",
+      "name": "Args & Kwargs",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2034,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "medium",
+      "name": "Magic Methods",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2035,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "medium",
+      "name": "Context Managers",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2036,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "medium",
+      "name": "Regular Expressions",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2037,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "medium",
+      "name": "JSON Handling",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2038,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "medium",
+      "name": "Date & Time",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2039,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "medium",
+      "name": "Importing",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2040,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "hard",
+      "name": "Metaclasses",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2041,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "hard",
+      "name": "AsyncIO",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2042,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "hard",
+      "name": "Multiprocessing",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2043,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "hard",
+      "name": "Threading",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2044,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "hard",
+      "name": "Memory Management",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2045,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "hard",
+      "name": "GIL (Global Interpreter Lock)",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2046,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "hard",
+      "name": "Descriptors",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2047,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "hard",
+      "name": "Monkey Patching",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2048,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "hard",
+      "name": "Cython",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2049,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "hard",
+      "name": "Deep vs Shallow Copy",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2050,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "hard",
+      "name": "Functional Programming",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2051,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "hard",
+      "name": "Unit Testing",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2052,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "hard",
+      "name": "Debugging",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2053,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "hard",
+      "name": "Web Scraping",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2054,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "hard",
+      "name": "Data Serialization",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2055,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "hard",
+      "name": "Socket Programming",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2056,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "hard",
+      "name": "Advanced Decorators",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2057,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "hard",
+      "name": "Coroutines",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2058,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "hard",
+      "name": "Typing Module",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2059,
+    "fields": {
+      "subcategory": 35,
+      "difficulty": "hard",
+      "name": "Performance Optimization",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2060,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "easy",
+      "name": "OS Definition",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2061,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "easy",
+      "name": "Kernel Basics",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2062,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "easy",
+      "name": "Types of OS",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2063,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "easy",
+      "name": "Booting Process",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2064,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "easy",
+      "name": "Process Concept",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2065,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "easy",
+      "name": "Thread Concept",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2066,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "easy",
+      "name": "GUI vs CLI",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2067,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "easy",
+      "name": "File Extensions",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2068,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "easy",
+      "name": "Directories",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2069,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "easy",
+      "name": "System Calls",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2070,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "easy",
+      "name": "User Mode",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2071,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "easy",
+      "name": "Kernel Mode",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2072,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "easy",
+      "name": "Batch Processing",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2073,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "easy",
+      "name": "Multitasking",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2074,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "easy",
+      "name": "Spooling",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2075,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "easy",
+      "name": "Buffering",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2076,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "easy",
+      "name": "Device Drivers",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2077,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "easy",
+      "name": "BIOS",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2078,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "easy",
+      "name": "Virtual Memory Basics",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2079,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "easy",
+      "name": "Processors",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2080,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "medium",
+      "name": "Process Scheduling",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2081,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "medium",
+      "name": "CPU Scheduling Algos",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2082,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "medium",
+      "name": "Deadlock Basics",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2083,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "medium",
+      "name": "Semaphores",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2084,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "medium",
+      "name": "Mutex",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2085,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "medium",
+      "name": "Paging",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2086,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "medium",
+      "name": "Segmentation",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2087,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "medium",
+      "name": "File Systems (NTFS/EXT)",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2088,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "medium",
+      "name": "Disk Scheduling",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2089,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "medium",
+      "name": "Inter-process Communication",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2090,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "medium",
+      "name": "Context Switching",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2091,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "medium",
+      "name": "Swapping",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2092,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "medium",
+      "name": "Thrashing",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2093,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "medium",
+      "name": "Race Conditions",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2094,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "medium",
+      "name": "Banker's Algorithm",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2095,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "medium",
+      "name": "Memory Allocation",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2096,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "medium",
+      "name": "Fragmentation",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2097,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "medium",
+      "name": "Interrupts",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2098,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "medium",
+      "name": "Shell Scripting",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2099,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "medium",
+      "name": "Real-Time OS",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2100,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "hard",
+      "name": "Distributed OS",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2101,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "hard",
+      "name": "Microkernel vs Monolithic",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2102,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "hard",
+      "name": "Deadlock Prevention",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2103,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "hard",
+      "name": "Page Replacement Algos",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2104,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "hard",
+      "name": "RAID Levels",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2105,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "hard",
+      "name": "Security & Protection",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2106,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "hard",
+      "name": "Virtualization",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2107,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "hard",
+      "name": "Kernel Data Structures",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2108,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "hard",
+      "name": "Socket Interface",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2109,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "hard",
+      "name": "Distributed File Systems",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2110,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "hard",
+      "name": "Memory Mapping",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2111,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "hard",
+      "name": "I/O Subsystems",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2112,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "hard",
+      "name": "Synchronization Primitives",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2113,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "hard",
+      "name": "RTOS Scheduling",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2114,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "hard",
+      "name": "Encryption in OS",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2115,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "hard",
+      "name": "Network OS",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2116,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "hard",
+      "name": "Cloud OS Concepts",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2117,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "hard",
+      "name": "Hypervisors",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2118,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "hard",
+      "name": "Containerization",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2119,
+    "fields": {
+      "subcategory": 36,
+      "difficulty": "hard",
+      "name": "Kernel Compilation",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2120,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "easy",
+      "name": "Biological Neuron",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2121,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "easy",
+      "name": "Artificial Neuron",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2122,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "easy",
+      "name": "Perceptron",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2123,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "easy",
+      "name": "Inputs & Outputs",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2124,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "easy",
+      "name": "Threshold",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2125,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "easy",
+      "name": "Activation",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2126,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "easy",
+      "name": "Binary Classification",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2127,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "easy",
+      "name": "Weights Importance",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2128,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "easy",
+      "name": "Bias Importance",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2129,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "easy",
+      "name": "Feedforward",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2130,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "easy",
+      "name": "Single Layer",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2131,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "easy",
+      "name": "Multi Layer",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2132,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "easy",
+      "name": "Training Concept",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2133,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "easy",
+      "name": "Error Calculation",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2134,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "easy",
+      "name": "Learning Concept",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2135,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "easy",
+      "name": "Network Topology",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2136,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "easy",
+      "name": "Synapse Concept",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2137,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "easy",
+      "name": "History of NN",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2138,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "easy",
+      "name": "Biological Neuron (1)",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2139,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "easy",
+      "name": "Artificial Neuron (1)",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2140,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "medium",
+      "name": "Multilayer Perceptron (MLP)",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2141,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "medium",
+      "name": "Gradient Descent",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2142,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "medium",
+      "name": "Cost Function",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2143,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "medium",
+      "name": "Backpropagation Algorithm",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2144,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "medium",
+      "name": "Learning Rate Schedules",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2145,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "medium",
+      "name": "Momentum",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2146,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "medium",
+      "name": "Weight Initialization",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2147,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "medium",
+      "name": "Hyperparameters",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2148,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "medium",
+      "name": "Convergence",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2149,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "medium",
+      "name": "Local Minima",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2150,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "medium",
+      "name": "Universal Approximation",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2151,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "medium",
+      "name": "Hidden Layer sizing",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2152,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "medium",
+      "name": "Activation choices",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2153,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "medium",
+      "name": "Training vs Validation",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2154,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "medium",
+      "name": "Early Stopping",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2155,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "medium",
+      "name": "Regularization",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2156,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "medium",
+      "name": "Optimizers",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2157,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "medium",
+      "name": "Softmax",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2158,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "medium",
+      "name": "Cross-Entropy",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2159,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "medium",
+      "name": "Multilayer Perceptron (MLP) (1)",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2160,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "hard",
+      "name": "Hessian Matrix",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2161,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "hard",
+      "name": "Second Order Methods",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2162,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "hard",
+      "name": "Conjugate Gradient",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2163,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "hard",
+      "name": "Levenberg-Marquardt",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2164,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "hard",
+      "name": "Radial Basis Functions",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2165,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "hard",
+      "name": "Hopfield Networks",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2166,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "hard",
+      "name": "Boltzmann Machines",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2167,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "hard",
+      "name": "Deep Belief Networks",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2168,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "hard",
+      "name": "Spiking Neural Networks",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2169,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "hard",
+      "name": "Hebbian Learning",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2170,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "hard",
+      "name": "Competitive Learning",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2171,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "hard",
+      "name": "Self-Organizing Maps (SOM)",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2172,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "hard",
+      "name": "Adaptive Resonance Theory",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2173,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "hard",
+      "name": "Neuro-Evolution",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2174,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "hard",
+      "name": "Reservoir Computing",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2175,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "hard",
+      "name": "Echo State Networks",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2176,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "hard",
+      "name": "Liquid State Machines",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2177,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "hard",
+      "name": "Dynamic Neural Fields",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2178,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "hard",
+      "name": "Plasticity",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2179,
+    "fields": {
+      "subcategory": 42,
+      "difficulty": "hard",
+      "name": "Neuromorphic Computing",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2180,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "easy",
+      "name": "NLP Definition",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2181,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "easy",
+      "name": "Text Data",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2182,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "easy",
+      "name": "Tokenization",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2183,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "easy",
+      "name": "Stop Words",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2184,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "easy",
+      "name": "Stemming",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2185,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "easy",
+      "name": "Lemmatization",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2186,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "easy",
+      "name": "Corpus",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2187,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "easy",
+      "name": "Vocabulary",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2188,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "easy",
+      "name": "Documents",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2189,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "easy",
+      "name": "Sentences",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2190,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "easy",
+      "name": "Parts of Speech",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2191,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "easy",
+      "name": "Lowercasing",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2192,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "easy",
+      "name": "Punctuation Removal",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2193,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "easy",
+      "name": "Text Cleaning",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2194,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "easy",
+      "name": "Language Detection",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2195,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "easy",
+      "name": "Sentiment Analysis Basics",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2196,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "easy",
+      "name": "Chatbot Basics",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2197,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "easy",
+      "name": "Translation Basics",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2198,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "easy",
+      "name": "Speech to Text",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2199,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "easy",
+      "name": "Text to Speech",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2200,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "medium",
+      "name": "Bag of Words",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2201,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "medium",
+      "name": "TF-IDF",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2202,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "medium",
+      "name": "N-Grams",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2203,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "medium",
+      "name": "POS Tagging",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2204,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "medium",
+      "name": "Named Entity Recognition (NER)",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2205,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "medium",
+      "name": "Word Embeddings",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2206,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "medium",
+      "name": "Word2Vec",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2207,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "medium",
+      "name": "GloVe",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2208,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "medium",
+      "name": "Cosine Similarity",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2209,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "medium",
+      "name": "Text Classification",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2210,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "medium",
+      "name": "Topic Modeling",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2211,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "medium",
+      "name": "LDA",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2212,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "medium",
+      "name": "Sentiment Analysis Advanced",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2213,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "medium",
+      "name": "Dependency Parsing",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2214,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "medium",
+      "name": "Syntax Trees",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2215,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "medium",
+      "name": "Regular Expressions in NLP",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2216,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "medium",
+      "name": "Text Summarization",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2217,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "medium",
+      "name": "Language Models",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2218,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "medium",
+      "name": "Spacy Library",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2219,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "medium",
+      "name": "NLTK Library",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2220,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "hard",
+      "name": "Transformers",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2221,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "hard",
+      "name": "BERT",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2222,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "hard",
+      "name": "GPT",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2223,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "hard",
+      "name": "Attention Mechanism",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2224,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "hard",
+      "name": "Encoder-Decoder",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2225,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "hard",
+      "name": "Seq2Seq Models",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2226,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "hard",
+      "name": "Machine Translation",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2227,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "hard",
+      "name": "Question Answering",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2228,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "hard",
+      "name": "Text Generation",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2229,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "hard",
+      "name": "Contextual Embeddings",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2230,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "hard",
+      "name": "Zero-Shot Learning",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2231,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "hard",
+      "name": "Few-Shot Learning",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2232,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "hard",
+      "name": "Coreference Resolution",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2233,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "hard",
+      "name": "Semantic Role Labeling",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2234,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "hard",
+      "name": "Knowledge Graphs",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2235,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "hard",
+      "name": "Multilingual Models",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2236,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "hard",
+      "name": "Fine-tuning LLMs",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2237,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "hard",
+      "name": "Prompt Engineering",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2238,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "hard",
+      "name": "Dialogue Systems",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2239,
+    "fields": {
+      "subcategory": 43,
+      "difficulty": "hard",
+      "name": "Speech Processing",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2240,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "easy",
+      "name": "Skeleton",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2241,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "easy",
+      "name": "Skull",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2242,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "easy",
+      "name": "Ribcage",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2243,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "easy",
+      "name": "Spine",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2244,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "easy",
+      "name": "Heartbeat",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2245,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "easy",
+      "name": "Lungs",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2246,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "easy",
+      "name": "Muscles",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2247,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "easy",
+      "name": "Skin",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2248,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "easy",
+      "name": "Digestion Basics",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2249,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "easy",
+      "name": "Senses",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2250,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "easy",
+      "name": "Bones",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2251,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "easy",
+      "name": "Blood",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2252,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "easy",
+      "name": "Nerves",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2253,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "easy",
+      "name": "Organs",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2254,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "easy",
+      "name": "Body Cavities",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2255,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "easy",
+      "name": "Joints",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2256,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "easy",
+      "name": "Breathing",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2257,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "easy",
+      "name": "Pulse",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2258,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "easy",
+      "name": "Growth",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2259,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "easy",
+      "name": "Movement",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2260,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "medium",
+      "name": "Digestive System",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2261,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "medium",
+      "name": "Respiratory System",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2262,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "medium",
+      "name": "Circulatory System",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2263,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "medium",
+      "name": "Nervous System",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2264,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "medium",
+      "name": "Endocrine System",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2265,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "medium",
+      "name": "Reproductive System",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2266,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "medium",
+      "name": "Urinary System",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2267,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "medium",
+      "name": "Lymphatic System",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2268,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "medium",
+      "name": "Homeostasis",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2269,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "medium",
+      "name": "Metabolism",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2270,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "medium",
+      "name": "Immune Response",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2271,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "medium",
+      "name": "Blood Clotting",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2272,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "medium",
+      "name": "Nerve Impulse",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2273,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "medium",
+      "name": "Muscle Contraction",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2274,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "medium",
+      "name": "Gas Exchange",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2275,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "medium",
+      "name": "Hormone Action",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2276,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "medium",
+      "name": "Kidney Function",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2277,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "medium",
+      "name": "Sensory Perception",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2278,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "medium",
+      "name": "Vision Mechanism",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2279,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "medium",
+      "name": "Hearing Mechanism",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2280,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "hard",
+      "name": "Neuroanatomy",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2281,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "hard",
+      "name": "Cardiovascular Dynamics",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2282,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "hard",
+      "name": "Respiratory Mechanics",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2283,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "hard",
+      "name": "Renal Clearance",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2284,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "hard",
+      "name": "Endocrine Feedback Loops",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2285,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "hard",
+      "name": "Exercise Physiology",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2286,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "hard",
+      "name": "High Altitude Physiology",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2287,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "hard",
+      "name": "Diving Physiology",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2288,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "hard",
+      "name": "Reproductive Cycles",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2289,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "hard",
+      "name": "Fetal Physiology",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2290,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "hard",
+      "name": "Aging Physiology",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2291,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "hard",
+      "name": "Stress Physiology",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2292,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "hard",
+      "name": "Pain Mechanisms",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2293,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "hard",
+      "name": "Sleep Cycles",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2294,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "hard",
+      "name": "Autonomic Control",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2295,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "hard",
+      "name": "Signal Transduction",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2296,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "hard",
+      "name": "Gene Expression",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2297,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "hard",
+      "name": "Apoptosis",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2298,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "hard",
+      "name": "Stem Cells",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2299,
+    "fields": {
+      "subcategory": 45,
+      "difficulty": "hard",
+      "name": "Microanatomy",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2300,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "easy",
+      "name": "Common Cold",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2301,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "easy",
+      "name": "Flu",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2302,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "easy",
+      "name": "Fever",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2303,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "easy",
+      "name": "Headache",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2304,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "easy",
+      "name": "Cough",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2305,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "easy",
+      "name": "Hygiene",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2306,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "easy",
+      "name": "Vaccination Basics",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2307,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "easy",
+      "name": "First Aid",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2308,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "easy",
+      "name": "Healthy Diet",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2309,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "easy",
+      "name": "Exercise Benefits",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2310,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "easy",
+      "name": "Sleep Importance",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2311,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "easy",
+      "name": "Hand Washing",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2312,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "easy",
+      "name": "Germs",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2313,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "easy",
+      "name": "Vitamins",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2314,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "easy",
+      "name": "Water Intake",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2315,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "easy",
+      "name": "Sun Safety",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2316,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "easy",
+      "name": "Dental Care",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2317,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "easy",
+      "name": "Mental Health Basics",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2318,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "easy",
+      "name": "Stress Management",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2319,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "easy",
+      "name": "Smoking Risks",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2320,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "medium",
+      "name": "Diabetes",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2321,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "medium",
+      "name": "Hypertension",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2322,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "medium",
+      "name": "Asthma",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2323,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "medium",
+      "name": "Allergies",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2324,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "medium",
+      "name": "Infections",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2325,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "medium",
+      "name": "Malaria",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2326,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "medium",
+      "name": "Dengue",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2327,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "medium",
+      "name": "Typhoid",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2328,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "medium",
+      "name": "Tuberculosis",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2329,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "medium",
+      "name": "COVID-19",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2330,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "medium",
+      "name": "Obesity",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2331,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "medium",
+      "name": "Heart Disease Risks",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2332,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "medium",
+      "name": "Cancer Awareness",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2333,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "medium",
+      "name": "Mental Disorders",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2334,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "medium",
+      "name": "Addiction",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2335,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "medium",
+      "name": "Antibiotic Resistance",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2336,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "medium",
+      "name": "Immunization Schedule",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2337,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "medium",
+      "name": "Nutrition Deficiencies",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2338,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "medium",
+      "name": "Occupational Health",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2339,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "medium",
+      "name": "Public Health",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2340,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "hard",
+      "name": "Epidemiology",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2341,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "hard",
+      "name": "Pandemics",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2342,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "hard",
+      "name": "Genetic Disorders",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2343,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "hard",
+      "name": "Autoimmune Diseases",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2344,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "hard",
+      "name": "Neurological Disorders",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2345,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "hard",
+      "name": "Cardiovascular Diseases",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2346,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "hard",
+      "name": "Oncology",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2347,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "hard",
+      "name": "HIV/AIDS",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2348,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "hard",
+      "name": "Hepatitis",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2349,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "hard",
+      "name": "Chronic Kidney Disease",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2350,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "hard",
+      "name": "Rare Diseases",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2351,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "hard",
+      "name": "Global Health Issues",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2352,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "hard",
+      "name": "Health Policy",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2353,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "hard",
+      "name": "Bioethics",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2354,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "hard",
+      "name": "Telemedicine",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2355,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "hard",
+      "name": "Personalized Medicine",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2356,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "hard",
+      "name": "Clinical Trials",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2357,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "hard",
+      "name": "Drug Development",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2358,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "hard",
+      "name": "Healthcare Systems",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2359,
+    "fields": {
+      "subcategory": 47,
+      "difficulty": "hard",
+      "name": "Preventive Medicine",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2360,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "easy",
+      "name": "Stunts",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2361,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "easy",
+      "name": "Explosions",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2362,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "easy",
+      "name": "Chase Scenes",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2363,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "easy",
+      "name": "Heroes",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2364,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "easy",
+      "name": "Villains",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2365,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "easy",
+      "name": "Fighting",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2366,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "easy",
+      "name": "Weapons",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2367,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "easy",
+      "name": "Speed",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2368,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "easy",
+      "name": "Danger",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2369,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "easy",
+      "name": "Rescues",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2370,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "easy",
+      "name": "Martial Arts",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2371,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "easy",
+      "name": "Car Chases",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2372,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "easy",
+      "name": "Shootouts",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2373,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "easy",
+      "name": "Superheroes",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2374,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "easy",
+      "name": "Spies",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2375,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "easy",
+      "name": "War",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2376,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "easy",
+      "name": "Adventure",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2377,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "easy",
+      "name": "Suspense",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2378,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "easy",
+      "name": "Thrills",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2379,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "easy",
+      "name": "Blockbusters",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2380,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "medium",
+      "name": "Choreography",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2381,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "medium",
+      "name": "Special Effects",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2382,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "medium",
+      "name": "CGI",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2383,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "medium",
+      "name": "Practical Effects",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2384,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "medium",
+      "name": "Stunt Doubles",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2385,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "medium",
+      "name": "Action Subgenres",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2386,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "medium",
+      "name": "Buddy Cop",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2387,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "medium",
+      "name": "Disaster Movies",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2388,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "medium",
+      "name": "Heist Movies",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2389,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "medium",
+      "name": "Revenge Movies",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2390,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "medium",
+      "name": "Franchises",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2391,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "medium",
+      "name": "Sequels",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2392,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "medium",
+      "name": "Directing Action",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2393,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "medium",
+      "name": "Editing Action",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2394,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "medium",
+      "name": "Sound Design",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2395,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "medium",
+      "name": "Pacing",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2396,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "medium",
+      "name": "Tension",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2397,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "medium",
+      "name": "Climax",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2398,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "medium",
+      "name": "Resolution",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2399,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "medium",
+      "name": "Iconic Roles",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2400,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "hard",
+      "name": "Cinematography in Action",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2401,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "hard",
+      "name": "History of Action",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2402,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "hard",
+      "name": "Hong Kong Cinema",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2403,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "hard",
+      "name": "Western Influence",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2404,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "hard",
+      "name": "Action Stars Biographies",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2405,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "hard",
+      "name": "Stunt Coordination",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2406,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "hard",
+      "name": "Safety Regulations",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2407,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "hard",
+      "name": "Budgeting Action",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2408,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "hard",
+      "name": "Marketing Action",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2409,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "hard",
+      "name": "Critical Reception",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2410,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "hard",
+      "name": "Genre Evolution",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2411,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "hard",
+      "name": "Deconstruction",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2412,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "hard",
+      "name": "Parody",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2413,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "hard",
+      "name": "Indie Action",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2414,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "hard",
+      "name": "International Action",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2415,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "hard",
+      "name": "Anime Action",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2416,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "hard",
+      "name": "Motion Capture",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2417,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "hard",
+      "name": "Virtual Production",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2418,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "hard",
+      "name": "Impact on Culture",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2419,
+    "fields": {
+      "subcategory": 106,
+      "difficulty": "hard",
+      "name": "Future of Action",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2420,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "easy",
+      "name": "Emotions",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2421,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "easy",
+      "name": "Relationships",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2422,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "easy",
+      "name": "Conflict",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2423,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "easy",
+      "name": "Dialogue",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2424,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "easy",
+      "name": "Characters",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2425,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "easy",
+      "name": "Realism",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2426,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "easy",
+      "name": "Sadness",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2427,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "easy",
+      "name": "Happiness",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2428,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "easy",
+      "name": "Love",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2429,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "easy",
+      "name": "Family",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2430,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "easy",
+      "name": "Friendship",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2431,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "easy",
+      "name": "Tragedy",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2432,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "easy",
+      "name": "Comedy-Drama",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2433,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "easy",
+      "name": "Acting",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2434,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "easy",
+      "name": "Script",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2435,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "easy",
+      "name": "Story",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2436,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "easy",
+      "name": "Plot",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2437,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "easy",
+      "name": "Setting",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2438,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "easy",
+      "name": "Theme",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2439,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "easy",
+      "name": "Ending",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2440,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "medium",
+      "name": "Character Development",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2441,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "medium",
+      "name": "Plot Twists",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2442,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "medium",
+      "name": "Subtext",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2443,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "medium",
+      "name": "Monologues",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2444,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "medium",
+      "name": "Screenwriting",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2445,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "medium",
+      "name": "Directing Drama",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2446,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "medium",
+      "name": "Acting Methods",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2447,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "medium",
+      "name": "Awards",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2448,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "medium",
+      "name": "Period Dramas",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2449,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "medium",
+      "name": "Biopics",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2450,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "medium",
+      "name": "Legal Dramas",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2451,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "medium",
+      "name": "Medical Dramas",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2452,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "medium",
+      "name": "Political Dramas",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2453,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "medium",
+      "name": "Teen Dramas",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2454,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "medium",
+      "name": "Indie Films",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2455,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "medium",
+      "name": "Character Arcs",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2456,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "medium",
+      "name": "Motifs",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2457,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "medium",
+      "name": "Symbolism",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2458,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "medium",
+      "name": "Foreshadowing",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2459,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "medium",
+      "name": "Flashbacks",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2460,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "hard",
+      "name": "Narrative Structures",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2461,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "hard",
+      "name": "Cinematic Techniques",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2462,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "hard",
+      "name": "Lighting & Mood",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2463,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "hard",
+      "name": "Soundtracks",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2464,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "hard",
+      "name": "Editing Rhythm",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2465,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "hard",
+      "name": "Genre Blending",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2466,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "hard",
+      "name": "Historical Accuracy",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2467,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "hard",
+      "name": "Social Commentary",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2468,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "hard",
+      "name": "Psychological Depth",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2469,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "hard",
+      "name": "Method Acting",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2470,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "hard",
+      "name": "Ensemble Casts",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2471,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "hard",
+      "name": "Adaptations",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2472,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "hard",
+      "name": "Play-to-Screen",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2473,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "hard",
+      "name": "Directorial Styles",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2474,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "hard",
+      "name": "Film Theory",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2475,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "hard",
+      "name": "Criticism",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2476,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "hard",
+      "name": "Audience Reception",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2477,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "hard",
+      "name": "Cultural Impact",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2478,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "hard",
+      "name": "Box Office",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2479,
+    "fields": {
+      "subcategory": 107,
+      "difficulty": "hard",
+      "name": "Production Design",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2480,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "easy",
+      "name": "Rhyme",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2481,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "easy",
+      "name": "Beat",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2482,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "easy",
+      "name": "Flow",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2483,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "easy",
+      "name": "Lyrics",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2484,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "easy",
+      "name": "Rapper",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2485,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "easy",
+      "name": "Hip Hop",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2486,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "easy",
+      "name": "DJ",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2487,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "easy",
+      "name": "Microphone",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2488,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "easy",
+      "name": "Stage",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2489,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "easy",
+      "name": "Concert",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2490,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "easy",
+      "name": "Album",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2491,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "easy",
+      "name": "Single",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2492,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "easy",
+      "name": "Music Video",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2493,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "easy",
+      "name": "Style",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2494,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "easy",
+      "name": "Fashion",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2495,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "easy",
+      "name": "Dance",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2496,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "easy",
+      "name": "Graffiti",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2497,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "easy",
+      "name": "Culture",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2498,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "easy",
+      "name": "Street",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2499,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "easy",
+      "name": "Voice",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2500,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "medium",
+      "name": "Old School",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2501,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "medium",
+      "name": "New School",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2502,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "medium",
+      "name": "East Coast",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2503,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "medium",
+      "name": "West Coast",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2504,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "medium",
+      "name": "Freestyle",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2505,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "medium",
+      "name": "Battle Rap",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2506,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "medium",
+      "name": "Sampling",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2507,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "medium",
+      "name": "Production",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2508,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "medium",
+      "name": "Record Labels",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2509,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "medium",
+      "name": "Mixtapes",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2510,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "medium",
+      "name": "Collaborations",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2511,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "medium",
+      "name": "Beefs",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2512,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "medium",
+      "name": "Storytelling",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2513,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "medium",
+      "name": "Metaphors",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2514,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "medium",
+      "name": "Similes",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2515,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "medium",
+      "name": "Punchlines",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2516,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "medium",
+      "name": "Delivery",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2517,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "medium",
+      "name": "Cadence",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2518,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "medium",
+      "name": "Ad-libs",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2519,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "medium",
+      "name": "Producers",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2520,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "hard",
+      "name": "Lyricism",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2521,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "hard",
+      "name": "Polyrhythms",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2522,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "hard",
+      "name": "Internal Rhymes",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2523,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "hard",
+      "name": "Multisyllabic Rhymes",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2524,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "hard",
+      "name": "Social Conscious Rap",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2525,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "hard",
+      "name": "Gangsta Rap",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2526,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "hard",
+      "name": "Trap Music",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2527,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "hard",
+      "name": "Mumble Rap",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2528,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "hard",
+      "name": "Drill Music",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2529,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "hard",
+      "name": "Global Hip Hop",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2530,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "hard",
+      "name": "History of DJing",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2531,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "hard",
+      "name": "Breakdancing Elements",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2532,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "hard",
+      "name": "Graffiti Art",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2533,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "hard",
+      "name": "Hip Hop Activism",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2534,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "hard",
+      "name": "Business of Rap",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2535,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "hard",
+      "name": "Streaming Era",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2536,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "hard",
+      "name": "Independent vs Major",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2537,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "hard",
+      "name": "Ghostwriting",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2538,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "hard",
+      "name": "Sampling Laws",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2539,
+    "fields": {
+      "subcategory": 108,
+      "difficulty": "hard",
+      "name": "Cultural Appropriation",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2540,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "easy",
+      "name": "Orchestra",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2541,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "easy",
+      "name": "Piano",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2542,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "easy",
+      "name": "Violin",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2543,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "easy",
+      "name": "Composer",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2544,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "easy",
+      "name": "Conductor",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2545,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "easy",
+      "name": "Symphony",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2546,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "easy",
+      "name": "Opera",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2547,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "easy",
+      "name": "Ballet",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2548,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "easy",
+      "name": "Music Notes",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2549,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "easy",
+      "name": "Sheet Music",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2550,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "easy",
+      "name": "Concert Hall",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2551,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "easy",
+      "name": "Audience",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2552,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "easy",
+      "name": "Instrument",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2553,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "easy",
+      "name": "Melody",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2554,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "easy",
+      "name": "Rhythm",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2555,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "easy",
+      "name": "Harmony",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2556,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "easy",
+      "name": "Tempo",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2557,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "easy",
+      "name": "Volume",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2558,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "easy",
+      "name": "Silence",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2559,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "easy",
+      "name": "Applause",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2560,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "medium",
+      "name": "Baroque Era",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2561,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "medium",
+      "name": "Classical Era",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2562,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "medium",
+      "name": "Romantic Era",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2563,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "medium",
+      "name": "Modern Era",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2564,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "medium",
+      "name": "Concerto",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2565,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "medium",
+      "name": "Sonata",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2566,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "medium",
+      "name": "String Quartet",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2567,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "medium",
+      "name": "Choir",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2568,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "medium",
+      "name": "Soloist",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2569,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "medium",
+      "name": "Chamber Music",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2570,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "medium",
+      "name": "Overture",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2571,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "medium",
+      "name": "Aria",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2572,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "medium",
+      "name": "Recitative",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2573,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "medium",
+      "name": "Major Key",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2574,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "medium",
+      "name": "Minor Key",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2575,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "medium",
+      "name": "Scales",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2576,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "medium",
+      "name": "Chords",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2577,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "medium",
+      "name": "Dynamics",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2578,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "medium",
+      "name": "Articulation",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2579,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "medium",
+      "name": "Phrasing",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2580,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "hard",
+      "name": "Bach",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2581,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "hard",
+      "name": "Mozart",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2582,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "hard",
+      "name": "Beethoven",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2583,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "hard",
+      "name": "Tchaikovsky",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2584,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "hard",
+      "name": "Chopin",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2585,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "hard",
+      "name": "Vivaldi",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2586,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "hard",
+      "name": "Handel",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2587,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "hard",
+      "name": "Brahms",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2588,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "hard",
+      "name": "Schubert",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2589,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "hard",
+      "name": "Wagner",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2590,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "hard",
+      "name": "Music Theory",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2591,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "hard",
+      "name": "Counterpoint",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2592,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "hard",
+      "name": "Fugue",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2593,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "hard",
+      "name": "Orchestration",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2594,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "hard",
+      "name": "Conducting Techniques",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2595,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "hard",
+      "name": "Historical Performance",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2596,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "hard",
+      "name": "Atonality",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2597,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "hard",
+      "name": "Minimalism",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2598,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "hard",
+      "name": "Opera Synopsis",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2599,
+    "fields": {
+      "subcategory": 109,
+      "difficulty": "hard",
+      "name": "Instrument Families",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2600,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "easy",
+      "name": "President",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2601,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "easy",
+      "name": "Prime Minister",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2602,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "easy",
+      "name": "Capital City",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2603,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "easy",
+      "name": "Flag",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2604,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "easy",
+      "name": "Anthem",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2605,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "easy",
+      "name": "Currency",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2606,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "easy",
+      "name": "Language",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2607,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "easy",
+      "name": "Population",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2608,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "easy",
+      "name": "States",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2609,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "easy",
+      "name": "Cities",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2610,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "easy",
+      "name": "Holidays",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2611,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "easy",
+      "name": "Festivals",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2612,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "easy",
+      "name": "Food",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2613,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "easy",
+      "name": "Clothes",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2614,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "easy",
+      "name": "Sports",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2615,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "easy",
+      "name": "Weather",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2616,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "easy",
+      "name": "Map",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2617,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "easy",
+      "name": "Borders",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2618,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "easy",
+      "name": "Neighbors",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2619,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "easy",
+      "name": "History Basics",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2620,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "medium",
+      "name": "Constitution",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2621,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "medium",
+      "name": "Parliament",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2622,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "medium",
+      "name": "Elections",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2623,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "medium",
+      "name": "Political Parties",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2624,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "medium",
+      "name": "Laws",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2625,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "medium",
+      "name": "Courts",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2626,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "medium",
+      "name": "Economy",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2627,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "medium",
+      "name": "Taxes",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2628,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "medium",
+      "name": "Education System",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2629,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "medium",
+      "name": "Healthcare System",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2630,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "medium",
+      "name": "Transportation",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2631,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "medium",
+      "name": "Infrastructure",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2632,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "medium",
+      "name": "Agriculture",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2633,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "medium",
+      "name": "Industry",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2634,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "medium",
+      "name": "Tourism",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2635,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "medium",
+      "name": "Media",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2636,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "medium",
+      "name": "Culture",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2637,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "medium",
+      "name": "Religion",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2638,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "medium",
+      "name": "Minorities",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2639,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "medium",
+      "name": "Immigration",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2640,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "hard",
+      "name": "Foreign Policy",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2641,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "hard",
+      "name": "Defense",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2642,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "hard",
+      "name": "Budget",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2643,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "hard",
+      "name": "GDP",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2644,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "hard",
+      "name": "Inflation",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2645,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "hard",
+      "name": "Trade",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2646,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "hard",
+      "name": "Diplomacy",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2647,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "hard",
+      "name": "Treaties",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2648,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "hard",
+      "name": "Alliances",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2649,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "hard",
+      "name": "Conflict Resolution",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2650,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "hard",
+      "name": "Human Rights",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2651,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "hard",
+      "name": "Environment Policy",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2652,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "hard",
+      "name": "Energy Policy",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2653,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "hard",
+      "name": "Science & Tech",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2654,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "hard",
+      "name": "Space Program",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2655,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "hard",
+      "name": "Social Issues",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2656,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "hard",
+      "name": "Reforms",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2657,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "hard",
+      "name": "Development",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2658,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "hard",
+      "name": "Corruption",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2659,
+    "fields": {
+      "subcategory": 101,
+      "difficulty": "hard",
+      "name": "Future Outlook",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2660,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "easy",
+      "name": "World Map",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2661,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "easy",
+      "name": "Continents",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2662,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "easy",
+      "name": "Oceans",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2663,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "easy",
+      "name": "Countries",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2664,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "easy",
+      "name": "Flags",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2665,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "easy",
+      "name": "United Nations",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2666,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "easy",
+      "name": "Peace",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2667,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "easy",
+      "name": "War",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2668,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "easy",
+      "name": "Trade",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2669,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "easy",
+      "name": "Travel",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2670,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "easy",
+      "name": "Passports",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2671,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "easy",
+      "name": "Visas",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2672,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "easy",
+      "name": "Languages",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2673,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "easy",
+      "name": "Religions",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2674,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "easy",
+      "name": "Currencies",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2675,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "easy",
+      "name": "Time Zones",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2676,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "easy",
+      "name": "Weather",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2677,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "easy",
+      "name": "Climate",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2678,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "easy",
+      "name": "Famous Places",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2679,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "easy",
+      "name": "Global Events",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2680,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "medium",
+      "name": "Geopolitics",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2681,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "medium",
+      "name": "Diplomacy",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2682,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "medium",
+      "name": "Embassies",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2683,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "medium",
+      "name": "Consulates",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2684,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "medium",
+      "name": "NGOs",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2685,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "medium",
+      "name": "WHO",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2686,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "medium",
+      "name": "WTO",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2687,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "medium",
+      "name": "IMF",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2688,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "medium",
+      "name": "World Bank",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2689,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "medium",
+      "name": "NATO",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2690,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "medium",
+      "name": "EU",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2691,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "medium",
+      "name": "ASEAN",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2692,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "medium",
+      "name": "G20",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2693,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "medium",
+      "name": "G7",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2694,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "medium",
+      "name": "International Law",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2695,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "medium",
+      "name": "Human Rights",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2696,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "medium",
+      "name": "Refugees",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2697,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "medium",
+      "name": "Migration",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2698,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "medium",
+      "name": "Terrorism",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2699,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "medium",
+      "name": "Cybersecurity",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2700,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "hard",
+      "name": "Globalization",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2701,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "hard",
+      "name": "Climate Change",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2702,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "hard",
+      "name": "Pandemics",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2703,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "hard",
+      "name": "Economic Crisis",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2704,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "hard",
+      "name": "Trade Wars",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2705,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "hard",
+      "name": "Nuclear Proliferation",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2706,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "hard",
+      "name": "Disarmament",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2707,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "hard",
+      "name": "Peacekeeping",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2708,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "hard",
+      "name": "Development Aid",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2709,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "hard",
+      "name": "Debt Relief",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2710,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "hard",
+      "name": "Sanctions",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2711,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "hard",
+      "name": "Treaties",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2712,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "hard",
+      "name": "Protocols",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2713,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "hard",
+      "name": "Conventions",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2714,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "hard",
+      "name": "Summits",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2715,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "hard",
+      "name": "Resolutions",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2716,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "hard",
+      "name": "Veto Power",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2717,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "hard",
+      "name": "Sovereignty",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2718,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "hard",
+      "name": "Diplomatic Immunity",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2719,
+    "fields": {
+      "subcategory": 102,
+      "difficulty": "hard",
+      "name": "Extradition",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2720,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "easy",
+      "name": "Past",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2721,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "easy",
+      "name": "Timeline",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2722,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "easy",
+      "name": "Dates",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2723,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "easy",
+      "name": "Events",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2724,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "easy",
+      "name": "People",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2725,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "easy",
+      "name": "Kings",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2726,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "easy",
+      "name": "Queens",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2727,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "easy",
+      "name": "Wars",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2728,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "easy",
+      "name": "Peace",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2729,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "easy",
+      "name": "Inventions",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2730,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "easy",
+      "name": "Discoveries",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2731,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "easy",
+      "name": "Explorers",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2732,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "easy",
+      "name": "Ancient",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2733,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "easy",
+      "name": "Modern",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2734,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "easy",
+      "name": "Museums",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2735,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "easy",
+      "name": "Books",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2736,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "easy",
+      "name": "Stories",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2737,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "easy",
+      "name": "Legends",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2738,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "easy",
+      "name": "Myths",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2739,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "easy",
+      "name": "Ruins",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2740,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "medium",
+      "name": "Ancient Civilizations",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2741,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "medium",
+      "name": "Egypt",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2742,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "medium",
+      "name": "Rome",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2743,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "medium",
+      "name": "Greece",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2744,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "medium",
+      "name": "China",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2745,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "medium",
+      "name": "India",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2746,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "medium",
+      "name": "Middle Ages",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2747,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "medium",
+      "name": "Renaissance",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2748,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "medium",
+      "name": "Industrial Revolution",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2749,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "medium",
+      "name": "World War I",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2750,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "medium",
+      "name": "World War II",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2751,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "medium",
+      "name": "Cold War",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2752,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "medium",
+      "name": "Colonialism",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2753,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "medium",
+      "name": "Independence",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2754,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "medium",
+      "name": "Revolutions",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2755,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "medium",
+      "name": "Civil Rights",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2756,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "medium",
+      "name": "Women's Rights",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2757,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "medium",
+      "name": "Democracy",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2758,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "medium",
+      "name": "Dictators",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2759,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "medium",
+      "name": "Empires",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2760,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "hard",
+      "name": "Historiography",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2761,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "hard",
+      "name": "Archaeology",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2762,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "hard",
+      "name": "Anthropology",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2763,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "hard",
+      "name": "Sociology",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2764,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "hard",
+      "name": "Economic History",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2765,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "hard",
+      "name": "Military History",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2766,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "hard",
+      "name": "Political History",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2767,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "hard",
+      "name": "Cultural History",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2768,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "hard",
+      "name": "Art History",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2769,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "hard",
+      "name": "Science History",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2770,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "hard",
+      "name": "Philosophy",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2771,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "hard",
+      "name": "Religion History",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2772,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "hard",
+      "name": "Migration History",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2773,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "hard",
+      "name": "Environmental History",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2774,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "hard",
+      "name": "Oral History",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2775,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "hard",
+      "name": "Primary Sources",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2776,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "hard",
+      "name": "Secondary Sources",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2777,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "hard",
+      "name": "Archives",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2778,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "hard",
+      "name": "Preservation",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2779,
+    "fields": {
+      "subcategory": 104,
+      "difficulty": "hard",
+      "name": "Heritage",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2780,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "easy",
+      "name": "Nature",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2781,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "easy",
+      "name": "Plants",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2782,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "easy",
+      "name": "Animals",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2783,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "easy",
+      "name": "Space",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2784,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "easy",
+      "name": "Stars",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2785,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "easy",
+      "name": "Planets",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2786,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "easy",
+      "name": "Sun",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2787,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "easy",
+      "name": "Moon",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2788,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "easy",
+      "name": "Water",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2789,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "easy",
+      "name": "Air",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2790,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "easy",
+      "name": "Fire",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2791,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "easy",
+      "name": "Earth",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2792,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "easy",
+      "name": "Human Body",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2793,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "easy",
+      "name": "Magnets",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2794,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "easy",
+      "name": "Light",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2795,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "easy",
+      "name": "Sound",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2796,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "easy",
+      "name": "Electricity",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2797,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "easy",
+      "name": "Machines",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2798,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "easy",
+      "name": "Computers",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2799,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "easy",
+      "name": "Robots",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2800,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "medium",
+      "name": "Biology",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2801,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "medium",
+      "name": "Chemistry",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2802,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "medium",
+      "name": "Physics",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2803,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "medium",
+      "name": "Astronomy",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2804,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "medium",
+      "name": "Geology",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2805,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "medium",
+      "name": "Ecology",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2806,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "medium",
+      "name": "Environment",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2807,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "medium",
+      "name": "Evolution",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2808,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "medium",
+      "name": "Genetics",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2809,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "medium",
+      "name": "Periodic Table",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2810,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "medium",
+      "name": "Elements",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2811,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "medium",
+      "name": "Compounds",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2812,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "medium",
+      "name": "Mixtures",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2813,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "medium",
+      "name": "Forces",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2814,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "medium",
+      "name": "Motion",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2815,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "medium",
+      "name": "Energy",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2816,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "medium",
+      "name": "Waves",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2817,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "medium",
+      "name": "Optics",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2818,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "medium",
+      "name": "Thermodynamics",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2819,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "medium",
+      "name": "Magnetism",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2820,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "hard",
+      "name": "Quantum Physics",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2821,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "hard",
+      "name": "Relativity",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2822,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "hard",
+      "name": "Astrophysics",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2823,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "hard",
+      "name": "Cosmology",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2824,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "hard",
+      "name": "Particle Physics",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2825,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "hard",
+      "name": "Nanotechnology",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2826,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "hard",
+      "name": "Biotechnology",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2827,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "hard",
+      "name": "Genetic Engineering",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2828,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "hard",
+      "name": "Cloning",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2829,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "hard",
+      "name": "Stem Cells",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2830,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "hard",
+      "name": "Neuroscience",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2831,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "hard",
+      "name": "Artificial Intelligence",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2832,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "hard",
+      "name": "Robotics",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2833,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "hard",
+      "name": "Space Exploration",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2834,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "hard",
+      "name": "Mars Mission",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2835,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "hard",
+      "name": "Climate Science",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2836,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "hard",
+      "name": "Renewable Energy",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2837,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "hard",
+      "name": "Nuclear Energy",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2838,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "hard",
+      "name": "Material Science",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  },
+  {
+    "model": "quizzes.concept",
+    "pk": 2839,
+    "fields": {
+      "subcategory": 105,
+      "difficulty": "hard",
+      "name": "Theoretical Physics",
+      "created_at": "2025-12-26T06:28:31.956Z"
+    }
+  }
+]
