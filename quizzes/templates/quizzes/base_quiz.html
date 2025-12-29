@@ -294,6 +294,136 @@
           animation: none !important;
         }
       }
+
+      {% comment %} for quizresults page {% endcomment %}
+      /* ===== RESULT HERO ===== */
+      .result-hero {
+        display: flex;
+        gap: 32px;
+        align-items: center;
+        padding: 28px;
+        border-radius: 16px;
+        background: linear-gradient(145deg, #0f172a, #020617);
+      }
+
+      .score-circle {
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        background: #facc15;
+        color: #020617;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .score-value {
+        font-size: 36px;
+        font-weight: 800;
+      }
+
+      .score-label {
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      .result-summary h2 {
+        margin: 0;
+      }
+
+      .feedback.success {
+        color: #22c55e;
+      }
+
+      .feedback.retry {
+        color: #facc15;
+      }
+
+      /* ===== STATS ===== */
+      .result-stats {
+        display: flex;
+        justify-content: space-around;
+        margin: 24px 0;
+      }
+
+      .stat {
+        text-align: center;
+      }
+
+      .stat-value {
+        font-size: 22px;
+        font-weight: 700;
+      }
+
+      .stat-label {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .soft-divider {
+        border: none;
+        height: 1px;
+        background: rgba(255,255,255,0.06);
+        margin: 20px 0;
+      }
+
+      /* ===== REVIEW ===== */
+      .question-card {
+        background: #020617;
+        border-radius: 12px;
+        margin-bottom: 12px;
+        padding: 12px;
+      }
+
+      .question-card summary {
+        display: flex;
+        justify-content: space-between;
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      .question-card.correct {
+        border-left: 4px solid #22c55e;
+      }
+
+      .question-card.wrong {
+        border-left: 4px solid #ef4444;
+      }
+
+      .review-body {
+        margin-top: 10px;
+        font-size: 14px;
+      }
+
+      .badge {
+        font-size: 12px;
+        padding: 4px 8px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.08);
+      }
+
+      .good {
+        color: #22c55e;
+      }
+
+      .bad {
+        color: #ef4444;
+      }
+
+      .explanation {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      /* ===== ACTIONS ===== */
+      .result-actions {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 32px;
+      }
+
     </style>
 
     {% block extra_styles %}{% endblock %}
