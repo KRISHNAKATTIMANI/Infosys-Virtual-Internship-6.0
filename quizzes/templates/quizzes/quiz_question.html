@@ -94,7 +94,10 @@
       console.error("Timer display element not found! Check the ID in base_quiz.html");
   }
 
-  let remainingTime = {{ remaining_seconds }};
+  const STORAGE_KEY = "quiz_timer_{{ quiz_attempt.id }}";
+
+  let remainingTime = localStorage.getItem(STORAGE_KEY)? parseInt(localStorage.getItem(STORAGE_KEY)) : {{ remaining_seconds }};
+
 
   function formatTime(seconds) {
       const mins = Math.floor(seconds / 60);
@@ -137,10 +140,12 @@
   // Countdown
   const countdown = setInterval(() => {
       remainingTime--;
+      localStorage.setItem(STORAGE_KEY, remainingTime);
       updateDisplay();
 
       if (remainingTime <= 0) {
           clearInterval(countdown);
+          localStorage.removeItem(STORAGE_KEY);
           document.getElementById('auto-submit-form').submit();
       }
   }, 1000);

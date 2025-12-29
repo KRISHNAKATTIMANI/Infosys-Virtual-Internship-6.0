@@ -176,4 +176,8 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
+<script>
+localStorage.removeItem("quiz_timer_{{ quiz_attempt.id }}");
+</script>
+
 {% endblock %}
