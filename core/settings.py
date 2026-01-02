@@ -166,8 +166,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.User'
 
-# OpenAI API Key for quiz generation
-OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
+# Anthropic API Key for quiz generation with Claude Opus 4.5
+ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY")
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:8000",

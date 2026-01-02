@@ -5,9 +5,9 @@ import requests
 from django.conf import settings
 
 
-OPENAI_API_KEY = settings.OPENAI_API_KEY
-OPENAI_MODEL = "gpt-3.5-turbo"
-OPENAI_URL = "https://api.openai.com/v1/chat/completions"
+ANTHROPIC_API_KEY = settings.ANTHROPIC_API_KEY
+ANTHROPIC_MODEL = "claude-opus-4-20250514"
+ANTHROPIC_URL = "https://api.anthropic.com/v1/messages"
 
 
 
@@ -62,11 +62,11 @@ def generate_quiz_questions(
     concepts=None
 ):
     """
-    Generate MCQs using OpenAI
+    Generate MCQs using Anthropic Claude Opus 4.5
     """
 
-    if not OPENAI_API_KEY:
-        raise Exception("OPENAI_API_KEY not found in settings.")
+    if not ANTHROPIC_API_KEY:
+        raise Exception("ANTHROPIC_API_KEY not found in settings.")
 
     # 🔹 CONCEPT AWARE PROMPT ADDITION
     concept_block = ""
@@ -128,13 +128,15 @@ Return ONLY the JSON array. No text outside JSON.
 
     try:
         response = requests.post(
-            OPENAI_URL,
+            ANTHROPIC_URL,
             headers={
-                "Authorization": f"Bearer {OPENAI_API_KEY}",
+                "x-api-key": ANTHROPIC_API_KEY,
+                "anthropic-version": "2023-06-01",
                 "Content-Type": "application/json",
             },
             json={
-                "model": OPENAI_MODEL,
+                "model": ANTHROPIC_MODEL,
+                "max_tokens": 4096,
                 "messages": [
                     {"role": "user", "content": prompt}
                 ],
@@ -148,7 +150,7 @@ Return ONLY the JSON array. No text outside JSON.
         data = response.json()
 
         # Extract text from model response
-        message = data["choices"][0]["message"]["content"]
+        message = data["content"][0]["text"]
 
         # Clean and extract JSON
         cleaned = clean_json(message)
