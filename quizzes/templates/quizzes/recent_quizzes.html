@@ -20,6 +20,10 @@
       rel="stylesheet"
     />
 
+    <!-- Theme System -->
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}" />
+    <script src="{% static 'js/theme.js' %}"></script>
+
     <style>
       * {
         margin: 0;
@@ -146,25 +150,32 @@
         gap: 1rem;
       }
 
+      .quiz-card-link {
+        text-decoration: none;
+        display: block;
+      }
+
       .quiz-card {
         background: rgba(30, 41, 59, 0.6);
         backdrop-filter: blur(20px);
         border: 1px solid rgba(255, 255, 255, 0.08);
         border-radius: 1rem;
         padding: 1.5rem;
-        display: flex;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: 1fr auto auto;
         align-items: center;
+        gap: 1.5rem;
         transition: all 0.3s ease;
         animation: slideUp 0.5s ease forwards;
         opacity: 0;
+        cursor: pointer;
       }
 
-      .quiz-card:nth-child(1) { animation-delay: 0.1s; }
-      .quiz-card:nth-child(2) { animation-delay: 0.15s; }
-      .quiz-card:nth-child(3) { animation-delay: 0.2s; }
-      .quiz-card:nth-child(4) { animation-delay: 0.25s; }
-      .quiz-card:nth-child(5) { animation-delay: 0.3s; }
+      .quiz-card-link:nth-child(1) .quiz-card { animation-delay: 0.1s; }
+      .quiz-card-link:nth-child(2) .quiz-card { animation-delay: 0.15s; }
+      .quiz-card-link:nth-child(3) .quiz-card { animation-delay: 0.2s; }
+      .quiz-card-link:nth-child(4) .quiz-card { animation-delay: 0.25s; }
+      .quiz-card-link:nth-child(5) .quiz-card { animation-delay: 0.3s; }
 
       @keyframes slideUp {
         from {
@@ -240,7 +251,8 @@
       }
 
       .quiz-score {
-        text-align: right;
+        text-align: center;
+        min-width: 80px;
       }
 
       .score-value {
@@ -249,11 +261,33 @@
         background: linear-gradient(135deg, #22c55e, #10b981);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        white-space: nowrap;
       }
 
       .score-label {
         color: #64748b;
         font-size: 0.75rem;
+      }
+
+      /* View Details Arrow */
+      .view-details {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(245, 158, 11, 0.15);
+        color: #fbbf24;
+        font-size: 1.5rem;
+        transition: all 0.3s ease;
+        flex-shrink: 0;
+      }
+
+      .quiz-card:hover .view-details {
+        background: linear-gradient(135deg, #f59e0b, #fbbf24);
+        color: #0f172a;
+        transform: translateX(5px);
       }
 
       /* Empty State */
@@ -337,14 +371,142 @@
         }
 
         .quiz-card {
-          flex-direction: column;
-          align-items: flex-start;
+          grid-template-columns: 1fr;
           gap: 1rem;
+          position: relative;
+          padding-right: 3.5rem;
         }
 
         .quiz-score {
           text-align: left;
         }
+
+        .view-details {
+          position: absolute;
+          right: 1rem;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      }
+
+      /* Theme Toggle Button */
+      .nav-links .theme-toggle-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(99, 102, 241, 0.1);
+        border: 1px solid rgba(99, 102, 241, 0.2);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        color: #6366f1;
+        transition: all 0.3s ease;
+        margin-left: 0.5rem;
+      }
+
+      .nav-links .theme-toggle-btn:hover {
+        transform: scale(1.1);
+        background: rgba(99, 102, 241, 0.2);
+      }
+
+      body.light-mode .nav-links .theme-toggle-btn {
+        background: rgba(251, 191, 36, 0.15);
+        border-color: rgba(251, 191, 36, 0.3);
+        color: #fbbf24;
+      }
+
+      /* ========== LIGHT MODE STYLES ========== */
+      body:not(.light-mode) {
+        background: #f8fafc;
+        color: #1e293b;
+      }
+
+      body:not(.light-mode)::before {
+        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
+      }
+
+      body:not(.light-mode) .navbar {
+        background: rgba(255, 255, 255, 0.95);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      }
+
+      body:not(.light-mode) .nav-link {
+        color: #475569;
+      }
+
+      body:not(.light-mode) .nav-link:hover {
+        color: #d97706;
+        background: rgba(245, 158, 11, 0.1);
+      }
+
+      body:not(.light-mode) .back-link {
+        color: #475569;
+      }
+
+      body:not(.light-mode) .back-link:hover {
+        color: #d97706;
+      }
+
+      body:not(.light-mode) .page-header h1 {
+        color: #0f172a;
+      }
+
+      body:not(.light-mode) .page-header p {
+        color: #64748b;
+      }
+
+      body:not(.light-mode) .quiz-card {
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      body:not(.light-mode) .quiz-card:hover {
+        border-color: rgba(245, 158, 11, 0.4);
+        box-shadow: 0 10px 30px rgba(245, 158, 11, 0.1);
+      }
+
+      body:not(.light-mode) .quiz-details h3 {
+        color: #0f172a;
+      }
+
+      body:not(.light-mode) .quiz-meta {
+        color: #64748b;
+      }
+
+      body:not(.light-mode) .score-label {
+        color: #64748b;
+      }
+
+      body:not(.light-mode) .view-details {
+        background: rgba(245, 158, 11, 0.15);
+        color: #d97706;
+      }
+
+      body:not(.light-mode) .quiz-card:hover .view-details {
+        background: linear-gradient(135deg, #f59e0b, #fbbf24);
+        color: #0f172a;
+      }
+
+      body:not(.light-mode) .empty-state {
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+      }
+
+      body:not(.light-mode) .empty-state i {
+        color: #94a3b8;
+      }
+
+      body:not(.light-mode) .empty-state p {
+        color: #64748b;
+      }
+
+      body:not(.light-mode) .nav-links .theme-toggle-btn {
+        background: rgba(99, 102, 241, 0.1);
+        border-color: rgba(99, 102, 241, 0.2);
+        color: #6366f1;
       }
     </style>
   </head>
@@ -357,6 +519,9 @@
         <a href="{% url 'quizzes:dashboard' %}" class="nav-link">Dashboard</a>
         <a href="{% url 'accounts:profile' %}" class="nav-link">Profile</a>
         <a href="{% url 'accounts:logout' %}" class="nav-link">Logout</a>
+        <button class="theme-toggle-btn" id="themeToggle" title="Toggle Theme">
+          <i class="ri-moon-line"></i>
+        </button>
       </div>
     </nav>
 
@@ -374,31 +539,36 @@
       {% if recent_quizzes %}
       <div class="quizzes-list">
         {% for quiz in recent_quizzes %}
-        <div class="quiz-card">
-          <div class="quiz-info">
-            <div class="quiz-icon">
-              <i class="ri-file-list-3-line"></i>
-            </div>
-            <div class="quiz-details">
-              <h3>{{ quiz.subcategory.name }}</h3>
-              <div class="quiz-meta">
-                <span class="difficulty-badge difficulty-{{ quiz.difficulty }}">{{ quiz.difficulty|title }}</span>
-                <span><i class="ri-calendar-line"></i> {{ quiz.completed_at|date:"d M Y, H:i" }}</span>
+        <a href="{% url 'quizzes:quiz_results' quiz.id %}" class="quiz-card-link">
+          <div class="quiz-card">
+            <div class="quiz-info">
+              <div class="quiz-icon">
+                <i class="ri-file-list-3-line"></i>
+              </div>
+              <div class="quiz-details">
+                <h3>{{ quiz.subcategory.name }}</h3>
+                <div class="quiz-meta">
+                  <span class="difficulty-badge difficulty-{{ quiz.difficulty }}">{{ quiz.difficulty|title }}</span>
+                  <span><i class="ri-calendar-line"></i> {{ quiz.completed_at|date:"d M Y, H:i" }}</span>
+                </div>
               </div>
             </div>
+            <div class="quiz-score">
+              <div class="score-value">{{ quiz.score }}%</div>
+              <div class="score-label">Score</div>
+            </div>
+            <div class="view-details">
+              <i class="ri-arrow-right-s-line"></i>
+            </div>
           </div>
-          <div class="quiz-score">
-            <div class="score-value">{{ quiz.score }}%</div>
-            <div class="score-label">Score</div>
-          </div>
-        </div>
+        </a>
         {% endfor %}
       </div>
       {% else %}
       <div class="empty-state">
         <i class="ri-history-line"></i>
         <p>No quizzes completed yet.<br>Start your learning journey now!</p>
-        <a href="{% url 'quizzes:categories' %}" class="btn-primary">
+        <a href="{% url 'quizzes:pre_start_quiz' %}" class="btn-primary">
           <i class="ri-play-circle-line"></i>
           <span class="btn-primary-text">Start a Quiz</span>
         </a>

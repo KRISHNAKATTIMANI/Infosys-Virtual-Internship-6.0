@@ -15,6 +15,7 @@ urlpatterns = [
     # Dashboard
     # ============================================================
     path("dashboard/", views.dashboard, name="dashboard"),
+    path("api/dashboard-charts/", views.dashboard_charts_api, name="dashboard_charts_api"),
     
     # ============================================================
     # Quiz Flow (Instructions -> Start -> Questions -> Results)
@@ -55,5 +56,8 @@ urlpatterns = [
      path("attempt/<uuid:attempt_id>/previous/",views.previous_question,name="previous_question"),
 
      path('attempt/<uuid:attempt_id>/save-timer/', views.save_timer, name='save_timer'),
+     
+     # Feedback
+     path('attempt/<uuid:attempt_id>/feedback/', views.submit_feedback, name='submit_feedback'),
 
 ]

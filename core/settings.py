@@ -41,10 +41,22 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts', #our app
+    'django.contrib.sites',  # Required for allauth
+    
+    # Django Allauth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    
+    # Our apps
+    'accounts',
     'quizzes',
     'core',
 ]
+
+# Required for allauth
+SITE_ID = 1
 
 # static & media
 STATIC_URL = '/static/'
@@ -74,6 +86,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',  # Required for allauth
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -166,8 +179,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.User'
 
-# Anthropic API Key for quiz generation with Claude Opus 4.5
-ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY")
+# OpenAI API Key for quiz generation with GPT-4
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:8000",
@@ -175,3 +188,47 @@ CSRF_TRUSTED_ORIGINS = [
     # add your host if you use a different domain/port, include scheme
 ]
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+
+# ========================
+# DJANGO ALLAUTH SETTINGS
+# ========================
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of allauth
+    'django.contrib.auth.backends.ModelBackend',
+    # allauth specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+# Allauth settings
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'optional'  # Change to 'mandatory' if you want email verification
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = False
+ACCOUNT_SESSION_REMEMBER = True
+ACCOUNT_UNIQUE_EMAIL = True
+
+# Social account settings
+SOCIALACCOUNT_AUTO_SIGNUP = True
+SOCIALACCOUNT_EMAIL_VERIFICATION = 'optional'
+SOCIALACCOUNT_QUERY_EMAIL = True
+SOCIALACCOUNT_ADAPTER = 'accounts.adapters.CustomSocialAccountAdapter'
+
+# Google OAuth settings (credentials configured via Django Admin)
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        },
+    }
+}
+
+# Redirect URLs after social login
+SOCIALACCOUNT_LOGIN_ON_GET = True
+LOGIN_REDIRECT_URL = '/quiz/dashboard/'
+ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'

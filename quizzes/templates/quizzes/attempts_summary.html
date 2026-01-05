@@ -20,6 +20,10 @@
       rel="stylesheet"
     />
 
+    <!-- Theme System -->
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}" />
+    <script src="{% static 'js/theme.js' %}"></script>
+
     <style>
       * {
         margin: 0;
@@ -331,6 +335,113 @@
           gap: 0.5rem;
         }
       }
+
+      /* Theme Toggle Button */
+      .nav-links .theme-toggle-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(99, 102, 241, 0.1);
+        border: 1px solid rgba(99, 102, 241, 0.2);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        color: #6366f1;
+        transition: all 0.3s ease;
+        margin-left: 0.5rem;
+      }
+
+      .nav-links .theme-toggle-btn:hover {
+        transform: scale(1.1);
+        background: rgba(99, 102, 241, 0.2);
+      }
+
+      body.light-mode .nav-links .theme-toggle-btn {
+        background: rgba(251, 191, 36, 0.15);
+        border-color: rgba(251, 191, 36, 0.3);
+        color: #fbbf24;
+      }
+
+      /* ========== LIGHT MODE STYLES ========== */
+      body:not(.light-mode) {
+        background: #f8fafc;
+        color: #1e293b;
+      }
+
+      body:not(.light-mode)::before {
+        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
+      }
+
+      body:not(.light-mode) .navbar {
+        background: rgba(255, 255, 255, 0.95);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      }
+
+      body:not(.light-mode) .nav-link {
+        color: #475569;
+      }
+
+      body:not(.light-mode) .nav-link:hover {
+        color: #d97706;
+        background: rgba(245, 158, 11, 0.1);
+      }
+
+      body:not(.light-mode) .back-link {
+        color: #475569;
+      }
+
+      body:not(.light-mode) .back-link:hover {
+        color: #d97706;
+      }
+
+      body:not(.light-mode) .page-header h1 {
+        color: #0f172a;
+      }
+
+      body:not(.light-mode) .page-header p {
+        color: #64748b;
+      }
+
+      body:not(.light-mode) .stat-card {
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      body:not(.light-mode) .stat-card:hover {
+        border-color: rgba(245, 158, 11, 0.4);
+        box-shadow: 0 10px 30px rgba(245, 158, 11, 0.1);
+      }
+
+      body:not(.light-mode) .stat-label {
+        color: #64748b;
+      }
+
+      body:not(.light-mode) .progress-section {
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      body:not(.light-mode) .progress-title {
+        color: #0f172a;
+      }
+
+      body:not(.light-mode) .progress-bar {
+        background: rgba(0, 0, 0, 0.08);
+      }
+
+      body:not(.light-mode) .legend-item {
+        color: #64748b;
+      }
+
+      body:not(.light-mode) .nav-links .theme-toggle-btn {
+        background: rgba(99, 102, 241, 0.1);
+        border-color: rgba(99, 102, 241, 0.2);
+        color: #6366f1;
+      }
     </style>
   </head>
 
@@ -342,6 +453,9 @@
         <a href="{% url 'quizzes:dashboard' %}" class="nav-link">Dashboard</a>
         <a href="{% url 'accounts:profile' %}" class="nav-link">Profile</a>
         <a href="{% url 'accounts:logout' %}" class="nav-link">Logout</a>
+        <button class="theme-toggle-btn" id="themeToggle" title="Toggle Theme">
+          <i class="ri-moon-line"></i>
+        </button>
       </div>
     </nav>
 

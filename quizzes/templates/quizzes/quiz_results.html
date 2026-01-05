@@ -1,242 +1,1039 @@
-{% extends "quizzes/base_quiz.html" %}
-{% block title %}Quiz Results – {{ quiz_attempt.subcategory.name }}{% endblock %}
-
-{% block quiz_content %}
-
-<!-- =========================
-     RESULT HERO
-========================= -->
-<section class="result-hero">
-  <div class="score-circle">
-    <div class="score-value">{{ percentage }}%</div>
-    <div class="score-label">Score</div>
-  </div>
-
-  <div class="result-summary">
-    <h2>Quiz Completed</h2>
-    <p class="grade">Grade: <strong>{{ grade }}</strong></p>
-
-    {% if percentage >= 70 %}
-      <p class="feedback success">Great job! You’re doing well.</p>
-    {% else %}
-      <p class="feedback retry">Don’t worry — review and try again.</p>
-    {% endif %}
-  </div>
-</section>
-
-<!-- =========================
-     STATS STRIP
-========================= -->
-<section class="result-stats">
-  <div class="stat">
-    <span class="stat-value">{{ correct }}</span>
-    <span class="stat-label">Correct</span>
-  </div>
-  <div class="stat">
-    <span class="stat-value">{{ total|add:"-"|add:correct }}</span>
-    <span class="stat-label">Incorrect</span>
-  </div>
-  <div class="stat">
-    <span class="stat-value">{{ total }}</span>
-    <span class="stat-label">Total</span>
-  </div>
-</section>
-
-<hr class="soft-divider">
-
-<!-- =========================
-     QUESTION REVIEW
-========================= -->
-<section class="review-section">
-  <h3>Review Questions</h3>
-
-  {% for q in quiz_attempt.questions %}
-  <details class="question-card {% if q.is_correct %}correct{% else %}wrong{% endif %}">
-    <summary>
-      <span>Q{{ forloop.counter }}. {{ q.question }}</span>
-      <span class="badge">
-        {% if q.is_correct %}✔ Correct{% else %}✖ Wrong{% endif %}
-      </span>
-    </summary>
-
-    <div class="review-body">
-      <p class="options">
-        A. {{ q.option_a }} |
-        B. {{ q.option_b }} |
-        C. {{ q.option_c }} |
-        D. {{ q.option_d }}
-      </p>
-
-      <p>
-        <strong>Your answer:</strong>
-        <span class="{% if q.is_correct %}good{% else %}bad{% endif %}">
-          {{ q.user_answer|default:"-" }}
-        </span>
-      </p>
-
-      {% if not q.is_correct %}
-        <p class="muted"><strong>Correct answer:</strong> {{ q.correct_answer }}</p>
-      {% endif %}
-
-      {% if q.explanation %}
-        <p class="explanation"><em>Explanation:</em> {{ q.explanation }}</p>
-      {% endif %}
-    </div>
-  </details>
-  {% endfor %}
-</section>
-
-<!-- =========================
-     ACTIONS
-========================= -->
-<div class="result-actions">
-  <a class="btn primary" href="{% url 'quizzes:dashboard' %}">
-    Back to Dashboard
-  </a>
-  <a class="btn secondary" href="{% url 'quizzes:quiz_selector' %}">
-    Try another quiz
-  </a>
-</div>
-
-{% endblock %}
-
-
-{% block extra_scripts %}
-<script>
-// Keep your original "Time's Up!" popup (unchanged)
-(function(){
-  const urlParams = new URLSearchParams(window.location.search);
-  const autoSubmitted = urlParams.get('auto_submitted') === 'true';
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Results – {{ quiz_attempt.subcategory.name }}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/theme.css' %}">
+  <script src="{% static 'js/theme.js' %}"></script>
   
-  if(autoSubmitted){
-    showAutoSubmitPopup();
-  }
-  
-  function showAutoSubmitPopup(){
-    const overlay = document.createElement('div');
-    overlay.style.cssText = `
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0a1628 0%, #0f172a 50%, #1e293b 100%) !important;
+      min-height: 100vh;
+      color: #e2e8f0 !important;
+      padding: 1rem;
+    }
+
+    .theme-toggle-btn {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.7);
+      top: 1rem;
+      right: 1rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(30, 41, 59, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 9999;
-      animation: fadeIn 0.3s ease-in-out;
-    `;
-    
-    const popup = document.createElement('div');
-    popup.style.cssText = `
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 16px;
-      padding: 32px;
-      max-width: 420px;
-      width: 90%;
-      text-align: center;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(10px);
-      animation: slideUp 0.4s cubic-bezier(0.2, 0.9, 0.2, 1);
-    `;
-    
-    const icon = document.createElement('div');
-    icon.innerHTML = '⏱️';
-    icon.style.cssText = `
-      font-size: 48px;
-      margin-bottom: 16px;
-    `;
-    
-    const title = document.createElement('h2');
-    title.textContent = 'Time\'s Up!';
-    title.style.cssText = `
-      color: #f6fbff;
-      margin: 0 0 8px 0;
-      font-size: 24px;
-      font-weight: 700;
-    `;
-    
-    const message = document.createElement('p');
-    message.textContent = 'Your quiz has been automatically submitted because the time limit has been reached.';
-    message.style.cssText = `
-      color: #94a3b8;
-      margin: 0 0 24px 0;
-      line-height: 1.5;
-      font-size: 14px;
-    `;
-    
-    const button = document.createElement('button');
-    button.textContent = 'View Results';
-    button.style.cssText = `
-      background: linear-gradient(90deg, #7c93ff, #6ee7b7);
-      color: #052233;
-      border: none;
-      padding: 12px 28px;
-      border-radius: 10px;
-      font-weight: 700;
-      cursor: pointer;
-      font-size: 14px;
-      box-shadow: 0 8px 24px rgba(124, 147, 255, 0.3);
-      transition: transform 160ms, box-shadow 160ms;
-    `;
-    
-    button.addEventListener('mouseover', () => {
-      button.style.transform = 'translateY(-2px)';
-      button.style.boxShadow = '0 12px 32px rgba(124, 147, 255, 0.4)';
-    });
-    
-    button.addEventListener('mouseout', () => {
-      button.style.transform = 'translateY(0)';
-      button.style.boxShadow = '0 8px 24px rgba(124, 147, 255, 0.3)';
-    });
-    
-    button.addEventListener('click', () => {
-      overlay.remove();
-    });
-    
-    popup.appendChild(icon);
-    popup.appendChild(title);
-    popup.appendChild(message);
-    popup.appendChild(button);
-    overlay.appendChild(popup);
-    document.body.appendChild(overlay);
-    
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-      }
-      @keyframes slideUp {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-    `;
-    document.head.appendChild(style);
-  }
-})();
-
-// NEW: Force sidebar timer to 00:00 on results page
-document.addEventListener('DOMContentLoaded', function() {
-  // Find all elements that contain exactly MM:SS format
-  document.querySelectorAll('div, span, p').forEach(el => {
-    const text = el.textContent.trim();
-    if (text.match(/^\d{2}:\d{2}$/)) {
-      el.textContent = "00:00";
+      font-size: 1.1rem;
+      color: #fbbf24;
+      transition: all 0.3s ease;
+      z-index: 1000;
     }
-  });
-});
-</script>
-<script>
-localStorage.removeItem("quiz_timer_{{ quiz_attempt.id }}");
-</script>
 
-{% endblock %}
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: #94a3b8;
+      text-decoration: none;
+      margin-bottom: 1rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .back-link:hover { color: #fbbf24; }
+
+    /* Main Grid Layout */
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .card {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(20px);
+      border-radius: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 1.25rem;
+    }
+
+    /* Score Card */
+    .score-card {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .score-circle {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 30px rgba(245, 158, 11, 0.3);
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .score-circle::before {
+      content: '';
+      position: absolute;
+      inset: 6px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+    }
+
+    .score-inner {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .score-value {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: #fbbf24;
+      line-height: 1;
+    }
+
+    .score-label {
+      font-size: 0.7rem;
+      color: #94a3b8;
+    }
+
+    .result-info h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 0.5rem;
+    }
+
+    .grade-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 0.4rem;
+      font-weight: 700;
+      font-size: 0.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .grade-badge.excellent { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+    .grade-badge.good { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+    .grade-badge.average { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
+    .grade-badge.poor { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+
+    .quiz-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      color: #64748b;
+      font-size: 0.75rem;
+    }
+
+    .quiz-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    /* Stats Card */
+    .stats-card {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+    }
+
+    .stat-item {
+      background: rgba(15, 23, 42, 0.5);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .stat-item .value {
+      font-size: 1.5rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .stat-item.correct .value { color: #22c55e; }
+    .stat-item.incorrect .value { color: #ef4444; }
+    .stat-item.total .value { color: #3b82f6; }
+
+    .stat-item .label {
+      font-size: 0.7rem;
+      color: #64748b;
+      margin-top: 0.25rem;
+    }
+
+    /* AI Feedback Card */
+    .ai-card {
+      grid-column: 1 / -1;
+    }
+
+    .ai-card h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .ai-card h3 i { color: #fbbf24; }
+
+    .ai-sections {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .ai-section {
+      background: rgba(15, 23, 42, 0.5);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .ai-section h4 {
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .ai-section.strong h4 { color: #22c55e; }
+    .ai-section.weak h4 { color: #ef4444; }
+    .ai-section.suggestions h4 { color: #3b82f6; }
+
+    .ai-section ul {
+      list-style: none;
+      font-size: 0.8rem;
+      color: #94a3b8;
+    }
+
+    .ai-section ul li {
+      padding: 0.3rem 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+    }
+
+    .ai-section ul li i {
+      font-size: 0.7rem;
+      margin-top: 0.2rem;
+    }
+
+    .ai-section.strong ul li i { color: #22c55e; }
+    .ai-section.weak ul li i { color: #ef4444; }
+    .ai-section.suggestions ul li i { color: #3b82f6; }
+
+    .no-items {
+      color: #64748b;
+      font-size: 0.75rem;
+      font-style: italic;
+    }
+
+    /* Review Section */
+    .review-card {
+      grid-column: 1 / -1;
+    }
+
+    .review-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .review-header h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .review-header h3 i { color: #fbbf24; }
+
+    .questions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      max-height: 400px;
+      overflow-y: auto;
+      padding-right: 0.5rem;
+    }
+
+    .questions-grid::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .questions-grid::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+    }
+
+    .questions-grid::-webkit-scrollbar-thumb {
+      background: rgba(245, 158, 11, 0.3);
+      border-radius: 4px;
+    }
+
+    .q-card {
+      background: rgba(15, 23, 42, 0.6);
+      border-radius: 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      overflow: hidden;
+    }
+
+    .q-card.correct { border-left: 3px solid #22c55e; }
+    .q-card.wrong { border-left: 3px solid #ef4444; }
+
+    .q-card summary {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #e2e8f0;
+      list-style: none;
+    }
+
+    .q-card summary::-webkit-details-marker { display: none; }
+
+    .q-card summary .q-text {
+      flex: 1;
+      padding-right: 0.5rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 1rem;
+      font-size: 0.65rem;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .status-badge.correct { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+    .status-badge.wrong { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+
+    .q-body {
+      padding: 0.75rem 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(0, 0, 0, 0.2);
+      font-size: 0.75rem;
+    }
+
+    .q-body .full-question {
+      color: #e2e8f0;
+      margin-bottom: 0.75rem;
+      font-weight: 500;
+    }
+
+    .options-mini {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .opt {
+      padding: 0.4rem 0.6rem;
+      border-radius: 0.4rem;
+      background: rgba(30, 41, 59, 0.5);
+      color: #94a3b8;
+      font-size: 0.7rem;
+      border: 1px solid transparent;
+    }
+
+    .opt.user-wrong { border-color: #ef4444; background: rgba(239, 68, 68, 0.1); }
+    .opt.correct-ans { border-color: #22c55e; background: rgba(34, 197, 94, 0.1); color: #22c55e; }
+    .opt.user-correct { border-color: #22c55e; background: rgba(34, 197, 94, 0.15); color: #22c55e; }
+
+    .answer-row {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+      color: #94a3b8;
+    }
+
+    .answer-row .good { color: #22c55e; }
+    .answer-row .bad { color: #ef4444; }
+
+    .explanation-mini {
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 0.5rem;
+      padding: 0.6rem;
+      color: #94a3b8;
+      font-size: 0.7rem;
+      line-height: 1.4;
+    }
+
+    .explanation-mini strong { color: #3b82f6; }
+
+    /* Actions */
+    .actions-row {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding-top: 0.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.7rem 1.25rem;
+      border-radius: 0.6rem;
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, #f59e0b, #fbbf24);
+      color: #0f172a;
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+    }
+
+    .btn.primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+    }
+
+    .btn.secondary {
+      background: rgba(30, 41, 59, 0.8);
+      color: #94a3b8;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .btn.secondary:hover {
+      background: rgba(30, 41, 59, 1);
+      color: white;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .results-grid { grid-template-columns: 1fr; }
+      .ai-sections { grid-template-columns: 1fr; }
+      .questions-grid { grid-template-columns: 1fr; }
+      .options-mini { grid-template-columns: 1fr; }
+      .actions-row { flex-direction: column; }
+      .btn { width: 100%; justify-content: center; }
+    }
+
+    /* ========== LIGHT MODE ========== */
+    body:not(.light-mode) {
+      background: #f8fafc !important;
+      color: #1e293b !important;
+    }
+
+    body:not(.light-mode) .theme-toggle-btn {
+      background: rgba(255, 255, 255, 0.9);
+      border-color: rgba(0, 0, 0, 0.1);
+      color: #6366f1;
+    }
+
+    body:not(.light-mode) .back-link { color: #64748b; }
+    body:not(.light-mode) .back-link:hover { color: #f59e0b; }
+
+    body:not(.light-mode) .card {
+      background: rgba(255, 255, 255, 0.95);
+      border-color: rgba(0, 0, 0, 0.08);
+    }
+
+    body:not(.light-mode) .score-circle::before {
+      background: linear-gradient(135deg, #f8fafc, #ffffff);
+    }
+
+    body:not(.light-mode) .result-info h2 { color: #0f172a; }
+    body:not(.light-mode) .quiz-meta { color: #64748b; }
+
+    body:not(.light-mode) .stat-item {
+      background: rgba(248, 250, 252, 0.8);
+      border-color: rgba(0, 0, 0, 0.05);
+    }
+
+    body:not(.light-mode) .stat-item .label { color: #64748b; }
+
+    body:not(.light-mode) .ai-card h3,
+    body:not(.light-mode) .review-header h3 { color: #0f172a; }
+
+    body:not(.light-mode) .ai-section {
+      background: rgba(248, 250, 252, 0.8);
+      border-color: rgba(0, 0, 0, 0.05);
+    }
+
+    body:not(.light-mode) .ai-section ul { color: #64748b; }
+
+    body:not(.light-mode) .q-card {
+      background: rgba(248, 250, 252, 0.8);
+      border-color: rgba(0, 0, 0, 0.08);
+    }
+
+    body:not(.light-mode) .q-card summary { color: #0f172a; }
+
+    body:not(.light-mode) .q-body {
+      background: rgba(248, 250, 252, 0.5);
+      border-color: rgba(0, 0, 0, 0.05);
+    }
+
+    body:not(.light-mode) .q-body .full-question { color: #0f172a; }
+
+    body:not(.light-mode) .opt {
+      background: rgba(255, 255, 255, 0.8);
+      color: #64748b;
+    }
+
+    body:not(.light-mode) .answer-row { color: #64748b; }
+
+    body:not(.light-mode) .explanation-mini {
+      background: rgba(59, 130, 246, 0.05);
+    }
+
+    body:not(.light-mode) .btn.secondary {
+      background: rgba(255, 255, 255, 0.9);
+      color: #64748b;
+      border-color: rgba(0, 0, 0, 0.1);
+    }
+
+    /* Feedback Section */
+    .feedback-card {
+      grid-column: 1 / -1;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.08));
+      border: 1px solid rgba(99, 102, 241, 0.2);
+    }
+
+    .feedback-card h3 {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #a5b4fc;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .feedback-card h3 i {
+      color: #6366f1;
+    }
+
+    .feedback-prompt {
+      color: #94a3b8;
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+    }
+
+    .rating-select {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .star-btn {
+      background: transparent;
+      border: none;
+      font-size: 1.75rem;
+      cursor: pointer;
+      color: #475569;
+      transition: all 0.2s ease;
+      padding: 0.25rem;
+    }
+
+    .star-btn:hover,
+    .star-btn.active {
+      color: #fbbf24;
+      transform: scale(1.15);
+    }
+
+    .feedback-textarea {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0.75rem;
+      padding: 0.875rem 1rem;
+      color: #e2e8f0;
+      font-family: inherit;
+      font-size: 0.9rem;
+      resize: vertical;
+      min-height: 80px;
+      max-height: 150px;
+      margin-bottom: 0.75rem;
+      transition: border-color 0.2s ease;
+    }
+
+    .feedback-textarea::placeholder {
+      color: #64748b;
+    }
+
+    .feedback-textarea:focus {
+      outline: none;
+      border-color: #6366f1;
+    }
+
+    .char-count {
+      font-size: 0.75rem;
+      color: #64748b;
+      text-align: right;
+      margin-bottom: 0.75rem;
+    }
+
+    .feedback-submit-btn {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: white;
+      border: none;
+      padding: 0.625rem 1.25rem;
+      border-radius: 0.6rem;
+      font-weight: 600;
+      font-size: 0.875rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.3s ease;
+    }
+
+    .feedback-submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+    }
+
+    .feedback-submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .feedback-success {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem;
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      border-radius: 0.75rem;
+      color: #22c55e;
+    }
+
+    .feedback-success i {
+      font-size: 1.5rem;
+    }
+
+    .feedback-existing {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 1rem;
+      background: rgba(99, 102, 241, 0.1);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      border-radius: 0.75rem;
+    }
+
+    .feedback-existing i {
+      color: #6366f1;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .feedback-existing-content {
+      flex: 1;
+    }
+
+    .feedback-existing-rating {
+      color: #fbbf24;
+      margin-bottom: 0.25rem;
+    }
+
+    .feedback-existing-comment {
+      color: #94a3b8;
+      font-size: 0.875rem;
+      font-style: italic;
+    }
+
+    /* Light mode feedback */
+    body:not(.light-mode) .feedback-card {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(139, 92, 246, 0.05));
+    }
+
+    body:not(.light-mode) .feedback-card h3 { color: #4f46e5; }
+
+    body:not(.light-mode) .feedback-prompt { color: #64748b; }
+
+    body:not(.light-mode) .feedback-textarea {
+      background: rgba(248, 250, 252, 0.8);
+      border-color: rgba(0, 0, 0, 0.1);
+      color: #0f172a;
+    }
+
+    body:not(.light-mode) .star-btn { color: #94a3b8; }
+  </style>
+</head>
+<body>
+  <button class="theme-toggle-btn" id="themeToggle" title="Toggle Theme">
+    <i class="ri-moon-line"></i>
+  </button>
+
+  <div class="container">
+    <a href="{% url 'quizzes:recent_quizzes' %}" class="back-link">
+      <i class="ri-arrow-left-line"></i> Back to Recent Quizzes
+    </a>
+
+    <div class="results-grid">
+      <!-- Score Card -->
+      <div class="card score-card">
+        <div class="score-circle">
+          <div class="score-inner">
+            <div class="score-value">{{ percentage|floatformat:0 }}%</div>
+            <div class="score-label">Score</div>
+          </div>
+        </div>
+        <div class="result-info">
+          <h2>{{ quiz_attempt.subcategory.name }}</h2>
+          <div class="grade-badge {% if percentage >= 90 %}excellent{% elif percentage >= 70 %}good{% elif percentage >= 50 %}average{% else %}poor{% endif %}">
+            <i class="ri-award-line"></i> Grade: {{ grade }}
+          </div>
+          <div class="quiz-meta">
+            <span><i class="ri-folder-line"></i> {{ quiz_attempt.category.name }}</span>
+            <span><i class="ri-bar-chart-line"></i> {{ quiz_attempt.difficulty|title }}</span>
+            <span><i class="ri-calendar-line"></i> {{ quiz_attempt.completed_at|date:"d M Y" }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats Card -->
+      <div class="card stats-card">
+        <div class="stat-item correct">
+          <div class="value">{{ correct }}</div>
+          <div class="label">Correct</div>
+        </div>
+        <div class="stat-item incorrect">
+          <div class="value">{{ incorrect }}</div>
+          <div class="label">Incorrect</div>
+        </div>
+        <div class="stat-item total">
+          <div class="value">{{ total }}</div>
+          <div class="label">Total</div>
+        </div>
+      </div>
+
+      <!-- AI Feedback Card -->
+      <div class="card ai-card">
+        <h3><i class="ri-robot-line"></i> AI Performance Analysis</h3>
+        <div class="ai-sections">
+          <div class="ai-section strong">
+            <h4><i class="ri-thumb-up-line"></i> Strong Areas</h4>
+            {% if strong_areas %}
+            <ul>
+              {% for area in strong_areas %}
+              <li><i class="ri-check-line"></i> {{ area }}</li>
+              {% endfor %}
+            </ul>
+            {% else %}
+            <p class="no-items">Keep practicing to build strengths!</p>
+            {% endif %}
+          </div>
+          
+          <div class="ai-section weak">
+            <h4><i class="ri-focus-3-line"></i> Needs Improvement</h4>
+            {% if weak_areas %}
+            <ul>
+              {% for area in weak_areas %}
+              <li><i class="ri-close-line"></i> {{ area }}</li>
+              {% endfor %}
+            </ul>
+            {% else %}
+            <p class="no-items">Great job! No weak areas found.</p>
+            {% endif %}
+          </div>
+          
+          <div class="ai-section suggestions">
+            <h4><i class="ri-lightbulb-line"></i> Suggestions</h4>
+            {% if ai_feedback %}
+            <ul>
+              {% for line in ai_feedback.splitlines %}
+              {% if line.strip %}
+              <li><i class="ri-arrow-right-s-line"></i> {{ line|slice:"2:" }}</li>
+              {% endif %}
+              {% endfor %}
+            </ul>
+            {% else %}
+            <ul>
+              <li><i class="ri-arrow-right-s-line"></i> Review incorrect answers</li>
+              <li><i class="ri-arrow-right-s-line"></i> Practice similar questions</li>
+              <li><i class="ri-arrow-right-s-line"></i> Try a different difficulty</li>
+            </ul>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <!-- Review Questions Card -->
+      <div class="card review-card">
+        <div class="review-header">
+          <h3><i class="ri-file-list-3-line"></i> Review Questions</h3>
+        </div>
+        <div class="questions-grid">
+          {% for q in quiz_attempt.questions %}
+          <details class="q-card {% if q.is_correct %}correct{% else %}wrong{% endif %}">
+            <summary>
+              <span class="q-text">Q{{ forloop.counter }}. {{ q.question }}</span>
+              <span class="status-badge {% if q.is_correct %}correct{% else %}wrong{% endif %}">
+                {% if q.is_correct %}<i class="ri-check-line"></i>{% else %}<i class="ri-close-line"></i>{% endif %}
+              </span>
+            </summary>
+            <div class="q-body">
+              <p class="full-question">{{ q.question }}</p>
+              <div class="options-mini">
+                <div class="opt {% if q.user_answer == 'A' %}{% if q.is_correct %}user-correct{% else %}user-wrong{% endif %}{% endif %} {% if q.correct_answer == 'A' and q.user_answer != 'A' %}correct-ans{% endif %}">
+                  A. {{ q.option_a }}
+                </div>
+                <div class="opt {% if q.user_answer == 'B' %}{% if q.is_correct %}user-correct{% else %}user-wrong{% endif %}{% endif %} {% if q.correct_answer == 'B' and q.user_answer != 'B' %}correct-ans{% endif %}">
+                  B. {{ q.option_b }}
+                </div>
+                <div class="opt {% if q.user_answer == 'C' %}{% if q.is_correct %}user-correct{% else %}user-wrong{% endif %}{% endif %} {% if q.correct_answer == 'C' and q.user_answer != 'C' %}correct-ans{% endif %}">
+                  C. {{ q.option_c }}
+                </div>
+                <div class="opt {% if q.user_answer == 'D' %}{% if q.is_correct %}user-correct{% else %}user-wrong{% endif %}{% endif %} {% if q.correct_answer == 'D' and q.user_answer != 'D' %}correct-ans{% endif %}">
+                  D. {{ q.option_d }}
+                </div>
+              </div>
+              <div class="answer-row">
+                <span><strong>Your:</strong> <span class="{% if q.is_correct %}good{% else %}bad{% endif %}">{{ q.user_answer|default:"—" }}</span></span>
+                {% if not q.is_correct %}
+                <span><strong>Correct:</strong> <span class="good">{{ q.correct_answer }}</span></span>
+                {% endif %}
+              </div>
+              {% if q.explanation %}
+              <div class="explanation-mini">
+                <strong><i class="ri-lightbulb-line"></i></strong> {{ q.explanation }}
+              </div>
+              {% endif %}
+            </div>
+          </details>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Feedback Section -->
+      <div class="card feedback-card" id="feedback-section">
+        <h3><i class="ri-chat-heart-line"></i> Share Your Experience</h3>
+        
+        {% if existing_feedback %}
+        <!-- User already submitted feedback -->
+        <div class="feedback-existing">
+          <i class="ri-checkbox-circle-fill"></i>
+          <div class="feedback-existing-content">
+            <div class="feedback-existing-rating">
+              {% for i in "12345" %}
+                {% if forloop.counter <= existing_feedback.rating %}
+                <i class="ri-star-fill"></i>
+                {% else %}
+                <i class="ri-star-line"></i>
+                {% endif %}
+              {% endfor %}
+            </div>
+            <p class="feedback-existing-comment">"{{ existing_feedback.comment }}"</p>
+          </div>
+        </div>
+        {% else %}
+        <!-- Feedback form -->
+        <p class="feedback-prompt">Help us improve! Your feedback may be featured on our homepage.</p>
+        
+        <form id="feedback-form">
+          {% csrf_token %}
+          <div class="rating-select" id="rating-select">
+            <button type="button" class="star-btn active" data-rating="1"><i class="ri-star-fill"></i></button>
+            <button type="button" class="star-btn active" data-rating="2"><i class="ri-star-fill"></i></button>
+            <button type="button" class="star-btn active" data-rating="3"><i class="ri-star-fill"></i></button>
+            <button type="button" class="star-btn active" data-rating="4"><i class="ri-star-fill"></i></button>
+            <button type="button" class="star-btn active" data-rating="5"><i class="ri-star-fill"></i></button>
+          </div>
+          <input type="hidden" id="rating-value" name="rating" value="5">
+          
+          <textarea 
+            class="feedback-textarea" 
+            name="comment" 
+            id="feedback-comment"
+            placeholder="Tell us about your experience... (optional but appreciated!)"
+            maxlength="500"
+          ></textarea>
+          <div class="char-count"><span id="char-count">0</span>/500</div>
+          
+          <button type="submit" class="feedback-submit-btn" id="submit-feedback-btn">
+            <i class="ri-send-plane-line"></i> Submit Feedback
+          </button>
+        </form>
+        
+        <div class="feedback-success" id="feedback-success" style="display: none;">
+          <i class="ri-checkbox-circle-fill"></i>
+          <span>Thank you for your feedback! It helps us improve.</span>
+        </div>
+        {% endif %}
+      </div>
+
+      <!-- Actions -->
+      <div class="actions-row">
+        <a class="btn primary" href="{% url 'quizzes:dashboard' %}">
+          <i class="ri-dashboard-line"></i> Dashboard
+        </a>
+        <a class="btn secondary" href="{% url 'quizzes:quiz_selector' %}">
+          <i class="ri-play-circle-line"></i> Try Another
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    // Auto-submit overlay
+    const urlParams = new URLSearchParams(window.location.search);
+    if(urlParams.get('auto_submitted') === 'true'){
+      const overlay = document.createElement('div');
+      overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:9999;';
+      overlay.innerHTML = `
+        <div style="background:linear-gradient(180deg,rgba(30,41,59,0.95),rgba(15,23,42,0.98));border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:32px;max-width:380px;width:90%;text-align:center;">
+          <div style="font-size:48px;margin-bottom:16px;">⏱️</div>
+          <h2 style="color:#fbbf24;margin:0 0 8px;font-size:22px;font-weight:800;">Time's Up!</h2>
+          <p style="color:#94a3b8;margin:0 0 20px;font-size:14px;">Your quiz was auto-submitted.</p>
+          <button onclick="this.parentElement.parentElement.remove()" style="background:linear-gradient(135deg,#f59e0b,#fbbf24);color:#0f172a;border:none;padding:10px 24px;border-radius:8px;font-weight:700;cursor:pointer;">View Results</button>
+        </div>
+      `;
+      document.body.appendChild(overlay);
+    }
+    
+    // Feedback functionality
+    const feedbackForm = document.getElementById('feedback-form');
+    const ratingSelect = document.getElementById('rating-select');
+    const ratingValue = document.getElementById('rating-value');
+    const commentInput = document.getElementById('feedback-comment');
+    const charCount = document.getElementById('char-count');
+    const submitBtn = document.getElementById('submit-feedback-btn');
+    const successDiv = document.getElementById('feedback-success');
+    
+    if (ratingSelect) {
+      const starBtns = ratingSelect.querySelectorAll('.star-btn');
+      
+      // Star rating interaction
+      starBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const rating = parseInt(btn.dataset.rating);
+          ratingValue.value = rating;
+          
+          starBtns.forEach((b, idx) => {
+            if (idx < rating) {
+              b.classList.add('active');
+              b.querySelector('i').className = 'ri-star-fill';
+            } else {
+              b.classList.remove('active');
+              b.querySelector('i').className = 'ri-star-line';
+            }
+          });
+        });
+      });
+    }
+    
+    // Character count
+    if (commentInput) {
+      commentInput.addEventListener('input', () => {
+        charCount.textContent = commentInput.value.length;
+      });
+    }
+    
+    // Form submission
+    if (feedbackForm) {
+      feedbackForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const comment = commentInput.value.trim();
+        if (!comment) {
+          commentInput.style.borderColor = '#ef4444';
+          commentInput.placeholder = 'Please enter your feedback...';
+          return;
+        }
+        
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="ri-loader-4-line" style="animation: spin 1s linear infinite;"></i> Submitting...';
+        
+        try {
+          const formData = new FormData();
+          formData.append('rating', ratingValue.value);
+          formData.append('comment', comment);
+          formData.append('csrfmiddlewaretoken', document.querySelector('[name=csrfmiddlewaretoken]').value);
+          
+          const resp = await fetch("{% url 'quizzes:submit_feedback' attempt_id=quiz_attempt.id %}", {
+            method: 'POST',
+            body: formData
+          });
+          
+          const data = await resp.json();
+          
+          if (data.success) {
+            feedbackForm.style.display = 'none';
+            document.querySelector('.feedback-prompt').style.display = 'none';
+            successDiv.style.display = 'flex';
+          } else {
+            alert(data.error || 'Failed to submit feedback');
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="ri-send-plane-line"></i> Submit Feedback';
+          }
+        } catch (err) {
+          alert('Network error. Please try again.');
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<i class="ri-send-plane-line"></i> Submit Feedback';
+        }
+      });
+    }
+  })();
+  
+  localStorage.removeItem("quiz_timer_{{ quiz_attempt.id }}");
+  
+  // Add spin animation
+  const spinStyle = document.createElement('style');
+  spinStyle.textContent = '@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }';
+  document.head.appendChild(spinStyle);
+  </script>
+</body>
+</html>

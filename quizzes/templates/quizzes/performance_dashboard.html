@@ -23,6 +23,10 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <!-- Theme System -->
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}" />
+    <script src="{% static 'js/theme.js' %}"></script>
+
     <style>
       * {
         margin: 0;
@@ -368,6 +372,197 @@
           align-items: flex-start;
         }
       }
+
+      /* Light Mode Styles */
+      body.light-mode {
+        background: #0f172a;
+        color: #f8fafc;
+      }
+
+      body.light-mode .navbar {
+        background: rgba(30, 41, 59, 0.95);
+        border-bottom-color: rgba(255, 255, 255, 0.1);
+      }
+
+      body.light-mode .nav-brand,
+      body.light-mode .nav-link {
+        color: #f8fafc;
+      }
+
+      body.light-mode .container {
+        background: rgba(30, 41, 59, 0.8);
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+
+      body.light-mode .page-header h1,
+      body.light-mode .section-title {
+        color: #f8fafc;
+      }
+
+      body.light-mode .stat-card,
+      body.light-mode .chart-card {
+        background: rgba(51, 65, 85, 0.5);
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+
+      body.light-mode .stat-value {
+        color: #f8fafc;
+      }
+
+      body.light-mode .stat-label {
+        color: #94a3b8;
+      }
+
+      /* Light Mode Styles (no class = light appearance) */
+      body:not(.light-mode) {
+        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
+        color: #1e293b;
+      }
+
+      body:not(.light-mode)::before {
+        background: 
+          radial-gradient(ellipse at 30% 10%, rgba(245, 158, 11, 0.06) 0%, transparent 40%),
+          radial-gradient(ellipse at 70% 80%, rgba(59, 130, 246, 0.04) 0%, transparent 40%);
+      }
+
+      body:not(.light-mode) .navbar {
+        background: rgba(255, 255, 255, 0.95);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      }
+
+      body:not(.light-mode) .nav-link {
+        color: #475569;
+      }
+
+      body:not(.light-mode) .nav-link:hover {
+        color: #d97706;
+        background: rgba(245, 158, 11, 0.1);
+      }
+
+      body:not(.light-mode) .back-link {
+        color: #475569;
+      }
+
+      body:not(.light-mode) .back-link:hover {
+        color: #d97706;
+      }
+
+      body:not(.light-mode) .dashboard {
+        background: transparent;
+      }
+
+      body:not(.light-mode) .page-header h1,
+      body:not(.light-mode) .section-title {
+        color: #0f172a;
+      }
+
+      body:not(.light-mode) .page-header p {
+        color: #64748b;
+      }
+
+      body:not(.light-mode) .card {
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      body:not(.light-mode) .card:hover {
+        border-color: rgba(245, 158, 11, 0.3);
+        box-shadow: 0 8px 30px rgba(245, 158, 11, 0.1);
+      }
+
+      body:not(.light-mode) .card h3 {
+        color: #64748b;
+      }
+
+      body:not(.light-mode) .card p {
+        color: #0f172a;
+      }
+
+      body:not(.light-mode) .stat-card,
+      body:not(.light-mode) .chart-card {
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      body:not(.light-mode) .stat-value {
+        color: #0f172a;
+      }
+
+      body:not(.light-mode) .stat-label {
+        color: #64748b;
+      }
+
+      body:not(.light-mode) .download-btn {
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        color: #475569;
+      }
+
+      body:not(.light-mode) .download-btn:hover {
+        border-color: rgba(245, 158, 11, 0.4);
+        color: #d97706;
+      }
+
+      body:not(.light-mode) .nav-links .theme-toggle-btn {
+        background: rgba(99, 102, 241, 0.1);
+        border-color: rgba(99, 102, 241, 0.2);
+        color: #6366f1;
+      }
+
+      /* Light mode - Section headers */
+      body:not(.light-mode) .section-header {
+        color: #0f172a;
+      }
+
+      body:not(.light-mode) .section-header i {
+        color: #d97706;
+      }
+
+      /* Light mode - Chart cards */
+      body:not(.light-mode) .chart-card {
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+      }
+
+      body:not(.light-mode) .chart-title {
+        color: #0f172a;
+      }
+
+      body:not(.light-mode) .chart-title i {
+        color: #d97706;
+      }
+
+      /* Light mode - Topic Analysis */
+      body:not(.light-mode) .topic-name {
+        color: #334155;
+      }
+
+      body:not(.light-mode) .topic-list li {
+        border-bottom-color: rgba(0, 0, 0, 0.08);
+      }
+
+      body:not(.light-mode) .empty-text {
+        color: #64748b;
+      }
+
+      /* Light mode - AI Feedback */
+      body:not(.light-mode) .ai-feedback-card {
+        background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(251, 191, 36, 0.04));
+        border: 1px solid rgba(245, 158, 11, 0.2);
+      }
+
+      body:not(.light-mode) .ai-feedback-card pre {
+        color: #334155;
+      }
+
+      /* Light mode - Insights */
+      body:not(.light-mode) .insight {
+        background: rgba(245, 158, 11, 0.08);
+        border-left: 4px solid #d97706;
+        color: #334155;
+      }
     </style>
   </head>
 
@@ -379,6 +574,10 @@
         <a href="{% url 'quizzes:dashboard' %}" class="nav-link">Dashboard</a>
         <a href="{% url 'accounts:profile' %}" class="nav-link">Profile</a>
         <a href="{% url 'accounts:logout' %}" class="nav-link">Logout</a>
+        <!-- Theme Toggle Button -->
+        <button class="theme-toggle-btn" id="themeToggle" title="Toggle Theme">
+          <i class="ri-moon-line"></i>
+        </button>
       </div>
     </nav>
 

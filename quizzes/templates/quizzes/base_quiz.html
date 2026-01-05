@@ -5,8 +5,19 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>
-      {% block title %}Quiz – {% if quiz_attempt %}{{quiz_attempt.subcategory.name }}{% else %}Quiz{% endif %}{% endblock %}
+      {% block title %}Quiz — {% if quiz_attempt %}{{quiz_attempt.subcategory.name }}{% else %}Quiz{% endif %}{% endblock %}
     </title>
+
+    <!-- Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <!-- Theme System -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}" />
+    <script src="{% static 'js/theme.js' %}"></script>
 
     <!-- Colors & design tokens -->
     <style>
@@ -424,6 +435,199 @@
         margin-top: 32px;
       }
 
+      /* ========== LIGHT MODE STYLES ========== */
+      /* Note: In this app, NO class = dark theme (default), light-mode class = light appearance */
+      body:not(.light-mode) {
+        --bg: #f8fafc;
+        --card: #ffffff;
+        --muted: #64748b;
+        --accent: #3b82f6;
+        --accent-2: #2563eb;
+        --danger: #ef4444;
+        --glass: #ffffff;
+        --glass-2: #f8fafc;
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      body:not(.light-mode) {
+        background: #f8fafc;
+        color: #1e293b;
+      }
+
+      body:not(.light-mode) .card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      body:not(.light-mode) .option {
+        background: #f8fafc;
+        border-color: #e2e8f0;
+        color: #1e293b;
+      }
+
+      body:not(.light-mode) .option .text {
+        color: #1e293b;
+      }
+
+      body:not(.light-mode) .option:hover {
+        background: #f1f5f9;
+        border-color: #cbd5e1;
+      }
+
+      body:not(.light-mode) .option:hover .text {
+        color: #0f172a;
+      }
+
+      body:not(.light-mode) .option.selected {
+        background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+        border-color: #3b82f6;
+      }
+
+      body:not(.light-mode) .option.selected .text {
+        color: #1e40af;
+      }
+
+      body:not(.light-mode) .q-text,
+      body:not(.light-mode) .title {
+        color: #0f172a;
+      }
+
+      body:not(.light-mode) .sub,
+      body:not(.light-mode) .panel-title {
+        color: #64748b;
+      }
+
+      body:not(.light-mode) .sub strong {
+        color: #334155;
+      }
+
+      body:not(.light-mode) .badge {
+        background: #3b82f6;
+        color: white;
+      }
+
+      body:not(.light-mode) .panel {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+      }
+
+      body:not(.light-mode) .panel h4 {
+        color: #0f172a;
+      }
+
+      body:not(.light-mode) .panel .stat {
+        color: #334155;
+      }
+
+      body:not(.light-mode) .panel .stat .muted {
+        color: #64748b;
+      }
+
+      body:not(.light-mode) .panel .stat div:not(.muted) {
+        color: #0f172a;
+      }
+
+      body:not(.light-mode) .panel .timer {
+        color: #dc2626;
+      }
+
+      body:not(.light-mode) .panel hr {
+        border-color: #e2e8f0 !important;
+      }
+
+      body:not(.light-mode) .progress {
+        background: #e2e8f0;
+      }
+
+      body:not(.light-mode) .progress > span {
+        background: linear-gradient(90deg, #3b82f6, #2563eb);
+      }
+
+      body:not(.light-mode) .btn {
+        color: #1e293b;
+        background: #f1f5f9;
+        border: 1px solid #e2e8f0;
+      }
+
+      body:not(.light-mode) .btn:hover {
+        background: #e2e8f0;
+      }
+
+      body:not(.light-mode) .btn-submit {
+        background: linear-gradient(135deg, #3b82f6, #2563eb);
+        color: white;
+        border: none;
+      }
+
+      body:not(.light-mode) .btn-back {
+        background: #64748b;
+        color: white;
+        border: none;
+      }
+
+      body:not(.light-mode) .answered-count {
+        color: #64748b;
+      }
+
+      body:not(.light-mode) .muted {
+        color: #64748b;
+      }
+
+      /* Light mode - Review Questions Section */
+      body:not(.light-mode) .question-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      body:not(.light-mode) .question-card summary {
+        color: #0f172a;
+      }
+
+      body:not(.light-mode) .question-card.correct {
+        border-left: 4px solid #22c55e;
+      }
+
+      body:not(.light-mode) .question-card.wrong {
+        border-left: 4px solid #ef4444;
+      }
+
+      body:not(.light-mode) .review-body {
+        color: #334155;
+      }
+
+      body:not(.light-mode) .review-body p {
+        color: #334155;
+      }
+
+      body:not(.light-mode) .review-body strong {
+        color: #0f172a;
+      }
+
+      body:not(.light-mode) .soft-divider {
+        background: #e2e8f0;
+      }
+
+      body:not(.light-mode) .good {
+        color: #16a34a;
+      }
+
+      body:not(.light-mode) .bad {
+        color: #dc2626;
+      }
+
+      body:not(.light-mode) .explanation {
+        color: #64748b;
+      }
+
+      /* Light mode - Results page headings */
+      body:not(.light-mode) .results-heading,
+      body:not(.light-mode) h2,
+      body:not(.light-mode) h3 {
+        color: #0f172a;
+      }
+
     </style>
 
     {% block extra_styles %}{% endblock %}
@@ -434,6 +638,10 @@
     data-remaining="{{ remaining_seconds|default:600 }}"
     data-quit-url="{% url 'quizzes:dashboard' %}"
   >
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle-btn fixed" id="themeToggle" title="Toggle Theme">
+      <i class="ri-moon-line"></i>
+    </button>
 
     <div class="container">
       <main class="card" role="main" aria-labelledby="quiz-title">

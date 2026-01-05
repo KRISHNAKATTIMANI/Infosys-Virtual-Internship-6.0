@@ -5,6 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404 - Page Not Found | AI Quiz Hub</title>
+    
+    <!-- Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    
+    <!-- Theme System -->
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}" />
+    <script src="{% static 'js/theme.js' %}"></script>
+    
     <style>
         * {
             margin: 0;
@@ -62,9 +73,23 @@
             width: 20px;
             height: 20px;
         }
+        
+        /* Light Mode Styles */
+        body:not(.light-mode) {
+            background: #f8fafc;
+        }
+        
+        body:not(.light-mode) .back-btn {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+        }
     </style>
 </head>
 <body>
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle-btn fixed" id="themeToggle" title="Toggle Theme">
+      <i class="ri-moon-line"></i>
+    </button>
+    
     <div class="error-container">
         <img src="{% static '404-error.png' %}" alt="404 Error - Page Not Found" class="error-image">
         <a href="/" class="back-btn">

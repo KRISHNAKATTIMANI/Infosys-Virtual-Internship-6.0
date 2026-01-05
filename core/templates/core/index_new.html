@@ -28,6 +28,10 @@
 
     <!-- Global Styles -->
     <link rel="stylesheet" href="{% static 'css/global.css' %}" />
+    
+    <!-- Theme System -->
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}" />
+    <script src="{% static 'js/theme.js' %}"></script>
 
     <style>
       /* ===== LANDING PAGE SPECIFIC STYLES ===== */
@@ -1668,8 +1672,43 @@
 
       body.light-mode .section-subtitle,
       body.light-mode .hero-description,
+      body.light-mode .hero-subtitle,
       body.light-mode p {
         color: #cbd5e1;
+      }
+
+      body.light-mode .hero-text {
+        color: #f8fafc;
+      }
+
+      body.light-mode .hero-badge {
+        background: rgba(99, 102, 241, 0.2);
+        border-color: rgba(99, 102, 241, 0.4);
+        color: #a5b4fc;
+      }
+
+      body.light-mode .hero-trust {
+        border-top-color: rgba(255, 255, 255, 0.1);
+      }
+
+      body.light-mode .trust-text {
+        color: #94a3b8;
+      }
+
+      body.light-mode .trust-count {
+        color: #f8fafc;
+      }
+
+      body.light-mode .stat-number {
+        color: #f8fafc;
+      }
+
+      body.light-mode .stat-label {
+        color: #94a3b8;
+      }
+
+      body.light-mode .hero-stats {
+        border-top-color: rgba(255, 255, 255, 0.1);
       }
 
       body.light-mode .feature-card,
@@ -2881,6 +2920,32 @@
         </div>
 
         <div class="testimonials-grid">
+          {% if testimonials %}
+            {% for feedback in testimonials %}
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:0 }}00">
+              <div class="testimonial-rating">
+                {% for i in "12345" %}
+                  {% if forloop.counter <= feedback.rating %}
+                  <i class="ri-star-fill"></i>
+                  {% else %}
+                  <i class="ri-star-half-fill"></i>
+                  {% endif %}
+                {% endfor %}
+              </div>
+              <p class="testimonial-content">
+                {{ feedback.comment }}
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar">{{ feedback.user.full_name|default:feedback.user.username|slice:":1"|upper }}</div>
+                <div class="author-info">
+                  <span class="author-name">{{ feedback.user.full_name|default:feedback.user.username }}</span>
+                  <span class="author-role">{% if feedback.quiz_attempt %}{{ feedback.quiz_attempt.category.name }} Learner{% else %}Student{% endif %}</span>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          {% else %}
+          <!-- Default testimonials when no feedback exists -->
           <div class="testimonial-card" data-aos="fade-up" data-aos-delay="0">
             <div class="testimonial-rating">
               <i class="ri-star-fill"></i>
@@ -2940,6 +3005,7 @@
               </div>
             </div>
           </div>
+          {% endif %}
         </div>
       </div>
     </section>
@@ -3252,23 +3318,8 @@
         observer.observe(statsSection);
       }
 
-      // Theme Toggle
-      const themeToggle = document.getElementById('themeToggle');
-      const themeIcon = themeToggle.querySelector('i');
-      
-      // Check for saved theme preference
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme === 'light') {
-        document.body.classList.add('light-mode');
-        themeIcon.className = 'ri-sun-line';
-      }
-
-      themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('light-mode');
-        const isLight = document.body.classList.contains('light-mode');
-        themeIcon.className = isLight ? 'ri-sun-line' : 'ri-moon-line';
-        localStorage.setItem('theme', isLight ? 'light' : 'dark');
-      });
+      // Theme Toggle - handled by theme.js (uses localStorage 'theme')
+      // theme.js convention: 'dark' theme = light-mode class, 'light' theme = no class
 
       // Scroll to Top Button
       const scrollTopBtn = document.getElementById('scrollTop');

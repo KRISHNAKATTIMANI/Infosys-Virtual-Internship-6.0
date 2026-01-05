@@ -17,6 +17,10 @@
     <!-- Global Styles -->
     <link rel="stylesheet" href="{% static 'css/global.css' %}" />
     
+    <!-- Theme System -->
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}" />
+    <script src="{% static 'js/theme.js' %}"></script>
+    
     <style>
         body {
             min-height: 100vh;
@@ -224,6 +228,85 @@
             position: relative;
             z-index: 1;
         }
+
+        /* Theme Toggle Button */
+        .theme-toggle-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(99, 102, 241, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: #a5b4fc;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .theme-toggle-btn:hover {
+            transform: scale(1.1);
+            background: rgba(99, 102, 241, 0.25);
+        }
+
+        body.light-mode .theme-toggle-btn {
+            background: rgba(251, 191, 36, 0.15);
+            border-color: rgba(251, 191, 36, 0.3);
+            color: #fbbf24;
+        }
+
+        /* ========== LIGHT MODE STYLES ========== */
+        body:not(.light-mode) {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
+        }
+
+        body:not(.light-mode) .grid-bg {
+            background-image: 
+                linear-gradient(rgba(99, 102, 241, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99, 102, 241, 0.06) 1px, transparent 1px);
+        }
+
+        body:not(.light-mode) .wizard-step {
+            background: rgba(0, 0, 0, 0.03);
+            border-color: rgba(0, 0, 0, 0.1);
+            color: #64748b;
+        }
+
+        body:not(.light-mode) .wizard-title {
+            color: #0f172a;
+        }
+
+        body:not(.light-mode) .wizard-subtitle {
+            color: #64748b;
+        }
+
+        body:not(.light-mode) .difficulty-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        body:not(.light-mode) .difficulty-card:hover {
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.15);
+        }
+
+        body:not(.light-mode) .difficulty-desc {
+            color: #64748b;
+        }
+
+        body:not(.light-mode) .theme-toggle-btn {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: rgba(99, 102, 241, 0.2);
+            color: #6366f1;
+        }
         
         @media (max-width: 768px) {
             .wizard-title {
@@ -238,6 +321,11 @@
 </head>
 <body>
     <div class="grid-bg"></div>
+    
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle-btn" id="themeToggle" title="Toggle Theme">
+        <i class="ri-moon-line"></i>
+    </button>
     
     <section class="wizard-section">
         <div class="wizard-container">

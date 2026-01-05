@@ -188,3 +188,22 @@ class Concept(models.Model):
 
     def __str__(self):
         return f"{self.subcategory.name} - {self.name} ({self.difficulty})"
+
+
+class Feedback(models.Model):
+    """User feedback after completing a quiz, displayed in testimonials"""
+    RATING_CHOICES = [(i, str(i)) for i in range(1, 6)]  # 1-5 stars
+    
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='feedbacks')
+    quiz_attempt = models.OneToOneField(QuizAttempt, on_delete=models.CASCADE, related_name='feedback', null=True, blank=True)
+    rating = models.PositiveSmallIntegerField(choices=RATING_CHOICES, default=5)
+    comment = models.TextField(max_length=500)
+    is_approved = models.BooleanField(default=True)  # For moderation if needed
+    is_featured = models.BooleanField(default=False)  # Featured on landing page
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"{self.user.username} - {self.rating}★ - {self.created_at.strftime('%Y-%m-%d')}"

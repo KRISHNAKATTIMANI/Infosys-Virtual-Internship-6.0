@@ -10,7 +10,7 @@ from datetime import timedelta, datetime
 import random
 import json
 
-from .models import Category, SubCategory, QuizAttempt, Question, Concept
+from .models import Category, SubCategory, QuizAttempt, Question, Concept, Feedback
 
 # for performance pdf functionality
 from reportlab.platypus import (
@@ -70,6 +70,55 @@ def dashboard(request):
         completed_at__gte=timezone.now() - timedelta(days=7)
     ).count()
 
+    # ===== DATA FOR CHARTS (Past 30 Days) =====
+    thirty_days_ago = timezone.now() - timedelta(days=30)
+    
+    # Daily quiz activity (quizzes completed per day)
+    daily_activity = completed_qs.filter(
+        completed_at__gte=thirty_days_ago
+    ).annotate(
+        date=TruncDate('completed_at')
+    ).values('date').annotate(
+        count=Count('id'),
+        avg_score=Avg('score')
+    ).order_by('date')
+    
+    # Prepare data for chart - fill in missing days with 0
+    activity_dict = {item['date']: {'count': item['count'], 'avg_score': round(item['avg_score'] or 0, 1)} for item in daily_activity}
+    
+    chart_labels = []
+    chart_quiz_counts = []
+    chart_scores = []
+    
+    for i in range(30):
+        date = (timezone.now() - timedelta(days=29-i)).date()
+        chart_labels.append(date.strftime('%b %d'))
+        data = activity_dict.get(date, {'count': 0, 'avg_score': 0})
+        chart_quiz_counts.append(data['count'])
+        chart_scores.append(data['avg_score'])
+    
+    # Category distribution for pie chart
+    category_distribution = completed_qs.filter(
+        completed_at__gte=thirty_days_ago
+    ).values('category__name').annotate(
+        count=Count('id')
+    ).order_by('-count')[:6]
+    
+    category_labels = [item['category__name'] or 'Unknown' for item in category_distribution]
+    category_counts = [item['count'] for item in category_distribution]
+    
+    # Difficulty distribution
+    difficulty_distribution = completed_qs.filter(
+        completed_at__gte=thirty_days_ago
+    ).values('difficulty').annotate(
+        count=Count('id'),
+        avg_score=Avg('score')
+    ).order_by('difficulty')
+    
+    difficulty_labels = [item['difficulty'].capitalize() for item in difficulty_distribution]
+    difficulty_counts = [item['count'] for item in difficulty_distribution]
+    difficulty_scores = [round(item['avg_score'] or 0, 1) for item in difficulty_distribution]
+
     context = {
         "total_attempted": total_attempted,
         "total_completed": total_completed,
@@ -84,8 +133,108 @@ def dashboard(request):
         "recent_quizzes": recent_quizzes,
 
         "last_7_days": last_7_days,
+        
+        # Chart data (JSON serialized for JavaScript)
+        "chart_labels": json.dumps(chart_labels),
+        "chart_quiz_counts": json.dumps(chart_quiz_counts),
+        "chart_scores": json.dumps(chart_scores),
+        "category_labels": json.dumps(category_labels),
+        "category_counts": json.dumps(category_counts),
+        "difficulty_labels": json.dumps(difficulty_labels),
+        "difficulty_counts": json.dumps(difficulty_counts),
+        "difficulty_scores": json.dumps(difficulty_scores),
     }
     return render(request, "quizzes/dashboard.html", context)
+
+
+# ============================================================
+# DASHBOARD CHARTS API - For Dynamic Updates
+# ============================================================
+@login_required
+def dashboard_charts_api(request):
+    """
+    API endpoint to fetch chart data for dashboard.
+    Returns JSON data for charts that update after quiz completion.
+    """
+    user = request.user
+    
+    # Base queryset: only completed quizzes
+    completed_qs = QuizAttempt.objects.filter(
+        user=user,
+        status=QuizAttempt.STATUS_COMPLETED
+    )
+    
+    thirty_days_ago = timezone.now() - timedelta(days=30)
+    
+    # Daily quiz activity (quizzes completed per day)
+    daily_activity = completed_qs.filter(
+        completed_at__gte=thirty_days_ago
+    ).annotate(
+        date=TruncDate('completed_at')
+    ).values('date').annotate(
+        count=Count('id'),
+        avg_score=Avg('score')
+    ).order_by('date')
+    
+    # Prepare data for chart - fill in missing days with 0
+    activity_dict = {item['date']: {'count': item['count'], 'avg_score': round(item['avg_score'] or 0, 1)} for item in daily_activity}
+    
+    chart_labels = []
+    chart_quiz_counts = []
+    chart_scores = []
+    
+    for i in range(30):
+        date = (timezone.now() - timedelta(days=29-i)).date()
+        chart_labels.append(date.strftime('%b %d'))
+        data = activity_dict.get(date, {'count': 0, 'avg_score': 0})
+        chart_quiz_counts.append(data['count'])
+        chart_scores.append(data['avg_score'])
+    
+    # Category distribution for pie chart
+    category_distribution = completed_qs.filter(
+        completed_at__gte=thirty_days_ago
+    ).values('category__name').annotate(
+        count=Count('id')
+    ).order_by('-count')[:6]
+    
+    category_labels = [item['category__name'] or 'Unknown' for item in category_distribution]
+    category_counts = [item['count'] for item in category_distribution]
+    
+    # Difficulty distribution
+    difficulty_distribution = completed_qs.filter(
+        completed_at__gte=thirty_days_ago
+    ).values('difficulty').annotate(
+        count=Count('id'),
+        avg_score=Avg('score')
+    ).order_by('difficulty')
+    
+    difficulty_labels = [item['difficulty'].capitalize() for item in difficulty_distribution]
+    difficulty_counts = [item['count'] for item in difficulty_distribution]
+    difficulty_scores = [round(item['avg_score'] or 0, 1) for item in difficulty_distribution]
+    
+    # Summary stats
+    total_completed = completed_qs.count()
+    total_30_days = completed_qs.filter(completed_at__gte=thirty_days_ago).count()
+    avg_score_30_days = completed_qs.filter(
+        completed_at__gte=thirty_days_ago
+    ).aggregate(avg=Avg('score'))['avg'] or 0
+    
+    return JsonResponse({
+        'success': True,
+        'chart_labels': chart_labels,
+        'chart_quiz_counts': chart_quiz_counts,
+        'chart_scores': chart_scores,
+        'category_labels': category_labels,
+        'category_counts': category_counts,
+        'difficulty_labels': difficulty_labels,
+        'difficulty_counts': difficulty_counts,
+        'difficulty_scores': difficulty_scores,
+        'summary': {
+            'total_completed': total_completed,
+            'total_30_days': total_30_days,
+            'avg_score_30_days': round(avg_score_30_days, 1),
+        }
+    })
 
 
 # ============================================================
@@ -602,6 +751,47 @@ def quiz_results(request, attempt_id):
     # Check if this was an auto-submit
     auto_submitted = request.GET.get('auto_submitted') == 'true'
     
+    # Generate AI Feedback
+    ai_feedback = None
+    strong_areas = []
+    weak_areas = []
+    
+    try:
+        # Analyze questions for strong/weak areas
+        questions = quiz_attempt.questions or []
+        
+        for q in questions:
+            topic = q.get('topic', quiz_attempt.subcategory.name)
+            if q.get('is_correct'):
+                if topic not in strong_areas:
+                    strong_areas.append(topic)
+            else:
+                if topic not in weak_areas:
+                    weak_areas.append(topic)
+        
+        # Remove overlaps - if in both, keep in weak
+        strong_areas = [a for a in strong_areas if a not in weak_areas]
+        
+        # Generate AI feedback
+        summary_data = {
+            "subcategory": quiz_attempt.subcategory.name,
+            "category": quiz_attempt.category.name,
+            "difficulty": quiz_attempt.difficulty,
+            "score": percentage,
+            "correct": correct,
+            "total": total,
+            "strong_areas": strong_areas[:3],
+            "weak_areas": weak_areas[:3],
+        }
+        
+        ai_feedback = generate_ai_feedback(str(summary_data))
+    except Exception as e:
+        print(f"AI Feedback error: {e}")
+        ai_feedback = None
+    
+    # Check if user already submitted feedback for this quiz
+    existing_feedback = Feedback.objects.filter(quiz_attempt=quiz_attempt).first()
+    
     return render(request, "quizzes/quiz_results.html", {
         "quiz_attempt": quiz_attempt,
         "total": total,
@@ -610,6 +800,10 @@ def quiz_results(request, attempt_id):
         "percentage": percentage,
         "grade": grade,
         "auto_submitted": auto_submitted,
+        "ai_feedback": ai_feedback,
+        "strong_areas": strong_areas[:3],
+        "weak_areas": weak_areas[:3],
+        "existing_feedback": existing_feedback,
     })
 def finalize_quiz_attempt(quiz_attempt):
     """
@@ -1114,3 +1308,64 @@ def save_timer(request, attempt_id):
 
     except Exception:
         return JsonResponse({'status': 'error'}, status=400)
+
+
+# ============================================================
+# FEEDBACK SUBMISSION
+# ============================================================
+@login_required
+@require_POST
+def submit_feedback(request, attempt_id):
+    """
+    Submit user feedback after quiz completion (optional).
+    Displayed on landing page testimonials.
+    """
+    try:
+        quiz_attempt = get_object_or_404(
+            QuizAttempt,
+            id=attempt_id,
+            user=request.user,
+            status=QuizAttempt.STATUS_COMPLETED
+        )
+        
+        # Check if feedback already exists
+        if Feedback.objects.filter(quiz_attempt=quiz_attempt).exists():
+            return JsonResponse({
+                'success': False,
+                'error': 'Feedback already submitted for this quiz'
+            }, status=400)
+        
+        rating = request.POST.get('rating', 5)
+        comment = request.POST.get('comment', '').strip()
+        
+        if not comment:
+            return JsonResponse({
+                'success': False,
+                'error': 'Please provide a comment'
+            }, status=400)
+        
+        if len(comment) > 500:
+            return JsonResponse({
+                'success': False,
+                'error': 'Comment must be under 500 characters'
+            }, status=400)
+        
+        # Create feedback
+        feedback = Feedback.objects.create(
+            user=request.user,
+            quiz_attempt=quiz_attempt,
+            rating=int(rating),
+            comment=comment,
+            is_approved=True  # Auto-approve for now
+        )
+        
+        return JsonResponse({
+            'success': True,
+            'message': 'Thank you for your feedback!'
+        })
+        
+    except Exception as e:
+        return JsonResponse({
+            'success': False,
+            'error': str(e)
+        }, status=400)

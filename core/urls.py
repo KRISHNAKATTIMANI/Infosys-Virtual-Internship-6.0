@@ -29,6 +29,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("quiz/", include("quizzes.urls")),
     path('accounts/', include('accounts.urls', namespace='accounts')),
+    path('accounts/', include('allauth.urls')),  # Allauth URLs for social authentication
 ]
 
 if settings.DEBUG:

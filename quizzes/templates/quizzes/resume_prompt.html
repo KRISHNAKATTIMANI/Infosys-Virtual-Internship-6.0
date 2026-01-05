@@ -20,6 +20,10 @@
       rel="stylesheet"
     />
 
+    <!-- Theme System -->
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}" />
+    <script src="{% static 'js/theme.js' %}"></script>
+
     <style>
       * {
         margin: 0;
@@ -228,10 +232,105 @@
           flex-direction: column;
         }
       }
+
+      /* ========== LIGHT MODE STYLES ========== */
+      body:not(.light-mode) {
+        background: #f8fafc;
+        color: #1e293b;
+      }
+
+      body:not(.light-mode)::before {
+        background: 
+          linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%),
+          radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 40%),
+          radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.06) 0%, transparent 40%);
+      }
+
+      body:not(.light-mode) .resume-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 25px 80px rgba(0, 0, 0, 0.1);
+      }
+
+      body:not(.light-mode) .resume-icon {
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(99, 102, 241, 0.1));
+      }
+
+      body:not(.light-mode) .resume-icon i {
+        color: #3b82f6;
+      }
+
+      body:not(.light-mode) h2 {
+        color: #0f172a;
+      }
+
+      body:not(.light-mode) .subtitle {
+        color: #64748b;
+      }
+
+      body:not(.light-mode) .quiz-info {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+      }
+
+      body:not(.light-mode) .info-row {
+        border-bottom-color: #e2e8f0;
+      }
+
+      body:not(.light-mode) .info-label {
+        color: #64748b;
+      }
+
+      body:not(.light-mode) .info-label i {
+        color: #3b82f6;
+      }
+
+      body:not(.light-mode) .info-value {
+        color: #0f172a;
+      }
+
+      body:not(.light-mode) .progress-bar {
+        background: #e2e8f0;
+      }
+
+      body:not(.light-mode) .progress-fill {
+        background: linear-gradient(90deg, #3b82f6, #6366f1);
+      }
+
+      body:not(.light-mode) .progress-text {
+        color: #64748b;
+      }
+
+      body:not(.light-mode) .btn-primary {
+        background: linear-gradient(135deg, #3b82f6, #2563eb);
+        color: white;
+        box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+      }
+
+      body:not(.light-mode) .btn-primary:hover {
+        box-shadow: 0 12px 35px rgba(59, 130, 246, 0.5);
+      }
+
+      body:not(.light-mode) .btn-secondary {
+        background: #f1f5f9;
+        border: 1px solid #e2e8f0;
+        color: #64748b;
+      }
+
+      body:not(.light-mode) .btn-secondary:hover {
+        background: rgba(239, 68, 68, 0.1);
+        border-color: rgba(239, 68, 68, 0.3);
+        color: #ef4444;
+      }
     </style>
   </head>
 
   <body>
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle-btn fixed" id="themeToggle" title="Toggle Theme">
+      <i class="ri-moon-line"></i>
+    </button>
+
     <div class="resume-card">
       <div class="resume-icon">
         <i class="ri-pause-circle-line"></i>

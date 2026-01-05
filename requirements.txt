@@ -5,3 +5,4 @@ python-dotenv==1.0.1
 openai==1.47.0
 reportlab==4.2.5
 requests==2.32.3
+django-allauth==64.2.1
