@@ -46,3 +46,29 @@ Work on UI/UX part- some parts are empty like while navigating the quiz some par
 Need to work on that either utilize or do whatever.
 resume quiz - functionality to be added.
 without resuming user cannot jump to next new quiz.
+
+06-01-2026
+1)wrtite yaml file
+build docker image based on source codew
+run it
+one container will create at runtime
+
+
+From docker to kubernetes
+IN kubernetes, the docker images (container) are called kubernetes cords..namespace,cluster, networking concepts, 
+
+AWS,Azure,GCP
+instead of running private VMS, kubernbetes will deploy somewhere there only they will keep it.
+
+learn docker and kubernetes: yt channel: abhishek virmalla-> 
+	Abhishek Veeramalla – DevOps Zero to Hero
+	Edureka DevOps Full Course 2025
+	
+	Bret Fisher – Docker & DevOps
+	DevOps Directive
+	FreeCodeCamp DevOps courses (Docker & Kubernetes)
+	
+Cloud Specific Deployments
+	cloudguru
+	cloud academy
+	
