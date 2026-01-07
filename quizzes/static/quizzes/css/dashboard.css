@@ -207,6 +207,7 @@ body::before {
 .sidebar-footer {
   padding: 1rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-decoration: none;
 }
 
 .user-profile {
@@ -582,9 +583,21 @@ body::before {
   grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: auto;
   gap: 1.5rem;
+  position: relative;
+  z-index: 0;
 }
 
 /* Card Base */
+.bento-card,
+.bento-card * {
+  pointer-events: auto;
+}
+
+.bento-card::before,
+.bento-card::after {
+  pointer-events: none;
+}
+
 .bento-card {
   background: #ffffff;
   border: 1px solid #e2e8f0;
@@ -691,6 +704,7 @@ body::before {
   background: radial-gradient(circle, rgba(245, 158, 11, 0.1) 0%, transparent 70%);
   border-radius: 50%;
   z-index: 1;
+  pointer-events: none;
 }
 
 .bento-card h2 {
@@ -737,51 +751,6 @@ body::before {
   text-decoration: none;
 }
 
-.start-quiz-card h2 {
-  font-family: 'Press Start 2P', 'Inter', cursive;
-  font-size: 1.1rem;
-  font-weight: 400;
-  background: linear-gradient(
-    90deg,
-    #ff0000 0%,
-    #ff8000 14%,
-    #ffff00 28%,
-    #00ff00 42%,
-    #00ffff 57%,
-    #0080ff 71%,
-    #8000ff 85%,
-    #ff0080 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  background-size: 200% 100%;
-  animation: rainbow-move 3s linear infinite;
-  text-shadow: none;
-  letter-spacing: 1px;
-}
-
-.start-quiz-card .bento-action span {
-  font-family: 'Press Start 2P', 'Inter', cursive;
-  font-size: 0.7rem;
-  background: linear-gradient(
-    90deg,
-    #ff0000 0%,
-    #ff8000 14%,
-    #ffff00 28%,
-    #00ff00 42%,
-    #00ffff 57%,
-    #0080ff 71%,
-    #8000ff 85%,
-    #ff0080 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  background-size: 200% 100%;
-  animation: rainbow-move 3s linear infinite;
-}
-
 @keyframes rainbow-move {
   0% {
     background-position: 0% 50%;
@@ -800,108 +769,61 @@ body::before {
   font-family: 'Press Start 2P', 'Inter', cursive;
   font-size: 0.75rem;
   font-weight: 400;
-  background: linear-gradient(
-    90deg,
-    #ff0000 0%,
-    #ff8000 14%,
-    #ffff00 28%,
-    #00ff00 42%,
-    #00ffff 57%,
-    #0080ff 71%,
-    #8000ff 85%,
-    #ff0080 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  background-size: 200% 100%;
-  animation: rainbow-move 3s linear infinite;
+
+  /* Explicit text color */
+  color: #111827; /* black / gray */
+
+  /* IMPORTANT: reset text fill */
+  -webkit-text-fill-color: #111827;
+
+  /* Remove gradient + animation */
+  background: none;
+  animation: none;
+
   letter-spacing: 0.5px;
 }
+
 
 .recent-card .bento-icon {
   background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(6, 182, 212, 0.05));
   color: #06b6d4;
 }
 
-.recent-card h3 {
-  font-family: 'Press Start 2P', 'Inter', cursive;
-  font-size: 0.75rem;
-  font-weight: 400;
-  background: linear-gradient(
-    90deg,
-    #ff0000 0%,
-    #ff8000 14%,
-    #ffff00 28%,
-    #00ff00 42%,
-    #00ffff 57%,
-    #0080ff 71%,
-    #8000ff 85%,
-    #ff0080 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  background-size: 200% 100%;
-  animation: rainbow-move 3s linear infinite;
-  letter-spacing: 0.5px;
-}
 
 .attempts-card .bento-icon {
   background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.05));
   color: #22c55e;
 }
 
-.attempts-card h3 {
-  font-family: 'Press Start 2P', 'Inter', cursive;
-  font-size: 0.75rem;
-  font-weight: 400;
-  background: linear-gradient(
-    90deg,
-    #ff0000 0%,
-    #ff8000 14%,
-    #ffff00 28%,
-    #00ff00 42%,
-    #00ffff 57%,
-    #0080ff 71%,
-    #8000ff 85%,
-    #ff0080 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  background-size: 200% 100%;
-  animation: rainbow-move 3s linear infinite;
-  letter-spacing: 0.5px;
-}
 
 .leaderboard-card .bento-icon {
   background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.05));
   color: #f59e0b;
 }
 
-.leaderboard-card h3 {
+.analytics-card h3,
+.attempts-card h3,
+.leaderboard-card h3,
+.recent-card h3,
+.start-quiz-card h2,
+.start-quiz-card .bento-action span {
   font-family: 'Press Start 2P', 'Inter', cursive;
   font-size: 0.75rem;
   font-weight: 400;
-  background: linear-gradient(
-    90deg,
-    #ff0000 0%,
-    #ff8000 14%,
-    #ffff00 28%,
-    #00ff00 42%,
-    #00ffff 57%,
-    #0080ff 71%,
-    #8000ff 85%,
-    #ff0080 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  background-size: 200% 100%;
-  animation: rainbow-move 3s linear infinite;
+
+  /* Normal text color */
+  color: #111827; /* gray-900 / near black */
+  -webkit-text-fill-color: #111827;
+
+  /* Remove rainbow effects */
+  background: none;
+  background-clip: border-box;
+  -webkit-background-clip: border-box;
+  animation: none;
+
   letter-spacing: 0.5px;
 }
+
 
 /* Leaderboard Preview */
 .leaderboard-preview {
@@ -1680,186 +1602,4 @@ body.light-mode .chart-period {
     min-height: auto;
     padding: 1.25rem;
   }
-}
-
-/* ============================================
-   DARK MODE STYLES (light-mode class = dark theme)
-   ============================================ */
-body.light-mode {
-  background: #0f172a !important;
-  color: #f8fafc !important;
-}
-
-body.light-mode::before {
-  background: 
-    radial-gradient(ellipse at 20% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 80%, rgba(251, 191, 36, 0.1) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(139, 92, 246, 0.08) 0%, transparent 60%) !important;
-}
-
-body.light-mode .sidebar {
-  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%) !important;
-  border-right-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-body.light-mode .sidebar-brand span {
-  color: #f8fafc !important;
-}
-
-body.light-mode .nav-item {
-  color: #cbd5e1 !important;
-}
-
-body.light-mode .nav-item:hover,
-body.light-mode .nav-item.active {
-  background: rgba(99, 102, 241, 0.2) !important;
-  color: #a5b4fc !important;
-}
-
-body.light-mode .main-content {
-  background: #0f172a !important;
-}
-
-body.light-mode .topbar {
-  background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.95) 100%) !important;
-  border: 1px solid rgba(99, 102, 241, 0.2) !important;
-  box-shadow: 
-    0 1px 3px rgba(0, 0, 0, 0.2),
-    0 4px 12px rgba(0, 0, 0, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
-}
-
-body.light-mode .topbar:hover {
-  border-color: rgba(99, 102, 241, 0.3) !important;
-  box-shadow: 
-    0 2px 6px rgba(0, 0, 0, 0.25),
-    0 8px 20px rgba(0, 0, 0, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
-}
-
-body.light-mode .page-title h1 {
-  color: #f8fafc !important;
-}
-
-body.light-mode .page-title p {
-  color: #94a3b8 !important;
-}
-
-body.light-mode .bento-card,
-body.light-mode .stat-card,
-body.light-mode .action-card,
-body.light-mode .recent-card {
-  background: rgba(30, 41, 59, 0.8) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
-}
-
-body.light-mode .bento-card:hover,
-body.light-mode .stat-card:hover,
-body.light-mode .action-card:hover {
-  background: rgba(30, 41, 59, 0.95) !important;
-  border-color: rgba(99, 102, 241, 0.5) !important;
-}
-
-body.light-mode .stat-value,
-body.light-mode .action-title,
-body.light-mode .bento-title {
-  color: #f8fafc !important;
-}
-
-body.light-mode .stat-label,
-body.light-mode .action-description,
-body.light-mode .bento-subtitle {
-  color: #94a3b8 !important;
-}
-
-body.light-mode .user-name {
-  color: #f8fafc !important;
-}
-
-body.light-mode .user-role {
-  color: #94a3b8 !important;
-}
-
-body.light-mode .recent-item {
-  background: rgba(51, 65, 85, 0.5) !important;
-  border-color: rgba(255, 255, 255, 0.05) !important;
-}
-
-body.light-mode .recent-item:hover {
-  background: rgba(51, 65, 85, 0.8) !important;
-}
-
-body.light-mode .recent-title {
-  color: #f8fafc !important;
-}
-
-body.light-mode .recent-meta {
-  color: #94a3b8 !important;
-}
-
-body.light-mode .category-card {
-  background: rgba(51, 65, 85, 0.6) !important;
-  border-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-body.light-mode .category-card:hover {
-  background: rgba(51, 65, 85, 0.8) !important;
-  border-color: rgba(99, 102, 241, 0.4) !important;
-}
-
-body.light-mode .category-name {
-  color: #f8fafc !important;
-}
-
-body.light-mode .category-count {
-  color: #94a3b8 !important;
-}
-
-body.light-mode .logout-btn {
-  color: #94a3b8 !important;
-}
-
-body.light-mode .logout-btn:hover {
-  background: rgba(239, 68, 68, 0.2) !important;
-  color: #fca5a5 !important;
-}
-
-/* Dark mode for specific bento cards */
-body.light-mode .start-quiz-card,
-body.light-mode .analytics-card {
-  background: rgba(30, 41, 59, 0.8) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
-}
-
-body.light-mode .start-quiz-card:hover,
-body.light-mode .analytics-card:hover {
-  background: rgba(30, 41, 59, 0.95) !important;
-  border-color: rgba(99, 102, 241, 0.5) !important;
-}
-
-body.light-mode .start-quiz-card p,
-body.light-mode .analytics-card p {
-  color: #94a3b8 !important;
-}
-
-body.light-mode .bento-arrow {
-  color: #64748b !important;
-}
-
-body.light-mode .start-quiz-card .bento-icon-large {
-  background: linear-gradient(135deg, #f59e0b, #fbbf24) !important;
-  color: #1e293b !important;
-  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4) !important;
-}
-
-body.light-mode .analytics-card .bento-icon,
-body.light-mode .leaderboard-card .bento-icon {
-  background: rgba(99, 102, 241, 0.2) !important;
-}
-
-/* Hide the bg pattern in dark mode to avoid visual clutter */
-body.light-mode .bento-bg-pattern {
-  display: none !important;
 }

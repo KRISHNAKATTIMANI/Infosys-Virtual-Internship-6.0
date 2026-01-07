@@ -1081,6 +1081,28 @@ def performance_dashboard(request):
 
     return render(request, 'quizzes/performance_dashboard.html', context)
 
+def draw_page_layout(canvas, doc):
+    canvas.saveState()
+
+    # Page border
+    canvas.setStrokeColor(colors.grey)
+    canvas.setLineWidth(1)
+    canvas.rect(20, 20, A4[0] - 40, A4[1] - 40)
+
+    # Header
+    canvas.setFont("Helvetica-Bold", 10)
+    canvas.drawString(40, A4[1] - 40, "AI Quiz Hub – Performance Report")
+
+    # Footer
+    canvas.setFont("Helvetica", 9)
+    canvas.setFillColor(colors.grey)
+    canvas.drawCentredString(
+        A4[0] / 2,
+        30,
+        f"Page {doc.page}"
+    )
+
+    canvas.restoreState()
 
 @login_required
 def download_performance_pdf(request):
@@ -1118,6 +1140,39 @@ def download_performance_pdf(request):
     )
 
     styles = getSampleStyleSheet()
+
+    styles.add(ParagraphStyle(
+        name="ReportTitle",
+        fontSize=22,
+        alignment=1,
+        spaceAfter=14,
+        textColor=colors.HexColor("#111827"),
+        fontName="Helvetica-Bold"
+    ))
+
+    styles.add(ParagraphStyle(
+        name="SectionTitle",
+        fontSize=14,
+        spaceBefore=16,
+        spaceAfter=8,
+        textColor=colors.HexColor("#1f2937"),
+        fontName="Helvetica-Bold"
+    ))
+
+    styles.add(ParagraphStyle(
+        name="ReportBody",
+        fontSize=10,
+        spaceAfter=6,
+        textColor=colors.black
+    ))
+
+    styles.add(ParagraphStyle(
+        name="MutedText",
+        fontSize=9,
+        textColor=colors.grey,
+        alignment=1
+    ))
+
     elements = []
 
     # ---------------- HEADER ----------------
@@ -1137,12 +1192,27 @@ def download_performance_pdf(request):
         textColor=colors.grey
     )
 
-    elements.append(Paragraph("AI Quiz Hub", title_style))
-    elements.append(Paragraph("Performance Report", subtitle_style))
+    elements.append(Paragraph("AI Quiz Hub", styles["ReportTitle"]))
+    elements.append(Paragraph(
+        "Personal Performance Report",
+        styles["MutedText"]
+    ))
+
+    elements.append(Spacer(1, 20))
+
+    elements.append(Paragraph(
+        f"Dear <b>{user.username}</b>,<br/><br/>"
+        "This report provides a detailed overview of your quiz performance, "
+        "accuracy, and topic-wise strengths. Use this insight to track progress "
+        "and identify improvement areas.",
+        styles["BodyText"]
+    ))
+
 
     # ---------------- USER INFO ----------------
     elements.append(Spacer(1, 10))
-    elements.append(Paragraph("<b>User Information</b>", styles['Heading2']))
+    elements.append(Paragraph("User Information", styles["SectionTitle"]))
+
     elements.append(Spacer(1, 6))
 
     elements.append(Paragraph(
@@ -1155,7 +1225,8 @@ def download_performance_pdf(request):
     elements.append(Spacer(1, 16))
 
     # ---------------- SUMMARY ----------------
-    elements.append(Paragraph("<b>Performance Summary</b>", styles['Heading2']))
+    elements.append(Paragraph("Performance Summary", styles["SectionTitle"]))
+
     elements.append(Spacer(1, 8))
 
     summary_table = Table([
@@ -1165,18 +1236,21 @@ def download_performance_pdf(request):
     ], colWidths=[250, 150])
 
     summary_table.setStyle(TableStyle([
-        ('BACKGROUND', (0,0), (-1,0), colors.whitesmoke),
-        ('GRID', (0,0), (-1,-1), 0.5, colors.grey),
+        ('BACKGROUND', (0,0), (-1,-1), colors.whitesmoke),
+        ('GRID', (0,0), (-1,-1), 0.8, colors.grey),
         ('FONT', (0,0), (-1,-1), 'Helvetica'),
+        ('FONT', (0,0), (0,-1), 'Helvetica-Bold'),
         ('ALIGN', (1,0), (1,-1), 'RIGHT'),
-        ('PADDING', (0,0), (-1,-1), 8),
+        ('PADDING', (0,0), (-1,-1), 10),
     ]))
+
 
     elements.append(summary_table)
     elements.append(Spacer(1, 20))
 
     # ---------------- TOPIC TABLE ----------------
-    elements.append(Paragraph("<b>Topic-wise Accuracy</b>", styles['Heading2']))
+    elements.append(Paragraph("Topic-wise Accuracy", styles["SectionTitle"]))
+
     elements.append(Spacer(1, 8))
 
     topic_data = [["Topic", "Accuracy (%)"]]
@@ -1207,16 +1281,17 @@ def download_performance_pdf(request):
     # ---------------- FOOTER ----------------
     elements.append(Spacer(1, 30))
     elements.append(Paragraph(
-        "This report is generated automatically by AI Quiz Hub.",
-        ParagraphStyle(
-            name="Footer",
-            fontSize=9,
-            alignment=1,
-            textColor=colors.grey
-        )
+        "This report is system-generated and reflects quiz attempts completed on AI Quiz Hub.",
+        styles["MutedText"]
     ))
 
-    doc.build(elements)
+
+    doc.build(
+        elements,
+        onFirstPage=draw_page_layout,
+        onLaterPages=draw_page_layout
+    )
+
     return response
 
 # RECENT QUIZZES

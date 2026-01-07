@@ -222,13 +222,16 @@
               <span class="user-role">Learner</span>
             </div>
           </a>
-          <a
-            href="{% url 'accounts:logout' %}"
-            class="topbar-logout-btn"
-            title="Logout"
+          <form
+            action="{% url 'accounts:logout' %}"
+            method="post"
+            class="topbar-logout-form"
           >
-            <i class="ri-logout-box-r-line"></i>
-          </a>
+            {% csrf_token %}
+            <button type="submit" class="topbar-logout-btn" title="Logout">
+              <i class="ri-logout-box-r-line"></i>
+            </button>
+          </form>
         </div>
       </header>
 
