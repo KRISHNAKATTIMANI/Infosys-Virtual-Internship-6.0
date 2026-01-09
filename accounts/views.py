@@ -19,20 +19,34 @@ def index(request):
 # ---------------------------
 # REGISTRATION
 # ---------------------------
+from django.contrib.auth import authenticate, login
+from django.shortcuts import redirect, render
+from django.contrib import messages
+
 def register_view(request):
     if request.user.is_authenticated:
-        return redirect('quizzes:dashboard')   # If logged in → go to dashboard
+        return redirect('quizzes:dashboard')
 
     if request.method == 'POST':
         form = RegistrationForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save()
-            login(request, user)
-            messages.success(request, "Registration successful! Welcome to AI Quiz Hub.")
+
+            #Authenticate FIRST (sets backend)
+            authenticated_user = authenticate(
+                request,
+                email=user.email,   # use username if not email-based
+                password=form.cleaned_data['password1']
+            )
+
+            if authenticated_user is not None:
+                login(request, authenticated_user)
+
+            messages.success(
+                request,
+                "Registration successful! Welcome to AI Quiz Hub."
+            )
             return redirect('quizzes:dashboard')
-        else:
-            # Form validation failed - errors will be displayed in template
-            pass
     else:
         form = RegistrationForm()
 
