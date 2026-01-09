@@ -187,7 +187,7 @@ CSRF_TRUSTED_ORIGINS = [
     "http://127.0.0.1:8000",
     # add your host if you use a different domain/port, include scheme
 ]
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1","aiquizhub.onrender.com"]
 
 # ========================
 # DJANGO ALLAUTH SETTINGS
