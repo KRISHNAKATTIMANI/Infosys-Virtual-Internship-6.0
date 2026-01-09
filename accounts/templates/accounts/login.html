@@ -886,18 +886,18 @@
               <i class="ri-lock-line"></i>
               {{ form.password }}
               <button type="button" class="password-toggle" onclick="togglePassword()">
-                <i class="ri-eye-line" id="toggleIcon"></i>
+                {% comment %} <i class="ri-eye-line" id="toggleIcon"></i> {% endcomment %}
               </button>
             </div>
             <div class="error-text">{{ form.password.errors }}</div>
           </div>
 
           <div class="form-options">
-            <label class="remember-me">
+            {% comment %} <label class="remember-me">
               <input type="checkbox" name="remember" />
               <span>Remember me</span>
-            </label>
-            <a href="#" class="forgot-password">Forgot password?</a>
+            </label> {% endcomment %}
+            {% comment %} <a href="#" class="forgot-password">Forgot password?</a> {% endcomment %}
           </div>
 
           {% if form.non_field_errors %}
