@@ -58,10 +58,19 @@ INSTALLED_APPS = [
 # Required for allauth
 SITE_ID = 1
 
-# static & media
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / "static"]
+
+# Where Django will COLLECT static files
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+# Where Django will FIND your static files (during development)
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+# Required for WhiteNoise
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / "media"
@@ -87,6 +96,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',  # Required for allauth
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
