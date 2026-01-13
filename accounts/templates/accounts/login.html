@@ -893,11 +893,12 @@
           </div>
 
           <div class="form-options">
-            {% comment %} <label class="remember-me">
+            <label class="remember-me">
               <input type="checkbox" name="remember" />
               <span>Remember me</span>
-            </label> {% endcomment %}
-            {% comment %} <a href="#" class="forgot-password">Forgot password?</a> {% endcomment %}
+            </label> 
+
+            <a href="{% url 'accounts:password_reset' %}" class="forgot-password">Forgot password?</a> 
           </div>
 
           {% if form.non_field_errors %}

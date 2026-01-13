@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'accounts',
     'quizzes',
     'core',
+
 ]
 
 # Required for allauth
@@ -94,7 +95,7 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],  
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -179,7 +180,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.User'
 
-# OpenAI API Key for quiz generation with GPT-4
+# OpenAI API Key for quiz generation with GPT 3.5
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 
 CSRF_TRUSTED_ORIGINS = [
@@ -232,3 +233,13 @@ SOCIALACCOUNT_PROVIDERS = {
 SOCIALACCOUNT_LOGIN_ON_GET = True
 LOGIN_REDIRECT_URL = '/quiz/dashboard/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
+
+#Email send for password reset
+# Real email sending (Gmail)
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD") 
+DEFAULT_FROM_EMAIL = f"AI Quiz Hub <{EMAIL_HOST_USER}>"

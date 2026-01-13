@@ -20,7 +20,7 @@ from django.urls import path, include
 from django.contrib import admin
 from django.views.generic import RedirectView
 from core import views
-
+from django.contrib.auth import views as auth_views
 # Custom error handlers
 handler404 = 'core.views.custom_404'
 
@@ -30,6 +30,21 @@ urlpatterns = [
     path("quiz/", include("quizzes.urls")),
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('accounts/', include('allauth.urls')),  # Allauth URLs for social authentication
+    
+    path(
+        'reset/<uidb64>/<token>/',
+        auth_views.PasswordResetConfirmView.as_view(
+            template_name='accounts/password_reset_confirm.html'
+        ),
+        name='password_reset_confirm'
+    ),
+    path(
+        'reset/done/',
+        auth_views.PasswordResetCompleteView.as_view(
+            template_name='accounts/password_reset_complete.html'
+        ),
+        name='password_reset_complete'
+    ),
 ]
 
 if settings.DEBUG:
