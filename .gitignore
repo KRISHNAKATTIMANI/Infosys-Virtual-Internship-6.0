@@ -2,3 +2,9 @@
 venv/
 node_modules/
 __pycache__/
+*.pyc
+
+# Django
+db.sqlite3
+media/
+staticfiles/

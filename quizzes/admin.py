@@ -17,7 +17,7 @@ class SubCategoryAdmin(admin.ModelAdmin):
 
 @admin.register(QuizAttempt)
 class QuizAttemptAdmin(admin.ModelAdmin):
-    list_display = ("id", "user", "category", "subcategory", "score", "started_at")
+    list_display = ("id", "user", "category", "subcategory", "score", "started_at", "tab_violations","is_auto_submitted","flagged_for_review",)
     list_filter = ("category", "difficulty", "status")
 
 

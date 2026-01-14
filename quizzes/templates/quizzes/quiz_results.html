@@ -708,6 +708,29 @@
     }
 
     body:not(.light-mode) .star-btn { color: #94a3b8; }
+
+    .submit-badge {
+      padding: 0.25rem 0.6rem;
+      border-radius: 0.4rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    .submit-manual {
+      background: rgba(34,197,94,0.2);
+      color: #22c55e;
+    }
+
+    .submit-auto {
+      background: rgba(251,191,36,0.2);
+      color: #fbbf24;
+    }
+
+    .submit-tab {
+      background: rgba(239,68,68,0.2);
+      color: #ef4444;
+    }
+
   </style>
 </head>
 <body>
@@ -723,6 +746,17 @@
     <div class="results-grid">
       <!-- Score Card -->
       <div class="card score-card">
+        
+        <span>
+          {% if quiz_attempt.auto_submit_reason == 0 %}
+            <i class="ri-checkbox-circle-line"></i> Submitted Manually
+          {% elif quiz_attempt.auto_submit_reason == 1 %}
+            <i class="ri-timer-flash-line"></i> Auto Submitted
+          {% elif quiz_attempt.auto_submit_reason == 2 %}
+            <i class="ri-alert-line"></i> Tab Switch Detected
+          {% endif %}
+        </span>
+
         <div class="score-circle">
           <div class="score-inner">
             <div class="score-value">{{ percentage|floatformat:0 }}%</div>
@@ -1037,3 +1071,4 @@
   </script>
 </body>
 </html>
+

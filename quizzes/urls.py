@@ -60,4 +60,6 @@ urlpatterns = [
      # Feedback
      path('attempt/<uuid:attempt_id>/feedback/', views.submit_feedback, name='submit_feedback'),
 
+    # tab-switch
+    path("tab-violation/",views.tab_violation,name="tab_violation")
 ]

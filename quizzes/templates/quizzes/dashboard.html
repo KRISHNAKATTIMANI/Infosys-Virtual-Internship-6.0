@@ -3,7 +3,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
     <title>Dashboard — AI Quiz Hub</title>
 
     <link
@@ -19,7 +22,7 @@
       rel="stylesheet"
       href="{% static 'quizzes/css/dashboard.css' %}?v=7"
     />
-    
+
     <!-- Theme System -->
     <link rel="stylesheet" href="{% static 'css/theme.css' %}" />
     <script src="{% static 'js/theme.js' %}"></script>
@@ -139,7 +142,7 @@
     </style>
   </head>
 
-  <body>
+  <body style="width: 100%; overflow-x: hidden">
     <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-brand">
@@ -197,10 +200,14 @@
         </div>
         <div class="topbar-right">
           <!-- Theme Toggle Button -->
-          <button class="theme-toggle-btn" id="themeToggle" title="Toggle Theme">
+          <button
+            class="theme-toggle-btn"
+            id="themeToggle"
+            title="Toggle Theme"
+          >
             <i class="ri-moon-line"></i>
           </button>
-          
+
           <a
             href="{% url 'accounts:profile' %}"
             class="user-profile"
@@ -214,11 +221,11 @@
             />
             {% else %}
             <div class="user-avatar-placeholder">
-              {{ request.user.full_name|default:request.user.username|slice:":1"|upper }}
+              {{request.user.username|default:request.user.username|slice:":1"|upper}}
             </div>
             {% endif %}
             <div class="user-info">
-              <span class="user-name">{{ request.user.full_name|default:request.user.username }}</span>
+              <span class="user-name">{{ request.user.full_name|default:request.user.username}}</span>
               <span class="user-role">Learner</span>
             </div>
           </a>
@@ -344,15 +351,21 @@
         <div class="charts-section">
           <div class="section-header">
             <div class="section-header-left">
-              <h2><i class="ri-line-chart-line"></i> Your Activity (Past 30 Days)</h2>
+              <h2>
+                <i class="ri-line-chart-line"></i> Your Activity (Past 30 Days)
+              </h2>
               <p>Track your learning progress and quiz performance</p>
             </div>
-            <button class="refresh-charts-btn" id="refreshChartsBtn" title="Refresh Charts">
+            <button
+              class="refresh-charts-btn"
+              id="refreshChartsBtn"
+              title="Refresh Charts"
+            >
               <i class="ri-refresh-line"></i>
               <span>Refresh</span>
             </button>
           </div>
-          
+
           <div class="charts-grid">
             <!-- Category Distribution -->
             <div class="chart-card chart-small">
@@ -404,7 +417,7 @@
 
     <!-- Chart.js Library -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
+
     <script>
       // Chart Data from Django
       const chartLabels = {{ chart_labels|safe }};
@@ -463,7 +476,7 @@
           scales: {
             x: {
               grid: { display: false },
-              ticks: { 
+              ticks: {
                 color: getChartColors().text,
                 maxRotation: 45,
                 minRotation: 45,
@@ -473,7 +486,7 @@
             y: {
               beginAtZero: true,
               grid: { color: getChartColors().grid },
-              ticks: { 
+              ticks: {
                 color: getChartColors().text,
                 stepSize: 1
               }
@@ -520,7 +533,7 @@
           scales: {
             x: {
               grid: { display: false },
-              ticks: { 
+              ticks: {
                 color: getChartColors().text,
                 maxRotation: 45,
                 minRotation: 45,
@@ -531,7 +544,7 @@
               beginAtZero: true,
               max: 100,
               grid: { color: getChartColors().grid },
-              ticks: { 
+              ticks: {
                 color: getChartColors().text,
                 callback: (value) => value + '%'
               }
@@ -585,7 +598,7 @@
       const difficultyCtx = document.getElementById('difficultyChart').getContext('2d');
       const difficultyColors = {
         'Easy': '#10b981',
-        'Medium': '#f59e0b', 
+        'Medium': '#f59e0b',
         'Hard': '#ef4444'
       };
       const difficultyChart = new Chart(difficultyCtx, {
@@ -618,14 +631,14 @@
             x: {
               beginAtZero: true,
               grid: { color: getChartColors().grid },
-              ticks: { 
+              ticks: {
                 color: getChartColors().text,
                 stepSize: 1
               }
             },
             y: {
               grid: { display: false },
-              ticks: { 
+              ticks: {
                 color: getChartColors().text,
                 font: { weight: '500' }
               }
@@ -667,18 +680,18 @@
         try {
           const response = await fetch('{% url "quizzes:dashboard_charts_api" %}');
           const data = await response.json();
-          
+
           if (data.success) {
             // Update Activity Chart
             activityChart.data.labels = data.chart_labels;
             activityChart.data.datasets[0].data = data.chart_quiz_counts;
             activityChart.update();
-            
+
             // Update Score Chart
             scoreChart.data.labels = data.chart_labels;
             scoreChart.data.datasets[0].data = data.chart_scores;
             scoreChart.update();
-            
+
             // Update Category Chart
             if (data.category_labels.length > 0) {
               categoryChart.data.labels = data.category_labels;
@@ -690,7 +703,7 @@
               categoryChart.data.datasets[0].backgroundColor = ['#e2e8f0'];
             }
             categoryChart.update();
-            
+
             // Update Difficulty Chart
             if (data.difficulty_labels.length > 0) {
               difficultyChart.data.labels = data.difficulty_labels;
@@ -701,7 +714,7 @@
               difficultyChart.data.datasets[0].data = [0, 0, 0];
             }
             difficultyChart.update();
-            
+
             console.log('Charts refreshed from database:', data.summary);
             return true;
           }
@@ -717,9 +730,9 @@
         refreshBtn.addEventListener('click', async () => {
           refreshBtn.classList.add('loading');
           refreshBtn.disabled = true;
-          
+
           await refreshChartsFromDatabase();
-          
+
           setTimeout(() => {
             refreshBtn.classList.remove('loading');
             refreshBtn.disabled = false;
@@ -742,19 +755,19 @@
       // Initial refresh to ensure latest data
       setTimeout(refreshChartsFromDatabase, 1000);
 
-      // Sidebar Toggle Functionality
+      // ===== RESPONSIVE SIDEBAR TOGGLE FOR MOBILE =====
       const sidebar = document.getElementById("sidebar");
       const sidebarToggle = document.getElementById("sidebarToggle");
       const mainContent = document.querySelector(".main-content");
 
       // Check for saved state
-      const sidebarCollapsed =
-        localStorage.getItem("sidebarCollapsed") === "true";
+      const sidebarCollapsed = localStorage.getItem("sidebarCollapsed") === "true";
       if (sidebarCollapsed) {
         sidebar.classList.add("collapsed");
         mainContent.classList.add("expanded");
       }
 
+      // Desktop: toggle collapsed state (60px vs 260px)
       sidebarToggle.addEventListener("click", () => {
         sidebar.classList.toggle("collapsed");
         mainContent.classList.toggle("expanded");
@@ -765,6 +778,32 @@
           sidebar.classList.contains("collapsed")
         );
       });
+
+      // Mobile: toggle mobile-open state (slide in/out)
+      if (window.innerWidth <= 768) {
+        // Close sidebar on nav link click
+        document.querySelectorAll('.nav-item').forEach(link => {
+          link.addEventListener('click', () => {
+            sidebar.classList.remove('mobile-open');
+          });
+        });
+
+        // Close sidebar on outside click
+        document.addEventListener('click', (e) => {
+          if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
+            sidebar.classList.remove('mobile-open');
+          }
+        });
+      }
+
+      // Handle window resize: switch between desktop and mobile behavior
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+          sidebar.classList.remove('mobile-open');
+        }
+      });
+
+      // ===== END SIDEBAR TOGGLE =====
     </script>
   </body>
 </html>

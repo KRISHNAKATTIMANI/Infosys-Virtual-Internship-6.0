@@ -32,6 +32,21 @@ class SubCategory(models.Model):
         return f"{self.category.name} - {self.name}"
 
 class QuizAttempt(models.Model):
+
+    AUTO_SUBMIT_NONE = 0
+    AUTO_SUBMIT_TIME_UP = 1
+    AUTO_SUBMIT_TAB_SWITCH = 2
+
+    AUTO_SUBMIT_REASON_CHOICES = [
+        (AUTO_SUBMIT_NONE, "None"),
+        (AUTO_SUBMIT_TIME_UP, "Time Up"),
+        (AUTO_SUBMIT_TAB_SWITCH, "Tab Switch"),
+    ]
+
+    auto_submit_reason = models.SmallIntegerField(
+        choices=AUTO_SUBMIT_REASON_CHOICES,
+        default=AUTO_SUBMIT_NONE
+    )
     correct_answers = models.SmallIntegerField(default=0)
     attempted_questions = models.SmallIntegerField(default=0)
     time_taken_seconds = models.IntegerField(default=0)
@@ -93,6 +108,10 @@ class QuizAttempt(models.Model):
     completed_at = models.DateTimeField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    tab_violations = models.IntegerField(default=0)
+    is_auto_submitted = models.BooleanField(default=False)
+    flagged_for_review = models.BooleanField(default=False)
 
     class Meta:
         indexes = [

@@ -711,6 +711,46 @@
     #auto-submit-form {
       display: none;
     }
+
+    #toast-container {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .toast {
+      min-width: 280px;
+      padding: 0.9rem 1.2rem;
+      border-radius: 0.75rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #0f172a;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      animation: slideIn 0.3s ease, fadeOut 0.3s ease 3.5s forwards;
+    }
+
+    .toast-warning {
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    }
+
+    .toast-danger {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: #fff;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(30px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes fadeOut {
+      to { opacity: 0; transform: translateX(30px); }
+    }
+
   </style>
 </head>
 <body
@@ -719,8 +759,12 @@
   data-remaining="{{ remaining_seconds }}"
   data-quit-url="{% url 'quizzes:dashboard' %}"
 >
+
   <!-- Background Animation -->
   <div class="bg-animation"></div>
+
+  <!-- Toast Container -->
+  <div id="toast-container"></div>
 
   <!-- Theme Toggle -->
   <button class="theme-toggle-btn" id="themeToggle" title="Toggle Theme">
@@ -1073,6 +1117,59 @@
     const style = document.createElement('style');
     style.textContent = '@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }';
     document.head.appendChild(style);
+
+    //ADD TOAST JS FUNCTION
+    function showToast(message, type = "warning") {
+    const container = document.getElementById("toast-container");
+
+    const toast = document.createElement("div");
+    toast.className = `toast toast-${type}`;
+    toast.textContent = message;
+
+    container.appendChild(toast);
+
+    setTimeout(() => toast.remove(), 4000);
+  }
+
+    //tab-switch
+    const MAX_WARNINGS=3
+    const attemptId = "{{ quiz_attempt.id }}";
+
+
+    document.addEventListener("visibilitychange", function () {
+    if (!document.hidden) return;
+
+    fetch("{% url 'quizzes:tab_violation' %}", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": csrftoken
+      },
+      body: JSON.stringify({
+        attempt_id: attemptId
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.status === "warning") {
+        showToast(
+          `Warning ${data.count}/${MAX_WARNINGS}: Do not change the tab`,
+          "warning"
+        );
+      }
+      else if (data.status === "auto_submitted") {
+        showToast(
+          "Quiz auto-submitted due to multiple tab switches",
+          "danger"
+        );
+        setTimeout(() => {
+          document.getElementById("auto-submit-form").submit();
+        }, 1200);
+      }
+    })
+    .catch(err => console.error("Tab violation error:", err));
+  });
+
   })();
   </script>
 </body>

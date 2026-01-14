@@ -146,10 +146,30 @@
       /* Stats Grid */
       .stats-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(6, 1fr);
         gap: 1.5rem;
-        margin-bottom: 2rem;
       }
+
+      /* First row: 3 cards evenly */
+      .stats-grid .stat-card:nth-child(1) { grid-column: span 2; }
+      .stats-grid .stat-card:nth-child(2) { grid-column: span 2; }
+      .stats-grid .stat-card:nth-child(3) { grid-column: span 2; }
+
+      /* Second row: 2 cards perfectly centered */
+      .stats-grid .stat-card:nth-child(4) { grid-column: 2 / span 2; }
+      .stats-grid .stat-card:nth-child(5) { grid-column: 4 / span 2; }
+
+
+      @media (max-width: 900px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stats-grid .stat-card {
+        grid-column: auto !important;
+      }
+    }
+
 
       .stat-card {
         background: rgba(30, 41, 59, 0.6);
@@ -251,6 +271,7 @@
         padding: 2rem;
         animation: slideUp 0.5s ease 0.4s forwards;
         opacity: 0;
+        margin:20px;
       }
 
       .progress-header {
@@ -321,7 +342,7 @@
       }
 
       /* Responsive */
-      @media (max-width: 640px) {
+      @media (max-width: 600px) {
         .container {
           padding: 1rem;
         }
@@ -494,6 +515,28 @@
           <div class="stat-value abandoned">{{ abandoned_attempts }}</div>
           <div class="stat-label">Abandoned</div>
         </div>
+
+        <div class="stat-card">
+          <div class="stat-icon abandoned">
+            <i class="ri-time-line"></i>
+          </div>
+          <div class="stat-value abandoned">{{ timeup_auto }}</div>
+
+          <div class="stat-label" title="The quiz was automatically submitted because the time limit expired.">
+            Auto-Submitted (Time Up)
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon abandoned">
+            <i class="ri-alert-line"></i>
+          </div>
+          <div class="stat-value abandoned">{{ tabswitch_auto }}</div>
+          <div class="stat-label" title="The quiz was automatically submitted due to multiple tab switches.">
+              Auto-Submitted (Tab Switch) <i class="ri-information-line"></i>
+          </div>
+        </div>
+
       </div>
 
       <div class="progress-section">
