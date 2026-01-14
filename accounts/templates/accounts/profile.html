@@ -1,823 +1,994 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Profile Settings | AI Quiz Hub</title>
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  
-  <!-- Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet" />
-
-  <!-- Theme System -->
-  <link rel="stylesheet" href="{% static 'css/theme.css' %}" />
-  <script src="{% static 'js/theme.js' %}"></script>
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
-      min-height: 100vh;
-      color: #1e293b;
-    }
-
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    /* Header */
-    .page-header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      margin-bottom: 24px;
-      padding: 16px 0;
-    }
-
-    .back-btn {
-      position: fixed;
-      top: 1.5rem;
-      left: 1.5rem;
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      color: #64748b;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-      z-index: 1000;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    }
-
-    .back-btn:hover {
-      background: rgba(255, 255, 255, 0.95);
-      color: #3b82f6;
-      border-color: #3b82f6;
-      transform: translateX(-3px);
-    }
-
-    .page-header h1 {
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: #6366f1;
-    }
-
-    /* Card Base */
-    .card {
-      background: white;
-      border-radius: 16px;
-      padding: 24px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-      border: 1px solid #e2e8f0;
-    }
-
-    /* User Info Card */
-    .user-info-card {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .user-avatar-large {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #6366f1, #8b5cf6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      font-weight: 600;
-      color: white;
-      overflow: hidden;
-      border: 3px solid white;
-      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
-    }
-
-    .user-avatar-large img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .user-details h2 {
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: #1e293b;
-      margin-bottom: 2px;
-    }
-
-    .user-details .username {
-      font-size: 0.875rem;
-      color: #10b981;
-      margin-bottom: 4px;
-    }
-
-    .user-details .email {
-      font-size: 0.875rem;
-      color: #64748b;
-    }
-
-    /* Section Header */
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-      padding: 4px 0;
-    }
-
-    .section-title {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .section-title h3 {
-      font-size: 1rem;
-      font-weight: 600;
-      color: #6366f1;
-    }
-
-    .section-subtitle {
-      font-size: 0.8rem;
-      color: #94a3b8;
-      margin-top: 4px;
-    }
-
-    .toggle-icon {
-      color: #94a3b8;
-      transition: transform 0.3s ease;
-    }
-
-    .toggle-icon.rotated {
-      transform: rotate(180deg);
-    }
-
-    /* Collapsible Content */
-    .collapsible-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease;
-    }
-
-    .collapsible-content.open {
-      max-height: 1000px;
-    }
-
-    /* Upload Section */
-    .upload-section {
-      margin-top: 20px;
-    }
-
-    .upload-label {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: #1e293b;
-      margin-bottom: 8px;
-      display: block;
-    }
-
-    .upload-hint {
-      font-size: 0.75rem;
-      color: #94a3b8;
-      margin-bottom: 12px;
-    }
-
-    .upload-area {
-      border: 2px dashed #e2e8f0;
-      border-radius: 12px;
-      padding: 32px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      background: #f8fafc;
-    }
-
-    .upload-area:hover {
-      border-color: #6366f1;
-      background: rgba(99, 102, 241, 0.05);
-    }
-
-    .upload-area i {
-      font-size: 2rem;
-      color: #94a3b8;
-      margin-bottom: 8px;
-    }
-
-    .upload-area p {
-      font-size: 0.875rem;
-      color: #64748b;
-    }
-
-    .upload-area span {
-      font-size: 0.75rem;
-      color: #94a3b8;
-    }
-
-    .upload-input {
-      display: none;
-    }
-
-    .uploaded-preview {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-top: 16px;
-      padding: 12px;
-      background: #f0fdf4;
-      border-radius: 8px;
-      border: 1px solid #bbf7d0;
-    }
-
-    .uploaded-preview img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-
-    .uploaded-preview span {
-      font-size: 0.875rem;
-      color: #16a34a;
-      font-weight: 500;
-    }
-
-    /* Built-in Avatars */
-    .avatars-section {
-      margin-top: 20px;
-    }
-
-    .avatars-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-top: 12px;
-    }
-
-    .avatar-option {
-      text-align: center;
-      cursor: pointer;
-      padding: 12px;
-      border-radius: 12px;
-      border: 2px solid transparent;
-      transition: all 0.3s ease;
-      background: #f8fafc;
-    }
-
-    .avatar-option:hover {
-      border-color: #6366f1;
-      background: rgba(99, 102, 241, 0.05);
-    }
-
-    .avatar-option.selected {
-      border-color: #6366f1;
-      background: rgba(99, 102, 241, 0.1);
-    }
-
-    .avatar-option img {
-      width: 64px;
-      height: 64px;
-      border-radius: 12px;
-      object-fit: cover;
-      margin-bottom: 8px;
-    }
-
-    .avatar-option span {
-      font-size: 0.75rem;
-      color: #64748b;
-      display: block;
-    }
-
-    /* Update Profile Form */
-    .update-form {
-      margin-top: 20px;
-    }
-
-    .form-group {
-      margin-bottom: 16px;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: #374151;
-      margin-bottom: 6px;
-    }
-
-    .form-group input {
-      width: 100%;
-      padding: 12px 16px;
-      border: 1px solid #e2e8f0;
-      border-radius: 10px;
-      font-size: 0.95rem;
-      transition: all 0.3s ease;
-      background: white;
-    }
-
-    .form-group input:focus {
-      outline: none;
-      border-color: #6366f1;
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
-    }
-
-    .btn-primary {
-      width: 100%;
-      padding: 14px;
-      background: linear-gradient(135deg, #6366f1, #8b5cf6);
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
-    }
-
-    /* Statistics Section */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-top: 16px;
-    }
-
-    .stat-item {
-      text-align: center;
-      padding: 16px 12px;
-      background: #f8fafc;
-      border-radius: 12px;
-      border: 1px solid #e2e8f0;
-    }
-
-    .stat-value {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #6366f1;
-      margin-bottom: 4px;
-    }
-
-    .stat-label {
-      font-size: 0.75rem;
-      color: #64748b;
-    }
-
-    /* Toast Notification */
-    .toast-container {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 9999;
-    }
-
-    .toast {
-      background: linear-gradient(135deg, #10b981, #059669);
-      color: white;
-      padding: 14px 20px;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
-      font-weight: 500;
-      animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s forwards;
-    }
-
-    @keyframes slideIn {
-      from {
-        transform: translateX(100%);
-        opacity: 0;
-      }
-      to {
-        transform: translateX(0);
-        opacity: 1;
-      }
-    }
-
-    @keyframes fadeOut {
-      to {
-        transform: translateY(-10px);
-        opacity: 0;
-      }
-    }
-
-    /* Theme Toggle */
-    .theme-toggle-btn {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: white;
-      border: 1px solid #e2e8f0;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.25rem;
-      color: #6366f1;
-      z-index: 100;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .theme-toggle-btn:hover {
-      transform: scale(1.1);
-    }
-
-    /* ===== DARK MODE ===== */
-    body.light-mode {
-      background: #0f172a;
-      color: #f8fafc;
-    }
-
-    body.light-mode .back-btn {
-      background: rgba(30, 41, 59, 0.8);
-      border-color: rgba(255, 255, 255, 0.1);
-      color: #94a3b8;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    }
-
-    body.light-mode .back-btn:hover {
-      background: rgba(30, 41, 59, 0.95);
-      color: #a5b4fc;
-      border-color: rgba(99, 102, 241, 0.5);
-    }
-
-    body.light-mode .card {
-      background: rgba(30, 41, 59, 0.8);
-      border-color: rgba(255, 255, 255, 0.1);
-    }
-
-    body.light-mode .user-details h2,
-    body.light-mode .upload-label {
-      color: #f8fafc;
-    }
-
-    body.light-mode .user-details .email,
-    body.light-mode .section-subtitle {
-      color: #94a3b8;
-    }
-
-    body.light-mode .upload-area {
-      background: rgba(51, 65, 85, 0.5);
-      border-color: rgba(255, 255, 255, 0.1);
-    }
-
-    body.light-mode .upload-area:hover {
-      border-color: #818cf8;
-      background: rgba(99, 102, 241, 0.1);
-    }
-
-    body.light-mode .avatar-option {
-      background: rgba(51, 65, 85, 0.5);
-    }
-
-    body.light-mode .avatar-option:hover {
-      background: rgba(99, 102, 241, 0.2);
-    }
-
-    body.light-mode .avatar-option span {
-      color: #cbd5e1;
-    }
-
-    body.light-mode .form-group label {
-      color: #cbd5e1;
-    }
-
-    body.light-mode .form-group input {
-      background: rgba(51, 65, 85, 0.5);
-      border-color: rgba(255, 255, 255, 0.1);
-      color: #f8fafc;
-    }
-
-    body.light-mode .form-group input:focus {
-      border-color: #818cf8;
-      background: rgba(51, 65, 85, 0.7);
-    }
-
-    body.light-mode .stat-item {
-      background: rgba(51, 65, 85, 0.5);
-      border-color: rgba(255, 255, 255, 0.1);
-    }
-
-    body.light-mode .stat-value {
-      color: #a5b4fc;
-    }
-
-    body.light-mode .stat-label {
-      color: #94a3b8;
-    }
-
-    body.light-mode .theme-toggle-btn {
-      background: rgba(30, 41, 59, 0.9);
-      border-color: rgba(255, 255, 255, 0.1);
-      color: #fbbf24;
-    }
-
-    body.light-mode .uploaded-preview {
-      background: rgba(16, 185, 129, 0.1);
-      border-color: rgba(16, 185, 129, 0.3);
-    }
-
-    body.light-mode .uploaded-preview span {
-      color: #34d399;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .avatars-grid {
-        grid-template-columns: repeat(3, 1fr);
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile Settings | AI Quiz Hub</title>
+
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <!-- Theme System -->
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}" />
+    <script src="{% static 'js/theme.js' %}"></script>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
       }
 
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+        background: linear-gradient(
+          135deg,
+          #f8fafc 0%,
+          #f1f5f9 50%,
+          #e2e8f0 100%
+        );
+        min-height: 100vh;
+        color: #1e293b;
       }
-    }
 
-    @media (max-width: 480px) {
-      .avatars-grid {
-        grid-template-columns: repeat(2, 1fr);
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
       }
 
+      /* Header */
+      .page-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        margin-bottom: 24px;
+        padding: 16px 0;
+      }
+
+      .back-btn {
+        position: fixed;
+        top: 1.5rem;
+        left: 1.5rem;
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: #64748b;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+
+      .back-btn:hover {
+        background: rgba(255, 255, 255, 0.95);
+        color: #3b82f6;
+        border-color: #3b82f6;
+        transform: translateX(-3px);
+      }
+
+      .page-header h1 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #6366f1;
+      }
+
+      /* Card Base */
+      .card {
+        background: white;
+        border-radius: 16px;
+        padding: 24px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        border: 1px solid #e2e8f0;
+      }
+
+      /* User Info Card */
       .user-info-card {
-        flex-direction: column;
-        text-align: center;
+        display: flex;
+        align-items: center;
+        gap: 16px;
       }
-    }
-  </style>
-</head>
 
-<body>
-  <!-- Theme Toggle -->
-  <button class="theme-toggle-btn" id="themeToggle" title="Toggle Theme">
-    <i class="ri-moon-line"></i>
-  </button>
+      .user-avatar-large {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        font-weight: 600;
+        color: white;
+        overflow: hidden;
+        border: 3px solid white;
+        box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+      }
 
-  <!-- Back Button (Fixed) -->
-  <a href="{% url 'quizzes:dashboard' %}" class="back-btn">
-    <i class="ri-arrow-left-line"></i>
-  </a>
+      .user-avatar-large img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
 
-  <div class="container">
-    <!-- Header -->
-    <div class="page-header">
-      <h1>Profile Settings</h1>
-    </div>
+      .user-details h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #1e293b;
+        margin-bottom: 2px;
+      }
 
-    <!-- User Info Card -->
-    <div class="card">
-      <div class="user-info-card">
-        <div class="user-avatar-large">
-          {% if request.user.avatar_path %}
-            <img src="{{ request.user.avatar_path.url }}" alt="Avatar" />
-          {% else %}
-            {{ request.user.username|first|upper }}
-          {% endif %}
-        </div>
-        <div class="user-details">
-          <h2>{{ request.user.full_name|default:request.user.username }}</h2>
-          <p class="username">@{{ request.user.username }}</p>
-          <p class="email">{{ request.user.email }}</p>
-        </div>
-      </div>
-    </div>
+      .user-details .username {
+        font-size: 0.875rem;
+        color: #10b981;
+        margin-bottom: 4px;
+      }
 
-    <!-- Avatar Settings -->
-    <div class="card">
-      <div class="section-header" onclick="toggleSection('avatarSection', this)">
-        <div class="section-title">
-          <h3>Avatar Settings</h3>
-        </div>
-        <i class="ri-arrow-down-s-line toggle-icon"></i>
-      </div>
-      <p class="section-subtitle">Click to hide options</p>
+      .user-details .email {
+        font-size: 0.875rem;
+        color: #64748b;
+      }
 
-      <div class="collapsible-content open" id="avatarSection">
-        <!-- Upload Custom Avatar -->
-        <div class="upload-section">
-          <span class="upload-label">Upload Custom Avatar</span>
-          <p class="upload-hint">Upload your own image (max 1MB, JPG/PNG/GIF)</p>
-          
-          <form method="POST" enctype="multipart/form-data" id="avatarForm">
-            {% csrf_token %}
-            <div class="upload-area" onclick="document.getElementById('avatarInput').click()">
-              <i class="ri-camera-line"></i>
-              <p>Click to upload</p>
-              <span>Maximum size: 1MB</span>
-            </div>
-            <input type="file" name="avatar_path" id="avatarInput" class="upload-input" accept="image/*" onchange="previewAndSubmit(this)" />
-          </form>
+      /* Section Header */
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        padding: 4px 0;
+      }
 
-          {% if request.user.avatar_path %}
-          <div class="uploaded-preview">
-            <img src="{{ request.user.avatar_path.url }}" alt="Current avatar" />
-            <span><i class="ri-check-line"></i> Custom image uploaded</span>
-          </div>
-          {% endif %}
-        </div>
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
 
-        <!-- Built-in Avatars -->
-        <div class="avatars-section">
-          <span class="upload-label">Choose from Built-in Avatars</span>
-          <p class="upload-hint">Select one of our pre-made avatars</p>
+      .section-title h3 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #6366f1;
+      }
 
-          <div class="avatars-grid">
-            <div class="avatar-option" onclick="selectBuiltinAvatar(this, 'Felix')">
-              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix&backgroundColor=b6e3f4" alt="Male 1" />
-              <span>Male 1</span>
-            </div>
-            <div class="avatar-option" onclick="selectBuiltinAvatar(this, 'John')">
-              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=John&backgroundColor=ffd5dc" alt="Male 2" />
-              <span>Male 2</span>
-            </div>
-            <div class="avatar-option" onclick="selectBuiltinAvatar(this, 'Mike')">
-              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Mike&backgroundColor=c0aede" alt="Male 3" />
-              <span>Male 3</span>
-            </div>
-            <div class="avatar-option" onclick="selectBuiltinAvatar(this, 'Sarah')">
-              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah&backgroundColor=d1f4d1" alt="Female 1" />
-              <span>Female 1</span>
-            </div>
-            <div class="avatar-option" onclick="selectBuiltinAvatar(this, 'Emma')">
-              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Emma&backgroundColor=ffdfba" alt="Female 2" />
-              <span>Female 2</span>
-            </div>
-            <div class="avatar-option" onclick="selectBuiltinAvatar(this, 'Lisa')">
-              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Lisa&backgroundColor=bae1ff" alt="Female 3" />
-              <span>Female 3</span>
-            </div>
-            <div class="avatar-option" onclick="selectBuiltinAvatar(this, 'Alex')">
-              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alex&backgroundColor=ffffba" alt="Avatar 1" />
-              <span>Avatar 1</span>
-            </div>
-            <div class="avatar-option" onclick="selectBuiltinAvatar(this, 'Chris')">
-              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Chris&backgroundColor=e0bbff" alt="Avatar 2" />
-              <span>Avatar 2</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      .section-subtitle {
+        font-size: 0.8rem;
+        color: #94a3b8;
+        margin-top: 4px;
+      }
 
-    <!-- Update Profile Form -->
-    <div class="card">
-      <div class="section-header" onclick="toggleSection('profileSection', this)">
-        <div class="section-title">
-          <h3>Update Profile</h3>
-        </div>
-        <i class="ri-arrow-down-s-line toggle-icon"></i>
-      </div>
-      <p class="section-subtitle">Update your email and name</p>
+      .toggle-icon {
+        color: #94a3b8;
+        transition: transform 0.3s ease;
+      }
 
-      <div class="collapsible-content open" id="profileSection">
-        <form method="POST" class="update-form">
-          {% csrf_token %}
-          <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" value="{{ request.user.email }}" placeholder="Enter your email" />
-          </div>
+      .toggle-icon.rotated {
+        transform: rotate(180deg);
+      }
 
-          <div class="form-group">
-            <label for="full_name">Full Name</label>
-            <input type="text" id="full_name" name="full_name" value="{{ request.user.full_name }}" placeholder="Enter your full name" />
-          </div>
+      /* Collapsible Content */
+      .collapsible-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+      }
 
-          <button type="submit" class="btn-primary">
-            <i class="ri-save-line"></i> Update Profile
-          </button>
-        </form>
-      </div>
-    </div>
+      .collapsible-content.open {
+        max-height: 1000px;
+      }
 
-    <!-- Statistics -->
-    <div class="card">
-      <div class="section-title">
-        <h3>Your Statistics</h3>
-      </div>
+      /* Upload Section */
+      .upload-section {
+        margin-top: 20px;
+      }
 
-      <div class="stats-grid">
-        <div class="stat-item">
-          <div class="stat-value">{{ quizzes_taken }}</div>
-          <div class="stat-label">Quizzes Taken</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-value">{{ avg_score }}%</div>
-          <div class="stat-label">Average Score</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-value">{{ current_streak }}</div>
-          <div class="stat-label">Current Streak</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-value">{{ time_spent }}h</div>
-          <div class="stat-label">Time Spent</div>
-        </div>
-      </div>
-    </div>
-  </div>
+      .upload-label {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #1e293b;
+        margin-bottom: 8px;
+        display: block;
+      }
 
-  <!-- Toast Messages -->
-  {% if messages %}
-  <div class="toast-container">
-    {% for message in messages %}
-    <div class="toast">{{ message }}</div>
-    {% endfor %}
-  </div>
-  {% endif %}
+      .upload-hint {
+        font-size: 0.75rem;
+        color: #94a3b8;
+        margin-bottom: 12px;
+      }
 
-  <script>
-    // Toggle collapsible sections
-    function toggleSection(sectionId, header) {
-      const section = document.getElementById(sectionId);
-      const icon = header.querySelector('.toggle-icon');
-      
-      section.classList.toggle('open');
-      icon.classList.toggle('rotated');
-    }
+      .upload-area {
+        border: 2px dashed #e2e8f0;
+        border-radius: 12px;
+        padding: 32px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: #f8fafc;
+      }
 
-    // Preview and auto-submit avatar
-    function previewAndSubmit(input) {
-      if (input.files && input.files[0]) {
-        const file = input.files[0];
-        
-        // Check file size (1MB limit)
-        if (file.size > 1024 * 1024) {
-          alert('File size must be less than 1MB');
-          input.value = '';
-          return;
+      .upload-area:hover {
+        border-color: #6366f1;
+        background: rgba(99, 102, 241, 0.05);
+      }
+
+      .upload-area i {
+        font-size: 2rem;
+        color: #94a3b8;
+        margin-bottom: 8px;
+      }
+
+      .upload-area p {
+        font-size: 0.875rem;
+        color: #64748b;
+      }
+
+      .upload-area span {
+        font-size: 0.75rem;
+        color: #94a3b8;
+      }
+
+      .upload-input {
+        display: none;
+      }
+
+      .uploaded-preview {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 16px;
+        padding: 12px;
+        background: #f0fdf4;
+        border-radius: 8px;
+        border: 1px solid #bbf7d0;
+      }
+
+      .uploaded-preview img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .uploaded-preview span {
+        font-size: 0.875rem;
+        color: #16a34a;
+        font-weight: 500;
+      }
+
+      /* Built-in Avatars */
+      .avatars-section {
+        margin-top: 20px;
+      }
+
+      .avatars-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin-top: 12px;
+      }
+
+      .avatar-option {
+        text-align: center;
+        cursor: pointer;
+        padding: 12px;
+        border-radius: 12px;
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+        background: #f8fafc;
+      }
+
+      .avatar-option:hover {
+        border-color: #6366f1;
+        background: rgba(99, 102, 241, 0.05);
+      }
+
+      .avatar-option.selected {
+        border-color: #6366f1;
+        background: rgba(99, 102, 241, 0.1);
+      }
+
+      .avatar-option img {
+        width: 64px;
+        height: 64px;
+        border-radius: 12px;
+        object-fit: cover;
+        margin-bottom: 8px;
+      }
+
+      .avatar-option span {
+        font-size: 0.75rem;
+        color: #64748b;
+        display: block;
+      }
+
+      /* Update Profile Form */
+      .update-form {
+        margin-top: 20px;
+      }
+
+      .form-group {
+        margin-bottom: 16px;
+      }
+
+      .form-group label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #374151;
+        margin-bottom: 6px;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 12px 16px;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+        background: white;
+      }
+
+      .form-group input:focus {
+        outline: none;
+        border-color: #6366f1;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+      }
+
+      .btn-primary {
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+      }
+
+      /* Statistics Section */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin-top: 16px;
+      }
+
+      .stat-item {
+        text-align: center;
+        padding: 16px 12px;
+        background: #f8fafc;
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
+      }
+
+      .stat-value {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #6366f1;
+        margin-bottom: 4px;
+      }
+
+      .stat-label {
+        font-size: 0.75rem;
+        color: #64748b;
+      }
+
+      /* Toast Notification */
+      .toast-container {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+      }
+
+      .toast {
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: white;
+        padding: 14px 20px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+        font-weight: 500;
+        animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s forwards;
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeOut {
+        to {
+          transform: translateY(-10px);
+          opacity: 0;
+        }
+      }
+
+      /* Theme Toggle */
+      .theme-toggle-btn {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: white;
+        border: 1px solid #e2e8f0;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        color: #6366f1;
+        z-index: 100;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .theme-toggle-btn:hover {
+        transform: scale(1.1);
+      }
+
+      /* ===== DARK MODE ===== */
+      body.light-mode {
+        background: #0f172a;
+        color: #f8fafc;
+      }
+
+      body.light-mode .back-btn {
+        background: rgba(30, 41, 59, 0.8);
+        border-color: rgba(255, 255, 255, 0.1);
+        color: #94a3b8;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      body.light-mode .back-btn:hover {
+        background: rgba(30, 41, 59, 0.95);
+        color: #a5b4fc;
+        border-color: rgba(99, 102, 241, 0.5);
+      }
+
+      body.light-mode .card {
+        background: rgba(30, 41, 59, 0.8);
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+
+      body.light-mode .user-details h2,
+      body.light-mode .upload-label {
+        color: #f8fafc;
+      }
+
+      body.light-mode .user-details .email,
+      body.light-mode .section-subtitle {
+        color: #94a3b8;
+      }
+
+      body.light-mode .upload-area {
+        background: rgba(51, 65, 85, 0.5);
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+
+      body.light-mode .upload-area:hover {
+        border-color: #818cf8;
+        background: rgba(99, 102, 241, 0.1);
+      }
+
+      body.light-mode .avatar-option {
+        background: rgba(51, 65, 85, 0.5);
+      }
+
+      body.light-mode .avatar-option:hover {
+        background: rgba(99, 102, 241, 0.2);
+      }
+
+      body.light-mode .avatar-option span {
+        color: #cbd5e1;
+      }
+
+      body.light-mode .form-group label {
+        color: #cbd5e1;
+      }
+
+      body.light-mode .form-group input {
+        background: rgba(51, 65, 85, 0.5);
+        border-color: rgba(255, 255, 255, 0.1);
+        color: #f8fafc;
+      }
+
+      body.light-mode .form-group input:focus {
+        border-color: #818cf8;
+        background: rgba(51, 65, 85, 0.7);
+      }
+
+      body.light-mode .stat-item {
+        background: rgba(51, 65, 85, 0.5);
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+
+      body.light-mode .stat-value {
+        color: #a5b4fc;
+      }
+
+      body.light-mode .stat-label {
+        color: #94a3b8;
+      }
+
+      body.light-mode .theme-toggle-btn {
+        background: rgba(30, 41, 59, 0.9);
+        border-color: rgba(255, 255, 255, 0.1);
+        color: #fbbf24;
+      }
+
+      body.light-mode .uploaded-preview {
+        background: rgba(16, 185, 129, 0.1);
+        border-color: rgba(16, 185, 129, 0.3);
+      }
+
+      body.light-mode .uploaded-preview span {
+        color: #34d399;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .avatars-grid {
+          grid-template-columns: repeat(3, 1fr);
         }
 
-        // Submit the form
-        document.getElementById('avatarForm').submit();
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
       }
-    }
 
-    // Select built-in avatar
-    function selectBuiltinAvatar(element, seed) {
-      // Remove selected class from all options
-      document.querySelectorAll('.avatar-option').forEach(opt => {
-        opt.classList.remove('selected');
+      @media (max-width: 480px) {
+        .avatars-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .user-info-card {
+          flex-direction: column;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Theme Toggle -->
+    <button class="theme-toggle-btn" id="themeToggle" title="Toggle Theme">
+      <i class="ri-moon-line"></i>
+    </button>
+
+    <!-- Back Button (Fixed) -->
+    <a href="{% url 'quizzes:dashboard' %}" class="back-btn">
+      <i class="ri-arrow-left-line"></i>
+    </a>
+
+    <div class="container">
+      <!-- Header -->
+      <div class="page-header">
+        <h1>Profile Settings</h1>
+      </div>
+
+      <!-- User Info Card -->
+      <div class="card">
+        <div class="user-info-card">
+          <div class="user-avatar-large">
+            {% if request.user.avatar_path %}
+            <img src="{{ request.user.avatar_path.url }}" alt="Avatar" />
+            {% else %} {{ request.user.username|first|upper }} {% endif %}
+          </div>
+          <div class="user-details">
+            <h2>{{ request.user.full_name|default:request.user.username }}</h2>
+            <p class="username">@{{ request.user.username }}</p>
+            <p class="email">{{ request.user.email }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Avatar Settings -->
+      <div class="card">
+        <div
+          class="section-header"
+          onclick="toggleSection('avatarSection', this)"
+        >
+          <div class="section-title">
+            <h3>Avatar Settings</h3>
+          </div>
+          <i class="ri-arrow-down-s-line toggle-icon"></i>
+        </div>
+        <p class="section-subtitle">Click to hide options</p>
+
+        <div class="collapsible-content open" id="avatarSection">
+          <!-- Upload Custom Avatar -->
+          <div class="upload-section">
+            <span class="upload-label">Upload Custom Avatar</span>
+            <p class="upload-hint">
+              Upload your own image (max 1MB, JPG/PNG/GIF)
+            </p>
+
+            <form method="POST" enctype="multipart/form-data" id="avatarForm">
+              {% csrf_token %}
+              <div
+                class="upload-area"
+                onclick="document.getElementById('avatarInput').click()"
+              >
+                <i class="ri-camera-line"></i>
+                <p>Click to upload</p>
+                <span>Maximum size: 1MB</span>
+              </div>
+              <input
+                type="file"
+                name="avatar_path"
+                id="avatarInput"
+                class="upload-input"
+                accept="image/*"
+                onchange="previewAndSubmit(this)"
+              />
+            </form>
+
+            {% if request.user.avatar_path %}
+            <div class="uploaded-preview">
+              <img
+                src="{{ request.user.avatar_path.url }}"
+                alt="Current avatar"
+              />
+              <span><i class="ri-check-line"></i> Custom image uploaded</span>
+            </div>
+            {% endif %}
+          </div>
+
+          <!-- Built-in Avatars -->
+          <div class="avatars-section">
+            <span class="upload-label">Choose from Built-in Avatars</span>
+            <p class="upload-hint">Select one of our pre-made avatars</p>
+
+            <div class="avatars-grid">
+              <div
+                class="avatar-option"
+                onclick="selectBuiltinAvatar(this, 'Felix')"
+              >
+                <img
+                  src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix&backgroundColor=b6e3f4"
+                  alt="Male 1"
+                />
+                <span>Male 1</span>
+              </div>
+              <div
+                class="avatar-option"
+                onclick="selectBuiltinAvatar(this, 'John')"
+              >
+                <img
+                  src="https://api.dicebear.com/7.x/avataaars/svg?seed=John&backgroundColor=ffd5dc"
+                  alt="Male 2"
+                />
+                <span>Male 2</span>
+              </div>
+              <div
+                class="avatar-option"
+                onclick="selectBuiltinAvatar(this, 'Mike')"
+              >
+                <img
+                  src="https://api.dicebear.com/7.x/avataaars/svg?seed=Mike&backgroundColor=c0aede"
+                  alt="Male 3"
+                />
+                <span>Male 3</span>
+              </div>
+              <div
+                class="avatar-option"
+                onclick="selectBuiltinAvatar(this, 'Sarah')"
+              >
+                <img
+                  src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah&backgroundColor=d1f4d1"
+                  alt="Female 1"
+                />
+                <span>Female 1</span>
+              </div>
+              <div
+                class="avatar-option"
+                onclick="selectBuiltinAvatar(this, 'Emma')"
+              >
+                <img
+                  src="https://api.dicebear.com/7.x/avataaars/svg?seed=Emma&backgroundColor=ffdfba"
+                  alt="Female 2"
+                />
+                <span>Female 2</span>
+              </div>
+              <div
+                class="avatar-option"
+                onclick="selectBuiltinAvatar(this, 'Lisa')"
+              >
+                <img
+                  src="https://api.dicebear.com/7.x/avataaars/svg?seed=Lisa&backgroundColor=bae1ff"
+                  alt="Female 3"
+                />
+                <span>Female 3</span>
+              </div>
+              <div
+                class="avatar-option"
+                onclick="selectBuiltinAvatar(this, 'Alex')"
+              >
+                <img
+                  src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alex&backgroundColor=ffffba"
+                  alt="Avatar 1"
+                />
+                <span>Avatar 1</span>
+              </div>
+              <div
+                class="avatar-option"
+                onclick="selectBuiltinAvatar(this, 'Chris')"
+              >
+                <img
+                  src="https://api.dicebear.com/7.x/avataaars/svg?seed=Chris&backgroundColor=e0bbff"
+                  alt="Avatar 2"
+                />
+                <span>Avatar 2</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Update Profile Form -->
+      <div class="card">
+        <div
+          class="section-header"
+          onclick="toggleSection('profileSection', this)"
+        >
+          <div class="section-title">
+            <h3>Update Profile</h3>
+          </div>
+          <i class="ri-arrow-down-s-line toggle-icon"></i>
+        </div>
+        <p class="section-subtitle">Update your email and name</p>
+
+        <div class="collapsible-content open" id="profileSection">
+          <form method="POST" class="update-form">
+            {% csrf_token %}
+            <input type="hidden" name="form_type" value="profile" />
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value="{{ request.user.email }}"
+                placeholder="Enter your email"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="full_name">Full Name</label>
+              <input
+                type="text"
+                id="full_name"
+                name="full_name"
+                value="{{ request.user.full_name }}"
+                placeholder="Enter your full name"
+              />
+            </div>
+
+            <button type="submit" class="btn-primary">
+              <i class="ri-save-line"></i> Update Profile
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Update Password -->
+      <div class="card">
+        <div
+          class="section-header"
+          onclick="toggleSection('passwordSection', this)"
+        >
+          <div class="section-title">
+            <h3>Update Password</h3>
+          </div>
+          <i class="ri-arrow-down-s-line toggle-icon"></i>
+        </div>
+        <p class="section-subtitle">Manage password</p>
+
+        <div class="collapsible-content" id="passwordSection">
+          <form method="POST" class="update-form">
+            {% csrf_token %}
+            <input type="hidden" name="form_type" value="password" />
+
+            <div class="form-group">
+              <label for="current_password">Current Password</label>
+              <input
+                type="password"
+                id="current_password"
+                name="current_password"
+                placeholder="Enter current password"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="new_password">New Password</label>
+              <input
+                type="password"
+                id="new_password"
+                name="new_password"
+                placeholder="Enter new password"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="confirm_password">Confirm New Password</label>
+              <input
+                type="password"
+                id="confirm_password"
+                name="confirm_password"
+                placeholder="Confirm new password"
+                required
+              />
+            </div>
+
+            <button type="submit" class="btn-primary">
+              <i class="ri-save-line"></i> Update Password
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Statistics -->
+      <div class="card">
+        <div class="section-title">
+          <h3>Your Statistics</h3>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-value">{{ quizzes_taken }}</div>
+            <div class="stat-label">Quizzes Taken</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">{{ avg_score }}%</div>
+            <div class="stat-label">Average Score</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">{{ current_streak }}</div>
+            <div class="stat-label">Current Streak</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">{{ time_spent }}h</div>
+            <div class="stat-label">Time Spent</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Messages -->
+    {% if messages %}
+    <div class="toast-container">
+      {% for message in messages %}
+      <div class="toast">{{ message }}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <script>
+      // Toggle collapsible sections
+      function toggleSection(sectionId, header) {
+        const section = document.getElementById(sectionId);
+        const icon = header.querySelector(".toggle-icon");
+
+        section.classList.toggle("open");
+        icon.classList.toggle("rotated");
+      }
+
+      // Preview and auto-submit avatar
+      function previewAndSubmit(input) {
+        if (input.files && input.files[0]) {
+          const file = input.files[0];
+
+          // Check file size (1MB limit)
+          if (file.size > 1024 * 1024) {
+            alert("File size must be less than 1MB");
+            input.value = "";
+            return;
+          }
+
+          // Submit the form
+          document.getElementById("avatarForm").submit();
+        }
+      }
+
+      // Select built-in avatar
+      function selectBuiltinAvatar(element, seed) {
+        // Remove selected class from all options
+        document.querySelectorAll(".avatar-option").forEach((opt) => {
+          opt.classList.remove("selected");
+        });
+
+        // Add selected class to clicked option
+        element.classList.add("selected");
+
+        // Get the image src from the clicked avatar
+        const imgSrc = element.querySelector("img").src;
+
+        // Update the user avatar display
+        const avatarDisplay = document.querySelector(".user-avatar-large");
+        avatarDisplay.innerHTML = `<img src="${imgSrc}" alt="Avatar" />`;
+
+        // Show success message
+        showToast(
+          "Avatar preview updated! (Note: Built-in avatars are preview only)"
+        );
+      }
+
+      // Show toast notification
+      function showToast(message) {
+        let container = document.querySelector(".toast-container");
+        if (!container) {
+          container = document.createElement("div");
+          container.className = "toast-container";
+          document.body.appendChild(container);
+        }
+
+        const toast = document.createElement("div");
+        toast.className = "toast";
+        toast.textContent = message;
+        container.appendChild(toast);
+
+        setTimeout(() => toast.remove(), 3000);
+      }
+
+      // Auto-remove toast after animation
+      setTimeout(() => {
+        const toasts = document.querySelectorAll(".toast");
+        toasts.forEach((toast) => toast.remove());
+      }, 3000);
+
+      // Sync toggle icons with open sections on page load
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll(".section-header").forEach((header) => {
+          const icon = header.querySelector(".toggle-icon");
+          const sectionId = header
+            .getAttribute("onclick")
+            ?.match(/'([^']+)'/)?.[1];
+
+          if (!sectionId) return;
+
+          const section = document.getElementById(sectionId);
+
+          if (section && section.classList.contains("open")) {
+            icon.classList.add("rotated");
+          } else {
+            icon.classList.remove("rotated");
+          }
+        });
       });
-      
-      // Add selected class to clicked option
-      element.classList.add('selected');
-      
-      // Get the image src from the clicked avatar
-      const imgSrc = element.querySelector('img').src;
-      
-      // Update the user avatar display
-      const avatarDisplay = document.querySelector('.user-avatar-large');
-      avatarDisplay.innerHTML = `<img src="${imgSrc}" alt="Avatar" />`;
-      
-      // Show success message
-      showToast('Avatar preview updated! (Note: Built-in avatars are preview only)');
-    }
-
-    // Show toast notification
-    function showToast(message) {
-      let container = document.querySelector('.toast-container');
-      if (!container) {
-        container = document.createElement('div');
-        container.className = 'toast-container';
-        document.body.appendChild(container);
-      }
-      
-      const toast = document.createElement('div');
-      toast.className = 'toast';
-      toast.textContent = message;
-      container.appendChild(toast);
-      
-      setTimeout(() => toast.remove(), 3000);
-    }
-
-    // Auto-remove toast after animation
-    setTimeout(() => {
-      const toasts = document.querySelectorAll('.toast');
-      toasts.forEach(toast => toast.remove());
-    }, 3000);
-  </script>
-</body>
+    </script>
+  </body>
 </html>
