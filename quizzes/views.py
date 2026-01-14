@@ -1,3 +1,5 @@
+from pyexpat.errors import messages
+import random
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.db.models import Avg, Max, Min, Sum, Count, Q
@@ -9,7 +11,7 @@ from django.views.decorators.http import require_POST
 from datetime import timedelta, datetime
 import random
 import json
-
+from django.views.decorators.csrf import csrf_exempt
 from .models import Category, SubCategory, QuizAttempt, Question, Concept, Feedback
 
 # for performance pdf functionality
@@ -399,6 +401,32 @@ def quit_quiz(request, attempt_id):
 
     return redirect('quizzes:dashboard')
 
+# shuffle correct options
+def shuffle_mcq(question_dict):
+    """
+    Shuffles MCQ options while keeping correct_answer accurate
+    """
+
+    options = [
+        ('A', question_dict['option_a']),
+        ('B', question_dict['option_b']),
+        ('C', question_dict['option_c']),
+        ('D', question_dict['option_d']),
+    ]
+
+    correct_text = dict(options)[question_dict['correct_answer']]
+
+    random.shuffle(options)
+
+    new_correct = None
+    for idx, (_, text) in enumerate(options):
+        letter = chr(ord('A') + idx)
+        question_dict[f'option_{letter.lower()}'] = text
+        if text == correct_text:
+            new_correct = letter
+
+    question_dict['correct_answer'] = new_correct
+    return question_dict
 
 @login_required
 @require_POST
@@ -460,7 +488,8 @@ def generate_questions(request, attempt_id):
         
         # Use up to REQUIRED_QUESTIONS from existing pool
         for q in unseen_questions[:REQUIRED_QUESTIONS]:
-            formatted_questions.append({
+            
+            question_data = {
                 "id": question_id,
                 "question": q.question_text,
                 "option_a": q.option_a,
@@ -471,7 +500,11 @@ def generate_questions(request, attempt_id):
                 "explanation": q.explanation,
                 "user_answer": None,
                 "is_correct": None
-            })
+            }
+
+            question_data = shuffle_mcq(question_data)
+            formatted_questions.append(question_data)
+
             # Update usage count
             q.usage_count += 1
             q.save(update_fields=['usage_count'])
@@ -537,7 +570,7 @@ def generate_questions(request, attempt_id):
                         usage_count=1
                     )
                     
-                    formatted_questions.append({
+                    question_data = {
                         "id": question_id,
                         "question": question_obj.question_text,
                         "option_a": question_obj.option_a,
@@ -548,7 +581,11 @@ def generate_questions(request, attempt_id):
                         "explanation": question_obj.explanation,
                         "user_answer": None,
                         "is_correct": None
-                    })
+                    }
+
+                    question_data = shuffle_mcq(question_data)
+                    formatted_questions.append(question_data)
+
                     question_id += 1
         
         # ============================================
@@ -663,8 +700,22 @@ def submit_answer(request, attempt_id):
     """
     Submit answer for current question
     """
-    quiz_attempt = get_object_or_404(QuizAttempt, id=attempt_id, user=request.user)
+
     
+
+    quiz_attempt = get_object_or_404(QuizAttempt, id=attempt_id, user=request.user)
+    quiz_attempt = get_object_or_404(
+    QuizAttempt,
+    id=attempt_id,
+    user=request.user
+)
+
+    if quiz_attempt.is_auto_submitted:
+        return JsonResponse({
+            "success": False,
+            "redirect_url": f"/quiz/attempt/{quiz_attempt.id}/results/?auto_submitted=true"
+        })
+
     # Get user's answer
     user_answer = request.POST.get('answer', '').upper()
     
@@ -715,13 +766,20 @@ def auto_submit_quiz(request, attempt_id):
     """
     quiz_attempt = get_object_or_404(QuizAttempt, id=attempt_id, user=request.user)
     
+    quiz_attempt.is_auto_submitted = True
+    quiz_attempt.auto_submit_reason = QuizAttempt.AUTO_SUBMIT_TIME_UP
+    quiz_attempt.save(update_fields=[
+        'is_auto_submitted',
+        'auto_submit_reason'
+    ])
+
     # Mark quiz as completed
     finalize_quiz_attempt(quiz_attempt)
     
-    return JsonResponse({
-        'success': True,
-        'redirect_url': f'/quiz/attempt/{quiz_attempt.id}/results/?auto_submitted=true'
-    })
+    return redirect(
+        'quizzes:quiz_results',
+        attempt_id=quiz_attempt.id
+    )
 
 @login_required
 def quiz_results(request, attempt_id):
@@ -806,14 +864,6 @@ def quiz_results(request, attempt_id):
         "existing_feedback": existing_feedback,
     })
 def finalize_quiz_attempt(quiz_attempt):
-    """
-    Finalize quiz attempt:
-    - calculate correct / attempted
-    - calculate score
-    - calculate time taken (SINGLE SOURCE)
-    - mark completed
-    """
-
     questions = quiz_attempt.questions or []
 
     attempted = 0
@@ -833,13 +883,14 @@ def finalize_quiz_attempt(quiz_attempt):
         if quiz_attempt.total_questions > 0 else 0
     )
 
-    # ✅ FINAL TIME CALCULATION (ONLY HERE)
-    remaining = quiz_attempt.remaining_seconds or 0
-    quiz_attempt.time_taken_seconds = (
-        quiz_attempt.time_limit_seconds - remaining
-    )
+    # ✅ AUTHORITATIVE TIME CALCULATION
+    if quiz_attempt.started_at:
+        quiz_attempt.time_taken_seconds = int(
+            (timezone.now() - quiz_attempt.started_at).total_seconds()
+        )
+    else:
+        quiz_attempt.time_taken_seconds = 0
 
-    # (Optional) keep time_spent_seconds consistent
     quiz_attempt.time_spent_seconds = quiz_attempt.time_taken_seconds
 
     quiz_attempt.completed_at = timezone.now()
@@ -1325,6 +1376,18 @@ def attempts_summary_view(request):
         abandoned=Count('id', filter=Q(status=QuizAttempt.STATUS_ABANDONED)),
     )
 
+    timeup_auto = QuizAttempt.objects.filter(
+        user=request.user,
+        is_auto_submitted=True,
+        auto_submit_reason=QuizAttempt.AUTO_SUBMIT_TIME_UP
+    ).count()
+
+    tabswitch_auto = QuizAttempt.objects.filter(
+        user=request.user,
+        is_auto_submitted=True,
+        auto_submit_reason=QuizAttempt.AUTO_SUBMIT_TAB_SWITCH
+    ).count()
+
     # last_7_days_attempts = QuizAttempt.objects.filter(
     #     user=user,
     #     started_at__gte=now() - timedelta(days=7)
@@ -1335,6 +1398,8 @@ def attempts_summary_view(request):
         'completed_attempts': status_counts['completed'],
         'abandoned_attempts': status_counts['abandoned'],
         # 'last_7_days_attempts': last_7_days_attempts,
+        "timeup_auto": timeup_auto,
+        "tabswitch_auto": tabswitch_auto,
     }
 
     return render(request, 'quizzes/attempts_summary.html', context)
@@ -1444,3 +1509,57 @@ def submit_feedback(request, attempt_id):
             'success': False,
             'error': str(e)
         }, status=400)
+    
+
+# tab-switch
+@login_required
+@require_POST
+def tab_violation(request):
+    try:
+        data = json.loads(request.body)
+        attempt_id = data.get("attempt_id")
+
+        if not attempt_id:
+            return JsonResponse({"error": "Missing attempt_id"}, status=400)
+
+        attempt = QuizAttempt.objects.get(
+            id=attempt_id,
+            user=request.user  # 🔐 prevent tampering
+        )
+
+        attempt.tab_violations += 1
+
+        if attempt.tab_violations >= 4:
+            attempt.is_auto_submitted = True
+            attempt.flagged_for_review = True
+            attempt.auto_submit_reason = QuizAttempt.AUTO_SUBMIT_TAB_SWITCH
+            attempt.completed_at = now()
+            attempt.status = QuizAttempt.STATUS_COMPLETED
+
+            finalize_quiz_attempt(attempt)
+
+            attempt.save(update_fields=[
+                'is_auto_submitted',
+                'auto_submit_reason',
+                'flagged_for_review',
+                'completed_at',
+                'status'
+            ])
+            return JsonResponse({
+                "status": "auto_submitted"
+            })
+
+        attempt.save()
+        return JsonResponse({
+            "status": "warning",
+            "count": attempt.tab_violations
+        })
+
+    except QuizAttempt.DoesNotExist:
+        return JsonResponse({"error": "Invalid attempt"}, status=404)
+
+    except json.JSONDecodeError:
+        return JsonResponse({"error": "Invalid JSON"}, status=400)
+
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)

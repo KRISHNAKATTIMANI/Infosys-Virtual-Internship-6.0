@@ -1058,548 +1058,328 @@ body.light-mode .chart-period {
 }
 
 @media (max-width: 768px) {
-  .charts-section {
-    margin-top: 1.5rem;
-  }
-  
-  .chart-container {
-    height: 200px;
-  }
-  
-  .chart-container-small {
-    height: 160px;
-  }
-}
-
-/* Quick Actions Card */
-.quick-actions {
-  grid-column: span 1;
-}
-
-.actions-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
-}
-
-.action-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1.25rem 1rem;
-  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
-  border: 1px solid #e2e8f0;
-  border-radius: 14px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.action-btn:hover {
-  background: linear-gradient(135deg, #3b82f6, #1e3a5f);
-  border-color: #3b82f6;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.25);
-}
-
-.action-btn:hover .action-icon,
-.action-btn:hover .action-label {
-  color: #ffffff;
-}
-
-.action-btn.primary {
-  background: linear-gradient(135deg, #f59e0b, #fbbf24);
-  border-color: transparent;
-}
-
-.action-btn.primary .action-icon,
-.action-btn.primary .action-label {
-  color: #1e293b;
-}
-
-.action-btn.primary:hover {
-  background: linear-gradient(135deg, #d97706, #f59e0b);
-  box-shadow: 0 8px 20px rgba(245, 158, 11, 0.35);
-}
-
-.action-icon {
-  font-size: 1.5rem;
-  color: #3b82f6;
-}
-
-.action-label {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #475569;
-}
-
-/* Recent Activity Card */
-.recent-activity {
-  grid-column: span 2;
-}
-
-.activity-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.activity-item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.875rem;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  transition: all 0.2s ease;
-}
-
-.activity-item:hover {
-  background: #f1f5f9;
-  border-color: rgba(59, 130, 246, 0.2);
-}
-
-.activity-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
-  flex-shrink: 0;
-}
-
-.activity-icon.quiz {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05));
-  color: #3b82f6;
-}
-
-.activity-icon.achievement {
-  background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.05));
-  color: #f59e0b;
-}
-
-.activity-icon.streak {
-  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.05));
-  color: #ef4444;
-}
-
-.activity-content {
-  flex: 1;
-  min-width: 0;
-}
-
-.activity-title {
-  color: #1e293b;
-  font-weight: 600;
-  font-size: 0.9rem;
-  margin-bottom: 0.125rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.activity-meta {
-  color: #64748b;
-  font-size: 0.8rem;
-}
-
-.activity-score {
-  font-weight: 700;
-  font-size: 1rem;
-  padding: 0.375rem 0.75rem;
-  border-radius: 8px;
-  flex-shrink: 0;
-}
-
-.activity-score.high {
-  background: rgba(34, 197, 94, 0.1);
-  color: #22c55e;
-}
-
-.activity-score.medium {
-  background: rgba(245, 158, 11, 0.1);
-  color: #f59e0b;
-}
-
-.activity-score.low {
-  background: rgba(239, 68, 68, 0.1);
-  color: #ef4444;
-}
-
-/* Progress Card */
-.progress-card {
-  grid-column: span 1;
-}
-
-.progress-ring-container {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.progress-ring {
-  position: relative;
-  width: 100px;
-  height: 100px;
-}
-
-.progress-ring svg {
-  transform: rotate(-90deg);
-}
-
-.progress-ring-bg {
-  fill: none;
-  stroke: #e2e8f0;
-  stroke-width: 8;
-}
-
-.progress-ring-fill {
-  fill: none;
-  stroke: url(#progressGradient);
-  stroke-width: 8;
-  stroke-linecap: round;
-  stroke-dasharray: 251.2;
-  stroke-dashoffset: 62.8;
-  transition: stroke-dashoffset 1s ease;
-}
-
-.progress-center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
-
-.progress-percent {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #3b82f6;
-}
-
-.progress-label {
-  font-size: 0.7rem;
-  color: #64748b;
-}
-
-.progress-stats {
-  flex: 1;
-}
-
-.progress-stat {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #f1f5f9;
-}
-
-.progress-stat:last-child {
-  border-bottom: none;
-}
-
-.progress-stat-label {
-  color: #64748b;
-  font-size: 0.85rem;
-}
-
-.progress-stat-value {
-  font-weight: 600;
-  color: #1e293b;
-  font-size: 0.85rem;
-}
-
-/* Leaderboard Card */
-.leaderboard-card {
-  grid-column: span 1;
-}
-
-.leaderboard-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.625rem;
-}
-
-.leaderboard-item {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.625rem 0.75rem;
-  background: #f8fafc;
-  border-radius: 10px;
-  transition: all 0.2s ease;
-}
-
-.leaderboard-item:hover {
-  background: #f1f5f9;
-}
-
-.leaderboard-item.highlight {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(245, 158, 11, 0.05));
-  border: 1px solid rgba(59, 130, 246, 0.2);
-}
-
-.rank {
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 0.8rem;
-  flex-shrink: 0;
-}
-
-.rank.gold {
-  background: linear-gradient(135deg, #f59e0b, #fbbf24);
-  color: #1e293b;
-}
-
-.rank.silver {
-  background: linear-gradient(135deg, #94a3b8, #cbd5e1);
-  color: #1e293b;
-}
-
-.rank.bronze {
-  background: linear-gradient(135deg, #d97706, #f59e0b);
-  color: #1e293b;
-}
-
-.rank.default {
-  background: #e2e8f0;
-  color: #64748b;
-}
-
-.lb-avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  object-fit: cover;
-}
-
-.lb-name {
-  flex: 1;
-  color: #1e293b;
-  font-weight: 500;
-  font-size: 0.85rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.lb-score {
-  font-weight: 700;
-  color: #3b82f6;
-  font-size: 0.85rem;
-}
-
-/* Achievements Card */
-.achievements-card {
-  grid-column: span 1;
-}
-
-.achievements-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.75rem;
-}
-
-.achievement {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1rem 0.5rem;
-  background: #f8fafc;
-  border-radius: 12px;
-  transition: all 0.2s ease;
-}
-
-.achievement:hover {
-  background: #f1f5f9;
-  transform: translateY(-2px);
-}
-
-.achievement.locked {
-  opacity: 0.5;
-}
-
-.achievement-icon {
-  font-size: 1.75rem;
-}
-
-.achievement-name {
-  font-size: 0.7rem;
-  color: #64748b;
-  text-align: center;
-}
-
-/* Categories Card */
-.categories-card {
-  grid-column: span 2;
-}
-
-.categories-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.75rem;
-}
-
-.category-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1rem;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.category-item:hover {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(245, 158, 11, 0.05));
-  border-color: rgba(59, 130, 246, 0.3);
-  transform: translateY(-3px);
-}
-
-.category-icon {
-  font-size: 1.5rem;
-}
-
-.category-name {
-  font-size: 0.8rem;
-  color: #475569;
-  font-weight: 500;
-  text-align: center;
-}
-
-.category-count {
-  font-size: 0.7rem;
-  color: #94a3b8;
-}
-
-/* Empty State */
-.empty-state {
-  text-align: center;
-  padding: 2rem;
-  color: #64748b;
-}
-
-.empty-state i {
-  font-size: 2.5rem;
-  margin-bottom: 0.75rem;
-  color: #94a3b8;
-}
-
-.empty-state p {
-  font-size: 0.9rem;
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 1200px) {
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .bento-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .bento-card.bento-large {
-    grid-column: span 2;
-  }
-  
-  .bento-card.bento-wide {
-    grid-column: span 2;
-  }
-  
-  .recent-activity {
-    grid-column: span 2;
-  }
-  
-  .categories-card {
-    grid-column: span 2;
-  }
-  
-  .categories-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 992px) {
+  /* Sidebar */
   .sidebar {
-    transform: translateX(-100%);
-  }
-  
-  .sidebar.open {
+    width: 60px;
     transform: translateX(0);
   }
-  
-  .sidebar-toggle {
-    display: flex;
+
+  .sidebar.collapsed {
+    width: 60px;
   }
-  
+
+  .sidebar.collapsed .nav-item span,
+  .sidebar.collapsed .sidebar-brand span,
+  .sidebar.collapsed .logout-btn span {
+    display: none;
+  }
+
+  /* Main content */
+  .main-content {
+    margin-left: 60px;
+    padding: 1.5rem 1rem;
+  }
+
+  /* Stats cards - stack vertically */
+  .stats-grid,
+  .bento-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  /* Page header */
+  .page-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .page-header h1 {
+    font-size: 1.75rem;
+  }
+
+  /* Bento cards */
+  .bento-card {
+    padding: 1.5rem;
+  }
+
+  .bento-card .bento-icon-large {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+
+  /* Charts section */
+  .charts-section {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .chart-container {
+    height: 300px;
+  }
+
+  /* Tables */
+  .table-responsive {
+    font-size: 0.875rem;
+  }
+
+  table th, table td {
+    padding: 0.75rem 0.5rem;
+  }
+
+  /* User profile area */
+  .user-profile {
+    gap: 0.5rem;
+  }
+
+  .user-info h4 {
+    font-size: 0.9rem;
+  }
+
+  .user-info p {
+    font-size: 0.75rem;
+  }
+}
+
+/* Mobile (480px and below) */
+@media (max-width: 480px) {
+  /* Sidebar - fully hide on mobile */
+  .sidebar {
+    position: fixed;
+    left: -60px;
+    top: 0;
+    height: 100vh;
+    z-index: 1000;
+    width: 200px;
+    transition: left 0.3s ease;
+  }
+
+  .sidebar.mobile-open {
+    left: 0;
+  }
+
+  /* Main content - full width on mobile */
   .main-content {
     margin-left: 0;
     padding: 1rem;
-    padding-top: 5rem;
   }
-  
+
+  /* Toggle button visible on mobile */
+  .sidebar-toggle-btn {
+    display: flex;
+  }
+
+  /* Page header */
+  .page-header {
+    gap: 0.5rem;
+  }
+
+  .page-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .page-header p {
+    font-size: 0.875rem;
+  }
+
+  /* Stats cards - stack and reduce padding */
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .stat-card {
+    padding: 1rem;
+  }
+
+  .stat-value {
+    font-size: 1.75rem;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+  }
+
+  .stat-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.25rem;
+  }
+
+  /* Bento grid */
   .bento-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
   }
-  
-  .bento-card.bento-large {
-    grid-column: span 2;
+
+  .bento-card {
+    padding: 1rem;
   }
-  
-  .bento-card.bento-wide {
-    grid-column: span 2;
+
+  .bento-card .bento-icon-large {
+    width: 50px;
+    height: 50px;
+    font-size: 1.25rem;
+  }
+
+  .bento-card .bento-content h2 {
+    font-size: 1.25rem;
+  }
+
+  .bento-card .bento-content p {
+    font-size: 0.8rem;
+  }
+
+  .bento-action span {
+    font-size: 0.8rem;
+  }
+
+  /* Charts - reduce height */
+  .chart-container {
+    height: 250px;
+  }
+
+  .charts-section {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  /* Tables - horizontal scroll on mobile */
+  .table-responsive {
+    overflow-x: auto;
+    font-size: 0.75rem;
+  }
+
+  table th, table td {
+    padding: 0.5rem 0.25rem;
+  }
+
+  /* Recent quizzes */
+  .recent-quiz-item {
+    padding: 0.75rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .recent-quiz-item .quiz-info {
+    width: 100%;
+  }
+
+  .recent-quiz-item .quiz-score {
+    width: 100%;
+    text-align: left;
+  }
+
+  /* User profile - stack vertically */
+  .user-profile {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .user-avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .user-info h4 {
+    font-size: 0.85rem;
+  }
+
+  .user-info p {
+    font-size: 0.7rem;
+  }
+
+  /* Buttons */
+  .btn-primary, .btn-secondary {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  /* Modal / Overlay adjustments */
+  .modal-content {
+    width: 95vw;
+    margin: auto;
+  }
+
+  /* Typography scaling */
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+  }
+
+  h3 {
+    font-size: 1rem;
+  }
+
+  p {
+    font-size: 0.875rem;
   }
 }
 
-@media (max-width: 768px) {
+/* Small mobile (360px and below) */
+@media (max-width: 360px) {
+  .main-content {
+    padding: 0.75rem;
+  }
+
+  .page-header h1 {
+    font-size: 1.25rem;
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
+  }
+
+  .stat-label {
+    font-size: 0.65rem;
+  }
+
+  .bento-card .bento-content h2 {
+    font-size: 1rem;
+  }
+
+  table th, table td {
+    padding: 0.25rem;
+    font-size: 0.7rem;
+  }
+}
+
+/* Large screens (1200px and above) - optional enhancement */
+@media (min-width: 1200px) {
+  .main-content {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
   .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
-  
+
   .bento-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
   }
-  
-  .bento-card.bento-large {
-    grid-column: span 2;
-  }
-  
-  .bento-card.bento-wide {
-    grid-column: span 2;
-  }
-  
-  .recent-activity,
-  .categories-card {
-    grid-column: span 2;
-  }
-  
-  .categories-grid {
+
+  .charts-section {
     grid-template-columns: repeat(2, 1fr);
   }
-  
-  .actions-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .progress-ring-container {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .bento-card {
-    min-height: auto;
-    padding: 1.25rem;
-  }
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Tablet (768px and below) */
+@media (max-width: 768px) {
+  .sidebar { width: 60px; }
+}
+
+/* Mobile (480px and below) */
+@media (max-width: 480px) {
+  .sidebar { position: fixed; left: -60px; }
+}
+
+/* Large screens (1200px and above) */
+@media (min-width: 1200px) {
+  .main-content { max-width: 1400px; }
 }
