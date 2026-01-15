@@ -61,5 +61,12 @@ urlpatterns = [
      path('attempt/<uuid:attempt_id>/feedback/', views.submit_feedback, name='submit_feedback'),
 
     # tab-switch
-    path("tab-violation/",views.tab_violation,name="tab_violation")
+    path("tab-violation/",views.tab_violation,name="tab_violation"),
+
+    path('attempt/<uuid:attempt_id>/mark-review/',views.mark_for_review,name='mark_for_review'),
+
+    path('attempt/<uuid:attempt_id>/skip/',views.skip_question,name='skip_question'),
+
+    path('attempt/<uuid:attempt_id>/jump/<int:q_no>/',views.jump_to_question,name='jump_to_question'),
+
 ]
