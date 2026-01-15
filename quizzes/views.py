@@ -24,7 +24,8 @@ from reportlab.lib import colors
 
 # AI Feedback recommendation
 from .ai_feedback_service import generate_ai_feedback
-
+# Ai pdf to Quiz generator
+from quizzes.utils.file_parser import extract_text_from_file
 #============================================================
 # USER DASHBOARD
 # ============================================================
@@ -1563,3 +1564,22 @@ def tab_violation(request):
 
     except Exception as e:
         return JsonResponse({"error": str(e)}, status=500)
+    
+#Show AI Generator Page
+@login_required
+def ai_quiz_generator_view(request):
+    return render(request, "quizzes/ai_quiz_generator.html")
+
+
+def generate_ai_quiz(request):
+    if request.method == "POST":
+        uploaded_file = request.FILES.get("file")
+        topic = request.POST.get("topic")
+
+        if uploaded_file:
+            extracted_text = extract_text_from_file(uploaded_file)
+        else:
+            extracted_text = topic
+
+        # TEMP: verify extraction works
+        return HttpResponse(extracted_text[:10000])

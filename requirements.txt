@@ -11,3 +11,5 @@ psycopg2-binary
 mysqlclient
 openai
 PyJWT
+pdfplumber
+python-docx

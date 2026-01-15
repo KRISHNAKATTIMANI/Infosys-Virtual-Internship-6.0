@@ -1,0 +1,167 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>AI Quiz Generator | AI Quiz Hub</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="{% static 'css/global.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'quizzes/css/quiz_selector.css' %}"
+    />
+    <script src="{% static 'js/theme.js' %}"></script>
+
+    <style>
+      body {
+        background: linear-gradient(135deg, #0f172a, #020617);
+        min-height: 100vh;
+        font-family: Poppins, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        background-color: #ffffff; /* important */
+      }
+
+      .ai-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 1.5rem;
+        padding: 2.5rem;
+        width: 100%;
+        max-width: 520px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        color: white;
+      }
+
+      .ai-card h1 {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .ai-card p {
+        color: #94a3b8;
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group {
+        margin-bottom: 1.2rem;
+      }
+
+      label {
+        font-size: 0.9rem;
+        color: #cbd5f5;
+        display: block;
+        margin-bottom: 0.3rem;
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 0.7rem;
+        border-radius: 0.5rem;
+        border: none;
+        outline: none;
+      }
+
+      .generate-btn {
+        width: 100%;
+        padding: 0.9rem;
+        border-radius: 0.7rem;
+        background: linear-gradient(90deg, #6366f1, #22d3ee);
+        color: white;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        margin-top: 1rem;
+      }
+
+      .or {
+        text-align: center;
+        margin: 1rem 0;
+        color: #64748b;
+        font-size: 0.85rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <div class="navbar">
+      <div class="brand">AI Quiz Hub</div>
+      <div class="nav-links">
+        <a href="{% url 'quizzes:dashboard' %}">Dashboard</a>
+        <a href="{% url 'quizzes:quiz_selector' %}">Quiz Selector</a>
+        <a href="{% url 'accounts:profile' %}">Profile</a>
+        <a href="{% url 'accounts:logout' %}">Logout</a>
+        <button class="theme-toggle-btn" id="themeToggle" title="Toggle Theme">
+          <i class="ri-moon-line"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="ai-card">
+      <h1>🤖 AI Quiz Generator</h1>
+      <p>Upload study material or enter a topic to generate a quiz</p>
+
+      <form
+        method="POST"
+        action="{% url 'quizzes:generate_ai_quiz' %}"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %}
+
+        <div class="form-group">
+          <label>Upload PDF / DOCX / TXT</label>
+          <input type="file" name="file" accept=".pdf,.docx,.txt" />
+        </div>
+
+        <div class="or">OR</div>
+
+        <div class="form-group">
+          <label>Enter Topic</label>
+          <input type="text" name="topic" placeholder="e.g. Machine Learning" />
+        </div>
+
+        <div class="form-group">
+          <label>Difficulty</label>
+          <select name="difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Number of Questions</label>
+          <input
+            type="number"
+            name="question_count"
+            value="10"
+            min="5"
+            max="30"
+          />
+        </div>
+
+        <button type="submit" class="generate-btn">🚀 Generate Quiz</button>
+      </form>
+    </div>
+  </body>
+</html>
