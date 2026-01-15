@@ -1,7 +1,4 @@
 import os
-from dotenv import load_dotenv
-import os
-load_dotenv()
 
 """
 Django settings for core project.
@@ -86,7 +83,7 @@ SESSION_COOKIE_AGE = 1209600  # 2 weeks
 SESSION_SAVE_EVERY_REQUEST = True
 
 # For development only: allow all (change for production)
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["localhost", "127.0.0.1","aiquizhub.onrender.com"]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -196,9 +193,10 @@ OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:8000",
     "http://127.0.0.1:8000",
+    "https://aiquizhub.onrender.com",
     # add your host if you use a different domain/port, include scheme
 ]
-ALLOWED_HOSTS = ["localhost", "127.0.0.1","aiquizhub.onrender.com"]
+
 
 # ========================
 # DJANGO ALLAUTH SETTINGS
@@ -252,4 +250,5 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD") 
-DEFAULT_FROM_EMAIL = f"AI Quiz Hub <{EMAIL_HOST_USER}>"
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_TIMEOUT = 10

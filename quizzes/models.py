@@ -226,3 +226,63 @@ class Feedback(models.Model):
     
     def __str__(self):
         return f"{self.user.username} - {self.rating}★ - {self.created_at.strftime('%Y-%m-%d')}"
+
+class AttemptQuestion(models.Model):
+    """
+    Tracks per-question state for a quiz attempt.
+    This powers:
+    - Question navigation palette
+    - Review / Skip
+    - Resume functionality
+    """
+
+    STATUS_UNVISITED = 0
+    STATUS_SOLVED = 1
+    STATUS_REVIEW = 2
+    STATUS_SKIPPED = 3
+
+    STATUS_CHOICES = [
+        (STATUS_UNVISITED, "Unvisited"),
+        (STATUS_SOLVED, "Solved"),
+        (STATUS_REVIEW, "Marked for Review"),
+        (STATUS_SKIPPED, "Skipped"),
+    ]
+
+    attempt = models.ForeignKey(
+        QuizAttempt,
+        on_delete=models.CASCADE,
+        related_name="attempt_questions"
+    )
+
+    question = models.ForeignKey(
+        Question,
+        on_delete=models.CASCADE
+    )
+
+    question_order = models.PositiveSmallIntegerField()
+    selected_option = models.CharField(
+        max_length=1,
+        null=True,
+        blank=True
+    )
+
+    status = models.SmallIntegerField(
+        choices=STATUS_CHOICES,
+        default=STATUS_UNVISITED
+    )
+
+    is_correct = models.BooleanField(null=True, blank=True)
+
+    visited_at = models.DateTimeField(null=True, blank=True)
+    answered_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        unique_together = ('attempt', 'question')
+        ordering = ['question_order']
+        indexes = [
+            models.Index(fields=['attempt', 'status']),
+            models.Index(fields=['attempt', 'question_order']),
+        ]
+
+    def __str__(self):
+        return f"{self.attempt.id} - Q{self.question_order} ({self.get_status_display()})"

@@ -1,4 +1,5 @@
-from pyexpat.errors import messages
+from .models import AttemptQuestion
+from django.db.models import Count, Q
 import random
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
@@ -268,7 +269,7 @@ def pre_start_quiz(request):
     """
     Entry point before the quiz navigation
     """
-    active_quiz=get_active_quiz(request.user)
+    active_quiz=QuizAttempt.objects.filter(user=request.user,status__in=[QuizAttempt.STATUS_IN_PROGRESS,QuizAttempt.STATUS_GENERATING],completed_at__isnull=True).first()
 
     if active_quiz:
         return redirect('quizzes:resume_quiz_prompt',attempt_id=active_quiz.id)
@@ -315,8 +316,10 @@ def start_quiz(request, subcategory_id, difficulty):
 def get_active_quiz(user):
     return QuizAttempt.objects.filter(
         user=user,
-        status=QuizAttempt.STATUS_IN_PROGRESS
+        status=QuizAttempt.STATUS_IN_PROGRESS,
+        completed_at__isnull=True
     ).order_by('-started_at').first()
+
 
 # If user is reumes quiz
 # RESUME / QUIT PROMPT VIEW
@@ -328,6 +331,12 @@ def resume_quiz_prompt(request,attempt_id):
         user=request.user,
         status=QuizAttempt.STATUS_IN_PROGRESS
     )
+
+    if quiz_attempt.status != QuizAttempt.STATUS_IN_PROGRESS:
+        return redirect(
+            'quizzes:quiz_results',
+            attempt_id=quiz_attempt.id
+        )
 
     return render(request,'quizzes/resume_prompt.html',{
         'quiz':quiz_attempt
@@ -349,7 +358,7 @@ def resume_quiz(request, attempt_id):
     # Clear the paused_at to indicate quiz is active again
     quiz_attempt.paused_at = None
    
-    quiz_attempt.save(update_fields=['paused_at', 'started_at'])
+    quiz_attempt.save(update_fields=['paused_at'])
 
     return redirect(
         'quizzes:show_question',
@@ -620,6 +629,27 @@ def generate_questions(request, attempt_id):
         }
         quiz_attempt.save(update_fields=['questions', 'status', 'ai_meta'])
 
+        # ============================
+        # CREATE AttemptQuestion ROWS
+        # ============================
+        AttemptQuestion.objects.filter(attempt=quiz_attempt).delete()
+
+        for idx, q in enumerate(formatted_questions):
+            question_obj = Question.objects.filter(
+                question_text=q["question"],
+                subcategory=quiz_attempt.subcategory
+            ).first()
+
+            if not question_obj:
+                continue
+
+            AttemptQuestion.objects.create(
+                attempt=quiz_attempt,
+                question=question_obj,
+                question_order=idx,
+                status=AttemptQuestion.STATUS_UNVISITED
+            )
+
         return JsonResponse({
             'success': True,
             'redirect_url': f'/quiz/attempt/{quiz_attempt.id}/question/'
@@ -633,7 +663,6 @@ def generate_questions(request, attempt_id):
             'success': False,
             'error': str(e)
         }, status=500)
-
 
 @login_required
 def show_question(request, attempt_id):
@@ -652,6 +681,17 @@ def show_question(request, attempt_id):
             'quizzes:quiz_results',
             attempt_id=quiz_attempt.id
         )
+
+    # ADD: Fetch AttemptQuestion
+    attempt_questions = quiz_attempt.attempt_questions.all()
+    current_aq = attempt_questions.filter(
+        question_order=quiz_attempt.current_question_index
+    ).first()
+
+    # Mark VISITED automatically
+    if current_aq and current_aq.visited_at is None:
+        current_aq.visited_at = timezone.now()
+        current_aq.save(update_fields=['visited_at'])
 
     # Get current question
     current_question = quiz_attempt.get_current_question()
@@ -691,6 +731,8 @@ def show_question(request, attempt_id):
         "answered_count": answered_count,
         "has_prev": quiz_attempt.current_question_index > 0,
         "remaining_seconds": remaining_seconds,
+        "attempt_questions": attempt_questions,
+        "current_status": current_aq.status if current_aq else None,
     })
 
 
@@ -705,11 +747,6 @@ def submit_answer(request, attempt_id):
     
 
     quiz_attempt = get_object_or_404(QuizAttempt, id=attempt_id, user=request.user)
-    quiz_attempt = get_object_or_404(
-    QuizAttempt,
-    id=attempt_id,
-    user=request.user
-)
 
     if quiz_attempt.is_auto_submitted:
         return JsonResponse({
@@ -719,12 +756,34 @@ def submit_answer(request, attempt_id):
 
     # Get user's answer
     user_answer = request.POST.get('answer', '').upper()
-    
+
     if user_answer not in ['A', 'B', 'C', 'D']:
         return JsonResponse({'error': 'Invalid answer'}, status=400)
     
-    # Get current question
+    # ADD DB UPDATE
     current_idx = quiz_attempt.current_question_index
+
+    aq = AttemptQuestion.objects.filter(
+        attempt=quiz_attempt,
+        question_order=current_idx
+    ).first()
+
+    if not aq:
+        return JsonResponse({'error': 'Question state not found'}, status=400)
+
+    aq.selected_option = user_answer
+    aq.status = AttemptQuestion.STATUS_SOLVED
+    aq.answered_at = timezone.now()
+    aq.is_correct = (
+        user_answer == quiz_attempt.questions[current_idx]['correct_answer']
+    )
+
+    aq.save(update_fields=[
+        'selected_option',
+        'status',
+        'answered_at',
+        'is_correct'
+    ])
     
     if current_idx >= len(quiz_attempt.questions):
         return JsonResponse({'error': 'No more questions'}, status=400)
@@ -793,7 +852,8 @@ def quiz_results(request, attempt_id):
     total = len(quiz_attempt.questions) if quiz_attempt.questions else 0
     correct = sum(1 for q in quiz_attempt.questions if q.get('is_correct')) if quiz_attempt.questions else 0
     incorrect = total - correct
-    percentage = quiz_attempt.score
+    percentage = round((correct * 100) / total, 2) if total else 0
+
     
     # Determine grade
     if percentage >= 90:
@@ -864,27 +924,26 @@ def quiz_results(request, attempt_id):
         "weak_areas": weak_areas[:3],
         "existing_feedback": existing_feedback,
     })
+
 def finalize_quiz_attempt(quiz_attempt):
-    questions = quiz_attempt.questions or []
+    aq_qs = AttemptQuestion.objects.filter(attempt=quiz_attempt)
 
-    attempted = 0
-    correct = 0
-
-    for q in questions:
-        if q.get("user_answer") is not None:
-            attempted += 1
-            if q.get("is_correct") is True:
-                correct += 1
+    attempted = aq_qs.filter(selected_option__isnull=False).count()
+    correct = aq_qs.filter(is_correct=True).count()
 
     quiz_attempt.attempted_questions = attempted
     quiz_attempt.correct_answers = correct
 
     quiz_attempt.score = (
-        (correct / quiz_attempt.total_questions) * 100
+        round((correct * 100) / quiz_attempt.total_questions, 2)
         if quiz_attempt.total_questions > 0 else 0
     )
 
-    # ✅ AUTHORITATIVE TIME CALCULATION
+    quiz_attempt.completed_at = timezone.now()
+    quiz_attempt.status = QuizAttempt.STATUS_COMPLETED
+    quiz_attempt.paused_at = None
+
+    # Time calc
     if quiz_attempt.started_at:
         quiz_attempt.time_taken_seconds = int(
             (timezone.now() - quiz_attempt.started_at).total_seconds()
@@ -893,10 +952,6 @@ def finalize_quiz_attempt(quiz_attempt):
         quiz_attempt.time_taken_seconds = 0
 
     quiz_attempt.time_spent_seconds = quiz_attempt.time_taken_seconds
-
-    quiz_attempt.completed_at = timezone.now()
-    quiz_attempt.status = QuizAttempt.STATUS_COMPLETED
-    quiz_attempt.paused_at = None
 
     quiz_attempt.save(update_fields=[
         'attempted_questions',
@@ -908,6 +963,7 @@ def finalize_quiz_attempt(quiz_attempt):
         'status',
         'paused_at'
     ])
+
 
 
 # streak
@@ -1534,18 +1590,19 @@ def tab_violation(request):
             attempt.is_auto_submitted = True
             attempt.flagged_for_review = True
             attempt.auto_submit_reason = QuizAttempt.AUTO_SUBMIT_TAB_SWITCH
-            attempt.completed_at = now()
-            attempt.status = QuizAttempt.STATUS_COMPLETED
 
             finalize_quiz_attempt(attempt)
+
+            attempt.is_auto_submitted = True
+            attempt.flagged_for_review = True
+            attempt.auto_submit_reason = QuizAttempt.AUTO_SUBMIT_TAB_SWITCH
 
             attempt.save(update_fields=[
                 'is_auto_submitted',
                 'auto_submit_reason',
-                'flagged_for_review',
-                'completed_at',
-                'status'
+                'flagged_for_review'
             ])
+
             return JsonResponse({
                 "status": "auto_submitted"
             })
@@ -1564,6 +1621,85 @@ def tab_violation(request):
 
     except Exception as e:
         return JsonResponse({"error": str(e)}, status=500)
+    
+# SKIP QUESTION
+@login_required
+@require_POST
+def skip_question(request, attempt_id):
+    quiz_attempt = get_object_or_404(
+        QuizAttempt,
+        id=attempt_id,
+        user=request.user,
+        status=QuizAttempt.STATUS_IN_PROGRESS
+    )
+
+    current_idx = quiz_attempt.current_question_index
+
+    aq = AttemptQuestion.objects.filter(
+        attempt=quiz_attempt,
+        question_order=current_idx
+    ).first()
+
+    if not aq:
+        return JsonResponse({'error': 'Question state not found'}, status=400)
+
+
+    aq.status = AttemptQuestion.STATUS_SKIPPED
+    aq.selected_option = None
+    aq.save(update_fields=['status', 'selected_option'])
+
+    quiz_attempt.current_question_index += 1
+    quiz_attempt.save(update_fields=['current_question_index'])
+
+    return redirect('quizzes:show_question',attempt_id=quiz_attempt.id)
+
+
+# MARK FOR REVIEW
+@login_required
+@require_POST
+def mark_for_review(request, attempt_id):
+    quiz_attempt = get_object_or_404(
+        QuizAttempt,
+        id=attempt_id,
+        user=request.user,
+        status=QuizAttempt.STATUS_IN_PROGRESS
+    )
+
+    current_idx = quiz_attempt.current_question_index
+
+    aq = AttemptQuestion.objects.filter(
+        attempt=quiz_attempt,
+        question_order=current_idx
+    ).first()
+
+    if not aq:
+        return JsonResponse({'error': 'Question state not found'}, status=400)
+
+    aq.status = AttemptQuestion.STATUS_REVIEW
+    aq.save(update_fields=['status'])
+
+    quiz_attempt.current_question_index += 1
+    quiz_attempt.save(update_fields=['current_question_index'])
+
+    return redirect('quizzes:show_question',attempt_id=quiz_attempt.id)
+
+
+# ADD QUESTION JUMP (Navigation Click)
+@login_required
+def jump_to_question(request, attempt_id, q_no):
+    quiz_attempt = get_object_or_404(
+        QuizAttempt,
+        id=attempt_id,
+        user=request.user,
+        status=QuizAttempt.STATUS_IN_PROGRESS
+    )
+
+    if 0 <= q_no < quiz_attempt.total_questions:
+        quiz_attempt.current_question_index = q_no
+        quiz_attempt.save(update_fields=['current_question_index'])
+
+    return redirect('quizzes:show_question', attempt_id=attempt_id)
+
     
 #Show AI Generator Page
 @login_required

@@ -751,6 +751,135 @@
       to { opacity: 0; transform: translateX(30px); }
     }
 
+    /* Question Palette Panel */
+    .question-palette {
+      padding: 1.25rem;
+    }
+
+    /* Grid */
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Question Button */
+    .palette-item {
+      height: 34px;
+      border-radius: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: inherit;
+      background: rgba(148, 163, 184, 0.15);
+      transition: all 0.2s ease;
+    }
+
+    .palette-item:hover {
+      transform: translateY(-1px);
+    }
+
+    /* Status Colors */
+    .status-unvisited { background: rgba(148, 163, 184, 0.2); }
+    .status-solved    { background: rgba(34, 197, 94, 0.25); color: #22c55e; }
+    .status-review    { background: rgba(250, 204, 21, 0.25); color: #facc15; }
+    .status-skipped   { background: rgba(239, 68, 68, 0.25); color: #ef4444; }
+
+    /* Active */
+    .palette-item.active {
+      background: linear-gradient(135deg, #f59e0b, #fbbf24);
+      color: #0f172a;
+      box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.4);
+    }
+
+    /* Legend */
+    .palette-legend {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.4rem;
+      font-size: 0.7rem;
+      color: #94a3b8;
+    }
+
+    .palette-legend div {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .palette-legend span {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+    }
+
+    /* Light Mode Compatibility */
+    body:not(.light-mode) .palette-item {
+      background: rgba(0, 0, 0, 0.08);
+    }
+
+    body:not(.light-mode) .status-solved { background: rgba(34,197,94,0.15); }
+    body:not(.light-mode) .status-review { background: rgba(250,204,21,0.2); }
+    body:not(.light-mode) .status-skipped { background: rgba(239,68,68,0.2); }
+
+    body:not(.light-mode) .palette-item.active {
+      color: #0f172a;
+    }
+
+
+    .legend.solved { background: #22c55e; }
+    .legend.review { background: #facc15; }
+    .legend.skipped { background: #ef4444; }
+    .legend.unvisited { background: #e5e7eb; }
+
+    .question-actions {
+      display: flex;
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .inline-form {
+      display: inline;
+    }
+
+    .btn {
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+    }
+
+    /* Review */
+    .btn-review {
+      background-color: #facc15;
+      color: #111827;
+    }
+
+    /* Skip */
+    .btn-skip {
+      background-color: #ef4444;
+      color: white;
+    }
+
+    .btn-review:hover {
+      background-color: #eab308;
+    }
+
+    .btn-skip:hover {
+      background-color: #dc2626;
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+
   </style>
 </head>
 <body
@@ -842,24 +971,79 @@
 
       <!-- Actions -->
       <div class="actions-bar">
-        <div>
+        
+        <!-- LEFT: Review / Skip -->
+        <div class="actions-left">
+          <form method="post" action="{% url 'quizzes:mark_for_review' quiz_attempt.id %}" class="inline-form">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-review">Mark for Review</button>
+          </form>
+
+          <form method="post" action="{% url 'quizzes:skip_question' quiz_attempt.id %}" class="inline-form">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-skip">Skip</button>
+          </form>
+        </div>
+
+        <!-- CENTER: Back -->
+        <div class="actions-center">
           {% if has_prev %}
           <button class="btn btn-secondary" id="back-btn">
             <i class="ri-arrow-left-line"></i> Back
           </button>
           {% endif %}
         </div>
-        <button class="btn btn-primary" id="submit-answer">
-          Submit Answer <i class="ri-arrow-right-line"></i>
-        </button>
-        <div class="answered-count">
-          Answered: <strong><span id="answered-count">{{ answered_count }}</span></strong> / {{ total_questions }}
+
+        <!-- RIGHT: Submit + Count -->
+        <div class="actions-right">
+          <button class="btn btn-primary" id="submit-answer">
+            Submit Answer <i class="ri-arrow-right-line"></i>
+          </button>
+
+          <div class="answered-count">
+            Answered: <strong>{{ answered_count }}</strong> / {{ total_questions }}
+          </div>
         </div>
+
       </div>
+
     </div>
 
     <!-- Sidebar -->
     <div class="sidebar-panel">
+      <!-- RIGHT SIDE QUESTION PALETTE -->
+      <div class="panel-card question-palette">
+
+        <div class="panel-header">
+          <i class="ri-layout-grid-line"></i>
+          <h3>Questions</h3>
+        </div>
+
+        <div class="palette-grid">
+          {% for aq in attempt_questions %}
+            <a href="{% url 'quizzes:jump_to_question' quiz_attempt.id aq.question_order %}"
+              class="palette-item
+              {% if aq.status == 0 %}status-unvisited{% endif %}
+              {% if aq.status == 1 %}status-solved{% endif %}
+              {% if aq.status == 2 %}status-review{% endif %}
+              {% if aq.status == 3 %}status-skipped{% endif %}
+              {% if aq.question_order == quiz_attempt.current_question_index %}active{% endif %}
+              ">
+              {{ forloop.counter }}
+            </a>
+          {% endfor %}
+        </div>
+
+        <!-- LEGEND -->
+        <div class="palette-legend">
+          <div><span class="legend solved"></span> Solved</div>
+          <div><span class="legend review"></span> Review</div>
+          <div><span class="legend skipped"></span> Skipped</div>
+          <div><span class="legend unvisited"></span> Unvisited</div>
+        </div>
+
+      </div>
+
       <!-- Timer Panel -->
       <div class="panel-card">
         <div class="panel-header">
