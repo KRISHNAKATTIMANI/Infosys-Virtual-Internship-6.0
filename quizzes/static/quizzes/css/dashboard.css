@@ -12,8 +12,8 @@
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #020617 0%, #020617 100%);
-  color: #e5e7eb;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
+  color: #1e293b;
   min-height: 100vh;
   display: flex;
   position: relative;
@@ -343,9 +343,8 @@ body::before {
   align-items: center;
   gap: 0.75rem;
   padding: 0.5rem 1rem 0.5rem 0.5rem;
-  background: rgba(15, 23, 42, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 50px;
   text-decoration: none;
   transition: all 0.3s ease;
@@ -455,9 +454,8 @@ body::before {
 }
 
 .stat-card {
-  background: rgba(15, 23, 42, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 16px;
   padding: 1.5rem;
   position: relative;
@@ -601,9 +599,8 @@ body::before {
 }
 
 .bento-card {
-  background: rgba(15, 23, 42, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 16px;
   padding: 1.75rem;
   transition: all 0.3s ease;
@@ -623,9 +620,8 @@ body::before {
 /* Large Card - Start Quiz */
 .bento-card.bento-large {
   min-height: 180px;
-  background: rgba(15, 23, 42, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
 }
 
 .bento-card.bento-large:hover {
@@ -774,9 +770,11 @@ body::before {
   font-size: 0.75rem;
   font-weight: 400;
 
-  color: inherit;
-  -webkit-text-fill-color: currentColor;
+  /* Explicit text color */
+  color: #111827; /* black / gray */
 
+  /* IMPORTANT: reset text fill */
+  -webkit-text-fill-color: #111827;
 
   /* Remove gradient + animation */
   background: none;
@@ -814,9 +812,8 @@ body::before {
   font-weight: 400;
 
   /* Normal text color */
-  color: inherit;
-  -webkit-text-fill-color: currentColor;
-
+  color: #111827; /* gray-900 / near black */
+  -webkit-text-fill-color: #111827;
 
   /* Remove rainbow effects */
   background: none;
@@ -956,9 +953,8 @@ body::before {
 }
 
 .chart-card {
-  background: rgba(15, 23, 42, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 16px;
   padding: 1.5rem;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
@@ -1029,6 +1025,11 @@ body.light-mode .refresh-charts-btn {
 
 body.light-mode .refresh-charts-btn:hover {
   box-shadow: 0 4px 12px rgba(129, 140, 248, 0.5);
+}
+
+body.light-mode .chart-card {
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 body.light-mode .chart-card:hover {
@@ -1381,18 +1382,4 @@ body.light-mode .chart-period {
 /* Large screens (1200px and above) */
 @media (min-width: 1200px) {
   .main-content { max-width: 1400px; }
-}
-
-/* ================= LIGHT MODE OVERRIDES ================= */
-body.light-mode {
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
-  color: #1e293b;
-}
-
-body.light-mode .topbar,
-body.light-mode .stat-card,
-body.light-mode .bento-card,
-body.light-mode .chart-card {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
 }
