@@ -91,7 +91,7 @@ If these are not loaded, you may see:
 #### ✅ Recommended: Load ALL required fixtures
 
 ```bash
-python manage.py loaddata categories.json subcategories.json concepts.json initial_data.json
+python manage.py loaddata categories.json subcategories.json concepts.json 
 ```
 
 📌 Run this:
