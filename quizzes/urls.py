@@ -69,4 +69,13 @@ urlpatterns = [
 
     path('attempt/<uuid:attempt_id>/jump/<int:q_no>/',views.jump_to_question,name='jump_to_question'),
 
+    path("tab-violation/",views.tab_violation,name="tab_violation"),
+    
+    # ============================================================
+    # AI Quiz Generator (PDF / Text Based)
+    # ============================================================
+    path("ai-generator/", views.ai_quiz_generator_view, name="ai_quiz_generator"),
+    path("ai-generator/generate/", views.generate_ai_quiz, name="generate_ai_quiz"),
+    path("attempt/<uuid:attempt_id>/generate/",views.generate_ai_quiz,name="generate_ai_quiz")
+    
 ]
