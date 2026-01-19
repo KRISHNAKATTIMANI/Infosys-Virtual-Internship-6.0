@@ -72,15 +72,27 @@
 
       body.light-mode .stat-card,
       body.light-mode .action-card,
-      body.light-mode .recent-card {
-        background: rgba(30, 41, 59, 0.8);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+      body.light-mode .recent-card,
+      body.light-mode .bento-card {
+        background: rgba(30, 41, 59, 0.8) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
       }
 
       body.light-mode .stat-card:hover,
-      body.light-mode .action-card:hover {
-        background: rgba(30, 41, 59, 0.9);
-        border-color: rgba(99, 102, 241, 0.5);
+      body.light-mode .action-card:hover,
+      body.light-mode .bento-card:hover {
+        background: rgba(30, 41, 59, 0.9) !important;
+        border-color: rgba(99, 102, 241, 0.5) !important;
+      }
+      
+      body.light-mode .bento-card.bento-large {
+        background: rgba(30, 41, 59, 0.8) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      }
+      
+      body.light-mode .bento-card.bento-large:hover {
+        background: rgba(30, 41, 59, 0.9) !important;
+        border-color: rgba(99, 102, 241, 0.5) !important;
       }
 
       body.light-mode .stat-value,
@@ -99,6 +111,63 @@
 
       body.light-mode .user-role {
         color: #94a3b8;
+      }
+      
+      /* Bento Card Text Colors for Dark Mode */
+      body.light-mode .bento-card h2,
+      body.light-mode .bento-card h3 {
+        color: #f8fafc !important;
+        -webkit-text-fill-color: #f8fafc !important;
+      }
+      
+      body.light-mode .analytics-card h3,
+      body.light-mode .attempts-card h3,
+      body.light-mode .leaderboard-card h3,
+      body.light-mode .recent-card h3,
+      body.light-mode .start-quiz-card h2 {
+        color: #f8fafc !important;
+        -webkit-text-fill-color: #f8fafc !important;
+        background: none !important;
+      }
+      
+      body.light-mode .bento-card p {
+        color: #cbd5e1 !important;
+      }
+      
+      body.light-mode .bento-action,
+      body.light-mode .bento-action span {
+        color: #fbbf24 !important;
+      }
+      
+      body.light-mode .start-quiz-card .bento-action span {
+        color: #fbbf24 !important;
+        -webkit-text-fill-color: #fbbf24 !important;
+      }
+
+      /* Topbar User Profile - Dark Mode */
+      body.light-mode .topbar-right .user-profile {
+        background: rgba(30, 41, 59, 0.8) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3) !important;
+      }
+      
+      body.light-mode .topbar-right .user-profile:hover {
+        background: rgba(30, 41, 59, 0.9) !important;
+        border-color: rgba(99, 102, 241, 0.4) !important;
+        box-shadow: 0 4px 15px rgba(99, 102, 241, 0.25) !important;
+      }
+      
+      body.light-mode .topbar-right .user-name {
+        color: #f8fafc !important;
+      }
+      
+      body.light-mode .topbar-right .user-role {
+        color: #94a3b8 !important;
+      }
+      
+      body.light-mode .topbar-right .user-avatar-placeholder {
+        background: linear-gradient(135deg, #f59e0b, #fbbf24) !important;
+        color: #1e293b !important;
       }
 
       /* Theme Toggle Button Styles */

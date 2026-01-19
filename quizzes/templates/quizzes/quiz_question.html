@@ -1283,10 +1283,15 @@
 
         const data = await resp.json();
 
-        if (resp.ok && data.success) {
+        if (data.redirect_url) {
+          // Handle both success and auto-submit cases
           window.location.href = data.redirect_url;
+        } else if (data.error) {
+          alert("Error: " + data.error);
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = 'Submit Answer <i class="ri-arrow-right-line"></i>';
         } else {
-          alert("Error: " + (data.error || resp.statusText));
+          alert("Unexpected response from server");
           submitBtn.disabled = false;
           submitBtn.innerHTML = 'Submit Answer <i class="ri-arrow-right-line"></i>';
         }

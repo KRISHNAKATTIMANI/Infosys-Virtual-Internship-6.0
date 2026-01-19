@@ -14,6 +14,9 @@
       rel="stylesheet"
     />
 
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
+
     <!-- Icons -->
     <link
       href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css"
@@ -1724,6 +1727,24 @@
         border-color: rgba(99, 102, 241, 0.5);
       }
 
+      body.light-mode .testimonials-nav {
+        background: rgba(30, 41, 59, 0.9);
+        border-color: rgba(99, 102, 241, 0.3);
+      }
+
+      body.light-mode .testimonials-nav:hover {
+        background: rgba(99, 102, 241, 0.9);
+        border-color: rgba(139, 92, 246, 0.5);
+      }
+
+      body.light-mode .testimonials-nav i {
+        color: #a5b4fc;
+      }
+
+      body.light-mode .testimonials-nav:hover i {
+        color: #ffffff;
+      }
+
       body.light-mode .stat-number {
         color: #f8fafc;
       }
@@ -1913,7 +1934,7 @@
 
       /* Testimonials Section */
       .testimonials {
-        padding: 6rem 2rem;
+        padding: 6rem 0;
         background: linear-gradient(180deg, #e0f2fe 0%, #f0f9ff 50%, #e0f7fa 100%);
         position: relative;
         overflow: hidden;
@@ -1933,17 +1954,94 @@
       }
 
       .testimonials-container {
-        max-width: 1200px;
-        margin: 0 auto;
+        width: 100%;
+        margin: 0;
         position: relative;
         z-index: 1;
+        padding: 0;
+      }
+
+      .section-header {
+        padding: 0 2rem;
+        margin-bottom: 3rem;
       }
 
       .testimonials-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        display: flex;
         gap: 2rem;
-        margin-top: 3rem;
+        margin-top: 0;
+        overflow: hidden;
+        position: relative;
+        padding: 2rem 0;
+        width: 100%;
+      }
+
+      .testimonials-track {
+        display: flex;
+        gap: 2rem;
+        animation: scrollTestimonials 30s linear infinite;
+        will-change: transform;
+      }
+
+      .testimonials-track.paused {
+        animation-play-state: paused;
+      }
+
+      @keyframes scrollTestimonials {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* Navigation Buttons */
+      .testimonials-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.9);
+        border: 2px solid rgba(56, 189, 248, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(56, 189, 248, 0.2);
+      }
+
+      .testimonials-nav:hover {
+        background: rgba(56, 189, 248, 0.9);
+        border-color: rgba(14, 165, 233, 0.5);
+        box-shadow: 0 6px 25px rgba(56, 189, 248, 0.4);
+        transform: translateY(-50%) scale(1.1);
+      }
+
+      .testimonials-nav i {
+        font-size: 1.5rem;
+        color: #0ea5e9;
+        transition: color 0.3s ease;
+      }
+
+      .testimonials-nav:hover i {
+        color: #ffffff;
+      }
+
+      .testimonials-nav.left {
+        left: 2rem;
+      }
+
+      .testimonials-nav.right {
+        right: 2rem;
+      }
+
+      .testimonials-wrapper {
+        position: relative;
       }
 
       .testimonial-card {
@@ -1956,7 +2054,10 @@
         box-shadow: 0 4px 20px rgba(56, 189, 248, 0.1);
         display: flex;
         flex-direction: column;
-        height: 100%;
+        min-width: 350px;
+        max-width: 400px;
+        flex-shrink: 0;
+        cursor: pointer;
       }
 
       .testimonial-card:hover {
@@ -2309,8 +2410,31 @@
           justify-content: center;
         }
 
-        .testimonials-grid {
-          grid-template-columns: 1fr;
+        /* Testimonials carousel responsive */
+        .testimonial-card {
+          min-width: 300px;
+          max-width: 350px;
+        }
+
+        .testimonials-track {
+          animation-duration: 25s;
+        }
+
+        .testimonials-nav {
+          width: 40px;
+          height: 40px;
+        }
+
+        .testimonials-nav.left {
+          left: 1rem;
+        }
+
+        .testimonials-nav.right {
+          right: 1rem;
+        }
+
+        .testimonials-nav i {
+          font-size: 1.2rem;
         }
         
         .hero-stats {
@@ -2320,6 +2444,40 @@
         
         .stat-item:not(:last-child)::after {
           display: none;
+        }
+      }
+
+      /* Extra small devices (phones, less than 480px) */
+      @media (max-width: 480px) {
+        .testimonial-card {
+          min-width: 280px;
+          max-width: 320px;
+          padding: 1.5rem;
+        }
+
+        .testimonial-content {
+          font-size: 1rem;
+        }
+
+        .testimonials-track {
+          animation-duration: 20s;
+        }
+
+        .testimonials-nav {
+          width: 35px;
+          height: 35px;
+        }
+
+        .testimonials-nav.left {
+          left: 0.5rem;
+        }
+
+        .testimonials-nav.right {
+          right: 0.5rem;
+        }
+
+        .testimonials-nav i {
+          font-size: 1rem;
         }
       }
 
@@ -2919,7 +3077,17 @@
           </p>
         </div>
 
-        <div class="testimonials-grid">
+        <div class="testimonials-wrapper">
+          <!-- Navigation Buttons -->
+          <button class="testimonials-nav left" id="testimonials-prev" aria-label="Previous testimonial">
+            <i class="ri-arrow-left-s-line"></i>
+          </button>
+          <button class="testimonials-nav right" id="testimonials-next" aria-label="Next testimonial">
+            <i class="ri-arrow-right-s-line"></i>
+          </button>
+
+          <div class="testimonials-grid">
+          <div class="testimonials-track" id="testimonials-track">
           {% if testimonials %}
             {% for feedback in testimonials %}
             <div class="testimonial-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:0 }}00">
@@ -2944,8 +3112,33 @@
               </div>
             </div>
             {% endfor %}
+            <!-- Duplicate testimonials for seamless loop -->
+            {% for feedback in testimonials %}
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:0 }}00">
+              <div class="testimonial-rating">
+                {% for i in "12345" %}
+                  {% if forloop.counter <= feedback.rating %}
+                  <i class="ri-star-fill"></i>
+                  {% else %}
+                  <i class="ri-star-half-fill"></i>
+                  {% endif %}
+                {% endfor %}
+              </div>
+              <p class="testimonial-content">
+                {{ feedback.comment }}
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar">{{ feedback.user.full_name|default:feedback.user.username|slice:":1"|upper }}</div>
+                <div class="author-info">
+                  <span class="author-name">{{ feedback.user.full_name|default:feedback.user.username }}</span>
+                  <span class="author-role">{% if feedback.quiz_attempt %}{{ feedback.quiz_attempt.category.name }} Learner{% else %}Student{% endif %}</span>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
           {% else %}
-          <!-- Default testimonials when no feedback exists -->
+          <div class="testimonials-track" id="testimonials-track">
           <div class="testimonial-card" data-aos="fade-up" data-aos-delay="0">
             <div class="testimonial-rating">
               <i class="ri-star-fill"></i>
@@ -3005,7 +3198,70 @@
               </div>
             </div>
           </div>
+
+          <!-- Duplicate default testimonials for seamless loop -->
+          <div class="testimonial-card" data-aos="fade-up" data-aos-delay="0">
+            <div class="testimonial-rating">
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+            </div>
+            <p class="testimonial-content">
+              AI Quiz Hub helped me prepare faster and smarter for my exams. The AI-generated questions were spot-on and the instant explanations really helped me understand concepts deeply.
+            </p>
+            <div class="testimonial-author">
+              <div class="author-avatar">R</div>
+              <div class="author-info">
+                <span class="author-name">Rahul Sharma</span>
+                <span class="author-role">Computer Science Student</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="testimonial-rating">
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+            </div>
+            <p class="testimonial-content">
+              The analytics dashboard is incredible! I can track my progress and identify weak areas. It's like having a personal tutor available 24/7.
+            </p>
+            <div class="testimonial-author">
+              <div class="author-avatar">P</div>
+              <div class="author-info">
+                <span class="author-name">Priya Patel</span>
+                <span class="author-role">Data Science Professional</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="testimonial-rating">
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-half-fill"></i>
+            </div>
+            <p class="testimonial-content">
+              As an instructor, I recommend AI Quiz Hub to all my students. The quality of questions and the adaptive learning system is truly remarkable.
+            </p>
+            <div class="testimonial-author">
+              <div class="author-avatar">A</div>
+              <div class="author-info">
+                <span class="author-name">Dr. Amit Kumar</span>
+                <span class="author-role">University Professor</span>
+              </div>
+            </div>
+          </div>
+          </div>
           {% endif %}
+        </div>
         </div>
       </div>
     </section>
@@ -3465,6 +3721,93 @@
       if (heroTitle) {
         const originalText = heroTitle.textContent;
         heroTitle.style.opacity = '1';
+      }
+
+      // Testimonials carousel auto-scroll with pause on hover and manual navigation
+      const testimonialsTrack = document.getElementById('testimonials-track');
+      const prevBtn = document.getElementById('testimonials-prev');
+      const nextBtn = document.getElementById('testimonials-next');
+      
+      if (testimonialsTrack) {
+        let scrollAmount = 0;
+        const cardWidth = 400; // approximate card width + gap
+        
+        // Handle hover on any testimonial card
+        const testimonialCards = testimonialsTrack.querySelectorAll('.testimonial-card');
+        testimonialCards.forEach(card => {
+          card.addEventListener('mouseenter', function() {
+            // Pause animation on hover
+            testimonialsTrack.classList.add('paused');
+            this.style.transform = 'translateY(-5px) scale(1.02)';
+            this.style.zIndex = '10';
+          });
+
+          card.addEventListener('mouseleave', function() {
+            // Resume animation when hover ends
+            testimonialsTrack.classList.remove('paused');
+            this.style.transform = '';
+            this.style.zIndex = '';
+          });
+        });
+
+        // Pause when hovering over the entire track
+        testimonialsTrack.addEventListener('mouseenter', function() {
+          this.classList.add('paused');
+        });
+
+        testimonialsTrack.addEventListener('mouseleave', function() {
+          this.classList.remove('paused');
+        });
+
+        // Manual navigation with buttons
+        if (prevBtn) {
+          prevBtn.addEventListener('click', function() {
+            testimonialsTrack.classList.add('paused');
+            const currentTransform = window.getComputedStyle(testimonialsTrack).transform;
+            let currentX = 0;
+            
+            if (currentTransform !== 'none') {
+              const matrix = new DOMMatrix(currentTransform);
+              currentX = matrix.m41;
+            }
+            
+            scrollAmount = currentX + cardWidth;
+            if (scrollAmount > 0) scrollAmount = 0;
+            
+            testimonialsTrack.style.animation = 'none';
+            testimonialsTrack.style.transform = `translateX(${scrollAmount}px)`;
+            
+            setTimeout(() => {
+              testimonialsTrack.style.animation = '';
+              testimonialsTrack.classList.remove('paused');
+            }, 2000);
+          });
+        }
+
+        if (nextBtn) {
+          nextBtn.addEventListener('click', function() {
+            testimonialsTrack.classList.add('paused');
+            const currentTransform = window.getComputedStyle(testimonialsTrack).transform;
+            let currentX = 0;
+            
+            if (currentTransform !== 'none') {
+              const matrix = new DOMMatrix(currentTransform);
+              currentX = matrix.m41;
+            }
+            
+            scrollAmount = currentX - cardWidth;
+            const maxScroll = -(testimonialsTrack.scrollWidth / 2);
+            if (scrollAmount < maxScroll) scrollAmount = 0;
+            
+            testimonialsTrack.style.animation = 'none';
+            testimonialsTrack.style.transform = `translateX(${scrollAmount}px)`;
+            
+            setTimeout(() => {
+              testimonialsTrack.style.animation = '';
+              testimonialsTrack.classList.remove('paused');
+            }, 2000);
+          });
+        }
       }
     </script>
   </body>

@@ -3,6 +3,7 @@ from django.db.models import Count, Q
 import random
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.db.models import Avg, Max, Min, Sum, Count, Q
 from django.db.models.functions import Coalesce, TruncDate
 from django.http import JsonResponse, HttpResponse
@@ -1626,12 +1627,23 @@ def tab_violation(request):
 @login_required
 @require_POST
 def skip_question(request, attempt_id):
-    quiz_attempt = get_object_or_404(
-        QuizAttempt,
-        id=attempt_id,
-        user=request.user,
-        status=QuizAttempt.STATUS_IN_PROGRESS
-    )
+    # Try to get the quiz attempt
+    try:
+        quiz_attempt = QuizAttempt.objects.get(
+            id=attempt_id,
+            user=request.user
+        )
+    except QuizAttempt.DoesNotExist:
+        messages.error(request, 'Quiz attempt not found.')
+        return redirect('quizzes:dashboard')
+    
+    # Check if quiz is still in progress
+    if quiz_attempt.status != QuizAttempt.STATUS_IN_PROGRESS:
+        messages.warning(request, f'Cannot skip question. Quiz status is: {quiz_attempt.get_status_display()}')
+        if quiz_attempt.status == QuizAttempt.STATUS_COMPLETED:
+            return redirect('quizzes:quiz_results', attempt_id=quiz_attempt.id)
+        else:
+            return redirect('quizzes:dashboard')
 
     current_idx = quiz_attempt.current_question_index
 
@@ -1648,8 +1660,10 @@ def skip_question(request, attempt_id):
     aq.selected_option = None
     aq.save(update_fields=['status', 'selected_option'])
 
-    quiz_attempt.current_question_index += 1
-    quiz_attempt.save(update_fields=['current_question_index'])
+    # Only increment if not at the last question
+    if quiz_attempt.current_question_index < quiz_attempt.total_questions - 1:
+        quiz_attempt.current_question_index += 1
+        quiz_attempt.save(update_fields=['current_question_index'])
 
     return redirect('quizzes:show_question',attempt_id=quiz_attempt.id)
 
@@ -1658,12 +1672,23 @@ def skip_question(request, attempt_id):
 @login_required
 @require_POST
 def mark_for_review(request, attempt_id):
-    quiz_attempt = get_object_or_404(
-        QuizAttempt,
-        id=attempt_id,
-        user=request.user,
-        status=QuizAttempt.STATUS_IN_PROGRESS
-    )
+    # Try to get the quiz attempt
+    try:
+        quiz_attempt = QuizAttempt.objects.get(
+            id=attempt_id,
+            user=request.user
+        )
+    except QuizAttempt.DoesNotExist:
+        messages.error(request, 'Quiz attempt not found.')
+        return redirect('quizzes:dashboard')
+    
+    # Check if quiz is still in progress
+    if quiz_attempt.status != QuizAttempt.STATUS_IN_PROGRESS:
+        messages.warning(request, f'Cannot mark for review. Quiz status is: {quiz_attempt.get_status_display()}')
+        if quiz_attempt.status == QuizAttempt.STATUS_COMPLETED:
+            return redirect('quizzes:quiz_results', attempt_id=quiz_attempt.id)
+        else:
+            return redirect('quizzes:dashboard')
 
     current_idx = quiz_attempt.current_question_index
 
@@ -1678,8 +1703,10 @@ def mark_for_review(request, attempt_id):
     aq.status = AttemptQuestion.STATUS_REVIEW
     aq.save(update_fields=['status'])
 
-    quiz_attempt.current_question_index += 1
-    quiz_attempt.save(update_fields=['current_question_index'])
+    # Only increment if not at the last question
+    if quiz_attempt.current_question_index < quiz_attempt.total_questions - 1:
+        quiz_attempt.current_question_index += 1
+        quiz_attempt.save(update_fields=['current_question_index'])
 
     return redirect('quizzes:show_question',attempt_id=quiz_attempt.id)
 

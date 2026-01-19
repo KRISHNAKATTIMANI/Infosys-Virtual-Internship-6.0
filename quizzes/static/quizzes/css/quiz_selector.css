@@ -614,19 +614,50 @@ body.light-mode .difficulty-title {
 }
 
 body.light-mode .difficulty-btn {
-    background: rgba(30, 41, 59, 0.6);
-    border-color: rgba(255, 255, 255, 0.1);
-    color: #e2e8f0;
+    background: rgba(30, 41, 59, 0.6) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    color: #e2e8f0 !important;
+}
+
+body.light-mode .difficulty-btn::before {
+    background: #64748b !important;
 }
 
 body.light-mode .difficulty-btn:hover {
-    background: rgba(99, 102, 241, 0.2);
-    border-color: rgba(99, 102, 241, 0.4);
+    background: rgba(99, 102, 241, 0.2) !important;
+    border-color: rgba(99, 102, 241, 0.4) !important;
+    color: #a5b4fc !important;
 }
 
 body.light-mode .difficulty-btn.selected {
-    background: rgba(99, 102, 241, 0.3);
-    border-color: #6366f1;
+    background: rgba(99, 102, 241, 0.3) !important;
+    border-color: #6366f1 !important;
+    color: #c7d2fe !important;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4) !important;
+}
+
+body.light-mode .difficulty-btn.selected::before {
+    background: #6366f1 !important;
+}
+
+body.light-mode .difficulty-btn.easy,
+body.light-mode .difficulty-btn.medium,
+body.light-mode .difficulty-btn.hard {
+    background: rgba(30, 41, 59, 0.6) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    color: #e2e8f0 !important;
+}
+
+body.light-mode .difficulty-btn.easy:hover,
+body.light-mode .difficulty-btn.medium:hover,
+body.light-mode .difficulty-btn.hard:hover,
+body.light-mode .difficulty-btn.easy.selected,
+body.light-mode .difficulty-btn.medium.selected,
+body.light-mode .difficulty-btn.hard.selected {
+    background: rgba(99, 102, 241, 0.3) !important;
+    border-color: #6366f1 !important;
+    color: #c7d2fe !important;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4) !important;
 }
 
 /* Additional dark mode styles for quiz selector */
@@ -665,6 +696,17 @@ body.light-mode .selection-summary h4 {
 body.light-mode .sidebar-placeholder p,
 body.light-mode .selection-path {
     color: #94a3b8 !important;
+}
+
+body.light-mode .selection-summary {
+    background: rgba(51, 65, 85, 0.6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+body.light-mode .path-item {
+    background: rgba(99, 102, 241, 0.2) !important;
+    border: 1px solid rgba(99, 102, 241, 0.4) !important;
+    color: #c7d2fe !important;
 }
 
 body.light-mode .selection-card {
