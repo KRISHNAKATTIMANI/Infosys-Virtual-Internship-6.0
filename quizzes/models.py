@@ -256,7 +256,9 @@ class AttemptQuestion(models.Model):
 
     question = models.ForeignKey(
         Question,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        null=True,  # Allow null for AI-generated quizzes
+        blank=True
     )
 
     question_order = models.PositiveSmallIntegerField()
@@ -277,7 +279,7 @@ class AttemptQuestion(models.Model):
     answered_at = models.DateTimeField(null=True, blank=True)
 
     class Meta:
-        unique_together = ('attempt', 'question')
+        unique_together = ('attempt', 'question_order')  # Changed: use question_order instead of question
         ordering = ['question_order']
         indexes = [
             models.Index(fields=['attempt', 'status']),

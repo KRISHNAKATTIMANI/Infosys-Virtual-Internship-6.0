@@ -368,12 +368,21 @@ def resume_quiz(request, attempt_id):
 
 @login_required
 def previous_question(request, attempt_id):
-    quiz_attempt = get_object_or_404(
-        QuizAttempt,
-        id=attempt_id,
-        user=request.user,
-        status=QuizAttempt.STATUS_IN_PROGRESS
-    )
+    # Try to get the quiz attempt
+    try:
+        quiz_attempt = QuizAttempt.objects.get(
+            id=attempt_id,
+            user=request.user
+        )
+    except QuizAttempt.DoesNotExist:
+        return redirect('quizzes:dashboard')
+    
+    # Check if quiz is still in progress
+    if quiz_attempt.status != QuizAttempt.STATUS_IN_PROGRESS:
+        if quiz_attempt.status == QuizAttempt.STATUS_COMPLETED:
+            return redirect('quizzes:quiz_results', attempt_id=quiz_attempt.id)
+        else:
+            return redirect('quizzes:dashboard')
 
     # Move back only if possible
     if quiz_attempt.current_question_index > 0:
@@ -764,27 +773,27 @@ def submit_answer(request, attempt_id):
     # ADD DB UPDATE
     current_idx = quiz_attempt.current_question_index
 
+    # Try to get AttemptQuestion (may not exist for AI-generated quizzes)
     aq = AttemptQuestion.objects.filter(
         attempt=quiz_attempt,
         question_order=current_idx
     ).first()
 
-    if not aq:
-        return JsonResponse({'error': 'Question state not found'}, status=400)
+    # Update AttemptQuestion if it exists
+    if aq:
+        aq.selected_option = user_answer
+        aq.status = AttemptQuestion.STATUS_SOLVED
+        aq.answered_at = timezone.now()
+        aq.is_correct = (
+            user_answer == quiz_attempt.questions[current_idx]['correct_answer']
+        )
 
-    aq.selected_option = user_answer
-    aq.status = AttemptQuestion.STATUS_SOLVED
-    aq.answered_at = timezone.now()
-    aq.is_correct = (
-        user_answer == quiz_attempt.questions[current_idx]['correct_answer']
-    )
-
-    aq.save(update_fields=[
-        'selected_option',
-        'status',
-        'answered_at',
-        'is_correct'
-    ])
+        aq.save(update_fields=[
+            'selected_option',
+            'status',
+            'answered_at',
+            'is_correct'
+        ])
     
     if current_idx >= len(quiz_attempt.questions):
         return JsonResponse({'error': 'No more questions'}, status=400)
@@ -1647,18 +1656,17 @@ def skip_question(request, attempt_id):
 
     current_idx = quiz_attempt.current_question_index
 
+    # Try to get AttemptQuestion (may not exist for AI-generated quizzes)
     aq = AttemptQuestion.objects.filter(
         attempt=quiz_attempt,
         question_order=current_idx
     ).first()
 
-    if not aq:
-        return JsonResponse({'error': 'Question state not found'}, status=400)
-
-
-    aq.status = AttemptQuestion.STATUS_SKIPPED
-    aq.selected_option = None
-    aq.save(update_fields=['status', 'selected_option'])
+    # Update AttemptQuestion if it exists
+    if aq:
+        aq.status = AttemptQuestion.STATUS_SKIPPED
+        aq.selected_option = None
+        aq.save(update_fields=['status', 'selected_option'])
 
     # Only increment if not at the last question
     if quiz_attempt.current_question_index < quiz_attempt.total_questions - 1:
@@ -1692,16 +1700,16 @@ def mark_for_review(request, attempt_id):
 
     current_idx = quiz_attempt.current_question_index
 
+    # Try to get AttemptQuestion (may not exist for AI-generated quizzes)
     aq = AttemptQuestion.objects.filter(
         attempt=quiz_attempt,
         question_order=current_idx
     ).first()
 
-    if not aq:
-        return JsonResponse({'error': 'Question state not found'}, status=400)
-
-    aq.status = AttemptQuestion.STATUS_REVIEW
-    aq.save(update_fields=['status'])
+    # Update AttemptQuestion if it exists
+    if aq:
+        aq.status = AttemptQuestion.STATUS_REVIEW
+        aq.save(update_fields=['status'])
 
     # Only increment if not at the last question
     if quiz_attempt.current_question_index < quiz_attempt.total_questions - 1:
@@ -1714,12 +1722,31 @@ def mark_for_review(request, attempt_id):
 # ADD QUESTION JUMP (Navigation Click)
 @login_required
 def jump_to_question(request, attempt_id, q_no):
-    quiz_attempt = get_object_or_404(
-        QuizAttempt,
+    # First try to get with IN_PROGRESS status
+    quiz_attempt = QuizAttempt.objects.filter(
         id=attempt_id,
         user=request.user,
         status=QuizAttempt.STATUS_IN_PROGRESS
-    )
+    ).first()
+    
+    # If not found with IN_PROGRESS, check if it exists with any status
+    if not quiz_attempt:
+        quiz_attempt = QuizAttempt.objects.filter(
+            id=attempt_id,
+            user=request.user
+        ).first()
+        
+        if not quiz_attempt:
+            # Quiz attempt doesn't exist at all
+            return redirect('quizzes:dashboard')
+        
+        # If quiz is completed, redirect to results
+        if quiz_attempt.status == QuizAttempt.STATUS_COMPLETED:
+            return redirect('quizzes:quiz_results', attempt_id=attempt_id)
+        
+        # If quiz is generating or abandoned, redirect to dashboard
+        if quiz_attempt.status in [QuizAttempt.STATUS_GENERATING, QuizAttempt.STATUS_ABANDONED]:
+            return redirect('quizzes:dashboard')
 
     if 0 <= q_no < quiz_attempt.total_questions:
         quiz_attempt.current_question_index = q_no
@@ -1734,15 +1761,149 @@ def ai_quiz_generator_view(request):
     return render(request, "quizzes/ai_quiz_generator.html")
 
 
+@login_required
 def generate_ai_quiz(request):
     if request.method == "POST":
         uploaded_file = request.FILES.get("file")
-        topic = request.POST.get("topic")
-
+        topic = request.POST.get("topic", "").strip()
+        difficulty = request.POST.get("difficulty", "medium")
+        question_count = int(request.POST.get("question_count", 10))
+        
+        # Validate question count
+        question_count = max(5, min(30, question_count))
+        
+        extracted_text = ""
+        source_name = topic or "Custom Quiz"
+        
         if uploaded_file:
-            extracted_text = extract_text_from_file(uploaded_file)
-        else:
+            try:
+                extracted_text = extract_text_from_file(uploaded_file)
+                source_name = uploaded_file.name.rsplit('.', 1)[0]  # File name without extension
+                if not extracted_text or len(extracted_text.strip()) < 50:
+                    messages.error(request, "Could not extract enough text from the file. Please try another file.")
+                    return redirect("quizzes:ai_quiz_generator")
+            except Exception as e:
+                messages.error(request, f"Error reading file: {str(e)}")
+                return redirect("quizzes:ai_quiz_generator")
+        elif topic:
             extracted_text = topic
+        else:
+            messages.error(request, "Please either upload a file or enter a topic.")
+            return redirect("quizzes:ai_quiz_generator")
+        
+        try:
+            # Generate questions using AI service
+            from .ai_service import generate_quiz_questions
+            
+            # For file uploads, use the extracted content as context
+            if uploaded_file:
+                # Truncate text if too long (API limits)
+                max_content_length = 8000
+                if len(extracted_text) > max_content_length:
+                    extracted_text = extracted_text[:max_content_length] + "..."
+                
+                questions = generate_quiz_questions(
+                    topic=source_name,
+                    category="Document-Based",
+                    difficulty=difficulty,
+                    count=question_count,
+                    concepts=[f"Based on the following content:\n{extracted_text}"]
+                )
+            else:
+                questions = generate_quiz_questions(
+                    topic=topic,
+                    category="Custom Topic",
+                    difficulty=difficulty,
+                    count=question_count,
+                    concepts=None
+                )
+            
+            # Store questions in session for the quiz
+            request.session['ai_generated_questions'] = questions
+            request.session['ai_quiz_config'] = {
+                'topic': source_name,
+                'difficulty': difficulty,
+                'question_count': len(questions),
+                'source': 'file' if uploaded_file else 'topic'
+            }
+            
+            # Redirect to start the AI-generated quiz
+            return redirect("quizzes:start_ai_quiz")
+            
+        except Exception as e:
+            messages.error(request, f"Error generating quiz: {str(e)}")
+            return redirect("quizzes:ai_quiz_generator")
+    
+    return redirect("quizzes:ai_quiz_generator")
 
-        # TEMP: verify extraction works
-        return HttpResponse(extracted_text[:10000])
+
+@login_required
+def start_ai_quiz(request):
+    """Start an AI-generated quiz from session data"""
+    questions = request.session.get('ai_generated_questions')
+    config = request.session.get('ai_quiz_config')
+    
+    if not questions or not config:
+        messages.error(request, "No quiz data found. Please generate a quiz first.")
+        return redirect("quizzes:ai_quiz_generator")
+    
+    # Create a quiz attempt for AI-generated quiz (without saving category/subcategory)
+    try:
+        # Calculate time limit (1 minute per question)
+        time_limit_seconds = len(questions) * 60
+        
+        # Format questions with IDs and user_answer fields
+        formatted_questions = []
+        for idx, q in enumerate(questions):
+            formatted_questions.append({
+                "id": idx + 1,
+                "question": q.get('question', ''),
+                "option_a": q.get('option_a', ''),
+                "option_b": q.get('option_b', ''),
+                "option_c": q.get('option_c', ''),
+                "option_d": q.get('option_d', ''),
+                "correct_answer": q.get('correct_answer', 'A'),
+                "explanation": q.get('explanation', ''),
+                "user_answer": None,
+                "is_correct": None
+            })
+        
+        # Create quiz attempt without category/subcategory
+        quiz_attempt = QuizAttempt.objects.create(
+            user=request.user,
+            category=None,  # No category saved
+            subcategory=None,  # No subcategory saved
+            difficulty=config['difficulty'],
+            total_questions=len(formatted_questions),
+            status=QuizAttempt.STATUS_IN_PROGRESS,
+            time_limit_seconds=time_limit_seconds,
+            remaining_seconds=time_limit_seconds,
+            questions=formatted_questions,
+            started_at=timezone.now(),
+            ai_meta={
+                'model': 'gpt-3.5-turbo',
+                'source': config.get('source', 'topic'),
+                'topic': config.get('topic', 'AI Generated Quiz'),
+                'generated_at': timezone.now().isoformat()
+            }
+        )
+        
+        # Create AttemptQuestion entries for navigation panel
+        for idx in range(len(formatted_questions)):
+            AttemptQuestion.objects.create(
+                attempt=quiz_attempt,
+                question=None,  # No Question object for AI-generated quizzes
+                question_order=idx,
+                status=AttemptQuestion.STATUS_UNVISITED
+            )
+        
+        # Clear session data
+        del request.session['ai_generated_questions']
+        del request.session['ai_quiz_config']
+        
+        return redirect("quizzes:show_question", attempt_id=quiz_attempt.id)
+        
+    except Exception as e:
+        messages.error(request, f"Error starting quiz: {str(e)}")
+        return redirect("quizzes:ai_quiz_generator")
+

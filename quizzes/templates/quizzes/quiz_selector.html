@@ -38,56 +38,104 @@
                 <span style="font-size: 2rem;">🎯</span>
                 <div>
                     <h1>Choose Your Quiz</h1>
-                    <p>Select a category and navigate through the topics</p>
+                    <p>Select a quiz mode and generation method</p>
                 </div>
             </div>
         </div>
 
-        <!-- Breadcrumb Trail -->
-        <div class="breadcrumb" id="breadcrumb">
-            <span class="breadcrumb-item active">Select a Category</span>
+        <!-- Step 1: Quiz Mode Selection -->
+        <div class="quiz-type-section" id="quiz-mode-section" style="background:white;border-radius:16px;padding:24px;margin-bottom:20px;box-shadow:0 4px 15px rgba(0,0,0,0.05);">
+            <h3 class="quiz-type-title" style="font-size:16px;font-weight:600;color:#4f46e5;margin-bottom:16px;">📋 Step 1: Select Quiz Mode</h3>
+            <div class="quiz-type-options" style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;">
+                <div class="quiz-mode-card" data-mode="personal" id="quiz-mode-personal" style="display:flex;align-items:center;gap:16px;padding:20px 24px;background:#f8fafc;border:2px solid #e2e8f0;border-radius:12px;cursor:pointer;transition:all 0.3s ease;">
+                    <div class="quiz-type-icon" style="font-size:2.5rem;flex-shrink:0;">🧠</div>
+                    <div class="quiz-type-content" style="flex:1;">
+                        <h4 style="font-size:16px;font-weight:600;color:#1e293b;margin:0 0 4px 0;">Personal Quiz</h4>
+                        <p style="font-size:13px;color:#64748b;margin:0;">Test and improve your own skills</p>
+                    </div>
+                    <div class="quiz-type-check" style="font-size:24px;color:#4f46e5;opacity:0;"><i class="ri-checkbox-circle-fill"></i></div>
+                </div>
+                <div class="quiz-mode-card" data-mode="classroom" id="quiz-mode-classroom" style="display:flex;align-items:center;gap:16px;padding:20px 24px;background:#f8fafc;border:2px solid #e2e8f0;border-radius:12px;cursor:pointer;transition:all 0.3s ease;">
+                    <div class="quiz-type-icon" style="font-size:2.5rem;flex-shrink:0;">👥</div>
+                    <div class="quiz-type-content" style="flex:1;">
+                        <h4 style="font-size:16px;font-weight:600;color:#1e293b;margin:0 0 4px 0;">Classroom Quiz</h4>
+                        <p style="font-size:13px;color:#64748b;margin:0;">Create quiz for multiple participants</p>
+                    </div>
+                    <div class="quiz-type-check" style="font-size:24px;color:#4f46e5;opacity:0;"><i class="ri-checkbox-circle-fill"></i></div>
+                </div>
+            </div>
         </div>
 
-        <!-- Two Column Layout -->
-        <div class="content-wrapper">
-            <!-- Left: Levels -->
-            <div class="levels-section" id="levels-container">
-                <!-- Level 1: Categories -->
-                <div class="level-container" data-level="1">
-                    <div class="level-label"><span>1</span> Categories</div>
-                    <div class="cards-grid">
-                        {% for cat in categories %}
-                        <div class="selection-card" data-type="category" data-id="{{ cat.id }}"
-                            data-name="{{ cat.name }}">
-                            <span class="card-icon">
-                                {% if 'Academic' in cat.name %}📚
-                                {% elif 'Entertainment' in cat.name %}🎬
-                                {% elif 'General' in cat.name %}🌍
-                                {% else %}📁{% endif %}
-                            </span>
-                            <div class="card-content">
-                                <div class="card-name">{{ cat.name }}</div>
-                                <div class="card-desc">{{ cat.description|default:"Explore topics" }}</div>
+        <!-- Step 2: Generation Method (Hidden by default) -->
+        <div class="quiz-type-section" id="generation-method-section" style="background:white;border-radius:16px;padding:24px;margin-bottom:20px;box-shadow:0 4px 15px rgba(0,0,0,0.05);display:none;">
+            <h3 class="quiz-type-title" style="font-size:16px;font-weight:600;color:#10b981;margin-bottom:16px;">📝 Step 2: Choose How to Generate Quiz</h3>
+            <div class="quiz-type-options" style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;">
+                <div class="generation-method-card" data-method="document" id="method-document" style="display:flex;align-items:center;gap:16px;padding:20px 24px;background:#f8fafc;border:2px solid #e2e8f0;border-radius:12px;cursor:pointer;transition:all 0.3s ease;">
+                    <div class="quiz-type-icon" style="font-size:2.5rem;flex-shrink:0;">📄</div>
+                    <div class="quiz-type-content" style="flex:1;">
+                        <h4 style="font-size:16px;font-weight:600;color:#1e293b;margin:0 0 4px 0;">Upload Document</h4>
+                        <p style="font-size:13px;color:#64748b;margin:0;">Generate quiz from PDF, DOCX, or TXT files</p>
+                    </div>
+                    <div class="quiz-type-check" style="font-size:24px;color:#f59e0b;"><i class="ri-upload-cloud-2-line"></i></div>
+                </div>
+                <div class="generation-method-card" data-method="categories" id="method-categories" style="display:flex;align-items:center;gap:16px;padding:20px 24px;background:#f8fafc;border:2px solid #e2e8f0;border-radius:12px;cursor:pointer;transition:all 0.3s ease;">
+                    <div class="quiz-type-icon" style="font-size:2.5rem;flex-shrink:0;">📚</div>
+                    <div class="quiz-type-content" style="flex:1;">
+                        <h4 style="font-size:16px;font-weight:600;color:#1e293b;margin:0 0 4px 0;">Select from Categories</h4>
+                        <p style="font-size:13px;color:#64748b;margin:0;">Choose from predefined topics and subjects</p>
+                    </div>
+                    <div class="quiz-type-check" style="font-size:24px;color:#10b981;opacity:0;"><i class="ri-checkbox-circle-fill"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categories Section (Hidden by default) -->
+        <div id="categories-section" style="display:none;">
+            <!-- Breadcrumb Trail -->
+            <div class="breadcrumb" id="breadcrumb">
+                <span class="breadcrumb-item active">Select a Category</span>
+            </div>
+
+            <!-- Two Column Layout -->
+            <div class="content-wrapper">
+                <!-- Left: Levels -->
+                <div class="levels-section" id="levels-container">
+                    <!-- Level 1: Categories -->
+                    <div class="level-container" data-level="1">
+                        <div class="level-label"><span>1</span> Categories</div>
+                        <div class="cards-grid">
+                            {% for cat in categories %}
+                            <div class="selection-card" data-type="category" data-id="{{ cat.id }}"
+                                data-name="{{ cat.name }}">
+                                <span class="card-icon">
+                                    {% if 'Academic' in cat.name %}📚
+                                    {% elif 'Entertainment' in cat.name %}🎬
+                                    {% elif 'General' in cat.name %}🌍
+                                    {% else %}📁{% endif %}
+                                </span>
+                                <div class="card-content">
+                                    <div class="card-name">{{ cat.name }}</div>
+                                    <div class="card-desc">{{ cat.description|default:"Explore topics" }}</div>
+                                </div>
                             </div>
+                            {% empty %}
+                            <div class="empty-state">
+                                <div class="empty-state-icon">📭</div>
+                                <p>No categories available.</p>
+                            </div>
+                            {% endfor %}
                         </div>
-                        {% empty %}
-                        <div class="empty-state">
-                            <div class="empty-state-icon">📭</div>
-                            <p>No categories available.</p>
-                        </div>
-                        {% endfor %}
                     </div>
                 </div>
-            </div>
 
-            <!-- Right: Sidebar -->
-            <div class="sidebar-section">
-                <!-- Placeholder when nothing selected -->
-                <div class="sidebar-placeholder" id="sidebar-placeholder">
-                    <div class="sidebar-placeholder-icon">📋</div>
-                    <h4>Your Selection</h4>
-                    <p>Select categories to see options here</p>
-                </div>
+                <!-- Right: Sidebar -->
+                <div class="sidebar-section">
+                    <!-- Placeholder when nothing selected -->
+                    <div class="sidebar-placeholder" id="sidebar-placeholder">
+                        <div class="sidebar-placeholder-icon">📋</div>
+                        <h4>Your Selection</h4>
+                        <p>Select categories to see options here</p>
+                    </div>
 
                 <!-- Selection Summary (shown when selecting) -->
                 <div class="difficulty-panel" id="sidebar-content" style="display: none;">
@@ -112,6 +160,7 @@
                 </div>
             </div>
         </div>
+        </div>
     </div>
 
     <script>
@@ -120,6 +169,8 @@
             const state = {
                 selections: [],
                 leafSubcategoryId: null,
+                quizMode: null, // 'personal' or 'classroom'
+                generationMethod: null, // 'document' or 'categories'
                 difficulty: null
             };
 
@@ -130,12 +181,120 @@
             const selectionPath = document.getElementById('selection-path');
             const startContainer = document.getElementById('start-container');
             const startBtn = document.getElementById('start-quiz-btn');
+            
+            // New sections
+            const quizModeSection = document.getElementById('quiz-mode-section');
+            const generationMethodSection = document.getElementById('generation-method-section');
+            const categoriesSection = document.getElementById('categories-section');
 
             // CSRF token for AJAX
             function getCsrfToken() {
                 const cookie = document.cookie.split(';').find(c => c.trim().startsWith('csrftoken='));
                 return cookie ? cookie.split('=')[1] : '';
             }
+
+            // Step 1: Quiz Mode Selection
+            const quizModeCards = document.querySelectorAll('.quiz-mode-card');
+            quizModeCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    // Update visual selection
+                    quizModeCards.forEach(c => {
+                        c.classList.remove('selected');
+                        c.style.background = '#f8fafc';
+                        c.style.border = '2px solid #e2e8f0';
+                        c.querySelector('.quiz-type-check').style.opacity = '0';
+                    });
+                    card.classList.add('selected');
+                    card.style.background = 'linear-gradient(135deg,#eef2ff,#e0e7ff)';
+                    card.style.border = '2px solid #4f46e5';
+                    card.querySelector('.quiz-type-check').style.opacity = '1';
+                    
+                    state.quizMode = card.dataset.mode;
+                    
+                    // Show Step 2: Generation Method
+                    generationMethodSection.style.display = 'block';
+                    
+                    // Reset Step 2 and categories
+                    state.generationMethod = null;
+                    categoriesSection.style.display = 'none';
+                    
+                    // Reset generation method card visuals
+                    document.querySelectorAll('.generation-method-card').forEach(c => {
+                        c.classList.remove('selected');
+                        c.style.background = '#f8fafc';
+                        c.style.border = '2px solid #e2e8f0';
+                        const check = c.querySelector('.quiz-type-check');
+                        if (c.dataset.method === 'document') {
+                            check.innerHTML = '<i class="ri-upload-cloud-2-line"></i>';
+                            check.style.color = '#f59e0b';
+                            check.style.opacity = '1';
+                        } else {
+                            check.innerHTML = '<i class="ri-checkbox-circle-fill"></i>';
+                            check.style.color = '#10b981';
+                            check.style.opacity = '0';
+                        }
+                    });
+                    
+                    // Show classroom coming soon message
+                    const existingBanner = document.querySelector('.coming-soon-banner');
+                    if (existingBanner) existingBanner.remove();
+                    
+                    if (state.quizMode === 'classroom') {
+                        const banner = document.createElement('div');
+                        banner.className = 'coming-soon-banner';
+                        banner.innerHTML = `
+                            <i class="ri-information-line"></i>
+                            <span>Classroom quiz mode is coming soon! For now, you can create quizzes with the same features.</span>
+                            <button onclick="this.parentElement.remove()" style="background:none;border:none;color:inherit;cursor:pointer;font-size:18px;margin-left:auto;"><i class="ri-close-line"></i></button>
+                        `;
+                        banner.style.cssText = 'display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,#f59e0b,#fbbf24);color:#0f172a;padding:12px 20px;border-radius:10px;margin-bottom:16px;font-weight:500;font-size:14px;';
+                        generationMethodSection.after(banner);
+                    }
+                    
+                    // Scroll to Step 2
+                    generationMethodSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                });
+            });
+
+            // Step 2: Generation Method Selection
+            const generationMethodCards = document.querySelectorAll('.generation-method-card');
+            generationMethodCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const method = card.dataset.method;
+                    state.generationMethod = method;
+                    
+                    // Update visual selection
+                    generationMethodCards.forEach(c => {
+                        c.classList.remove('selected');
+                        c.style.background = '#f8fafc';
+                        c.style.border = '2px solid #e2e8f0';
+                        const check = c.querySelector('.quiz-type-check');
+                        if (c.dataset.method === 'document') {
+                            check.innerHTML = '<i class="ri-upload-cloud-2-line"></i>';
+                            check.style.color = '#f59e0b';
+                        } else {
+                            check.innerHTML = '<i class="ri-checkbox-circle-fill"></i>';
+                            check.style.color = '#10b981';
+                            check.style.opacity = '0';
+                        }
+                    });
+                    
+                    card.classList.add('selected');
+                    if (method === 'document') {
+                        card.style.background = 'linear-gradient(135deg,#fef3c7,#fde68a)';
+                        card.style.border = '2px solid #f59e0b';
+                        // Redirect to document upload page
+                        window.location.href = "{% url 'quizzes:ai_quiz_generator' %}";
+                    } else {
+                        card.style.background = 'linear-gradient(135deg,#ecfdf5,#d1fae5)';
+                        card.style.border = '2px solid #10b981';
+                        card.querySelector('.quiz-type-check').style.opacity = '1';
+                        // Show categories section
+                        categoriesSection.style.display = 'block';
+                        categoriesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
 
             // Update breadcrumb display
             function updateBreadcrumb() {

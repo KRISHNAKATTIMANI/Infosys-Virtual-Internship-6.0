@@ -714,23 +714,28 @@
 
     #toast-container {
       position: fixed;
-      top: 1.5rem;
-      right: 1.5rem;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
       z-index: 9999;
       display: flex;
       flex-direction: column;
+      align-items: center;
       gap: 0.75rem;
+      padding-top: 1rem;
     }
 
     .toast {
-      min-width: 280px;
-      padding: 0.9rem 1.2rem;
-      border-radius: 0.75rem;
-      font-size: 0.9rem;
-      font-weight: 500;
+      min-width: 300px;
+      max-width: 90vw;
+      padding: 1rem 1.5rem;
+      border-radius: 0 0 0.75rem 0.75rem;
+      font-size: 0.95rem;
+      font-weight: 600;
       color: #0f172a;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-      animation: slideIn 0.3s ease, fadeOut 0.3s ease 3.5s forwards;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      animation: dropDown 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), fadeOut 0.4s ease 3.5s forwards;
+      text-align: center;
     }
 
     .toast-warning {
@@ -742,13 +747,23 @@
       color: #fff;
     }
 
-    @keyframes slideIn {
-      from { transform: translateX(30px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
+    .toast-success {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #fff;
+    }
+
+    .toast-info {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: #fff;
+    }
+
+    @keyframes dropDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
     @keyframes fadeOut {
-      to { opacity: 0; transform: translateX(30px); }
+      to { opacity: 0; transform: translateY(-20px); }
     }
 
     /* Question Palette Panel */
@@ -1145,11 +1160,33 @@
     const timerDisplay = document.getElementById('timer-display');
 
     const STORAGE_KEY = "quiz_timer_{{ quiz_attempt.id }}";
-    let remainingTime = localStorage.getItem(STORAGE_KEY) ? parseInt(localStorage.getItem(STORAGE_KEY)) : {{ remaining_seconds }};
+    const SERVER_TIME = {{ remaining_seconds }};
+    
+    // Use server time as the authoritative source, localStorage only as backup
+    // This prevents issues when navigating between questions
+    let storedTime = localStorage.getItem(STORAGE_KEY);
+    let remainingTime = SERVER_TIME;
+    
+    // Only use localStorage if it's valid and less than server time (to prevent cheating)
+    if (storedTime) {
+      const parsedTime = parseInt(storedTime);
+      if (!isNaN(parsedTime) && parsedTime > 0 && parsedTime <= SERVER_TIME) {
+        remainingTime = parsedTime;
+      }
+    }
+    
+    // Ensure we never start with 0 or negative time (prevents instant auto-submit)
+    if (remainingTime <= 0) {
+      remainingTime = SERVER_TIME > 0 ? SERVER_TIME : 1;
+    }
+    
+    // Flag to prevent auto-submit during page navigation
+    let isNavigating = false;
+    let autoSubmitTriggered = false;
 
     function formatTime(seconds) {
-      const mins = Math.floor(seconds / 60);
-      const secs = seconds % 60;
+      const mins = Math.floor(Math.max(0, seconds) / 60);
+      const secs = Math.max(0, seconds) % 60;
       return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
     }
 
@@ -1166,8 +1203,10 @@
     }
 
     function saveRemainingTime() {
+      if (isNavigating || remainingTime <= 0) return;
+      
       const formData = new FormData();
-      formData.append('remaining_seconds', remainingTime);
+      formData.append('remaining_seconds', Math.max(0, remainingTime));
       formData.append('csrfmiddlewaretoken', csrftoken);
       if (navigator.sendBeacon) {
         navigator.sendBeacon(saveTimerUrl, formData);
@@ -1184,20 +1223,38 @@
 
     // Save every 10 seconds
     setInterval(() => {
-      if (remainingTime > 0) saveRemainingTime();
+      if (remainingTime > 0 && !isNavigating) saveRemainingTime();
     }, 10000);
 
-    // Save on tab close
-    window.addEventListener('beforeunload', saveRemainingTime);
+    // Save on tab close (but not during navigation)
+    window.addEventListener('beforeunload', (e) => {
+      if (!isNavigating) saveRemainingTime();
+    });
+    
+    // Mark navigation events to prevent false auto-submits
+    document.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        isNavigating = true;
+        saveRemainingTime();
+      });
+    });
 
-    // Countdown
+    // Countdown - only auto-submit if timer truly expires, not during navigation
     const countdown = setInterval(() => {
+      if (isNavigating) return; // Don't count down during navigation
+      
       remainingTime--;
-      localStorage.setItem(STORAGE_KEY, remainingTime);
+      if (remainingTime > 0) {
+        localStorage.setItem(STORAGE_KEY, remainingTime);
+      }
       updateDisplay();
-      if (remainingTime <= 0) {
+      
+      // Only auto-submit if time is truly up and we haven't already triggered it
+      if (remainingTime <= 0 && !autoSubmitTriggered && !isNavigating) {
+        autoSubmitTriggered = true;
         clearInterval(countdown);
         localStorage.removeItem(STORAGE_KEY);
+        console.log('[Timer] Time expired - auto-submitting quiz');
         document.getElementById('auto-submit-form').submit();
       }
     }, 1000);
@@ -1236,6 +1293,8 @@
     if (backBtn) {
       backBtn.addEventListener('click', (e) => {
         e.preventDefault();
+        isNavigating = true;
+        saveRemainingTime();
         window.location.href = backUrl;
       });
     }
@@ -1244,6 +1303,7 @@
     quitBtn?.addEventListener('click', (e) => {
       e.preventDefault();
       if (confirm("Quit quiz? Your progress will be saved.")) {
+        isNavigating = true;
         saveRemainingTime();
         window.location.href = dashboardUrl;
       }
@@ -1284,7 +1344,9 @@
         const data = await resp.json();
 
         if (data.redirect_url) {
-          // Handle both success and auto-submit cases
+          // Mark as navigating before redirect to prevent auto-submit race condition
+          isNavigating = true;
+          saveRemainingTime();
           window.location.href = data.redirect_url;
         } else if (data.error) {
           alert("Error: " + data.error);
@@ -1324,9 +1386,10 @@
     const MAX_WARNINGS=3
     const attemptId = "{{ quiz_attempt.id }}";
 
-
+    // Only track genuine tab switches, not page navigation
     document.addEventListener("visibilitychange", function () {
-    if (!document.hidden) return;
+    // Don't track if we're navigating to another page or quiz is already done
+    if (!document.hidden || isNavigating || autoSubmitTriggered) return;
 
     fetch("{% url 'quizzes:tab_violation' %}", {
       method: "POST",
@@ -1351,6 +1414,7 @@
           "Quiz auto-submitted due to multiple tab switches",
           "danger"
         );
+        autoSubmitTriggered = true;
         setTimeout(() => {
           document.getElementById("auto-submit-form").submit();
         }, 1200);

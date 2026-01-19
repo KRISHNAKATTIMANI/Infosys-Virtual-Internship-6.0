@@ -76,5 +76,6 @@ urlpatterns = [
     # ============================================================
     path("ai-generator/", views.ai_quiz_generator_view, name="ai_quiz_generator"),
     path("ai-generator/generate/", views.generate_ai_quiz, name="generate_ai_quiz"),
+    path("ai-generator/start/", views.start_ai_quiz, name="start_ai_quiz"),
     
 ]
