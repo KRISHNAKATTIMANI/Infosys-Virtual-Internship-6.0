@@ -47,6 +47,11 @@ def register_view(request):
                 request,
                 "Registration successful! Welcome to AI Quiz Hub."
             )
+            
+            # Check if user was trying to join a shared quiz before registration
+            pending_quiz = request.session.pop('pending_shared_quiz', None)
+            if pending_quiz:
+                return redirect('quizzes:take_shared_quiz', share_code=pending_quiz)
             return redirect('quizzes:dashboard')
     else:
         form = RegistrationForm()
@@ -63,7 +68,11 @@ class CustomLoginView(LoginView):
 
     # override success URL
     def get_success_url(self):
-         return reverse_lazy('quizzes:dashboard')
+        # Check if user was trying to join a shared quiz before login
+        pending_quiz = self.request.session.pop('pending_shared_quiz', None)
+        if pending_quiz:
+            return reverse_lazy('quizzes:take_shared_quiz', kwargs={'share_code': pending_quiz})
+        return reverse_lazy('quizzes:dashboard')
 
 # ---------------------------
 # PROFILE PAGE (User model only — no UserProfile)
@@ -147,11 +156,18 @@ def profile_view(request):
 
     time_spent_hours = round(total_time / 3600, 1)
 
+    # Get shared quizzes taken by this user (via shared links)
+    from quizzes.models import SharedQuizAttempt
+    shared_quiz_attempts = SharedQuizAttempt.objects.filter(
+        attempt__user=user
+    ).select_related('shared_quiz', 'shared_quiz__creator', 'attempt').order_by('-accessed_at')
+
     context = {
         'quizzes_taken': quizzes_taken,
         'avg_score': round(avg_score, 1),
         'current_streak': 0,
         'time_spent': time_spent_hours,
+        'shared_quiz_attempts': shared_quiz_attempts,
     }
 
     return render(request, "accounts/profile.html", context)

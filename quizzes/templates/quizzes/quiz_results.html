@@ -772,6 +772,9 @@
             <span><i class="ri-folder-line"></i> {{ quiz_attempt.category.name }}</span>
             <span><i class="ri-bar-chart-line"></i> {{ quiz_attempt.difficulty|title }}</span>
             <span><i class="ri-calendar-line"></i> {{ quiz_attempt.completed_at|date:"d M Y" }}</span>
+            {% if quiz_hoster %}
+            <span><i class="ri-user-star-line"></i> Hosted by: {{ quiz_hoster.get_full_name|default:quiz_hoster.username }}</span>
+            {% endif %}
           </div>
         </div>
       </div>

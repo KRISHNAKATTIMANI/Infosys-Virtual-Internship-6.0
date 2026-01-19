@@ -151,17 +151,39 @@
                         <button class="difficulty-btn hard" data-difficulty="hard">Hard</button>
                     </div>
 
-                    <!-- Start Quiz Button -->
+                <!-- Start Quiz Button -->
                     <div class="start-quiz-container" id="start-container" style="display: none;">
-                        <a href="#" class="start-quiz-btn" id="start-quiz-btn">
+                        <!-- For Personal Mode: Direct link -->
+                        <a href="#" class="start-quiz-btn" id="start-quiz-btn" style="display: none;">
                             🚀 Start Quiz
                         </a>
+                        <!-- For Classroom Mode: Form submission -->
+                        <form method="POST" action="{% url 'quizzes:generate_category_quiz' %}" id="classroom-quiz-form" style="display: none;">
+                            {% csrf_token %}
+                            <input type="hidden" name="subcategory_id" id="form-subcategory-id" />
+                            <input type="hidden" name="difficulty" id="form-difficulty" />
+                            <input type="hidden" name="quiz_mode" id="form-quiz-mode" />
+                            <input type="hidden" name="question_count" value="10" />
+                            <button type="submit" class="start-quiz-btn" id="classroom-generate-btn">
+                                <span class="btn-text">🎓 Generate Classroom Quiz</span>
+                                <span class="btn-loading" style="display:none;">
+                                    <i class="ri-loader-4-line" style="animation: spin 1s linear infinite;"></i> Generating...
+                                </span>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
         </div>
     </div>
+
+    <style>
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
 
     <script>
         (function () {
@@ -235,22 +257,6 @@
                         }
                     });
                     
-                    // Show classroom coming soon message
-                    const existingBanner = document.querySelector('.coming-soon-banner');
-                    if (existingBanner) existingBanner.remove();
-                    
-                    if (state.quizMode === 'classroom') {
-                        const banner = document.createElement('div');
-                        banner.className = 'coming-soon-banner';
-                        banner.innerHTML = `
-                            <i class="ri-information-line"></i>
-                            <span>Classroom quiz mode is coming soon! For now, you can create quizzes with the same features.</span>
-                            <button onclick="this.parentElement.remove()" style="background:none;border:none;color:inherit;cursor:pointer;font-size:18px;margin-left:auto;"><i class="ri-close-line"></i></button>
-                        `;
-                        banner.style.cssText = 'display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,#f59e0b,#fbbf24);color:#0f172a;padding:12px 20px;border-radius:10px;margin-bottom:16px;font-weight:500;font-size:14px;';
-                        generationMethodSection.after(banner);
-                    }
-                    
                     // Scroll to Step 2
                     generationMethodSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 });
@@ -283,8 +289,8 @@
                     if (method === 'document') {
                         card.style.background = 'linear-gradient(135deg,#fef3c7,#fde68a)';
                         card.style.border = '2px solid #f59e0b';
-                        // Redirect to document upload page
-                        window.location.href = "{% url 'quizzes:ai_quiz_generator' %}";
+                        // Redirect to document upload page with quiz_mode
+                        window.location.href = "{% url 'quizzes:ai_quiz_generator' %}?mode=" + state.quizMode;
                     } else {
                         card.style.background = 'linear-gradient(135deg,#ecfdf5,#d1fae5)';
                         card.style.border = '2px solid #10b981';
@@ -455,9 +461,39 @@
                     state.difficulty = btn.dataset.difficulty;
 
                     startContainer.style.display = 'block';
-                    startBtn.href = `{% url 'quizzes:instructions' 0 'easy' %}`.replace('/0/', `/${state.leafSubcategoryId}/`).replace('/easy/', `/${state.difficulty}/`);
+                    
+                    // Update form/button based on quiz mode
+                    const classroomForm = document.getElementById('classroom-quiz-form');
+                    
+                    if (state.quizMode === 'classroom') {
+                        // Classroom mode: show form, hide direct link
+                        startBtn.style.display = 'none';
+                        classroomForm.style.display = 'block';
+                        
+                        // Update form values
+                        document.getElementById('form-subcategory-id').value = state.leafSubcategoryId;
+                        document.getElementById('form-difficulty').value = state.difficulty;
+                        document.getElementById('form-quiz-mode').value = 'classroom';
+                    } else {
+                        // Personal mode: show direct link, hide form
+                        startBtn.style.display = 'flex';
+                        classroomForm.style.display = 'none';
+                        startBtn.href = `{% url 'quizzes:instructions' 0 'easy' %}`.replace('/0/', `/${state.leafSubcategoryId}/`).replace('/easy/', `/${state.difficulty}/`);
+                    }
                 });
             });
+            
+            // Form submit handler for loading state
+            const classroomForm = document.getElementById('classroom-quiz-form');
+            if (classroomForm) {
+                classroomForm.addEventListener('submit', function() {
+                    const btn = document.getElementById('classroom-generate-btn');
+                    btn.querySelector('.btn-text').style.display = 'none';
+                    btn.querySelector('.btn-loading').style.display = 'inline-flex';
+                    btn.disabled = true;
+                    btn.style.opacity = '0.7';
+                });
+            }
 
             // Initialize
             attachCardListeners(document.querySelector('.level-container'));

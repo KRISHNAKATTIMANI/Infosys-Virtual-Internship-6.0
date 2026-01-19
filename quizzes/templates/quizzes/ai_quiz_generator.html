@@ -497,6 +497,24 @@
         <p>Upload your study material or enter a topic to generate a personalized quiz</p>
       </div>
 
+      {% if quiz_mode == 'classroom' %}
+      <div class="mode-banner classroom-mode" style="display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,#4f46e5,#6366f1);color:white;padding:14px 20px;border-radius:12px;margin-bottom:20px;font-weight:500;font-size:14px;box-shadow:0 4px 15px rgba(79,70,229,0.3);">
+        <i class="ri-presentation-line" style="font-size:24px;"></i>
+        <div style="flex:1;">
+          <strong>Classroom Quiz Mode</strong>
+          <p style="margin:4px 0 0;opacity:0.9;font-size:13px;">You'll be able to preview and edit questions before sharing with participants</p>
+        </div>
+      </div>
+      {% else %}
+      <div class="mode-banner personal-mode" style="display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,#10b981,#34d399);color:white;padding:14px 20px;border-radius:12px;margin-bottom:20px;font-weight:500;font-size:14px;box-shadow:0 4px 15px rgba(16,185,129,0.3);">
+        <i class="ri-user-line" style="font-size:24px;"></i>
+        <div style="flex:1;">
+          <strong>Personal Quiz Mode</strong>
+          <p style="margin:4px 0 0;opacity:0.9;font-size:13px;">Quiz will start immediately after generation</p>
+        </div>
+      </div>
+      {% endif %}
+
       {% if messages %}
       <div class="messages">
         {% for message in messages %}
@@ -511,6 +529,8 @@
       <div class="ai-card">
         <form method="POST" action="{% url 'quizzes:generate_ai_quiz' %}" enctype="multipart/form-data" id="quiz-form">
           {% csrf_token %}
+          <!-- Hidden field for quiz mode (personal or classroom) -->
+          <input type="hidden" name="quiz_mode" value="{{ quiz_mode|default:'personal' }}" />
 
           <div class="upload-section">
             <h3><i class="ri-upload-cloud-2-line"></i> Upload Study Material</h3>

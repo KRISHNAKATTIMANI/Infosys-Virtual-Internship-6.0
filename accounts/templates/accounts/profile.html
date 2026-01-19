@@ -566,6 +566,139 @@
         color: #34d399;
       }
 
+      /* Shared Quizzes Section */
+      .shared-quiz-list {
+        margin-top: 16px;
+      }
+
+      .shared-quiz-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px;
+        background: #f8fafc;
+        border-radius: 12px;
+        margin-bottom: 12px;
+        border: 1px solid #e2e8f0;
+        transition: all 0.3s ease;
+      }
+
+      .shared-quiz-item:hover {
+        border-color: #6366f1;
+        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.1);
+      }
+
+      .shared-quiz-info {
+        flex: 1;
+      }
+
+      .shared-quiz-title {
+        font-weight: 600;
+        color: #1e293b;
+        margin-bottom: 4px;
+        font-size: 1rem;
+      }
+
+      .shared-quiz-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        font-size: 0.8rem;
+        color: #64748b;
+      }
+
+      .shared-quiz-meta span {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .circulated-by {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 12px;
+        background: linear-gradient(135deg, #dbeafe, #e0e7ff);
+        border-radius: 20px;
+        font-size: 0.75rem;
+        color: #4f46e5;
+        font-weight: 500;
+      }
+
+      .shared-quiz-score {
+        text-align: right;
+      }
+
+      .score-badge {
+        display: inline-block;
+        padding: 8px 16px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 0.95rem;
+      }
+
+      .score-badge.high {
+        background: #dcfce7;
+        color: #16a34a;
+      }
+
+      .score-badge.medium {
+        background: #fef9c3;
+        color: #ca8a04;
+      }
+
+      .score-badge.low {
+        background: #fee2e2;
+        color: #dc2626;
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 40px 20px;
+        color: #64748b;
+      }
+
+      .empty-state i {
+        font-size: 3rem;
+        color: #cbd5e1;
+        margin-bottom: 12px;
+      }
+
+      .empty-state p {
+        font-size: 0.95rem;
+      }
+
+      /* Dark mode for shared quizzes */
+      body.light-mode .shared-quiz-item {
+        background: rgba(51, 65, 85, 0.5);
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+
+      body.light-mode .shared-quiz-item:hover {
+        border-color: rgba(99, 102, 241, 0.5);
+      }
+
+      body.light-mode .shared-quiz-title {
+        color: #f1f5f9;
+      }
+
+      body.light-mode .shared-quiz-meta {
+        color: #94a3b8;
+      }
+
+      body.light-mode .circulated-by {
+        background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+        color: #a5b4fc;
+      }
+
+      body.light-mode .empty-state {
+        color: #94a3b8;
+      }
+
+      body.light-mode .empty-state i {
+        color: #475569;
+      }
+
       /* Responsive */
       @media (max-width: 768px) {
         .avatars-grid {
@@ -895,6 +1028,53 @@
           </div>
         </div>
       </div>
+
+      <!-- Shared Quizzes Taken -->
+      {% if shared_quiz_attempts %}
+      <div class="card">
+        <div class="section-header" onclick="toggleSection('sharedQuizzesSection', this)">
+          <div class="section-title">
+            <h3><i class="ri-share-line"></i> Classroom Quizzes Taken</h3>
+          </div>
+          <i class="ri-arrow-down-s-line toggle-icon rotated"></i>
+        </div>
+        <p class="section-subtitle">Quizzes you've taken via shared links</p>
+
+        <div class="collapsible-content open" id="sharedQuizzesSection">
+          <div class="shared-quiz-list">
+            {% for shared_attempt in shared_quiz_attempts %}
+            <div class="shared-quiz-item">
+              <div class="shared-quiz-info">
+                <div class="shared-quiz-title">{{ shared_attempt.shared_quiz.title }}</div>
+                <div class="shared-quiz-meta">
+                  <span><i class="ri-calendar-line"></i> {{ shared_attempt.accessed_at|date:"M d, Y" }}</span>
+                  <span><i class="ri-question-line"></i> {{ shared_attempt.shared_quiz.questions|length }} Questions</span>
+                  <span><i class="ri-bar-chart-line"></i> {{ shared_attempt.shared_quiz.difficulty|title }}</span>
+                </div>
+                <div style="margin-top: 8px;">
+                  <span class="circulated-by">
+                    <i class="ri-user-shared-line"></i>
+                    Circulated by {{ shared_attempt.shared_quiz.creator.username }}
+                  </span>
+                </div>
+              </div>
+              <div class="shared-quiz-score">
+                {% if shared_attempt.attempt.status == 'completed' %}
+                  {% with score=shared_attempt.attempt.score %}
+                  <span class="score-badge {% if score >= 70 %}high{% elif score >= 40 %}medium{% else %}low{% endif %}">
+                    {{ score }}%
+                  </span>
+                  {% endwith %}
+                {% else %}
+                  <span class="score-badge medium">In Progress</span>
+                {% endif %}
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endif %}
     </div>
 
     <!-- Toast Messages -->

@@ -1,4 +1,5 @@
 from .models import AttemptQuestion
+from .models import SharedQuiz, SharedQuizAttempt
 from django.db.models import Count, Q
 import random
 from django.shortcuts import render, get_object_or_404, redirect
@@ -706,6 +707,8 @@ def show_question(request, attempt_id):
     # Get current question
     current_question = quiz_attempt.get_current_question()
     if not current_question:
+        # Finalize the quiz before redirecting to results
+        finalize_quiz_attempt(quiz_attempt)
         return redirect(
             'quizzes:quiz_results',
             attempt_id=quiz_attempt.id
@@ -921,6 +924,14 @@ def quiz_results(request, attempt_id):
     # Check if user already submitted feedback for this quiz
     existing_feedback = Feedback.objects.filter(quiz_attempt=quiz_attempt).first()
     
+    # Get quiz hoster if this is a shared/classroom quiz
+    quiz_hoster = None
+    try:
+        if hasattr(quiz_attempt, 'shared_quiz_link') and quiz_attempt.shared_quiz_link:
+            quiz_hoster = quiz_attempt.shared_quiz_link.shared_quiz.creator
+    except Exception:
+        pass
+    
     return render(request, "quizzes/quiz_results.html", {
         "quiz_attempt": quiz_attempt,
         "total": total,
@@ -933,13 +944,27 @@ def quiz_results(request, attempt_id):
         "strong_areas": strong_areas[:3],
         "weak_areas": weak_areas[:3],
         "existing_feedback": existing_feedback,
+        "quiz_hoster": quiz_hoster,
     })
 
 def finalize_quiz_attempt(quiz_attempt):
+    """
+    Finalize a quiz attempt - calculate score, set status to completed.
+    """
+    # Skip if already completed
+    if quiz_attempt.status == QuizAttempt.STATUS_COMPLETED:
+        return
+        
     aq_qs = AttemptQuestion.objects.filter(attempt=quiz_attempt)
 
+    # Try to get counts from AttemptQuestion
     attempted = aq_qs.filter(selected_option__isnull=False).count()
     correct = aq_qs.filter(is_correct=True).count()
+    
+    # If AttemptQuestion doesn't have data, fall back to JSON questions
+    if attempted == 0 and quiz_attempt.questions:
+        attempted = sum(1 for q in quiz_attempt.questions if q.get('user_answer'))
+        correct = sum(1 for q in quiz_attempt.questions if q.get('is_correct'))
 
     quiz_attempt.attempted_questions = attempted
     quiz_attempt.correct_answers = correct
@@ -1758,7 +1783,9 @@ def jump_to_question(request, attempt_id, q_no):
 #Show AI Generator Page
 @login_required
 def ai_quiz_generator_view(request):
-    return render(request, "quizzes/ai_quiz_generator.html")
+    # Get quiz_mode from URL parameter (from quiz_selector page)
+    quiz_mode = request.GET.get('mode', 'personal')
+    return render(request, "quizzes/ai_quiz_generator.html", {'quiz_mode': quiz_mode})
 
 
 @login_required
@@ -1768,6 +1795,7 @@ def generate_ai_quiz(request):
         topic = request.POST.get("topic", "").strip()
         difficulty = request.POST.get("difficulty", "medium")
         question_count = int(request.POST.get("question_count", 10))
+        quiz_mode = request.POST.get("quiz_mode", "personal")  # 'personal' or 'classroom'
         
         # Validate question count
         question_count = max(5, min(30, question_count))
@@ -1824,17 +1852,97 @@ def generate_ai_quiz(request):
                 'topic': source_name,
                 'difficulty': difficulty,
                 'question_count': len(questions),
-                'source': 'file' if uploaded_file else 'topic'
+                'source': 'file' if uploaded_file else 'topic',
+                'quiz_mode': quiz_mode
             }
             
-            # Redirect to start the AI-generated quiz
-            return redirect("quizzes:start_ai_quiz")
+            # Redirect based on quiz mode
+            if quiz_mode == 'classroom':
+                # Classroom mode - go to preview/edit page
+                return redirect("quizzes:classroom_quiz_preview")
+            else:
+                # Personal mode - start quiz directly
+                return redirect("quizzes:start_ai_quiz")
             
         except Exception as e:
             messages.error(request, f"Error generating quiz: {str(e)}")
             return redirect("quizzes:ai_quiz_generator")
     
     return redirect("quizzes:ai_quiz_generator")
+
+
+@login_required
+@require_POST
+def generate_category_quiz(request):
+    """
+    Generate a quiz from selected category/subcategory.
+    Used for both personal and classroom modes when user selects 'Browse Categories'.
+    """
+    subcategory_id = request.POST.get('subcategory_id')
+    difficulty = request.POST.get('difficulty', 'medium')
+    quiz_mode = request.POST.get('quiz_mode', 'personal')
+    question_count = int(request.POST.get('question_count', 10))
+    
+    # Validate
+    if not subcategory_id:
+        messages.error(request, "Please select a category first.")
+        return redirect("quizzes:quiz_selector")
+    
+    try:
+        subcategory = SubCategory.objects.get(id=subcategory_id)
+    except SubCategory.DoesNotExist:
+        messages.error(request, "Invalid category selected.")
+        return redirect("quizzes:quiz_selector")
+    
+    # Fetch concepts for this subcategory
+    concepts_qs = Concept.objects.filter(
+        subcategory=subcategory,
+        difficulty=difficulty
+    )
+    concept_names = list(concepts_qs.values_list('name', flat=True))
+    
+    # If not enough concepts for selected difficulty, try all difficulties
+    if len(concept_names) < 5:
+        concepts_qs = Concept.objects.filter(subcategory=subcategory)
+        concept_names = list(concepts_qs.values_list('name', flat=True))
+    
+    # If still not enough, use subcategory name as topic
+    if len(concept_names) < 3:
+        concept_names = None
+        
+    try:
+        # Generate questions using AI service
+        from .ai_service import generate_quiz_questions
+        
+        questions = generate_quiz_questions(
+            topic=subcategory.name,
+            category=subcategory.category.name,
+            difficulty=difficulty,
+            count=question_count,
+            concepts=concept_names
+        )
+        
+        # Store questions in session
+        request.session['ai_generated_questions'] = questions
+        request.session['ai_quiz_config'] = {
+            'topic': subcategory.name,
+            'category': subcategory.category.name,
+            'subcategory_id': subcategory.id,
+            'difficulty': difficulty,
+            'question_count': len(questions),
+            'source': 'category',
+            'quiz_mode': quiz_mode
+        }
+        
+        # Redirect based on quiz mode
+        if quiz_mode == 'classroom':
+            return redirect("quizzes:classroom_quiz_preview")
+        else:
+            return redirect("quizzes:start_ai_quiz")
+            
+    except Exception as e:
+        messages.error(request, f"Error generating quiz: {str(e)}")
+        return redirect("quizzes:quiz_selector")
 
 
 @login_required
@@ -1907,3 +2015,350 @@ def start_ai_quiz(request):
         messages.error(request, f"Error starting quiz: {str(e)}")
         return redirect("quizzes:ai_quiz_generator")
 
+
+# ============================================================
+# CLASSROOM QUIZ FEATURE - Preview, Edit, Share, Results
+# ============================================================
+
+@login_required
+def classroom_quiz_preview(request):
+    """
+    Preview AI-generated questions for classroom quiz.
+    Allow editing questions and options before sharing.
+    """
+    questions = request.session.get('ai_generated_questions')
+    config = request.session.get('ai_quiz_config')
+    
+    if not questions or not config:
+        messages.error(request, "No quiz data found. Please generate a quiz first.")
+        return redirect("quizzes:ai_quiz_generator")
+    
+    context = {
+        'questions': questions,
+        'config': config,
+        'question_count': len(questions),
+    }
+    return render(request, 'quizzes/classroom_quiz_preview.html', context)
+
+
+@login_required
+@require_POST
+def save_classroom_quiz(request):
+    """
+    Save edited questions and create a shareable classroom quiz.
+    """
+    try:
+        data = json.loads(request.body)
+        questions = data.get('questions', [])
+        title = data.get('title', 'Classroom Quiz')
+        description = data.get('description', '')
+        time_limit = data.get('time_limit', 600)  # Default 10 minutes
+        
+        config = request.session.get('ai_quiz_config', {})
+        
+        if not questions:
+            return JsonResponse({'success': False, 'error': 'No questions provided'})
+        
+        # Format questions for storage
+        formatted_questions = []
+        for idx, q in enumerate(questions):
+            formatted_questions.append({
+                "id": idx + 1,
+                "question": q.get('question', ''),
+                "option_a": q.get('option_a', ''),
+                "option_b": q.get('option_b', ''),
+                "option_c": q.get('option_c', ''),
+                "option_d": q.get('option_d', ''),
+                "correct_answer": q.get('correct_answer', 'A').upper(),
+                "explanation": q.get('explanation', ''),
+            })
+        
+        # Create SharedQuiz
+        shared_quiz = SharedQuiz.objects.create(
+            creator=request.user,
+            title=title,
+            description=description,
+            difficulty=config.get('difficulty', 'medium'),
+            questions=formatted_questions,
+            time_limit_seconds=int(time_limit),
+        )
+        
+        # Clear session data
+        if 'ai_generated_questions' in request.session:
+            del request.session['ai_generated_questions']
+        if 'ai_quiz_config' in request.session:
+            del request.session['ai_quiz_config']
+        
+        return JsonResponse({
+            'success': True,
+            'quiz_id': str(shared_quiz.id),
+            'share_code': shared_quiz.share_code,
+            'redirect_url': f'/quiz/classroom/{shared_quiz.id}/share/'
+        })
+        
+    except Exception as e:
+        return JsonResponse({'success': False, 'error': str(e)})
+
+
+@login_required
+def share_classroom_quiz(request, quiz_id):
+    """
+    Display the shareable link for a classroom quiz.
+    """
+    shared_quiz = get_object_or_404(SharedQuiz, id=quiz_id, creator=request.user)
+    
+    # Build full share URL
+    share_url = request.build_absolute_uri(f'/quiz/join/{shared_quiz.share_code}/')
+    
+    context = {
+        'quiz': shared_quiz,
+        'share_url': share_url,
+        'share_code': shared_quiz.share_code,
+    }
+    return render(request, 'quizzes/share_classroom_quiz.html', context)
+
+
+def take_shared_quiz(request, share_code):
+    """
+    Handle shared quiz access via link.
+    Requires login to take the quiz.
+    """
+    shared_quiz = get_object_or_404(SharedQuiz, share_code=share_code, is_active=True)
+    
+    # Check if quiz has expired
+    if shared_quiz.is_expired():
+        messages.error(request, "This quiz has expired and is no longer available.")
+        return redirect('core:home')
+    
+    # Require login
+    if not request.user.is_authenticated:
+        messages.info(request, "Please login or create an account to take this quiz.")
+        # Store the quiz code in session for redirect after login
+        request.session['pending_shared_quiz'] = share_code
+        return redirect('accounts:login')
+    
+    # Check if user has already attempted this quiz
+    existing_attempt = SharedQuizAttempt.objects.filter(
+        shared_quiz=shared_quiz,
+        attempt__user=request.user
+    ).select_related('attempt').first()
+    
+    if existing_attempt:
+        # Check if completed or can retry
+        if existing_attempt.attempt.status == QuizAttempt.STATUS_COMPLETED:
+            # Check max attempts
+            user_attempts = SharedQuizAttempt.objects.filter(
+                shared_quiz=shared_quiz,
+                attempt__user=request.user,
+                attempt__status=QuizAttempt.STATUS_COMPLETED
+            ).count()
+            
+            if user_attempts >= shared_quiz.max_attempts:
+                messages.warning(request, "You have already completed this quiz.")
+                return redirect('quizzes:quiz_results', attempt_id=existing_attempt.attempt.id)
+        elif existing_attempt.attempt.status == QuizAttempt.STATUS_IN_PROGRESS:
+            # Resume existing attempt
+            return redirect('quizzes:show_question', attempt_id=existing_attempt.attempt.id)
+    
+    # Show quiz instructions page
+    context = {
+        'quiz': shared_quiz,
+        'creator': shared_quiz.creator,
+        'question_count': len(shared_quiz.questions),
+    }
+    return render(request, 'quizzes/shared_quiz_instructions.html', context)
+
+
+@login_required
+@require_POST
+def start_shared_quiz(request, share_code):
+    """
+    Start a shared quiz attempt.
+    """
+    shared_quiz = get_object_or_404(SharedQuiz, share_code=share_code, is_active=True)
+    
+    if shared_quiz.is_expired():
+        messages.error(request, "This quiz has expired.")
+        return redirect('core:home')
+    
+    # Check max attempts
+    user_attempts = SharedQuizAttempt.objects.filter(
+        shared_quiz=shared_quiz,
+        attempt__user=request.user,
+        attempt__status=QuizAttempt.STATUS_COMPLETED
+    ).count()
+    
+    if user_attempts >= shared_quiz.max_attempts:
+        messages.warning(request, "You have reached the maximum number of attempts for this quiz.")
+        return redirect('quizzes:dashboard')
+    
+    # Format questions with user_answer fields
+    formatted_questions = []
+    for q in shared_quiz.questions:
+        formatted_questions.append({
+            **q,
+            "user_answer": None,
+            "is_correct": None
+        })
+    
+    # Create quiz attempt
+    quiz_attempt = QuizAttempt.objects.create(
+        user=request.user,
+        category=shared_quiz.category,
+        subcategory=shared_quiz.subcategory,
+        difficulty=shared_quiz.difficulty,
+        total_questions=len(formatted_questions),
+        status=QuizAttempt.STATUS_IN_PROGRESS,
+        time_limit_seconds=shared_quiz.time_limit_seconds,
+        remaining_seconds=shared_quiz.time_limit_seconds,
+        questions=formatted_questions,
+        started_at=timezone.now(),
+        ai_meta={
+            'source': 'shared_quiz',
+            'shared_quiz_id': str(shared_quiz.id),
+            'shared_by': shared_quiz.creator.username,
+            'topic': shared_quiz.title,
+        }
+    )
+    
+    # Create AttemptQuestion entries
+    for idx in range(len(formatted_questions)):
+        AttemptQuestion.objects.create(
+            attempt=quiz_attempt,
+            question=None,
+            question_order=idx,
+            status=AttemptQuestion.STATUS_UNVISITED
+        )
+    
+    # Link attempt to shared quiz
+    SharedQuizAttempt.objects.create(
+        shared_quiz=shared_quiz,
+        attempt=quiz_attempt
+    )
+    
+    return redirect("quizzes:show_question", attempt_id=quiz_attempt.id)
+
+
+@login_required
+def classroom_quiz_results(request, quiz_id):
+    """
+    Results dashboard for classroom quiz creator.
+    Shows all students who attempted the quiz with their scores.
+    """
+    shared_quiz = get_object_or_404(SharedQuiz, id=quiz_id, creator=request.user)
+    
+    # Get all attempts for this quiz
+    attempts = SharedQuizAttempt.objects.filter(
+        shared_quiz=shared_quiz
+    ).select_related(
+        'attempt', 'attempt__user'
+    ).order_by('-attempt__completed_at')
+    
+    # Calculate statistics
+    completed_attempts = [a for a in attempts if a.attempt.status == QuizAttempt.STATUS_COMPLETED]
+    in_progress_attempts = [a for a in attempts if a.attempt.status == QuizAttempt.STATUS_IN_PROGRESS]
+    
+    total_participants = len(attempts)
+    completed_count = len(completed_attempts)
+    
+    avg_score = 0
+    if completed_attempts:
+        avg_score = sum(a.attempt.score for a in completed_attempts) / len(completed_attempts)
+    
+    # Build participant details
+    participants = []
+    for shared_attempt in attempts:
+        attempt = shared_attempt.attempt
+        user = attempt.user
+        
+        # Count question stats
+        answered = 0
+        skipped = 0
+        not_attempted = 0
+        
+        if attempt.questions:
+            for q in attempt.questions:
+                if q.get('user_answer'):
+                    answered += 1
+                elif q.get('skipped'):
+                    skipped += 1
+                else:
+                    not_attempted += 1
+        
+        participants.append({
+            'user': user,
+            'username': user.username,
+            'email': user.email,
+            'full_name': user.full_name or user.username,  # Fallback to username if no full_name
+            'avatar': user.avatar_path.url if user.avatar_path else None,
+            'date_joined': user.date_joined,
+            'score': attempt.score if attempt.status == QuizAttempt.STATUS_COMPLETED else None,
+            'correct_answers': attempt.correct_answers,
+            'status': attempt.get_status_display(),
+            'status_code': attempt.status,
+            'answered': answered,
+            'skipped': skipped,
+            'not_attempted': not_attempted,
+            'completed_at': attempt.completed_at,
+            'started_at': attempt.started_at,
+            'time_taken': attempt.time_taken_seconds,
+            'attempt_id': attempt.id,
+        })
+    
+    context = {
+        'quiz': shared_quiz,
+        'participants': participants,
+        'total_participants': total_participants,
+        'completed_count': completed_count,
+        'in_progress_count': len(in_progress_attempts),
+        'avg_score': round(avg_score, 1),
+        'share_url': request.build_absolute_uri(f'/quiz/join/{shared_quiz.share_code}/'),
+    }
+    return render(request, 'quizzes/classroom_quiz_results.html', context)
+
+
+@login_required
+def my_classroom_quizzes(request):
+    """
+    List all classroom quizzes created by the user.
+    """
+    quizzes = SharedQuiz.objects.filter(
+        creator=request.user
+    ).annotate(
+        attempts_count=Count('shared_attempts'),
+        completed_count=Count('shared_attempts', filter=Q(shared_attempts__attempt__status=QuizAttempt.STATUS_COMPLETED))
+    ).order_by('-created_at')
+    
+    context = {
+        'quizzes': quizzes,
+    }
+    return render(request, 'quizzes/my_classroom_quizzes.html', context)
+
+
+@login_required
+@require_POST
+def toggle_shared_quiz_status(request, quiz_id):
+    """
+    Toggle active/inactive status for a shared quiz.
+    """
+    shared_quiz = get_object_or_404(SharedQuiz, id=quiz_id, creator=request.user)
+    shared_quiz.is_active = not shared_quiz.is_active
+    shared_quiz.save()
+    
+    return JsonResponse({
+        'success': True,
+        'is_active': shared_quiz.is_active
+    })
+
+
+@login_required
+@require_POST  
+def delete_shared_quiz(request, quiz_id):
+    """
+    Delete a shared quiz.
+    """
+    shared_quiz = get_object_or_404(SharedQuiz, id=quiz_id, creator=request.user)
+    shared_quiz.delete()
+    
+    messages.success(request, "Classroom quiz deleted successfully.")
+    return JsonResponse({'success': True})

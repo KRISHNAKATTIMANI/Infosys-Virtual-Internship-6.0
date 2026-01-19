@@ -76,6 +76,25 @@ urlpatterns = [
     # ============================================================
     path("ai-generator/", views.ai_quiz_generator_view, name="ai_quiz_generator"),
     path("ai-generator/generate/", views.generate_ai_quiz, name="generate_ai_quiz"),
+    path("ai-generator/generate-from-category/", views.generate_category_quiz, name="generate_category_quiz"),
     path("ai-generator/start/", views.start_ai_quiz, name="start_ai_quiz"),
+    
+    # ============================================================
+    # Classroom Quiz Feature
+    # ============================================================
+    # Preview and edit quiz before sharing
+    path("classroom/preview/", views.classroom_quiz_preview, name="classroom_quiz_preview"),
+    path("classroom/save/", views.save_classroom_quiz, name="save_classroom_quiz"),
+    
+    # Manage classroom quizzes
+    path("classroom/my-quizzes/", views.my_classroom_quizzes, name="my_classroom_quizzes"),
+    path("classroom/<uuid:quiz_id>/share/", views.share_classroom_quiz, name="share_classroom_quiz"),
+    path("classroom/<uuid:quiz_id>/results/", views.classroom_quiz_results, name="classroom_quiz_results"),
+    path("classroom/<uuid:quiz_id>/toggle/", views.toggle_shared_quiz_status, name="toggle_shared_quiz"),
+    path("classroom/<uuid:quiz_id>/delete/", views.delete_shared_quiz, name="delete_shared_quiz"),
+    
+    # Take shared quiz via link
+    path("join/<str:share_code>/", views.take_shared_quiz, name="take_shared_quiz"),
+    path("join/<str:share_code>/start/", views.start_shared_quiz, name="start_shared_quiz"),
     
 ]

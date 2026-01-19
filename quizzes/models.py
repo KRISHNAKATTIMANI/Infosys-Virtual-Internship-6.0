@@ -288,3 +288,115 @@ class AttemptQuestion(models.Model):
 
     def __str__(self):
         return f"{self.attempt.id} - Q{self.question_order} ({self.get_status_display()})"
+
+
+class SharedQuiz(models.Model):
+    """
+    Represents a quiz that can be shared via link for classroom use.
+    The creator can preview and edit questions before sharing.
+    """
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    
+    # Creator of the shared quiz
+    creator = models.ForeignKey(
+        settings.AUTH_USER_MODEL, 
+        on_delete=models.CASCADE, 
+        related_name='created_shared_quizzes'
+    )
+    
+    # Quiz metadata
+    title = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
+    subcategory = models.ForeignKey(SubCategory, on_delete=models.SET_NULL, null=True, blank=True)
+    difficulty = models.CharField(max_length=10, choices=[
+        ('easy', 'Easy'),
+        ('medium', 'Medium'),
+        ('hard', 'Hard')
+    ], default='medium')
+    
+    # Questions (edited by creator)
+    # Same JSON structure as QuizAttempt.questions but without user_answer/is_correct
+    questions = models.JSONField(default=list)
+    
+    # Time settings
+    time_limit_seconds = models.IntegerField(default=600)  # 10 minutes default
+    
+    # Sharing settings
+    share_code = models.CharField(max_length=12, unique=True, db_index=True)
+    is_active = models.BooleanField(default=True)  # Can disable sharing
+    max_attempts = models.PositiveIntegerField(default=1)  # Attempts per user
+    
+    # Timestamps
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    expires_at = models.DateTimeField(null=True, blank=True)  # Optional expiry
+    
+    class Meta:
+        ordering = ['-created_at']
+        indexes = [
+            models.Index(fields=['creator', 'created_at']),
+            models.Index(fields=['share_code']),
+        ]
+    
+    def __str__(self):
+        return f"{self.title} by {self.creator.username}"
+    
+    def save(self, *args, **kwargs):
+        if not self.share_code:
+            # Generate a unique 8-character code
+            import secrets
+            import string
+            while True:
+                code = ''.join(secrets.choice(string.ascii_uppercase + string.digits) for _ in range(8))
+                if not SharedQuiz.objects.filter(share_code=code).exists():
+                    self.share_code = code
+                    break
+        super().save(*args, **kwargs)
+    
+    def get_share_url(self):
+        """Get the full shareable URL"""
+        from django.urls import reverse
+        return reverse('quizzes:take_shared_quiz', kwargs={'share_code': self.share_code})
+    
+    def get_attempts_count(self):
+        """Get number of attempts for this shared quiz"""
+        return self.shared_attempts.count()
+    
+    def get_completed_attempts(self):
+        """Get completed attempts"""
+        return self.shared_attempts.filter(status=QuizAttempt.STATUS_COMPLETED)
+    
+    def is_expired(self):
+        """Check if quiz has expired"""
+        if self.expires_at:
+            return timezone.now() > self.expires_at
+        return False
+
+
+class SharedQuizAttempt(models.Model):
+    """
+    Links a QuizAttempt to a SharedQuiz for tracking shared quiz participation.
+    """
+    shared_quiz = models.ForeignKey(
+        SharedQuiz, 
+        on_delete=models.CASCADE, 
+        related_name='shared_attempts'
+    )
+    attempt = models.OneToOneField(
+        QuizAttempt, 
+        on_delete=models.CASCADE, 
+        related_name='shared_quiz_link'
+    )
+    
+    # Track when user accessed via shared link
+    accessed_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        unique_together = ('shared_quiz', 'attempt')
+        indexes = [
+            models.Index(fields=['shared_quiz', 'accessed_at']),
+        ]
+    
+    def __str__(self):
+        return f"{self.attempt.user.username} - {self.shared_quiz.title}"

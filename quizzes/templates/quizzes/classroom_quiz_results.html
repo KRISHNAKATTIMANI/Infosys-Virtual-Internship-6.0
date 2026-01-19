@@ -1,0 +1,550 @@
+{% load static %}
+{% load quiz_filters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results - {{ quiz.title }} | AI Quiz Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 30px;
+            color: white;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .header-content h1 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .header-content p {
+            opacity: 0.9;
+        }
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+        .btn {
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .btn-white {
+            background: white;
+            color: #4f46e5;
+        }
+        .btn-white:hover {
+            background: #f0f0f0;
+        }
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.5);
+        }
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: white;
+        }
+        
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .stat-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .stat-card .icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-size: 1.5rem;
+        }
+        .stat-card .icon.blue { background: #dbeafe; color: #2563eb; }
+        .stat-card .icon.green { background: #dcfce7; color: #16a34a; }
+        .stat-card .icon.yellow { background: #fef3c7; color: #d97706; }
+        .stat-card .icon.purple { background: #f3e8ff; color: #9333ea; }
+        .stat-card .value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+        .stat-card .label {
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+        
+        /* Share Link Box */
+        .share-box {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .share-box .icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+        .share-box .content {
+            flex: 1;
+        }
+        .share-box .label {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+        .share-box .link {
+            font-family: monospace;
+            color: #1e293b;
+            word-break: break-all;
+        }
+        .share-box .btn-copy {
+            padding: 10px 16px;
+            background: #f1f5f9;
+            color: #475569;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .share-box .btn-copy:hover {
+            background: #e2e8f0;
+        }
+        
+        /* Participants Table */
+        .table-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .table-header h2 {
+            font-size: 1.2rem;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #f8fafc;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 2px solid #e5e7eb;
+        }
+        .search-box input {
+            border: none;
+            background: transparent;
+            outline: none;
+            font-family: inherit;
+            width: 200px;
+        }
+        .search-box i {
+            color: #94a3b8;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 14px 16px;
+            text-align: left;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        th {
+            background: #f8fafc;
+            font-weight: 600;
+            color: #475569;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        tr:hover td {
+            background: #f8fafc;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        img.user-avatar {
+            border: 2px solid #e2e8f0;
+        }
+        .user-details .name {
+            font-weight: 500;
+            color: #1e293b;
+        }
+        .user-details .email {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .status-completed { background: #dcfce7; color: #16a34a; }
+        .status-progress { background: #fef3c7; color: #d97706; }
+        .score-badge {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        .score-high { color: #16a34a; }
+        .score-medium { color: #d97706; }
+        .score-low { color: #dc2626; }
+        
+        .question-stats {
+            display: flex;
+            gap: 12px;
+        }
+        .q-stat {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.85rem;
+        }
+        .q-stat.correct { color: #16a34a; }
+        .q-stat.skipped { color: #d97706; }
+        .q-stat.wrong { color: #dc2626; }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #64748b;
+        }
+        .empty-state i {
+            font-size: 4rem;
+            color: #e2e8f0;
+            margin-bottom: 16px;
+        }
+        .empty-state h3 {
+            font-size: 1.2rem;
+            color: #475569;
+            margin-bottom: 8px;
+        }
+        
+        .btn-export {
+            padding: 10px 16px;
+            background: #10b981;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .btn-export:hover {
+            background: #059669;
+        }
+        
+        @media (max-width: 900px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .header { flex-direction: column; text-align: center; }
+        }
+        @media (max-width: 600px) {
+            .stats-grid { grid-template-columns: 1fr; }
+            .share-box { flex-direction: column; text-align: center; }
+            .table-header { flex-direction: column; gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-content">
+                <h1>📊 {{ quiz.title }}</h1>
+                <p>Classroom Quiz Results Dashboard</p>
+            </div>
+            <div class="header-actions">
+                <a href="{% url 'quizzes:my_classroom_quizzes' %}" class="btn btn-outline">
+                    <i class="ri-arrow-left-line"></i> Back
+                </a>
+                <button class="btn btn-white" onclick="exportResults()">
+                    <i class="ri-download-line"></i> Export
+                </button>
+            </div>
+        </div>
+        
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="icon blue"><i class="ri-user-line"></i></div>
+                <div class="value">{{ total_participants }}</div>
+                <div class="label">Total Participants</div>
+            </div>
+            <div class="stat-card">
+                <div class="icon green"><i class="ri-checkbox-circle-line"></i></div>
+                <div class="value">{{ completed_count }}</div>
+                <div class="label">Completed</div>
+            </div>
+            <div class="stat-card">
+                <div class="icon yellow"><i class="ri-time-line"></i></div>
+                <div class="value">{{ in_progress_count }}</div>
+                <div class="label">In Progress</div>
+            </div>
+            <div class="stat-card">
+                <div class="icon purple"><i class="ri-percent-line"></i></div>
+                <div class="value">{{ avg_score }}%</div>
+                <div class="label">Average Score</div>
+            </div>
+        </div>
+        
+        <!-- Share Link -->
+        <div class="share-box">
+            <div class="icon"><i class="ri-link"></i></div>
+            <div class="content">
+                <div class="label">Share Link</div>
+                <div class="link" id="shareLink">{{ share_url }}</div>
+            </div>
+            <button class="btn-copy" onclick="copyLink()">
+                <i class="ri-file-copy-line"></i> Copy
+            </button>
+        </div>
+        
+        <!-- Participants Table -->
+        <div class="table-card">
+            <div class="table-header">
+                <h2><i class="ri-group-line"></i> Participants</h2>
+                <div style="display:flex;gap:12px;">
+                    <div class="search-box">
+                        <i class="ri-search-line"></i>
+                        <input type="text" id="searchInput" placeholder="Search by name or email..." onkeyup="filterTable()">
+                    </div>
+                    <button class="btn-export" onclick="exportResults()">
+                        <i class="ri-file-excel-line"></i> Export CSV
+                    </button>
+                </div>
+            </div>
+            
+            {% if participants %}
+            <div class="table-container">
+                <table id="participantsTable">
+                    <thead>
+                        <tr>
+                            <th>Participant</th>
+                            <th>Status</th>
+                            <th>Score</th>
+                            <th>Questions Stats</th>
+                            <th>Time Taken</th>
+                            <th>Completed At</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for p in participants %}
+                        <tr>
+                            <td>
+                                <div class="user-info">
+                                    {% if p.avatar %}
+                                    <img src="{{ p.avatar }}" class="user-avatar" alt="{{ p.username }}">
+                                    {% else %}
+                                    <div class="user-avatar">{{ p.full_name|slice:":1"|upper }}</div>
+                                    {% endif %}
+                                    <div class="user-details">
+                                        <div class="name">{{ p.full_name }}</div>
+                                        <div class="email">{{ p.email }}</div>
+                                        <div class="username" style="font-size:11px;color:#94a3b8;">@{{ p.username }}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                {% if p.status_code == 2 %}
+                                <span class="status-badge status-completed">Completed</span>
+                                {% else %}
+                                <span class="status-badge status-progress">In Progress</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if p.score is not None %}
+                                <span class="score-badge {% if p.score >= 70 %}score-high{% elif p.score >= 40 %}score-medium{% else %}score-low{% endif %}">
+                                    {{ p.score|floatformat:1 }}%
+                                </span>
+                                {% else %}
+                                <span style="color:#94a3b8">-</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="question-stats">
+                                    <span class="q-stat correct" title="Answered">
+                                        <i class="ri-checkbox-circle-fill"></i> {{ p.answered }}
+                                    </span>
+                                    <span class="q-stat skipped" title="Skipped">
+                                        <i class="ri-skip-forward-fill"></i> {{ p.skipped }}
+                                    </span>
+                                    <span class="q-stat wrong" title="Not Attempted">
+                                        <i class="ri-close-circle-fill"></i> {{ p.not_attempted }}
+                                    </span>
+                                </div>
+                            </td>
+                            <td>
+                                {% if p.time_taken %}
+                                {{ p.time_taken|format_time }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if p.completed_at %}
+                                {{ p.completed_at|date:"M d, Y H:i" }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="empty-state">
+                <i class="ri-inbox-line"></i>
+                <h3>No participants yet</h3>
+                <p>Share the quiz link with your students to get started</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    
+    <script>
+        function copyLink() {
+            const link = document.getElementById('shareLink').textContent;
+            navigator.clipboard.writeText(link).then(() => {
+                alert('Link copied to clipboard!');
+            });
+        }
+        
+        function filterTable() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const rows = document.querySelectorAll('#participantsTable tbody tr');
+            
+            rows.forEach(row => {
+                const name = row.querySelector('.name').textContent.toLowerCase();
+                const email = row.querySelector('.email').textContent.toLowerCase();
+                if (name.includes(input) || email.includes(input)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+        
+        function exportResults() {
+            const table = document.getElementById('participantsTable');
+            if (!table) {
+                alert('No data to export');
+                return;
+            }
+            
+            let csv = 'Full Name,Username,Email,Status,Score,Answered,Skipped,Not Attempted,Time Taken,Completed At\n';
+            
+            const rows = table.querySelectorAll('tbody tr');
+            rows.forEach(row => {
+                const fullName = row.querySelector('.name').textContent.trim();
+                const username = row.querySelector('.username')?.textContent.trim().replace('@', '') || '';
+                const email = row.querySelector('.email').textContent.trim();
+                const status = row.querySelector('.status-badge').textContent.trim();
+                const score = row.querySelector('.score-badge')?.textContent.trim() || '-';
+                const answered = row.querySelectorAll('.q-stat')[0].textContent.trim();
+                const skipped = row.querySelectorAll('.q-stat')[1].textContent.trim();
+                const notAttempted = row.querySelectorAll('.q-stat')[2].textContent.trim();
+                const timeTaken = row.cells[4].textContent.trim();
+                const completedAt = row.cells[5].textContent.trim();
+                
+                csv += `"${fullName}","${username}","${email}","${status}","${score}","${answered}","${skipped}","${notAttempted}","${timeTaken}","${completedAt}"\n`;
+            });
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = '{{ quiz.title|slugify }}_results.csv';
+            a.click();
+        }
+    </script>
+</body>
+</html>

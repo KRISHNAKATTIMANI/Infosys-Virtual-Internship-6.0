@@ -1,0 +1,359 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Quiz | AI Quiz Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            width: 100%;
+        }
+        .success-card {
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 2.5rem;
+            color: white;
+            animation: bounceIn 0.6s ease;
+        }
+        @keyframes bounceIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        .success-card h1 {
+            font-size: 1.8rem;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+        .success-card p {
+            color: #64748b;
+            margin-bottom: 32px;
+        }
+        
+        .quiz-info {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 24px;
+            text-align: left;
+        }
+        .quiz-info h3 {
+            color: #1e293b;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .quiz-info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .quiz-info-item:last-child {
+            border-bottom: none;
+        }
+        .quiz-info-item span:first-child {
+            color: #64748b;
+        }
+        .quiz-info-item span:last-child {
+            font-weight: 500;
+            color: #1e293b;
+        }
+        
+        .share-section {
+            margin-bottom: 24px;
+        }
+        .share-section label {
+            display: block;
+            text-align: left;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+        .share-link-box {
+            display: flex;
+            gap: 8px;
+        }
+        .share-link-input {
+            flex: 1;
+            padding: 14px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-family: monospace;
+            background: #f8fafc;
+            color: #1e293b;
+        }
+        .share-link-input:focus {
+            outline: none;
+            border-color: #4f46e5;
+        }
+        .btn-copy {
+            padding: 14px 20px;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        .btn-copy:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+        }
+        .btn-copy.copied {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+        
+        .share-code-box {
+            margin-top: 16px;
+            padding: 16px;
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        .share-code-box span {
+            color: #92400e;
+            font-weight: 500;
+        }
+        .share-code {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #78350f;
+            letter-spacing: 3px;
+            font-family: monospace;
+        }
+        
+        .share-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+        .share-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .share-btn:hover {
+            transform: scale(1.1);
+        }
+        .share-whatsapp { background: #25D366; }
+        .share-telegram { background: #0088cc; }
+        .share-email { background: #ea4335; }
+        .share-linkedin { background: #0077b5; }
+        
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+        .btn {
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .btn-outline {
+            background: transparent;
+            color: #4f46e5;
+            border: 2px solid #4f46e5;
+        }
+        .btn-outline:hover {
+            background: #4f46e5;
+            color: white;
+        }
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #475569;
+        }
+        .btn-secondary:hover {
+            background: #e2e8f0;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+        }
+        
+        @media (max-width: 480px) {
+            .success-card { padding: 24px; }
+            .share-link-box { flex-direction: column; }
+            .action-buttons { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-card">
+            <div class="success-icon">
+                <i class="ri-check-line"></i>
+            </div>
+            <h1>Quiz Created Successfully! 🎉</h1>
+            <p>Your classroom quiz is ready to share with students</p>
+            
+            <div class="quiz-info">
+                <h3><i class="ri-file-list-3-line"></i> Quiz Details</h3>
+                <div class="quiz-info-item">
+                    <span>Title</span>
+                    <span>{{ quiz.title }}</span>
+                </div>
+                <div class="quiz-info-item">
+                    <span>Questions</span>
+                    <span>{{ quiz.questions|length }}</span>
+                </div>
+                <div class="quiz-info-item">
+                    <span>Time Limit</span>
+                    <span>{{ quiz.time_limit_seconds|divisibleby:60 }} minutes</span>
+                </div>
+                <div class="quiz-info-item">
+                    <span>Difficulty</span>
+                    <span>{{ quiz.difficulty|title }}</span>
+                </div>
+            </div>
+            
+            <div class="share-section">
+                <label>Share Link</label>
+                <div class="share-link-box">
+                    <input type="text" class="share-link-input" id="shareLink" value="{{ share_url }}" readonly>
+                    <button class="btn-copy" onclick="copyLink()">
+                        <i class="ri-file-copy-line" id="copyIcon"></i>
+                        <span id="copyText">Copy</span>
+                    </button>
+                </div>
+                <div class="share-code-box">
+                    <span>Quiz Code:</span>
+                    <span class="share-code">{{ share_code }}</span>
+                </div>
+            </div>
+            
+            <div class="share-buttons">
+                <button class="share-btn share-whatsapp" onclick="shareWhatsApp()" title="Share on WhatsApp">
+                    <i class="ri-whatsapp-line"></i>
+                </button>
+                <button class="share-btn share-telegram" onclick="shareTelegram()" title="Share on Telegram">
+                    <i class="ri-telegram-line"></i>
+                </button>
+                <button class="share-btn share-email" onclick="shareEmail()" title="Share via Email">
+                    <i class="ri-mail-line"></i>
+                </button>
+                <button class="share-btn share-linkedin" onclick="shareLinkedIn()" title="Share on LinkedIn">
+                    <i class="ri-linkedin-fill"></i>
+                </button>
+            </div>
+            
+            <div class="action-buttons">
+                <a href="{% url 'quizzes:dashboard' %}" class="btn btn-outline">
+                    <i class="ri-arrow-left-line"></i> Back to Dashboard
+                </a>
+                <a href="{% url 'quizzes:my_classroom_quizzes' %}" class="btn btn-secondary">
+                    <i class="ri-list-check"></i> My Quizzes
+                </a>
+                <a href="{% url 'quizzes:classroom_quiz_results' quiz.id %}" class="btn btn-primary">
+                    <i class="ri-bar-chart-box-line"></i> View Results
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const shareUrl = "{{ share_url }}";
+        const quizTitle = "{{ quiz.title }}";
+        
+        function copyLink() {
+            const input = document.getElementById('shareLink');
+            input.select();
+            document.execCommand('copy');
+            
+            const btn = document.querySelector('.btn-copy');
+            const icon = document.getElementById('copyIcon');
+            const text = document.getElementById('copyText');
+            
+            btn.classList.add('copied');
+            icon.className = 'ri-check-line';
+            text.textContent = 'Copied!';
+            
+            setTimeout(() => {
+                btn.classList.remove('copied');
+                icon.className = 'ri-file-copy-line';
+                text.textContent = 'Copy';
+            }, 2000);
+        }
+        
+        function shareWhatsApp() {
+            const message = `📚 Join my quiz: "${quizTitle}"\n\n🔗 ${shareUrl}\n\nTake this quiz on AI Quiz Hub!`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
+        }
+        
+        function shareTelegram() {
+            const message = `📚 Join my quiz: "${quizTitle}"`;
+            window.open(`https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(message)}`, '_blank');
+        }
+        
+        function shareEmail() {
+            const subject = `Join my quiz: ${quizTitle}`;
+            const body = `Hi,\n\nI've created a quiz for you on AI Quiz Hub!\n\n📚 Quiz: ${quizTitle}\n🔗 Link: ${shareUrl}\n\nClick the link to take the quiz.\n\nBest regards`;
+            window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
+        
+        function shareLinkedIn() {
+            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`, '_blank');
+        }
+    </script>
+</body>
+</html>

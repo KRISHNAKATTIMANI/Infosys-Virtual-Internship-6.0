@@ -1,0 +1,552 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview & Edit Quiz | AI Quiz Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 30px;
+            color: white;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .header p {
+            opacity: 0.9;
+            margin-top: 8px;
+        }
+        
+        /* Quiz Details Form */
+        .quiz-details-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .quiz-details-card h3 {
+            font-size: 1.1rem;
+            color: #4f46e5;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+        .form-group label {
+            font-weight: 500;
+            color: #374151;
+            font-size: 0.9rem;
+        }
+        .form-group input, .form-group textarea, .form-group select {
+            padding: 12px 14px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+        
+        /* Question Cards */
+        .questions-section h3 {
+            font-size: 1.1rem;
+            color: #1e293b;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .question-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 4px solid #4f46e5;
+            transition: all 0.3s ease;
+        }
+        .question-card:hover {
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+        }
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .question-number {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        .question-actions {
+            display: flex;
+            gap: 8px;
+        }
+        .btn-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .btn-edit {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+        .btn-edit:hover {
+            background: #2563eb;
+            color: white;
+        }
+        .btn-delete {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+        .btn-delete:hover {
+            background: #dc2626;
+            color: white;
+        }
+        
+        .question-text {
+            font-size: 1rem;
+            color: #1e293b;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+        .question-text-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 80px;
+            display: none;
+        }
+        .question-card.editing .question-text { display: none; }
+        .question-card.editing .question-text-input { display: block; }
+        
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .option-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 14px;
+            background: #f8fafc;
+            border-radius: 10px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .option-item.correct {
+            background: #ecfdf5;
+            border-color: #10b981;
+        }
+        .option-label {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #64748b;
+            flex-shrink: 0;
+        }
+        .option-item.correct .option-label {
+            background: #10b981;
+            color: white;
+        }
+        .option-text {
+            flex: 1;
+            color: #374151;
+        }
+        .option-input {
+            flex: 1;
+            padding: 8px 10px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-family: inherit;
+            display: none;
+        }
+        .question-card.editing .option-text { display: none; }
+        .question-card.editing .option-input { display: block; }
+        
+        .correct-answer-select {
+            margin-top: 12px;
+            display: none;
+        }
+        .question-card.editing .correct-answer-select { display: flex; align-items: center; gap: 10px; }
+        .correct-answer-select label {
+            font-weight: 500;
+            color: #374151;
+        }
+        .correct-answer-select select {
+            padding: 8px 12px;
+            border: 2px solid #10b981;
+            border-radius: 8px;
+            font-family: inherit;
+            background: #ecfdf5;
+            color: #065f46;
+            font-weight: 500;
+        }
+        
+        /* Action Buttons */
+        .action-bar {
+            position: sticky;
+            bottom: 20px;
+            background: white;
+            border-radius: 16px;
+            padding: 20px 24px;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 24px;
+        }
+        .btn {
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #475569;
+        }
+        .btn-secondary:hover {
+            background: #e2e8f0;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+        }
+        
+        /* Loading Overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .loading-overlay.show { display: flex; }
+        .loading-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+        }
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #e5e7eb;
+            border-top-color: #4f46e5;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 16px;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .form-row { grid-template-columns: 1fr; }
+            .options-grid { grid-template-columns: 1fr; }
+            .action-bar { flex-direction: column; gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="ri-eye-line"></i> Preview & Edit Quiz</h1>
+            <p>Review and modify questions before sharing with your class</p>
+        </div>
+        
+        <!-- Quiz Details -->
+        <div class="quiz-details-card">
+            <h3><i class="ri-settings-3-line"></i> Quiz Settings</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="quiz-title">Quiz Title *</label>
+                    <input type="text" id="quiz-title" placeholder="Enter quiz title" value="{{ config.topic|default:'Classroom Quiz' }}">
+                </div>
+                <div class="form-group">
+                    <label for="time-limit">Time Limit (minutes)</label>
+                    <input type="number" id="time-limit" min="5" max="120" value="{{ question_count }}">
+                </div>
+            </div>
+            <div class="form-group full-width">
+                <label for="quiz-description">Description (optional)</label>
+                <textarea id="quiz-description" rows="2" placeholder="Add a description for your quiz..."></textarea>
+            </div>
+        </div>
+        
+        <!-- Questions -->
+        <div class="questions-section">
+            <h3><i class="ri-questionnaire-line"></i> Questions ({{ question_count }})</h3>
+            
+            {% for q in questions %}
+            <div class="question-card" data-index="{{ forloop.counter0 }}">
+                <div class="question-header">
+                    <span class="question-number">Question {{ forloop.counter }}</span>
+                    <div class="question-actions">
+                        <button class="btn-icon btn-edit" onclick="toggleEdit(this)" title="Edit">
+                            <i class="ri-edit-line"></i>
+                        </button>
+                        <button class="btn-icon btn-delete" onclick="deleteQuestion({{ forloop.counter0 }})" title="Delete">
+                            <i class="ri-delete-bin-line"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="question-text">{{ q.question }}</div>
+                <textarea class="question-text-input" placeholder="Enter question text">{{ q.question }}</textarea>
+                
+                <div class="options-grid">
+                    <div class="option-item {% if q.correct_answer == 'A' %}correct{% endif %}">
+                        <span class="option-label">A</span>
+                        <span class="option-text">{{ q.option_a }}</span>
+                        <input class="option-input" data-option="A" value="{{ q.option_a }}" placeholder="Option A">
+                    </div>
+                    <div class="option-item {% if q.correct_answer == 'B' %}correct{% endif %}">
+                        <span class="option-label">B</span>
+                        <span class="option-text">{{ q.option_b }}</span>
+                        <input class="option-input" data-option="B" value="{{ q.option_b }}" placeholder="Option B">
+                    </div>
+                    <div class="option-item {% if q.correct_answer == 'C' %}correct{% endif %}">
+                        <span class="option-label">C</span>
+                        <span class="option-text">{{ q.option_c }}</span>
+                        <input class="option-input" data-option="C" value="{{ q.option_c }}" placeholder="Option C">
+                    </div>
+                    <div class="option-item {% if q.correct_answer == 'D' %}correct{% endif %}">
+                        <span class="option-label">D</span>
+                        <span class="option-text">{{ q.option_d }}</span>
+                        <input class="option-input" data-option="D" value="{{ q.option_d }}" placeholder="Option D">
+                    </div>
+                </div>
+                
+                <div class="correct-answer-select">
+                    <label>Correct Answer:</label>
+                    <select class="correct-answer-dropdown" data-current="{{ q.correct_answer }}">
+                        <option value="A" {% if q.correct_answer == 'A' %}selected{% endif %}>A</option>
+                        <option value="B" {% if q.correct_answer == 'B' %}selected{% endif %}>B</option>
+                        <option value="C" {% if q.correct_answer == 'C' %}selected{% endif %}>C</option>
+                        <option value="D" {% if q.correct_answer == 'D' %}selected{% endif %}>D</option>
+                    </select>
+                </div>
+                
+                <input type="hidden" class="explanation-data" value="{{ q.explanation }}">
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Action Bar -->
+        <div class="action-bar">
+            <a href="{% url 'quizzes:ai_quiz_generator' %}" class="btn btn-secondary">
+                <i class="ri-arrow-left-line"></i> Back
+            </a>
+            <div style="display:flex;gap:12px;">
+                <button class="btn btn-primary" onclick="saveAndShare()">
+                    <i class="ri-share-line"></i> Save & Create Share Link
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p>Creating your quiz...</p>
+        </div>
+    </div>
+    
+    <script>
+        // Store original questions data
+        let questionsData = {{ questions|safe }};
+        
+        function toggleEdit(btn) {
+            const card = btn.closest('.question-card');
+            const isEditing = card.classList.contains('editing');
+            
+            if (isEditing) {
+                // Save changes
+                const index = parseInt(card.dataset.index);
+                const questionText = card.querySelector('.question-text-input').value;
+                const optionInputs = card.querySelectorAll('.option-input');
+                const correctAnswer = card.querySelector('.correct-answer-dropdown').value;
+                
+                // Update display
+                card.querySelector('.question-text').textContent = questionText;
+                optionInputs.forEach(input => {
+                    const option = input.dataset.option;
+                    const optionItem = input.closest('.option-item');
+                    optionItem.querySelector('.option-text').textContent = input.value;
+                    
+                    // Update correct styling
+                    if (option === correctAnswer) {
+                        optionItem.classList.add('correct');
+                    } else {
+                        optionItem.classList.remove('correct');
+                    }
+                });
+                
+                // Update data
+                questionsData[index].question = questionText;
+                questionsData[index].option_a = card.querySelector('[data-option="A"]').value;
+                questionsData[index].option_b = card.querySelector('[data-option="B"]').value;
+                questionsData[index].option_c = card.querySelector('[data-option="C"]').value;
+                questionsData[index].option_d = card.querySelector('[data-option="D"]').value;
+                questionsData[index].correct_answer = correctAnswer;
+                
+                btn.innerHTML = '<i class="ri-edit-line"></i>';
+                btn.title = 'Edit';
+            } else {
+                btn.innerHTML = '<i class="ri-check-line"></i>';
+                btn.title = 'Save';
+            }
+            
+            card.classList.toggle('editing');
+        }
+        
+        function deleteQuestion(index) {
+            if (questionsData.length <= 1) {
+                alert('You must have at least one question.');
+                return;
+            }
+            
+            if (confirm('Are you sure you want to delete this question?')) {
+                questionsData.splice(index, 1);
+                // Refresh the page or remove the card
+                document.querySelectorAll('.question-card')[index].remove();
+                // Re-index remaining cards
+                document.querySelectorAll('.question-card').forEach((card, i) => {
+                    card.dataset.index = i;
+                    card.querySelector('.question-number').textContent = `Question ${i + 1}`;
+                });
+                // Update count
+                document.querySelector('.questions-section h3').innerHTML = 
+                    `<i class="ri-questionnaire-line"></i> Questions (${questionsData.length})`;
+            }
+        }
+        
+        function saveAndShare() {
+            const title = document.getElementById('quiz-title').value.trim();
+            const description = document.getElementById('quiz-description').value.trim();
+            const timeLimit = parseInt(document.getElementById('time-limit').value) * 60; // Convert to seconds
+            
+            if (!title) {
+                alert('Please enter a quiz title.');
+                return;
+            }
+            
+            if (questionsData.length === 0) {
+                alert('You need at least one question.');
+                return;
+            }
+            
+            document.getElementById('loadingOverlay').classList.add('show');
+            
+            fetch('{% url "quizzes:save_classroom_quiz" %}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify({
+                    title: title,
+                    description: description,
+                    time_limit: timeLimit,
+                    questions: questionsData
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = data.redirect_url;
+                } else {
+                    alert('Error: ' + data.error);
+                    document.getElementById('loadingOverlay').classList.remove('show');
+                }
+            })
+            .catch(error => {
+                alert('Error saving quiz: ' + error);
+                document.getElementById('loadingOverlay').classList.remove('show');
+            });
+        }
+    </script>
+</body>
+</html>
