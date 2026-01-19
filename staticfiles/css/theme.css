@@ -1,0 +1,481 @@
+/* =======================================================
+   UNIVERSAL THEME SYSTEM - Light & Dark Mode Styles
+   
+   Convention:
+   - 'light-mode' class = DARK theme (dark backgrounds)
+   - No class = LIGHT theme (light backgrounds)
+   
+   These styles use !important to override page-specific inline styles
+   ======================================================= */
+
+/* Base transition for smooth theme switching */
+body,
+body * {
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+/* ==================== LIGHT THEME (Default - No class) ==================== */
+body:not(.light-mode) {
+  background: #f8fafc !important;
+  color: #1e293b !important;
+}
+
+body:not(.light-mode) .navbar,
+body:not(.light-mode) .topbar,
+body:not(.light-mode) .sidebar {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+}
+
+body:not(.light-mode) .brand {
+  color: #4f46e5 !important;
+}
+
+body:not(.light-mode) .card,
+body:not(.light-mode) .stat-card,
+body:not(.light-mode) .feature-card,
+body:not(.light-mode) .action-card,
+body:not(.light-mode) .recent-card,
+body:not(.light-mode) .selection-card,
+body:not(.light-mode) .level-container,
+body:not(.light-mode) .sidebar-section,
+body:not(.light-mode) .difficulty-panel,
+body:not(.light-mode) .sidebar-placeholder {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+}
+
+body:not(.light-mode) h1,
+body:not(.light-mode) h2,
+body:not(.light-mode) h3,
+body:not(.light-mode) h4,
+body:not(.light-mode) h5,
+body:not(.light-mode) h6,
+body:not(.light-mode) .page-title h1,
+body:not(.light-mode) .card-name,
+body:not(.light-mode) .stat-value,
+body:not(.light-mode) .level-label {
+  color: #1e293b !important;
+}
+
+body:not(.light-mode) p,
+body:not(.light-mode) span:not(.badge):not(.card-icon),
+body:not(.light-mode) label,
+body:not(.light-mode) .page-title p,
+body:not(.light-mode) .card-desc,
+body:not(.light-mode) .stat-label,
+body:not(.light-mode) .card-content {
+  color: #475569 !important;
+}
+
+body:not(.light-mode) .nav-links a {
+  color: #333 !important;
+}
+
+body:not(.light-mode) .nav-links a:hover {
+  color: #4f46e5 !important;
+}
+
+body:not(.light-mode) .breadcrumb {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+body:not(.light-mode) .breadcrumb-item {
+  color: #666 !important;
+}
+
+body:not(.light-mode) .breadcrumb-item.active {
+  color: #4f46e5 !important;
+}
+
+body:not(.light-mode) input,
+body:not(.light-mode) textarea,
+body:not(.light-mode) select {
+  background: #ffffff !important;
+  border: 1px solid #d1d5db !important;
+  color: #1e293b !important;
+}
+
+body:not(.light-mode) input:focus,
+body:not(.light-mode) textarea:focus,
+body:not(.light-mode) select:focus {
+  border-color: #6366f1 !important;
+  background: #ffffff !important;
+}
+
+body:not(.light-mode) .difficulty-btn {
+  background: #f1f5f9 !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #475569 !important;
+}
+
+body:not(.light-mode) .difficulty-btn:hover,
+body:not(.light-mode) .difficulty-btn.selected {
+  background: #eef2ff !important;
+  border-color: #6366f1 !important;
+  color: #4f46e5 !important;
+}
+
+/* ==================== DARK THEME (light-mode class) ==================== */
+body.light-mode {
+  background: #0f172a !important;
+  color: #f8fafc !important;
+}
+
+body.light-mode .navbar,
+body.light-mode .topbar,
+body.light-mode .sidebar {
+  background: rgba(15, 23, 42, 0.95) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+body.light-mode .brand {
+  color: #a5b4fc !important;
+}
+
+body.light-mode .card,
+body.light-mode .stat-card,
+body.light-mode .feature-card,
+body.light-mode .action-card,
+body.light-mode .recent-card,
+body.light-mode .selection-card,
+body.light-mode .level-container,
+body.light-mode .sidebar-section,
+body.light-mode .difficulty-panel,
+body.light-mode .sidebar-placeholder {
+  background: rgba(30, 41, 59, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.light-mode .card:hover,
+body.light-mode .stat-card:hover,
+body.light-mode .feature-card:hover,
+body.light-mode .action-card:hover,
+body.light-mode .selection-card:hover {
+  background: rgba(30, 41, 59, 0.95) !important;
+  border-color: rgba(99, 102, 241, 0.5) !important;
+}
+
+body.light-mode h1,
+body.light-mode h2,
+body.light-mode h3,
+body.light-mode h4,
+body.light-mode h5,
+body.light-mode h6,
+body.light-mode .page-title h1,
+body.light-mode .card-name,
+body.light-mode .stat-value,
+body.light-mode .level-label {
+  color: #f8fafc !important;
+}
+
+body.light-mode p,
+body.light-mode span:not(.badge):not(.card-icon),
+body.light-mode label,
+body.light-mode .page-title p,
+body.light-mode .card-desc,
+body.light-mode .stat-label,
+body.light-mode .card-content {
+  color: #cbd5e1 !important;
+}
+
+body.light-mode .nav-links a {
+  color: #94a3b8 !important;
+}
+
+body.light-mode .nav-links a:hover {
+  color: #fbbf24 !important;
+}
+
+body.light-mode .breadcrumb {
+  background: rgba(30, 41, 59, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+body.light-mode .breadcrumb-item {
+  color: #94a3b8 !important;
+}
+
+body.light-mode .breadcrumb-item.active {
+  color: #fbbf24 !important;
+}
+
+body.light-mode input,
+body.light-mode textarea,
+body.light-mode select {
+  background: rgba(30, 41, 59, 0.5) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #f8fafc !important;
+}
+
+body.light-mode input::placeholder,
+body.light-mode textarea::placeholder {
+  color: #64748b !important;
+}
+
+body.light-mode input:focus,
+body.light-mode textarea:focus,
+body.light-mode select:focus {
+  border-color: rgba(99, 102, 241, 0.5) !important;
+  background: rgba(30, 41, 59, 0.7) !important;
+}
+
+body.light-mode .difficulty-btn {
+  background: rgba(30, 41, 59, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #e2e8f0 !important;
+}
+
+body.light-mode .difficulty-btn:hover {
+  background: rgba(99, 102, 241, 0.2) !important;
+  border-color: rgba(99, 102, 241, 0.4) !important;
+}
+
+body.light-mode .difficulty-btn.selected {
+  background: rgba(99, 102, 241, 0.3) !important;
+  border-color: #6366f1 !important;
+}
+
+body.light-mode .btn,
+body.light-mode button:not(.theme-toggle-btn) {
+  color: #f8fafc !important;
+}
+
+body.light-mode .text-muted {
+  color: #94a3b8 !important;
+}
+
+/* ==================== SPA HEADER GRADIENT ==================== */
+body:not(.light-mode) .spa-header {
+  background: linear-gradient(135deg, #4f46e5, #6d28d9) !important;
+}
+
+body.light-mode .spa-header {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%) !important;
+}
+
+body.light-mode .spa-header h1,
+body.light-mode .spa-header p {
+  color: #ffffff !important;
+}
+
+/* ==================== QUIZ SELECTOR SPECIFIC ==================== */
+body.light-mode .cards-grid .selection-card {
+  background: rgba(30, 41, 59, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+body.light-mode .cards-grid .selection-card:hover {
+  background: rgba(30, 41, 59, 0.95) !important;
+  border-color: rgba(99, 102, 241, 0.5) !important;
+}
+
+/* ==================== DASHBOARD SPECIFIC ==================== */
+body.light-mode .main-content {
+  background: #0f172a !important;
+}
+
+body.light-mode .sidebar-brand span,
+body.light-mode .nav-item span {
+  color: #f8fafc !important;
+}
+
+body.light-mode .nav-item {
+  color: #cbd5e1 !important;
+}
+
+body.light-mode .nav-item:hover,
+body.light-mode .nav-item.active {
+  background: rgba(99, 102, 241, 0.2) !important;
+  color: #a5b4fc !important;
+}
+
+/* ==================== AUTH PAGES (Login/Register) ==================== */
+body.light-mode .right-panel,
+body.light-mode .form-container,
+body.light-mode .login-card,
+body.light-mode .register-card {
+  background: rgba(30, 41, 59, 0.95) !important;
+}
+
+body.light-mode .form-group label {
+  color: #cbd5e1 !important;
+}
+
+body.light-mode .form-input {
+  background: rgba(15, 23, 42, 0.5) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #f8fafc !important;
+}
+
+body.light-mode .form-input:focus {
+  border-color: rgba(99, 102, 241, 0.5) !important;
+}
+
+body.light-mode .auth-link,
+body.light-mode .forgot-password {
+  color: #94a3b8 !important;
+}
+
+body.light-mode .auth-link:hover,
+body.light-mode .forgot-password:hover {
+  color: #fbbf24 !important;
+}
+
+/* ==================== THEME TOGGLE BUTTON ==================== */
+.theme-toggle-btn {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(99, 102, 241, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: #6366f1;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(99, 102, 241, 0.15);
+}
+
+.theme-toggle-btn:hover {
+  transform: scale(1.1);
+  background: rgba(99, 102, 241, 0.2);
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.25);
+}
+
+/* Dark mode toggle button (when light-mode class is active) */
+body.light-mode .theme-toggle-btn {
+  background: rgba(251, 191, 36, 0.15) !important;
+  border-color: rgba(251, 191, 36, 0.3) !important;
+  color: #fbbf24 !important;
+  box-shadow: 0 2px 10px rgba(251, 191, 36, 0.2) !important;
+}
+
+body.light-mode .theme-toggle-btn:hover {
+  background: rgba(251, 191, 36, 0.25) !important;
+  box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3) !important;
+}
+
+/* Fixed position for pages without topbar */
+.theme-toggle-btn.fixed {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+/* ==================== QUIZ QUESTION PAGE ==================== */
+body.light-mode .question-card,
+body.light-mode .option-card,
+body.light-mode .timer-card,
+body.light-mode .progress-card {
+  background: rgba(30, 41, 59, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+body.light-mode .question-text {
+  color: #f8fafc !important;
+}
+
+body.light-mode .option-text {
+  color: #e2e8f0 !important;
+}
+
+/* ==================== RESULTS PAGE ==================== */
+body.light-mode .result-hero,
+body.light-mode .result-stats,
+body.light-mode .review-section {
+  color: #f8fafc !important;
+}
+
+body.light-mode .question-card.correct {
+  border-left-color: #10b981 !important;
+}
+
+body.light-mode .question-card.wrong {
+  border-left-color: #ef4444 !important;
+}
+
+body.light-mode details summary {
+  color: #f8fafc !important;
+}
+
+body.light-mode details .review-body {
+  color: #cbd5e1 !important;
+}
+
+/* ==================== LEADERBOARD ==================== */
+body.light-mode .leaderboard-card,
+body.light-mode .leaderboard-table {
+  background: rgba(30, 41, 59, 0.8) !important;
+}
+
+body.light-mode .leaderboard-table th {
+  color: #94a3b8 !important;
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+body.light-mode .leaderboard-table td {
+  color: #e2e8f0 !important;
+  border-bottom-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* ==================== PERFORMANCE DASHBOARD ==================== */
+body.light-mode .chart-card,
+body.light-mode .ai-feedback-card,
+body.light-mode .insight {
+  background: rgba(30, 41, 59, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+body.light-mode .section-header {
+  color: #f8fafc !important;
+}
+
+body.light-mode .insight-text {
+  color: #cbd5e1 !important;
+}
+
+/* ==================== GENERATING QUIZ PAGE ==================== */
+body.light-mode .generating-container,
+body.light-mode .step-container {
+  background: rgba(30, 41, 59, 0.8) !important;
+}
+
+body.light-mode .generating-text,
+body.light-mode .step-title {
+  color: #f8fafc !important;
+}
+
+body.light-mode .generating-subtitle,
+body.light-mode .step-description {
+  color: #94a3b8 !important;
+}
+
+/* ==================== TABLES ==================== */
+body.light-mode table {
+  background: transparent !important;
+}
+
+body.light-mode th {
+  color: #94a3b8 !important;
+  background: rgba(30, 41, 59, 0.5) !important;
+}
+
+body.light-mode td {
+  color: #e2e8f0 !important;
+  border-bottom-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+body.light-mode tr:hover td {
+  background: rgba(99, 102, 241, 0.1) !important;
+}

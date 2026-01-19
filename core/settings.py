@@ -2,8 +2,6 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
-load_dotenv()
 
 """
 Django settings for core project.
@@ -22,6 +20,8 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Load environment variables from .env file (local development)
+load_dotenv(BASE_DIR / ".env")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -194,6 +194,7 @@ AUTH_USER_MODEL = 'accounts.User'
 
 # OpenAI API Key for quiz generation with GPT 3.5
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
+
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:8000",
